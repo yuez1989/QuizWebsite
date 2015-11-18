@@ -31,7 +31,8 @@ public class Friend {
 		removeFromDB(); // removing any existing friend object that is equal to this one
 		// after clear or is not duplicate, execute the insert
 		String saveValue = "\"" + usr1ID + "\",\"" + usr2ID + "\",\"" + time + "\"";
-		String saveStmt = "INSERT INTO Users VALUES(" + saveValue + ");";		
+		String saveStmt = "INSERT INTO Friends VALUES(" + saveValue + ");";	
+		System.out.println(saveStmt);
 		return QuizSystem.db.executeUpdate(saveStmt); // if insert is failed, return false
 	}
 
