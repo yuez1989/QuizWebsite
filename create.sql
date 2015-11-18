@@ -2,7 +2,7 @@
 DROP TABLE IF EXISTS Users;
 CREATE TABLE Users(
 	usrID VARCHAR(255) primary key,
-	password VARCHAR(16),
+	password VARCHAR(64),
 	createTime DATETIME,
 	premission INT,
 	imagepath VARCHAR(2047),
