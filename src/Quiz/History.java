@@ -37,17 +37,13 @@ public class History {
 	 * Constructor of history - given a history ID, get all information from QuizSystem.db
 	 * @param historyID
 	 */
-	public History(int historyID) {		
-		String command = "SELECT * FROM Histories WHERE historyID = " + "\""
-				+ historyID + "\";";
+	public History(String quizID, String usrID, String end) {		
+		String command = "SELECT * FROM Histories WHERE quizID = \"" + quizID + "\" AND \"" + usrID + "\" AND \"" + end + "\";";
 		ResultSet rs = QuizSystem.db.executeQuery(command);
 		try {
 			if (rs.next()) {
-				String quizID = rs.getString("quizID");
-				String usrID = rs.getString("usrID");
 				String playmode = rs.getString("playmode");
 				String start = rs.getString("start");
-				String end = rs.getString("end");
 				long span = rs.getLong("span");
 				double score = rs.getDouble("score");
 				String review = rs.getString("review");
