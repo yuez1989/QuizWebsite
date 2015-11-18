@@ -12,7 +12,7 @@ public class User {
 	protected String usrID;
 	protected String password;
 	protected String time;
-	protected boolean permission;
+	protected int permission;
 	protected char privacy;
 	protected UserInfo info; // not in db
 	/*
@@ -38,7 +38,12 @@ public class User {
 		DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
 		Date dateobj = new Date();
 		time = df.format(dateobj.getTime()).toString();
-		this.permission = permission;
+		if (permission) {
+			this.permission = 1;
+		}
+		else {
+			this.permission = 0;
+		}
 		this.privacy = privacy;
 
 		/* Supporting info */
@@ -65,14 +70,14 @@ public class User {
 	 * Extract permission information from DB
 	 */
 	public void extractpermissionFromDB() {
-		permission = false;
+		permission = 0;
 		String command = "SELECT permission FROM Users WHERE usrID = \"" + usrID + "\"";
 		try{
 			ResultSet rs = QuizSystem.db.executeQuery(command);
 			if(rs.next()){
 				String str = rs. getString("premission");
 				if (str.equals("true")) {
-					permission = true;
+					permission = 1;
 				}
 			}
 		} catch (SQLException e) {
@@ -197,8 +202,9 @@ public class User {
 			QuizSystem.db.executeUpdate(deleteStmt);
 		}
 		// after clear or is not duplicate, execute the insert
-		String saveValue = "\"" + usrID + "\",\"" + password + "\",\"" + time + "\",\"" + permission + "\",\"" + privacy + "\"";
+		String saveValue = "\"" + usrID + "\",\"" + password + "\",\"" + time + "\",\"" + permission + "\",\"\",\"" + privacy + "\"";
 		String saveStmt = "INSERT INTO Users VALUES(" + saveValue + ");";		
+		System.out.println(saveStmt);
 		return QuizSystem.db.executeUpdate(saveStmt); // if insert is failed, return false
 	}
 

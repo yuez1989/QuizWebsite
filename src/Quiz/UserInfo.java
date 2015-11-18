@@ -43,8 +43,9 @@ public class UserInfo {
 	public void extractFriendsFromDB() {
 		// use usrID to query the db and fill the friends list.
 		String command = "SELECT * FROM Friends WHERE usr1ID =\"" + usrID + "\" OR usr2ID = \"" + usrID + "\";";
+
 		try{
-			ResultSet rs = QuizSystem.db.executeQuery(command);
+			ResultSet rs = QuizSystem.getQuizSystem().db.executeQuery(command);
 			while (rs.next()){
 				String usr1ID = rs.getString("usr1ID");
 				String usr2ID = rs.getString("usr2ID");
@@ -95,17 +96,16 @@ public class UserInfo {
 			ResultSet rs = QuizSystem.db.executeQuery(command);
 			while (rs.next()) {
 				String achID = rs.getString("achID");
-				int histID = rs.getInt("histID");
 				String quizID = rs.getString("quizID");
 				String playmode = rs.getString("playmode");
 				String start = rs.getString("start");
-				long end = Long.parseLong(rs.getString("end"), 10);
-				double span = rs.getDouble("span");
+				String end = rs.getString("end");
+				long span = rs.getLong("span");
 				double score = rs.getDouble("score");
 				String review = rs.getString("review");
 				int rating = rs.getInt("rating");
 
-				histories.add(new History(histID, quizID, usrID, end));
+				histories.add(new History(quizID, usrID, playmode, start, end, span, score, review, rating));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

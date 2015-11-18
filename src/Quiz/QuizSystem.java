@@ -10,7 +10,7 @@ public class QuizSystem {
 	private QuizSystem(){
 		 db = DataBase.getDataBase();
 	}
-	public QuizSystem getQuizSystem(){
+	static public QuizSystem getQuizSystem(){
 		if(qzsys == null){
 			qzsys = new QuizSystem();
 		}

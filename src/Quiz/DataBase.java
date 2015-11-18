@@ -8,7 +8,6 @@ import com.mysql.jdbc.*;
 
 public class DataBase {
 	static private DataBase db;
-	
 	static String account = MyDBInfo.MYSQL_USERNAME; static String password = MyDBInfo.MYSQL_PASSWORD; static String server = MyDBInfo.MYSQL_DATABASE_SERVER; static String database = MyDBInfo.MYSQL_DATABASE_NAME;
 	private Connection con;
 	private Statement stmt;

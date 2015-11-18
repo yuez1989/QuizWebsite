@@ -28,7 +28,7 @@ public class QuizTest {
 		 quiz.saveToDB();
 */
 		
-		Quiz.deleteQuiz("Abc1232015-11-18 11:32:51");
+		Quiz.deleteQuiz("Abc1232015-11-18 11:50:00");
 		
 		
 		
