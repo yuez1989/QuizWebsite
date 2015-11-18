@@ -111,7 +111,7 @@ public class History {
 		String saveValue = "\"" + quizID + "\",\"" + usrID + "\",\"" + playmode 
 				+ "\",\"" + start + "\",\"" + end + "\",\"" + score + "\",\"" + review + "\",\""
 				+ rating + "\",\"" + span + "\"";
-		String saveStmt = "INSERT INTO Users VALUES(" + saveValue + ");";		
+		String saveStmt = "INSERT INTO Histories VALUES(" + saveValue + ");";		
 		return QuizSystem.db.executeUpdate(saveStmt); // if insert is failed, return false
 	}
 
