@@ -56,9 +56,9 @@ CREATE TABLE Histories(
 	playmode VARCHAR(255),
 	start DATETIME,
 	end DATETIME,
-	score INT,
+	score FLOAT,
 	review TEXT,
-	rating INT,
+	rating FLOAT,
 	FOREIGN KEY (quizID) REFERENCES Quizzes(quizID),
 	FOREIGN KEY (usrID) REFERENCES Users(usrID)
 );
