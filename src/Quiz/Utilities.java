@@ -6,10 +6,11 @@ import java.util.*;
 
 public class Utilities {
 
-	static DataBase db = QuizSystem.db;
+	static DataBase db = QuizSystem.getQuizSystem().db;
 
 	public Utilities(){
-
+		QuizSystem sys = QuizSystem.getQuizSystem();
+		db = sys.db;
 	}
 
 	/**
@@ -57,8 +58,6 @@ public class Utilities {
 		
 		return highScores;
 	}
-
-
 	
 	/**
 	 * Get recent activities from history for every friend of
@@ -113,7 +112,7 @@ public class Utilities {
 	 */
 	public static ArrayList<History> getRecentActivitiesOfUser(String usrID) throws SQLException{
 		ArrayList<History> recentActs = new ArrayList<History>();
-		String command = "SELECT * FROM Histories WHERE usrID = "+"\""+usrID+"\";";
+		String command = "SELECT * FROM Histories WHERE usrID = "+"\""+usrID+"\" ORDER BY end DESC;";
 		ResultSet rs = db.executeQuery(command);
 		ArrayList<String> qids = new ArrayList<String>();
 		ArrayList<String> endtimes = new ArrayList<String>();
@@ -178,6 +177,21 @@ public class Utilities {
 			recentTopPerformance.add(hist);
 		}
 		return recentTopPerformance;
+	}
+	
+	static public void main(String[] args){
+
+		
+		try {
+			ArrayList<History> highscore = getRecentFriendActivities("yuezhang");
+			for(History hist: highscore){
+				System.out.println(hist);
+			}
+			//System.out.println( getUserAverageScore("xinhuiwu"));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	
 }
