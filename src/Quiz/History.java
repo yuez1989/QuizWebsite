@@ -99,7 +99,33 @@ public class History {
 		this.rating = r;
 	}
 	 */
-	
+	public String getQuizID(){
+		return quizID;
+	}
+	public String getUsrID(){
+		return usrID;
+	}
+	public String getPlaymode(){
+		return playmode;
+	}
+	public String getStartTime(){
+		return start;
+	}
+	public String getEndTime(){
+		return end;
+	}
+	public long getsSpan(){
+		return span;
+	}
+	public double getScore(){
+		return score;
+	}
+	public String getReview(){
+		return review;
+	}
+	public double getRating(){
+		return rating;
+	}
 
 	/**
 	 * Save history object to database, one save action will save all 
@@ -135,27 +161,5 @@ public class History {
 	public static boolean removeByQuizID(String quizID){
 		String cmd = "DELETE FROM Histories WHERE quizID = \""+quizID+"\";";
 		return QuizSystem.db.executeUpdate(cmd);
-	}
-	
-	public String toString(){
-		String str = "";
-		str += this.quizID;
-		str += " ";
-		str += this.usrID;
-		str += " ";
-		str += this.playmode;
-		str += " ";
-		str += this.start;
-		str += " ";
-		str += this.end;
-		str += " ";
-		str += String.valueOf(this.score);
-		str += " ";
-		str += this.review;
-		str += " ";
-		str += String.valueOf(rating);
-		str += " ";
-		str += String.valueOf(span);
-		return str;
 	}
 }
