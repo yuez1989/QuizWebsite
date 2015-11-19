@@ -141,11 +141,16 @@ public class Utilities {
 		String lastDay = QuizSystem.minusDay(time);
 		String command = "SELECT * FROM Histories WHERE end > "+"\""+lastDay+"\" ORDER BY end DESC;";
 		ResultSet rs = db.executeQuery(command);
+		ArrayList<String> qids = new ArrayList<String>();
+		ArrayList<String> uids = new ArrayList<String>();
+		ArrayList<String> endtimes = new ArrayList<String>();
 		while(rs.next()){
-			String quizID = rs.getString("quizID");
-			String usrID = rs.getString("usrID");
-			String end = rs.getString("end");
-			History hist = new History(quizID, usrID, end);
+			qids.add(rs.getString("quizID"));
+			uids.add(rs.getString("usrID"));
+			endtimes.add(rs.getString("end"));
+		}
+		for(int i = 0; i<qids.size();i++){
+			History hist = new History(qids.get(i),uids.get(i), endtimes.get(i));
 			recentTopPerformance.add(hist);
 		}
 		return recentTopPerformance;
