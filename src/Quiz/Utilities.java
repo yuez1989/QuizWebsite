@@ -17,7 +17,7 @@ public class Utilities {
 	 * @param QuizID
 	 * @return 
 	 */
-	public  ArrayList<History> getHighScoresOfQuiz(int QuizID) throws SQLException{
+	public static ArrayList<History> getHighScoresOfQuiz(int QuizID) throws SQLException{
 		ArrayList<History> highScores = new ArrayList<History>();
 		String command = "SELECT * FROM Histories WHERE quizID = "+"\""+QuizID+"\" ORDER BY score DESC;";
 		ResultSet rs= db.executeQuery(command);
@@ -31,7 +31,7 @@ public class Utilities {
 		return highScores;
 	}
 
-	public ArrayList<History> getHighScoresOfUser(String usrID) throws SQLException{
+	public static ArrayList<History> getHighScoresOfUser(String usrID) throws SQLException{
 		ArrayList<History> highScores = new ArrayList<History>();
 		String command = "SELECT * FROM Histories WHERE usrID = "+"\""+usrID+"\" ORDER BY score DESC;";
 		ResultSet rs= db.executeQuery(command);
@@ -51,7 +51,7 @@ public class Utilities {
 	 * @return
 	 * @throws SQLException
 	 */
-	public ArrayList<History> getRecentFriendActivities(String usrID) throws SQLException{
+	public static ArrayList<History> getRecentFriendActivities(String usrID) throws SQLException{
 		ArrayList<History> friendAct = new ArrayList<History>();
 		ArrayList<String> friendList = new ArrayList<String>();
 		try {
@@ -72,7 +72,7 @@ public class Utilities {
 	 * @return
 	 * @throws SQLException
 	 */
-	public ArrayList<String> getFriendList(String usrID) throws SQLException{
+	public static ArrayList<String> getFriendList(String usrID) throws SQLException{
 		ArrayList<String> friendIDs = new ArrayList<String>();
 		String command1 = "SELECT * FROM Friends WHERE usr1ID = "+"\""+usrID+"\";";
 		ResultSet rs1= db.executeQuery(command1);
@@ -95,7 +95,7 @@ public class Utilities {
 	 * @return
 	 * @throws SQLException
 	 */
-	public ArrayList<History> getRecentActivitiesOfUser(String usrID) throws SQLException{
+	public static ArrayList<History> getRecentActivitiesOfUser(String usrID) throws SQLException{
 		ArrayList<History> recentActs = new ArrayList<History>();
 		String command = "SELECT * FROM Histories WHERE usrID = "+"\""+usrID+"\";";
 		ResultSet rs = db.executeQuery(command);
@@ -108,7 +108,7 @@ public class Utilities {
 		return recentActs;
 	}
 
-	public ArrayList<History> getRecentScoresOfUser(String usrID) throws SQLException{
+	public static ArrayList<History> getRecentScoresOfUser(String usrID) throws SQLException{
 		ArrayList<History> recentScores = new ArrayList<History>();
 		String command = "SELECT * FROM Histories WHERE usrID = "+"\""+usrID+"\" ORDER BY end DESC;";
 		ResultSet rs = db.executeQuery(command);
@@ -121,7 +121,7 @@ public class Utilities {
 		return recentScores;
 	}
 
-	public double getUserAverageScore(String usrID) throws SQLException{
+	public static double getUserAverageScore(String usrID) throws SQLException{
 		double avg = 0;
 		String command = "SELECT * FROM Histories WHERE usrID = "+"\""+usrID+"\";";
 		ResultSet rs = db.executeQuery(command);
@@ -136,7 +136,7 @@ public class Utilities {
 		return avg;
 	}
 
-	public ArrayList<History> getTopPerformanceOfLastDay(String time) throws SQLException{
+	public static ArrayList<History> getTopPerformanceOfLastDay(String time) throws SQLException{
 		ArrayList<History> recentTopPerformance = new ArrayList<History>();
 		String lastDay = QuizSystem.minusDay(time);
 		String command = "SELECT * FROM Histories WHERE end > "+"\""+lastDay+"\" ORDER BY end DESC;";
