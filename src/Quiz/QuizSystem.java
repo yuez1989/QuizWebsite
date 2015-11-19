@@ -46,14 +46,26 @@ public class QuizSystem {
 		return sdf.format(d);
 	}
 	
-	static public String minusDay(Date in){
+	static public String minusDay(String datestr){
 
+		Date in = convertToDate(datestr);
 		LocalDateTime ldt = LocalDateTime.ofInstant(in.toInstant(), ZoneId.systemDefault());
 		LocalDateTime nldt = ldt.minusDays(1);
 		Date out = Date.from(nldt.atZone(ZoneId.systemDefault()).toInstant());
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss");
 		return sdf.format(out);
 	}
+	
+	static public String minusDay(String datestr,int num){
+
+		Date in = convertToDate(datestr);
+		LocalDateTime ldt = LocalDateTime.ofInstant(in.toInstant(), ZoneId.systemDefault());
+		LocalDateTime nldt = ldt.minusDays(num);
+		Date out = Date.from(nldt.atZone(ZoneId.systemDefault()).toInstant());
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss");
+		return sdf.format(out);
+	}
+	
 
 	static public Date convertToDate(String datetime){
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
