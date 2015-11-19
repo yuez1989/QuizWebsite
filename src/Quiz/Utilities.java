@@ -17,32 +17,48 @@ public class Utilities {
 	 * @param QuizID
 	 * @return 
 	 */
-	public static ArrayList<History> getHighScoresOfQuiz(int QuizID) throws SQLException{
+	public static ArrayList<History> getHighScoresOfQuiz(String QuizID) throws SQLException{
 		ArrayList<History> highScores = new ArrayList<History>();
 		String command = "SELECT * FROM Histories WHERE quizID = "+"\""+QuizID+"\" ORDER BY score DESC;";
 		ResultSet rs= db.executeQuery(command);
+		ArrayList<String> qids = new ArrayList<String>();
+		ArrayList<String> uids = new ArrayList<String>();
+		ArrayList<String> endtimes = new ArrayList<String>();
 		while(rs.next()){
-			String quizID = rs.getString("quizID");
-			String usrID = rs.getString("usrID");
-			String end = rs.getString("end");
-			History hist = new History(quizID, usrID, end);
-			highScores.add(hist);			
+			qids.add(rs.getString("quizID"));
+			uids.add(rs.getString("usrID"));
+			endtimes.add(rs.getString("end"));
+		}
+		for(int i = 0; i<qids.size();i++){
+			History hist = new History(qids.get(i),uids.get(i), endtimes.get(i));
+			
+			highScores.add(hist);
 		}
 		return highScores;
 	}
 
 	public static ArrayList<History> getHighScoresOfUser(String usrID) throws SQLException{
 		ArrayList<History> highScores = new ArrayList<History>();
-		String command = "SELECT * FROM Histories WHERE usrID = "+"\""+usrID+"\" ORDER BY score DESC;";
+		String command = "SELECT * FROM Histories WHERE usrID = "+"\""+usrID+"\" ORDER BY score DESC limit 1;";
 		ResultSet rs= db.executeQuery(command);
+		
+		ArrayList<String> qids = new ArrayList<String>();
+		ArrayList<String> endtimes = new ArrayList<String>();
+		
 		while(rs.next()){
-			String quizID = rs.getString("quizID");
-			String end = rs.getString("end");
-			History hist = new History(quizID, usrID, end);
-			highScores.add(hist);			
+			qids.add(rs.getString("quizID"));
+			endtimes.add(rs.getString("end"));
 		}
+		
+		for(int i = 0; i< qids.size();i++){
+			History hist = new History(qids.get(i),usrID,endtimes.get(i));
+			highScores.add(hist);
+		}	
+		
 		return highScores;
 	}
+
+
 	
 	/**
 	 * Get recent activities from history for every friend of
