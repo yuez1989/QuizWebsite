@@ -110,6 +110,29 @@ public class Utilities {
 	 * @return
 	 * @throws SQLException
 	 */
+	public static ArrayList<History> getRecentActivitiesOfQuiz(String quizID) throws SQLException{
+		ArrayList<History> recentActs = new ArrayList<History>();
+		String command = "SELECT * FROM Histories WHERE quizID = "+"\""+quizID+"\" ORDER BY end DESC;";
+		ResultSet rs = db.executeQuery(command);
+		ArrayList<String> uids = new ArrayList<String>();
+		ArrayList<String> endtimes = new ArrayList<String>();
+		while(rs.next()){
+			uids.add(rs.getString("usrID"));
+			endtimes.add(rs.getString("end"));	
+		}
+		for(int i = 0; i<uids.size();i++){
+			History hist = new History(quizID , uids.get(i), endtimes.get(i));
+			recentActs.add(hist);
+		}
+		return recentActs;
+	}
+
+	/**
+	 * 
+	 * @param usrID
+	 * @return
+	 * @throws SQLException
+	 */
 	public static ArrayList<History> getRecentActivitiesOfUser(String usrID) throws SQLException{
 		ArrayList<History> recentActs = new ArrayList<History>();
 		String command = "SELECT * FROM Histories WHERE usrID = "+"\""+usrID+"\" ORDER BY end DESC;";
