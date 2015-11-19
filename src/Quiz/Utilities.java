@@ -112,11 +112,15 @@ public class Utilities {
 		ArrayList<History> recentScores = new ArrayList<History>();
 		String command = "SELECT * FROM Histories WHERE usrID = "+"\""+usrID+"\" ORDER BY end DESC;";
 		ResultSet rs = db.executeQuery(command);
+		ArrayList<String> qids = new ArrayList<String>();
+		ArrayList<String> endtimes = new ArrayList<String>();
 		while(rs.next()){
-			String quizID = rs.getString("quizID");
-			String end = rs.getString("end");
-			History hist = new History(quizID, usrID, end);
-			recentScores.add(hist);		
+			qids.add(rs.getString("quizID"));
+			endtimes.add(rs.getString("end"));	
+		}
+		for(int i = 0; i<qids.size();i++){
+			History hist = new History(qids.get(i), usrID , endtimes.get(i));
+			recentScores.add(hist);
 		}
 		return recentScores;
 	}
