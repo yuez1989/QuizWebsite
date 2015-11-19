@@ -25,12 +25,12 @@ public class AchievementRecord {
 		removeFromDB(); // removing any existing friend object that is equal to this one
 		// after clear or is not duplicate, execute the insert
 		String saveValue = "\"" + usrID + "\",\"" + achID + "\",\"" + time + "\"";
-		String saveStmt = "INSERT INTO AchievementRecordss VALUES(" + saveValue + ");";		
+		String saveStmt = "INSERT INTO AchievementRecords VALUES(" + saveValue + ");";		
 		return QuizSystem.db.executeUpdate(saveStmt); // if insert is failed, return false
 	}
 	
 	public boolean removeFromDB() {
-		String stmt = "DELETE FROM AchievementRecordss WHERE usrID = \"" + usrID + "\";";
+		String stmt = "DELETE FROM AchievementRecords WHERE usrID = \"" + usrID + "\" AND \"" + achID + "\" AND \"" + time + "\";";
 		return QuizSystem.db.executeUpdate(stmt);
 	}
 }

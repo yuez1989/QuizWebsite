@@ -28,11 +28,8 @@ public class Message {
 		fromID = from;
 		toID = to;
 		this.type = type;
-		
-		DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
-		Date dateobj = new Date();
-		time = df.format(dateobj.getTime()).toString();
-		
+	
+		this.time = time;
 		this.msg = msg;
 	}
 	
@@ -45,16 +42,23 @@ public class Message {
 		removeFromDB(); // removing any existing friend object that is equal to this one
 		// after clear or is not duplicate, execute the insert
 		String saveValue = "\"" + fromID + "\",\"" + toID + "\",\"" + msg + "\",\"" + time + "\",\"" + type + "\"";
-		String saveStmt = "INSERT INTO Users VALUES(" + saveValue + ");";		
+		String saveStmt = "INSERT INTO Messages VALUES(" + saveValue + ");";		
+		System.out.println(saveStmt);
 		return QuizSystem.db.executeUpdate(saveStmt); // if insert is failed, return false
 	}
 	
 	public boolean removeFromDB() {
-		String stmt = "DELETE FROM Friends WHERE fromID = \"" + fromID + 
+		String stmt = "DELETE FROM Messages WHERE fromID = \"" + fromID + 
 				"\" AND toID = \"" + toID + "\" AND type = \"" + type + 
 				"\" AND time = \"" + time + "\" AND msg = \"" + msg + 
 				"\";";
-		
+		System.out.println(stmt);
+		return QuizSystem.db.executeUpdate(stmt);
+	}
+	
+	public static boolean removeByUserID(String usrID) {
+		String stmt = "DELETE FROM Messages WHERE fromID = \"" + usrID  + "\" OR toID = \"" + usrID + "\";";
+		System.out.println(stmt);
 		return QuizSystem.db.executeUpdate(stmt);
 	}
 	

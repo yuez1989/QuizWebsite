@@ -42,4 +42,9 @@ public class Friend {
 
 		return (QuizSystem.db.executeUpdate(stmt1) && QuizSystem.db.executeUpdate(stmt2));
 	}
+	
+	public static boolean removeByUserID(String usrID) {
+		String stmt = "DELETE FROM Friends WHERE usr1ID = \"" + usrID  + "\" OR usr2ID = \"" + usrID + "\";";
+		return QuizSystem.db.executeUpdate(stmt);
+	}
 }

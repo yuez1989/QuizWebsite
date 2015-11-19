@@ -91,7 +91,7 @@ public class UserInfo {
 	}
 
 	public void extractHistoriesFromDB() {
-		String command = "SELECT * FROM AchievementRecords WHERE usrID =\"" + usrID + "\";";
+		String command = "SELECT * FROM Histories WHERE usrID =\"" + usrID + "\";";
 		try {
 			ResultSet rs = QuizSystem.db.executeQuery(command);
 			while (rs.next()) {
