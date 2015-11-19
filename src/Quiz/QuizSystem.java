@@ -9,6 +9,8 @@ import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.Date;
 
+import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
+
 public class QuizSystem {
 	static public QuizSystem qzsys;
 	static public DataBase db;
@@ -29,6 +31,13 @@ public class QuizSystem {
 		}
 		return qzsys;
 	}
+// Example:	
+//	static public void main(String[] args){
+//		String nowstr = generateCurrentTime();
+//		System.out.println(nowstr);
+//		System.out.println(minusDay(convertToDate(nowstr)));
+//		
+//	}
 
 	static public String generateCurrentTime(){
 		Date d = new Date();
@@ -36,14 +45,29 @@ public class QuizSystem {
 
 		return sdf.format(d);
 	}
+	
 	static public String minusDay(Date in){
 
 		LocalDateTime ldt = LocalDateTime.ofInstant(in.toInstant(), ZoneId.systemDefault());
-		ldt.minusDays(1);
-		Date out = Date.from(ldt.atZone(ZoneId.systemDefault()).toInstant());
+		LocalDateTime nldt = ldt.minusDays(1);
+		Date out = Date.from(nldt.atZone(ZoneId.systemDefault()).toInstant());
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss");
 		return sdf.format(out);
 	}
+
+	static public Date convertToDate(String datetime){
+		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		try {
+			return sdf.parse(datetime);
+		} catch (java.text.ParseException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			return null;
+		}
+
+	}
+	
+	
 	static public void destroySystem(){
 		db.disconnectDB();
 	}
