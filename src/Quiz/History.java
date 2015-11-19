@@ -100,7 +100,33 @@ public class History {
 		this.rating = r;
 	}
 	 */
-	
+	public String getQuizID(){
+		return quizID;
+	}
+	public String getUsrID(){
+		return usrID;
+	}
+	public String getPlaymode(){
+		return playmode;
+	}
+	public String getStartTime(){
+		return start;
+	}
+	public String getEndTime(){
+		return end;
+	}
+	public long getsSpan(){
+		return span;
+	}
+	public double getScore(){
+		return score;
+	}
+	public String getReview(){
+		return review;
+	}
+	public double getRating(){
+		return rating;
+	}
 
 	/**
 	 * Save history object to database, one save action will save all 
