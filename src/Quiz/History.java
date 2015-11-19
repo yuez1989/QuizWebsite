@@ -127,8 +127,8 @@ public class History {
 		return QuizSystem.db.executeUpdate(stmt);
 	}
 	
-	public boolean removeByUserID(String userId){
-		String cmd = "DELETE FROM Histories WHERE usrID = \""+userId+"\";";
+	public boolean removeByUserID(String usrId){
+		String cmd = "DELETE FROM Histories WHERE usrID = \""+usrId+"\";";
 		return QuizSystem.db.executeUpdate(cmd);
 	}
 	
