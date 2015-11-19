@@ -182,6 +182,22 @@ public class Utilities {
 		return avg;
 	}
 
+
+	public static double getQuizAverageScore(String quizID) throws SQLException{
+		double avg = 0;
+		String command = "SELECT * FROM Histories WHERE quizID = "+"\""+quizID+"\";";
+		ResultSet rs = db.executeQuery(command);
+		int count = 0;
+		double total = 0;
+		while(rs.next()){
+			double score = rs.getDouble("score");
+			total += score;
+			count++;
+		}	
+		avg = total / count;
+		return avg;
+	}
+
 	public static ArrayList<History> getTopPerformanceOfLastDay(String time) throws SQLException{
 		ArrayList<History> recentTopPerformance = new ArrayList<History>();
 		String lastDay = QuizSystem.minusDay(time);
