@@ -59,7 +59,6 @@ public class History {
 				this.score = score;
 				this.review = review;
 				this.rating = rating;
-				System.out.println("In History CTR");
 			}
 
 		} catch (SQLException e) {
