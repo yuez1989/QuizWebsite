@@ -28,12 +28,16 @@ public class UserTest {
 		msg.removeFromDB();
 		Message.removeByUserID("yuezhang");
 		System.out.println("Message success.");
-		 
+
 		Achievement achID = new Achievement("champion", "champion description");
 		//achID.saveToDB();
 		AchievementRecord achRec = new AchievementRecord("yuezhang", "champion");
 		achRec.saveToDB();
-		achRec.removeFromDB();
+		AchievementRecord achRec2 = new AchievementRecord("xinhuiwu", "champion");
+		achRec2.saveToDB();
+		AchievementRecord.removeByAchID("champion");
+		
+		//achRec.removeFromDB();
 		//achID.removeFromDB();
 		System.out.println("Achievement success.");
 		System.out.println("All done.");
@@ -41,6 +45,6 @@ public class UserTest {
 		//usr2.removeFromDB();
 		//friend.removeFromDB();
 		 *
-		*/
+		 */
 	}
 }

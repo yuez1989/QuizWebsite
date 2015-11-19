@@ -33,4 +33,15 @@ public class AchievementRecord {
 		String stmt = "DELETE FROM AchievementRecords WHERE usrID = \"" + usrID + "\" AND \"" + achID + "\" AND \"" + time + "\";";
 		return QuizSystem.db.executeUpdate(stmt);
 	}
+	
+	public static boolean removeByUserID(String usrID) {
+		String stmt = "DELETE FROM AchievementRecords WHERE usrID = \"" + usrID + "\";";
+		return QuizSystem.db.executeUpdate(stmt);
+	}
+	
+	public static boolean removeByAchID(String achID) {
+		String stmt = "DELETE FROM AchievementRecords WHERE achID = \"" + achID + "\";";
+		return QuizSystem.db.executeUpdate(stmt);
+	}
+	
 }
