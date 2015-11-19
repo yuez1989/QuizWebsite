@@ -136,4 +136,26 @@ public class History {
 		String cmd = "DELETE FROM Histories WHERE quizID = \""+quizID+"\";";
 		return QuizSystem.db.executeUpdate(cmd);
 	}
+	
+	public String toString(){
+		String str = "";
+		str += this.quizID;
+		str += " ";
+		str += this.usrID;
+		str += " ";
+		str += this.playmode;
+		str += " ";
+		str += this.start;
+		str += " ";
+		str += this.end;
+		str += " ";
+		str += String.valueOf(this.score);
+		str += " ";
+		str += this.review;
+		str += " ";
+		str += String.valueOf(rating);
+		str += " ";
+		str += String.valueOf(span);
+		return str;
+	}
 }
