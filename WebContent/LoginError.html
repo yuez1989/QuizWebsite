@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Login Error</title>
+</head>
+<body>
+
+<h1>Login Error</h1>
+<p>Your account and password does not match. Please try again or sign up for a new account.</p>
+
+<form action="UserLoginServlet" method = "post">
+	<p>User Name: <input type="text" name="account" /></p>
+	<p>Password: <input type="text" name="password" /></p>
+	<input type="submit" value = "Login"/>
+</form>
+
+<form action="CreateAccount.html" method = "get">
+	<input type="submit" value = "Sign Up"/>
+</form>
+
+</body>
+</html>

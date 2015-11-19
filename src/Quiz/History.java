@@ -23,9 +23,10 @@ public class History {
 			String end, long span, double score, String review, double rating) {
 		this.quizID = quizID;
 		this.usrID = usrID;
-		this.playmode = "";
+		this.playmode = playmode;
 		// start time should be set by calling method setStartQuizTime() at 
 		// the time user start taking quiz
+		this.start = start;
 		this.end = end;
 		this.span = span;
 		this.score = score;
@@ -98,6 +99,7 @@ public class History {
 		this.rating = r;
 	}
 	 */
+	
 
 	/**
 	 * Save history object to database, one save action will save all 
@@ -111,7 +113,8 @@ public class History {
 		String saveValue = "\"" + quizID + "\",\"" + usrID + "\",\"" + playmode 
 				+ "\",\"" + start + "\",\"" + end + "\",\"" + score + "\",\"" + review + "\",\""
 				+ rating + "\",\"" + span + "\"";
-		String saveStmt = "INSERT INTO Users VALUES(" + saveValue + ");";		
+		String saveStmt = "INSERT INTO Histories VALUES(" + saveValue + ");";
+		System.out.println(saveStmt);
 		return QuizSystem.db.executeUpdate(saveStmt); // if insert is failed, return false
 	}
 
@@ -120,7 +123,17 @@ public class History {
 	 * @return whether removal is successful
 	 */
 	public boolean removeFromDB() {
-		String stmt = "DELETE FROM Friends WHERE quizID = \"" + quizID + "\" AND usrID = \"" + usrID + "\" AND start = \"" + start + "\" AND end = \"" + end +  "\";";
+		String stmt = "DELETE FROM Histories WHERE quizID = \"" + quizID + "\" AND usrID = \"" + usrID + "\" AND start = \"" + start + "\" AND end = \"" + end +  "\";";
 		return QuizSystem.db.executeUpdate(stmt);
+	}
+	
+	public static boolean removeByUserID(String usrID){
+		String cmd = "DELETE FROM Histories WHERE usrID = \""+usrID+"\";";
+		return QuizSystem.db.executeUpdate(cmd);
+	}
+	
+	public static boolean removeByQuizID(String quizID){
+		String cmd = "DELETE FROM Histories WHERE quizID = \""+quizID+"\";";
+		return QuizSystem.db.executeUpdate(cmd);
 	}
 }
