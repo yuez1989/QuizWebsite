@@ -40,9 +40,9 @@ public class UserLoginServlet extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		User user = (User)request.getAttribute("user");
+		User user = (User)request.getAttribute("user"); //retrieve user of current HTTP session
 		
-		if(user == null){
+		if(user == null) { // if there is no active user, pass the login information 
 			String account = (String)request.getParameter("account");
 			String password = (String)request.getParameter("password");
 			MessageDigest msgdigest= ((QuizSystem)request.getServletContext().getAttribute("quizsystem")).md;
@@ -54,7 +54,7 @@ public class UserLoginServlet extends HttpServlet {
 			// Database has the user
 			ResultSet rs = db.executeQuery("select * from Users where usrID = \""+account+"\";");
 			try {
-				if(rs.next()){
+				if(rs.next()) {
 					byte[] databasepw = rs.getBytes("password");
 					if(Arrays.equals(inputpw, databasepw)){
 						RequestDispatcher dispatcher = request.getRequestDispatcher("UserHomePage.jsp");
