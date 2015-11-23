@@ -9,6 +9,7 @@ import java.util.Arrays;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.*;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -56,13 +57,18 @@ public class UserLoginServlet extends HttpServlet {
 			try {
 				if(rs.next()) {
 					byte[] databasepw = rs.getBytes("password");
-					if(Arrays.equals(inputpw, databasepw)){
+					if(Arrays.equals(inputpw, databasepw)){ // If user exists
 						RequestDispatcher dispatcher = request.getRequestDispatcher("UserHomePage.jsp");
 						dispatcher.forward(request, response);
+						
+						// Put username info into user session
+						HttpSession session = request.getSession();
+						session.setAttribute("usrID", account);
+						
 						return;						
 					}
 				}
-				
+				// If user does not exist
 				RequestDispatcher dispatcher = request.getRequestDispatcher("LoginError.html");
 				dispatcher.forward(request, response);
 				return;	
