@@ -20,14 +20,14 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/UserLoginServlet")
 public class UserLoginServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public UserLoginServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
+
+	/**
+	 * @see HttpServlet#HttpServlet()
+	 */
+	public UserLoginServlet() {
+		super();
+		// TODO Auto-generated constructor stub
+	}
 
 	/**
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
@@ -42,28 +42,27 @@ public class UserLoginServlet extends HttpServlet {
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		User user = (User)request.getAttribute("user"); //retrieve user of current HTTP session
-		
-		if(user == null) { // if there is no active user, pass the login information 
+
+		//if(user == null) { // if there is no active user, pass the login information 
 			String account = (String)request.getParameter("account");
 			String password = (String)request.getParameter("password");
-			MessageDigest msgdigest= ((QuizSystem)request.getServletContext().getAttribute("quizsystem")).md;
+			MessageDigest msgdigest = ((QuizSystem)request.getServletContext().getAttribute("quizsystem")).md;
 			DataBase db = ((QuizSystem)request.getServletContext().getAttribute("quizsystem")).db;
-			msgdigest.reset();
-			msgdigest.update(password.getBytes());
-			byte[] inputpw = msgdigest.digest();
-			
+			String inputpw = User.encryptPW(password);
+
 			// Database has the user
 			ResultSet rs = db.executeQuery("select * from Users where usrID = \""+account+"\";");
 			try {
 				if(rs.next()) {
-					byte[] databasepw = rs.getBytes("password");
-					if(Arrays.equals(inputpw, databasepw)){ // If user exists
+					byte[] databasepwByte = rs.getBytes("password");
+					String databasepw = new String(databasepwByte, "UTF-8");
+					if(inputpw.equals(databasepw)) { // If login successful
+						System.out.println("login successful");
+						// Put username info into user session
+						request.getSession().setAttribute("user", account);
+						
 						RequestDispatcher dispatcher = request.getRequestDispatcher("UserHomePage.jsp");
 						dispatcher.forward(request, response);
-						
-						// Put username info into user session
-						HttpSession session = request.getSession();
-						session.setAttribute("usrID", account);
 						
 						return;						
 					}
@@ -77,6 +76,6 @@ public class UserLoginServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-	}
+	//}
 
 }

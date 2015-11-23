@@ -49,7 +49,7 @@ public class CreateAccountServlet extends HttpServlet {
 		// Database has the user
 		ResultSet rs = db.executeQuery("select * from Users where usrID = \""+accountname+"\";");
 		try {
-			if(rs.next()){
+			if(rs.next()){ // if user already exists
 				RequestDispatcher dispatcher = request.getRequestDispatcher("NameInUse.html");
 				dispatcher.forward(request, response);
 				return;
@@ -59,17 +59,23 @@ public class CreateAccountServlet extends HttpServlet {
 			e.printStackTrace();
 			return;
 		}
-		// two password does not match
-		if(!password.equals(passwordcopy)){
+		if(!password.equals(passwordcopy)) { // two password does not match
 			RequestDispatcher dispatcher = request.getRequestDispatcher("PasswordMismatch.jsp");
 			dispatcher.forward(request, response);
 			return;
 		}
 		
-		request.getSession().removeAttribute("user");
+		// save the account and password to database
+		User user = new User(accountname, password, false, 'd');
+		try {
+			user.saveToDB();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		RequestDispatcher dispatcher = request.getRequestDispatcher("UserLogin.jsp");
-		dispatcher.forward(request, response);		
+		RequestDispatcher dispatcher = request.getRequestDispatcher("index.jsp");
+		dispatcher.forward(request, response);
 	}
 
 }

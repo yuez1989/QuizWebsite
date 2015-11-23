@@ -1,12 +1,6 @@
 var main = function(){
-	$("#login_form").hide();
-
 	$("#about").click(function(){
 		window.location.href = "about.html";
-	});
-
-	$("#login").click(function(){
-		$("#login_form").toggle();
 	});
 
 	$("#signup").click(function(){
@@ -18,16 +12,16 @@ var main = function(){
  //          	$('<li>').text(value).appendTo($("#popular_ul"));      
  //        });
  //    });
+	
+	/* Get Most Popular Quiz Data from Database */
     var xhr = new XMLHttpRequest();
     xhr.onreadystatechange = function() {
         if (xhr.readyState == 4) {
             var data = xhr.responseText;
-            alert(data);
         }
     }
-    xhr.open('POST', 'HomePageServlet', true);
+    xhr.open('POST', 'IndexServlet', true);
     xhr.send(null);
-
 };
 
 $(document).ready(main);

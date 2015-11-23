@@ -26,7 +26,7 @@ public class User {
 	/**
 	 * Constructor: first create an user
 	 * @param usrID
-	 * @param password
+	 * @param password, this is the raw version
 	 * @param permission
 	 * @param privacy
 	 * @param imagePaths
@@ -239,7 +239,7 @@ public class User {
 	 * Users: usrID, password, creation time, access permission, privacy,images, 
 	 * maybe we can get an extension like plain text tweeter...
 	 */
-	String encryptPW(String password) {
+	public static String encryptPW(String password) {
 		try {
 			MessageDigest mdConverter = MessageDigest.getInstance("SHA1");
 			// Convert string input to bytes[] depending on its type -- password or hashcode

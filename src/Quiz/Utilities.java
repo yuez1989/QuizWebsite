@@ -6,7 +6,7 @@ import java.util.*;
 
 public class Utilities {
 
-	static DataBase db = QuizSystem.getQuizSystem().db;
+	static DataBase db;
 
 	public Utilities(){
 		QuizSystem sys = QuizSystem.getQuizSystem();
