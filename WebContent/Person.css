@@ -1,3 +1,4 @@
+@CHARSET "UTF-8";
 .menubar{
     list-style-type: none;
     margin: 0;
@@ -6,7 +7,6 @@
     background-color: #dddddd;
     font-size: 20px;
 }
-
 .menubar .leftmenu{
     float: left;
     display: block;
@@ -17,26 +17,22 @@
 }
 .menubar ul li {
     display: block;
-    width: 120px;
+    width: 200px;
     margin-left: 30px;
     margin-right: 30px;
     text-align: center;
 }
 
-#login_form{
-	text-align: left;
-}
-
-.most_popular{
-	height: 300px;
+.friends{
+	height: 200px;
 	background-color: #dddddd;
 }
 
-.top_player{
-	height: 300px;
+.achievements{
+	height: 200px;
 	background-color: #dddddd;
 }
-.recent_quiz{
-	height: 300px;
+.history{
+	height: 200px;
 	background-color: #dddddd;	
 }

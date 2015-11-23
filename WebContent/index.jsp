@@ -1,4 +1,8 @@
 <!DOCTYPE html>
+<%@page import="Quiz.*"%>
+<%@page import="java.util.ArrayList"%>
+
+
 <html>
 <head>
 <meta charset="UTF-8">
@@ -37,11 +41,43 @@
 	%>
 	</h1>
 	<div class='most_popular'>
-		<h3>Most Popular Quizzes</h3>
+		<%
+ 			ArrayList<Quiz> poplist = Utilities.getPopularQuiz();
+			if(poplist !=null){
+				out.print("<h3>Most Popular Quizzes</h3>");
+				out.print("<ul>");
+				for(Quiz quiz:poplist){
+					out.print("<li>" + quiz.getQuizName() + "</li>");
+				}
+				out.print("</ul>");
+			} 
+		%>
 	</div>
 	<div class='top_player'>
-		<h3>Toppest Players</h3>
+		<%
+ 			ArrayList<User> toplist = Utilities.getTopPlayer();
+			if(toplist != null){
+				out.print("<h3>Toppest Player</h3>");
+				out.print("<ul>");
+				for(User player:toplist){
+					out.print("<li>" + player + "</li>");
+				}
+				out.print("</ul>");
+			} 
+		%>
 	</div>
-	<div class=''>
+	<div class='recent_quiz'>
+		<%
+ 			ArrayList<String> recentlist = Utilities.getRecentQuiz();
+			if(recentlist!=null){
+				out.print("<h3>Recent Added Quizzes</h3>");
+				out.print("<ul>");
+				for(String quiz:recentlist){
+					out.print("<li>"+quiz+"</li>");	
+				}
+				out.print("</ul>");
+			} 
+		%>
+	</div>
 </body>
 </html>
