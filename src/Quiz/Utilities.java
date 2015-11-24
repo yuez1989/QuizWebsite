@@ -242,28 +242,42 @@ public class Utilities {
 	static public ArrayList<Quiz> getPopularQuiz(){
 		int count = 0;
 		DataBase db = QuizSystem.getQuizSystem().db;
-		ResultSet rsCount = db.executeQuery("COUNT distinct quizID FROM Histories GROUP BY quizID" +
-				" ORDER BY count(usrID)");
+//		ResultSet rsCount = db.executeQuery("select COUNT distinct quizID FROM Histories GROUP BY quizID" +
+//				" ORDER BY count(usrID);");
+		ResultSet rsCount = db.executeQuery("select count(distinct quizID) from Histories;");
 		try {
 			if(rsCount.next()){
-				count = rsCount.getInt("quizID");
+				count = rsCount.getInt(1);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}	
+		System.out.println(count);
 		ArrayList<Quiz> popuQuiz = new ArrayList<Quiz>();
 		int limit = (int) (count * 0.05);
 		if(limit <= 1) limit = 1;
 		ResultSet rs = db.executeQuery("SELECT distinct quizID FROM Histories GROUP BY quizID" +
-				" ORDER BY count(usrID) LIMIT " + limit);
+				" ORDER BY count(usrID) LIMIT " + limit+";");
+		ArrayList<String> quizids = new ArrayList<String>();
+		
 		try {
 			while(rs.next()){
-				String qID = rs.getString("quizID");
-				Quiz q = new Quiz(qID);
-				popuQuiz.add(q);
+				String qID = rs.getString(1);
+				quizids.add(qID);
+
 				}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}
+		for(String qid : quizids){
+			Quiz q;
+			try {
+				q = new Quiz(qid);
+				popuQuiz.add(q);	
+			} catch (SQLException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 		return popuQuiz;
 	}
@@ -317,18 +331,19 @@ public class Utilities {
 //			FOREIGN KEY (creator) REFERENCES Users(usrID)
 //		);
 		
-
-		try {
-			ResultSet rs=db.executeQuery("Select * from Quizzes;");
-			while(rs.next()){
-				System.out.println(rs.getString(1));
-				System.out.println(rs.getString(2));
-				
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		ArrayList<Quiz> list = getPopularQuiz();
+		
+//		try {
+//			ResultSet rs=db.executeQuery("Select * from Quizzes;");
+//			while(rs.next()){
+//				System.out.println(rs.getString(1));
+//				System.out.println(rs.getString(2));
+//				
+//			}
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
 	}
 	
 }
