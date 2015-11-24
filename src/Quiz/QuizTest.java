@@ -1,5 +1,6 @@
 package Quiz;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -13,14 +14,19 @@ public class QuizTest {
 
 
 		// internal info
-		 ArrayList<String> tags = new  ArrayList<String>();
-		 ArrayList<Question> questions = new ArrayList<Question>();
-		 questions.add(new Question("xiaotihu1448331783449"));
-
-
-		 Quiz quiz = new Quiz(quizName, description, creator,tags, questions, "I");
-		 quiz.saveToDB();
-
+//		 ArrayList<String> tags = new  ArrayList<String>();
+//		 ArrayList<Question> questions = new ArrayList<Question>();
+//		 questions.add(new Question("xiaotihu1448331783449"));
+//		 questions.add(new Question("xiaotihu1448344148216"));
+//
+//		 Quiz quiz = new Quiz("xiaotihu2015-11-23 19:12:15");
+//		 quiz.updateQuestions(questions);
+		 
+		DataBase db = QuizSystem.getQuizSystem().db;
+		ResultSet rs = db.executeQuery("select proID from Problems where proID like \'xiaotihu%\';");
+		while(rs.next()){
+			System.out.println(rs.getString(1));
+		}
 		
 //		Quiz.deleteQuiz("Abc1232015-11-18 11:50:00");
 		
