@@ -235,13 +235,71 @@ public class Utilities {
 		}
 	}
 	
+/**
+	 * Get the top 5% of Quizzes in total played times 
+	 * @return
+	 */
 	static public ArrayList<Quiz> getPopularQuiz(){
-		//TODO
-		return null;
+		int count = 0;
+		DataBase db = QuizSystem.getQuizSystem().db;
+		ResultSet rsCount = db.executeQuery("COUNT distinct quizID FROM Histories GROUP BY quizID" +
+				" ORDER BY count(usrID)");
+		try {
+			if(rsCount.next()){
+				count = rsCount.getInt("quizID");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
+		ArrayList<Quiz> popuQuiz = new ArrayList<Quiz>();
+		int limit = (int) (count * 0.05);
+		if(limit <= 1) limit = 1;
+		ResultSet rs = db.executeQuery("SELECT distinct quizID FROM Histories GROUP BY quizID" +
+				" ORDER BY count(usrID) LIMIT " + limit);
+		try {
+			while(rs.next()){
+				String qID = rs.getString("quizID");
+				Quiz q = new Quiz(qID);
+				popuQuiz.add(q);
+				}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return popuQuiz;
 	}
 	
-	static public ArrayList<User> getTopPlayer(){
-		return null;
+	/**
+	 * Get the top 5% of players in total played quiz numbers
+	 * @return
+	 * @throws ClassNotFoundException 
+	 */
+	static public ArrayList<User> getTopPlayer() throws ClassNotFoundException{
+		int count = 0;
+		DataBase db = QuizSystem.getQuizSystem().db;
+		ResultSet rsCount = db.executeQuery("COUNT distinct usrID FROM Histories GROUP BY usrID" +
+				" ORDER BY count(quizID)");
+		try {
+			if(rsCount.next()){
+				count = rsCount.getInt("usrID");
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}	
+		ArrayList<User> topUser = new ArrayList<User>();
+		int limit = (int) (count * 0.05);
+		if(limit <= 1) limit = 1;
+		ResultSet rs = db.executeQuery("SELECT distinct usrID FROM Histories GROUP BY usrID" +
+				" ORDER BY count(quizID) LIMIT " + limit);
+		try {
+			while(rs.next()){
+				String usrID = rs.getString("usrID");
+				User user = new User(usrID);
+				topUser.add(user);
+				}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return topUser;
 	}
 	
 	static public void main(String[] args){

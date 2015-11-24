@@ -14,9 +14,9 @@
 		RequestDispatcher dispatcher = request.getRequestDispatcher("UserHomePage.jsp");
 		dispatcher.forward(request, response);
 	}
-	UserInfo userinfo = new UserInfo(person); 
+	UserInfo UserInfo = new UserInfo(person); 
 %>
-<title><%=person%>'s Home Page</title>
+<title>Quizzzz</title>
 <link rel="stylesheet" type="text/css" href="Person.css">
 </head>
 <body>
@@ -30,16 +30,16 @@
 	</div>
 	<%
 		//can not access the homepage.
-		if(userinfo.privacy == 'd'){
+		if(UserInfo.privacy == 'd'){
 			out.print("<h2>Sorry, you don't have access to "+person+"\'s Homepage</h2>");
 		}else{
-			userinfo.update();
+			UserInfo.update();
 	%>
 	<div class='friends'>
 		<p><%=person %>'s Friends</p>
 		<ul id='friends_ul'>
 			<%
-				for(Friend frd:userinfo.friends){
+				for(Friend frd:UserInfo.friends){
 					out.print("<li>"+frd.getFriend(person)+"</li>");
 				}
 			%>
@@ -50,7 +50,7 @@
 		<p><%=person %> has achieved</p>
 		<ul id='achievements_ul'>
 			<%
-				for(AchievementRecord ach:userinfo.achievementRecords){
+				for(AchievementRecord ach:UserInfo.achievementRecords){
 					out.print("<li>"+ach.achID+" at "+ach.time+"</li>");
 				}
 			%>		
@@ -60,7 +60,7 @@
 		<p><%=person %> played:</p>
 		<ul id='history_ul'>
 			<%
-				for(History history:userinfo.histories){
+				for(History history:UserInfo.histories){
 					out.print("<li>"+history.quizID+" at "+history.start+"</li>");
 				}
 			%>
