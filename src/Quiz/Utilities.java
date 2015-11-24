@@ -106,6 +106,25 @@ public class Utilities {
 
 	/**
 	 * 
+	 * @param quizID
+	 * @return
+	 * @throws SQLException
+	 */
+	public static ArrayList<String> getRecentQuizReviews(String quizID) throws SQLException{
+		ArrayList<String> recentReviews = new ArrayList<String>();
+		String command = "SELECT * FROM Histories WHERE quizID = "+"\""+quizID+"\" ORDER BY end DESC;";
+		ResultSet rs = db.executeQuery(command);
+		int count = 0; 
+		while(rs.next()){
+			if(count == 3) break;
+			count++;
+			recentReviews.add(rs.getString("review"));
+			}
+		return recentReviews;
+	}
+
+	/**
+	 * 
 	 * @param usrID
 	 * @return
 	 * @throws SQLException
