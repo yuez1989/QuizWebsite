@@ -7,27 +7,22 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%
-	String user = (String)session.getAttribute("user");
-	//String person = (String)request.getAttribute("person");
+	//String user = (String)session.getAttribute("user");
+	//String person = (String)request.getParameter("person");
+	String person = "xiaotihu";
+	/*
 	String person = "xiaotihu";
 	if(user!=null && user.equals(person)){
 		RequestDispatcher dispatcher = request.getRequestDispatcher("UserHomePage.jsp");
 		dispatcher.forward(request, response);
 	}
+	*/
 	UserInfo UserInfo = new UserInfo(person); 
 %>
 <title>Quizzzz</title>
 <link rel="stylesheet" type="text/css" href="Person.css">
 </head>
 <body>
-
-	<div class='menubar'>
-		<ul id='menu_ul'>
-			<li class='leftmenu'>Home Page: <%=person%></li>
-			<li class='rightmenu'><img src='#'></li>
-			<li class='rightmenu'><%=user %></li>
-		</ul>
-	</div>
 	<%
 		//can not access the homepage.
 		if(UserInfo.privacy == 'd'){
