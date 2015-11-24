@@ -7,6 +7,10 @@ import java.util.Date;
 import java.sql.*;
 
 public class Question{
+	public static final String TYPE_MULTIPLECHOICE = "MC";
+	public static final String TYPE_FREERESPONCE = "FREERESPONSE";
+	public static final String TYPE_MATCHING = "MATCH";
+	
 	protected String problemID;
 	protected String context;
 	protected String picutreUrl;
@@ -211,6 +215,58 @@ public class Question{
 			solutions.add(oneAns); 
 		}
 	}
+	/**
+	 * if this question is a multiple choice, return an arraylist of text for options
+	 * @return option description. if it is not MC, return null
+	 */
+	public ArrayList<String> parseOption(){
+		if(!this.problemType.equals(TYPE_MULTIPLECHOICE)){
+			return null;
+		}
+		String[] choices = this.context.split("<option>");
+		ArrayList<String> options = new ArrayList<String>();
+		for(int i=1; i<choices.length; i++){
+			options.add(choices[i].substring(0, choices[i].indexOf("</option>")));
+		}
+		return options;
+	}
+	
+	public static void main(String[] arg) throws SQLException{
+//		String context = "Who's the first presidents in US?<option>George Washington</option><option>John Adams</option><option>Thomas Jefferson</option>";
+//		System.out.println(context);
+//		String picutreUrl="";
+//		ArrayList<ArrayList<String>> solutions = new ArrayList<ArrayList<String>>();
+//		ArrayList<String> p1 = new ArrayList<String>();
+//		p1.add("A");
+//		solutions.add(p1);
+//		long timed = 0;
+//		int order = 0;
+//		String problemType = TYPE_MULTIPLECHOICE;
+//		Question q = new Question(context, picutreUrl, solutions, 
+//				timed, "xiaotihu", order,problemType);
+//		try {
+//			q.saveProb();
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+		ResultSet rs = db.executeQuery("select * from Quizzes");
+		//xiaotihu2015-11-23 19:12:15
+		while(rs.next()){
+			System.out.println(rs.getString(1));
+		}
+//		Question q = new Question("xiaotihu1448331783449");
+//		ArrayList<String> options = q.parseOption();
+//		for(String str: options){
+//			System.out.println(str);
+//		}
+//		ArrayList<String> list = new ArrayList<String>();
+//		list.add("B");
+//		System.out.println(q.grade(list));
+
+	}
+	/*
+	
 	
 	public static void main(String[] arg) throws SQLException{
 //		Question q = new Question("ABC1231447305985620");
@@ -269,5 +325,5 @@ public class Question{
 //			System.out.println(correct.get(i));
 //		}
 	}
-	
+	*/
 }

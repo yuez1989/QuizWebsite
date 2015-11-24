@@ -261,7 +261,7 @@ public class Utilities {
 		
 
 		try {
-			ResultSet rs=db.executeQuery("Select Quizzes.name, Problems.description from Quizzes, Problems,ProblemBelongto where Quizzes.quizID = ProblemBelongto.quizID and ProblemBelongto.proID=Problems.proID;");
+			ResultSet rs=db.executeQuery("Select * from Quizzes;");
 			while(rs.next()){
 				System.out.println(rs.getString(1));
 				System.out.println(rs.getString(2));

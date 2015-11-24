@@ -6,29 +6,23 @@ import java.util.Arrays;
 
 public class QuizTest {
 	public static void main(String[] arg) throws SQLException{
-		/*
-		 String quizName = "random";
-		 String description = "fuck this shit";
-		 String creator = "Abc123";
+		
+		 String quizName = "MC_quiz";
+		 String description = "this quiz has MC for test!";
+		 String creator = "xiaotihu";
 
 
 		// internal info
 		 ArrayList<String> tags = new  ArrayList<String>();
-		 tags.add("test");
-		 tags.add("random");
 		 ArrayList<Question> questions = new ArrayList<Question>();
-		 questions.add(new Question("ABC1231447751482816"));
-		 questions.add(new Question("ABC1231447751482840"));
-		 questions.add(new Question("ABC1231447751482846"));
-		 questions.add(new Question("ABC1231447751482855"));
-		 questions.add(new Question("ABC1231447751482861"));
+		 questions.add(new Question("xiaotihu1448331783449"));
 
 
-		 Quiz quiz = new Quiz(quizName, description, creator,tags, questions, "IM");
+		 Quiz quiz = new Quiz(quizName, description, creator,tags, questions, "I");
 		 quiz.saveToDB();
-*/
+
 		
-		Quiz.deleteQuiz("Abc1232015-11-18 11:50:00");
+//		Quiz.deleteQuiz("Abc1232015-11-18 11:50:00");
 		
 		
 		
