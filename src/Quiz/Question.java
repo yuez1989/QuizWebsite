@@ -232,16 +232,18 @@ public class Question{
 	}
 	
 	public static void main(String[] arg) throws SQLException{
-//		String context = "Who's the first presidents in US?<option>George Washington</option><option>John Adams</option><option>Thomas Jefferson</option>";
-//		System.out.println(context);
+//		String context = "who teaches cs108?";
+//		//System.out.println(context);
 //		String picutreUrl="";
 //		ArrayList<ArrayList<String>> solutions = new ArrayList<ArrayList<String>>();
 //		ArrayList<String> p1 = new ArrayList<String>();
-//		p1.add("A");
+//		p1.add("Young");
+//		p1.add("Patrick");
+//		p1.add("Patrick Young");
 //		solutions.add(p1);
 //		long timed = 0;
 //		int order = 0;
-//		String problemType = TYPE_MULTIPLECHOICE;
+//		String problemType = TYPE_FREERESPONCE;
 //		Question q = new Question(context, picutreUrl, solutions, 
 //				timed, "xiaotihu", order,problemType);
 //		try {
@@ -250,12 +252,8 @@ public class Question{
 //			// TODO Auto-generated catch block
 //			e.printStackTrace();
 //		}
-		ResultSet rs = db.executeQuery("select * from Quizzes");
-		//xiaotihu2015-11-23 19:12:15
-		while(rs.next()){
-			System.out.println(rs.getString(1));
-		}
-//		Question q = new Question("xiaotihu1448331783449");
+
+//		Question q = new Question("xiaotihu1448344148216");
 //		ArrayList<String> options = q.parseOption();
 //		for(String str: options){
 //			System.out.println(str);
