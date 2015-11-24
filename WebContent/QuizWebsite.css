@@ -1,0 +1,19 @@
+@CHARSET "UTF-8";
+
+.
+#header {
+	background-color:gray;
+	padding-top: 10px;
+    padding-left: 14px;
+    padding-right: 14px;
+    padding-bottom: 10px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 9000;
+}
+
+#personal-header {
+	float:right;
+}

@@ -4,20 +4,24 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Welcome to Quizzzz, <%
+<link rel="stylesheet" href="QuizWebsite.css">
+<title>
+	<%
 		String usrID = "default";
 		if (!session.isNew()) {
-			usrID = (String)session.getAttribute("user");
-			if (usrID == null) usrID = "default";
+			usrID = (String) session.getAttribute("user");
+			if (usrID == null)
+				usrID = "default";
 		}
 		out.println(usrID);
-	%>
+	%>'s Homepage
 </title>
-<h1>
-	Welcome,
-	<%= usrID %></h1>
 </head>
 <body>
-
+<div id="header">
+	<div id="personal-header">
+		<p>Welcome, <%=usrID%></p>
+	</div>
+</div>
 </body>
 </html>
