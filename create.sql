@@ -1,10 +1,9 @@
-
 DROP TABLE IF EXISTS Users;
 CREATE TABLE Users(
 	usrID VARCHAR(255) primary key,
 	password VARCHAR(64),
 	createTime DATETIME,
-	premission INT,
+	permission INT,
 	imagepath VARCHAR(2047),
 	privacy VARCHAR(10)
 );
@@ -59,15 +58,14 @@ CREATE TABLE Histories(
 	score FLOAT,
 	review TEXT,
 	rating FLOAT,
+	span INT,
 	FOREIGN KEY (quizID) REFERENCES Quizzes(quizID),
 	FOREIGN KEY (usrID) REFERENCES Users(usrID)
 );
 
-
 DROP TABLE IF EXISTS Tags;
 CREATE TABLE Tags(
 	tagsID VARCHAR(255),
-	description TEXT,
 	PRIMARY KEY (tagsID)
 );
 
@@ -114,11 +112,7 @@ DROP TABLE IF EXISTS Friends;
 CREATE TABLE Friends(
 	usr1ID VARCHAR(255),
 	usr2ID VARCHAR(255),
-	time DATETIME
+	time DATETIME,
+	FOREIGN KEY (usr1ID) REFERENCES Users(usrID),
+	FOREIGN KEY (usr2ID) REFERENCES Users(usrID)
 );
-
-
-
-
-
-
