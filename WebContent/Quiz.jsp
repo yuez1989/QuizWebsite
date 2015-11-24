@@ -44,7 +44,16 @@
 						out.print("<input type=\'radio\' name = \'q"+count+"ans\'>"+opt+"</input>");
 					}
 				}else if(Question.TYPE_MATCHING.equals(q.getType())){
-					
+					out.print("<p class=\'question_description\'>"+ q.getText().substring(0,q.getText().indexOf("<option_left>"))+"</p>");
+					ArrayList<String> optionsleft = q.parseOptionleft();
+					ArrayList<String> optionsright = q.parseOptionright();
+					int optcnt=1;
+					for(String opt: optionsleft){
+						out.print("<input type=\'text\' name = \'q"+count+"ans"+optcnt+"\'></input>");
+						out.print("<p>"+opt+"</p>");
+						out.print("<p>"+optionsright.get(optcnt-1)+"</p>");
+						optcnt++;
+					}
 				}
 
 				

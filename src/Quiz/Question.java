@@ -231,27 +231,53 @@ public class Question{
 		return options;
 	}
 	
+	public ArrayList<String> parseOptionleft(){
+		if(!this.problemType.equals(TYPE_MATCHING)){
+			return null;
+		}
+		String[] choices = this.context.split("<option_left>");
+		ArrayList<String> options = new ArrayList<String>();
+		for(int i=1; i<choices.length; i++){
+			options.add(choices[i].substring(0, choices[i].indexOf("</option_left>")));
+		}
+		return options;
+		
+	}
+	public ArrayList<String> parseOptionright(){
+		if(!this.problemType.equals(TYPE_MATCHING)){
+			return null;
+		}
+		String[] choices = this.context.split("<option_right>");
+		ArrayList<String> options = new ArrayList<String>();
+		for(int i=1; i<choices.length; i++){
+			options.add(choices[i].substring(0, choices[i].indexOf("</option_right>")));
+		}
+		return options;
+	}
+	
 	public static void main(String[] arg) throws SQLException{
-//		String context = "who teaches cs108?";
-//		//System.out.println(context);
-//		String picutreUrl="";
-//		ArrayList<ArrayList<String>> solutions = new ArrayList<ArrayList<String>>();
-//		ArrayList<String> p1 = new ArrayList<String>();
-//		p1.add("Young");
-//		p1.add("Patrick");
-//		p1.add("Patrick Young");
-//		solutions.add(p1);
-//		long timed = 0;
-//		int order = 0;
-//		String problemType = TYPE_FREERESPONCE;
-//		Question q = new Question(context, picutreUrl, solutions, 
-//				timed, "xiaotihu", order,problemType);
-//		try {
-//			q.saveProb();
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
+		String context = "Match movie with director<option_left>Interstellar</option_left><option_left>Coherence</option_left><option_right>Nolan</option_right><option_right>James Ward Byrkit</option_right>";
+		//System.out.println(context);
+		String picutreUrl="";
+		ArrayList<ArrayList<String>> solutions = new ArrayList<ArrayList<String>>();
+		ArrayList<String> p1 = new ArrayList<String>();
+		p1.add("A");
+		solutions.add(p1);
+		ArrayList<String> p2 = new ArrayList<String>();
+		p2.add("B");
+		solutions.add(p2);
+		
+		long timed = 0;
+		int order = 0;
+		String problemType = TYPE_MATCHING;
+		Question q = new Question(context, picutreUrl, solutions, 
+				timed, "xiaotihu", order,problemType);
+		try {
+			q.saveProb();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
 //		Question q = new Question("xiaotihu1448344148216");
 //		ArrayList<String> options = q.parseOption();
