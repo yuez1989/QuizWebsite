@@ -8,8 +8,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%
 	//String user = (String)session.getAttribute("user");
-	//String person = (String)request.getParameter("person");
-	String person = "xiaotihu";
+	String person = (String)request.getParameter("person");
+	//String person = "xiaotihu";
 	/*
 	String person = "xiaotihu";
 	if(user!=null && user.equals(person)){

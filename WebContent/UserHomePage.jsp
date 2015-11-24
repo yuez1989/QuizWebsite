@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+<%@ page import="Quiz.*,java.util.*" language="java"
+	contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -21,7 +21,7 @@
 	crossorigin="anonymous"></script>
 </head>
 <title>
-	<%
+	Quizzzz <%
 		String usrID = "default";
 		if (!session.isNew()) {
 			usrID = (String) session.getAttribute("user");
@@ -29,9 +29,13 @@
 				usrID = "default";
 		}
 		out.println(usrID);
-	%>'s Homepage
+	%>
 </title>
 <body>
+	<%
+		User user = new User(usrID);
+		UserInfo info = user.info;
+	%>
 	<div class="header-line">
 		<div class="logo-header">
 			<div class="logo-header-large">Quizzzz</div>
@@ -50,16 +54,40 @@
 			<div class="column-name">PROFILE</div>
 			<div>
 				<form name="submitForm" method="POST" action="Person.jsp">
-					<input type="hidden" name="person" value="<%=usrID%>">
-					<a href="javascript:document.submitForm.submit()"><%=usrID%>'s profile</a>
-				</form>	
+					<input type="hidden" name="person" value="<%=usrID%>"> <a
+						href="javascript:document.submitForm.submit()"><%=usrID%>'s
+						profile</a>
+				</form>
 			</div>
 			<div>Setting</div>
 			<div>Administration Settings</div>
-			<div class="uhp-user-inner column-name">
-				<div>Achievements</div>
-				<div>Recent Quizzes</div>
-				<div>Recent Creation</div>
+			<div class="uhp-user-inner">
+				<div>
+					<span class="section-name">Achievements </span>
+					<span class="column-indent"> 
+						<%
+							ArrayList<AchievementRecord> achs = info.achievementRecords;
+							for (AchievementRecord ach : achs) {
+								out.println(ach.achID);
+							}	
+						%>
+						<%= achs.size() %>
+					</span>
+				</div>
+				<div><span class="section-name">Recent Quizzes</span></div>
+				<div><span class="section-name">Recent Creation</span></div>
+				<div>
+					<span class="section-name">Friends List</span>
+					<span class="column-indent"> 
+						<%
+							ArrayList<Friend> frds = info.friends;
+							for (Friend frd : frds) {
+								//out.println(frd.otherID);
+							}
+						%>
+						<%= frds.size() %>
+					</span>
+				</div>
 			</div>
 			<div style="clear: both;"></div>
 		</div>
