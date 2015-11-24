@@ -218,15 +218,55 @@ public class Utilities {
 		return recentTopPerformance;
 	}
 	
-	static public void main(String[] args){
-
-		
+	static public ArrayList<String> getRecentQuiz(){
+		//TODO
+		DataBase db = QuizSystem.getQuizSystem().db;
+		ResultSet rs = db.executeQuery("Select name from Quizzes Order by createTime;");
+		ArrayList<String> recentquiz = new ArrayList<String>();
 		try {
-			ArrayList<History> highscore = getRecentFriendActivities("yuezhang");
-			for(History hist: highscore){
-				System.out.println(hist);
+			while(rs.next()){
+				recentquiz.add(rs.getString("name"));
 			}
-			//System.out.println( getUserAverageScore("xinhuiwu"));
+			return recentquiz;
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+			return null;
+		}
+	}
+	
+	static public ArrayList<Quiz> getPopularQuiz(){
+		//TODO
+		return null;
+	}
+	
+	static public ArrayList<User> getTopPlayer(){
+		return null;
+	}
+	
+	static public void main(String[] args){
+		DataBase db = QuizSystem.getQuizSystem().db;
+//		DROP TABLE IF EXISTS Quizzes;
+//		CREATE TABLE Quizzes(
+//			quizID VARCHAR(255),
+//			name VARCHAR(1023),
+//			creator VARCHAR(255),
+//			createTime DATETIME,
+//			updateTime DATETIME,
+//			description TEXT,
+//			spec TEXT,
+//			PRIMARY KEY (quizID),
+//			FOREIGN KEY (creator) REFERENCES Users(usrID)
+//		);
+		
+
+		try {
+			ResultSet rs=db.executeQuery("Select Quizzes.name, Problems.description from Quizzes, Problems,ProblemBelongto where Quizzes.quizID = ProblemBelongto.quizID and ProblemBelongto.proID=Problems.proID;");
+			while(rs.next()){
+				System.out.println(rs.getString(1));
+				System.out.println(rs.getString(2));
+				
+			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();

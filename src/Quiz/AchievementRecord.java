@@ -9,9 +9,9 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class AchievementRecord {
-	String usrID;
-	String achID;
-	String time;
+	public String usrID;
+	public String achID;
+	public String time;
 	
 	public AchievementRecord(String usrID, String achID) {
 		this.usrID = usrID;

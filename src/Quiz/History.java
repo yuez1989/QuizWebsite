@@ -6,10 +6,10 @@ import java.sql.SQLException;
 //TODO in QuizSystem.db, score and rating is INT, should be double in this case, action needed
 
 public class History {
-	protected String quizID;
-	protected String usrID;
-	protected String playmode;
-	protected String start;
+	public String quizID;
+	public String usrID;
+	public String playmode;
+	public String start;
 	protected String end;
 	protected long span;
 	protected double score;
