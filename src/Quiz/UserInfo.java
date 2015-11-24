@@ -43,7 +43,7 @@ public class UserInfo {
 	public void extractFriendsFromDB() {
 		// use usrID to query the db and fill the friends list.
 		String command = "SELECT * FROM Friends WHERE usr1ID =\"" + usrID + "\" OR usr2ID = \"" + usrID + "\";";
-
+		friends = new ArrayList<Friend>();
 		try{
 			ResultSet rs = QuizSystem.getQuizSystem().db.executeQuery(command);
 			while (rs.next()){
@@ -60,6 +60,7 @@ public class UserInfo {
 
 	public void extractMessagesFromDB() {
 		String command = "SELECT * FROM Messages WHERE fromID =\"" + usrID + "\" OR toID = \"" + usrID + "\";";
+		messages = new ArrayList<Message>();
 		try{
 			ResultSet rs = QuizSystem.db.executeQuery(command);
 			while (rs.next()){
@@ -78,6 +79,8 @@ public class UserInfo {
 
 	public void extractAchievementRecordsFromDB() {
 		String command = "SELECT * FROM AchievementRecords WHERE usrID =\"" + usrID + "\";";
+		achievementRecords = new ArrayList<AchievementRecord>();
+
 		try {
 			ResultSet rs = QuizSystem.db.executeQuery(command);
 			while (rs.next()) {
@@ -91,6 +94,7 @@ public class UserInfo {
 	}
 
 	public void extractHistoriesFromDB() {
+		histories = new ArrayList<History>();
 		String command = "SELECT * FROM Histories WHERE usrID =\"" + usrID + "\";";
 		try {
 			ResultSet rs = QuizSystem.db.executeQuery(command);

@@ -9,19 +9,22 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%
 	Quiz quiz = new Quiz(request.getParameter("quizID"));
+	quiz = new Quiz("xiaotihu2015-11-23 19:12:15");
+
 	if(quiz.isRandom()){
 		quiz.shuffleQuestion();
 	}
 %>
+
 <title>Welcome to <%=quiz.getQuizName() %></title>
 </head>
 <body>
 <%
 	if(quiz.isMultiplePages()){
-		
+		out.print("<p>hi</p>");
 	}else{	
 %>
-	<form class='total_form'>
+	<form class='total_form' >
 		<%
 			ArrayList<Question> questions = quiz.getQuestions();
 			int count=0;
@@ -29,9 +32,21 @@
 				count++;
 				out.print("<div class = question"+count+">");
 				out.print("<h3>Question "+count+"<h3>");
-				out.print("<p class=\'question_description\'>"+ q.getText()+"</p>");
-				if(!q.getPic().isEmpty())
-					out.print("<img src=\'"+q.getPic()+"\' class=\'question_image\'>");
+				if(Question.TYPE_FREERESPONCE.equals(q.getType())){
+					out.print("<p class=\'question_description\'>"+ q.getText()+"</p>");
+					if(!q.getPic().isEmpty())
+						out.print("<img src=\'"+q.getPic()+"\' class=\'question_image\'>");
+					out.print("<input type=\'text\' name=\'q"+count+"ans\' value=\'enter here\'>");
+				}else if(Question.TYPE_MULTIPLECHOICE.equals(q.getType())){
+					out.print("<p class=\'question_description\'>"+ q.getText().substring(0,q.getText().indexOf("<option>"))+"</p>");
+					ArrayList<String> options = q.parseOption();
+					for(String opt: options){
+						out.print("<input type=\'radio\' name = \'q"+count+"ans\'>"+opt+"</input>");
+					}
+				}else if(Question.TYPE_MATCHING.equals(q.getType())){
+					
+				}
+
 				
 				out.print("</div>");
 			}
