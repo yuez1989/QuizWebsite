@@ -18,13 +18,18 @@
 </title>
 </head>
 <body>
-<div id="header-line">
-	<div id="personal-header">
-		<p>Welcome, <%=usrID%></p>
-		<a href="#">Messages</a>
-		<a href="logout.jsp">Log Out</a>
+	<div id="header-line">
+		<div class="logo-header">
+			<div class="logo-header-large">Quizzzz</div>
+			<div class="logo-header-small">Only fun learning wakes us up</div>
+		</div>
+		<div id="personal-header">
+			<p>
+				Welcome,
+				<%=usrID%></p>
+			<a href="#">Messages</a> <a href="logout.jsp">Log Out</a>
+		</div>
+		<div style="clear: both;"></div>
 	</div>
-	<div style="clear:both;"></div>
-</div>
 </body>
 </html>

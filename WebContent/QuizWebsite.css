@@ -1,15 +1,20 @@
 @CHARSET "UTF-8";
 /* UserHomePage.jsp */
+
+body {
+	background-color: rgb(237,240,245);
+}
+
 #header-line {
-	background-color: rgb(70, 121, 189);
+	background-color: rgb(58,87,149);
 	position: fixed;
 	top: 0;
 	left: 0;
 	right: 0;
 	padding-top: 10px;
-	padding-left: 14px;
-	padding-right: 14px;
-	padding-bottom: 10px;
+	padding-left: 15px;
+	padding-right: 15px;
+	padding-bottom: 6px;
 	z-index: 9;
 	overflow: auto;
 }
@@ -17,6 +22,26 @@
 #header-line * {
 	font-family: Circular, "Helvetica Neue", Helvetica, Arial, sans-serif;
 	color: white;
+}
+
+.logo-header {
+	float: left;
+	padding-left: 100px;
+	padding-bottom: -10px;
+}
+
+.logo-header *{
+	display: inline-block;
+}
+
+.logo-header-large {
+	font-size: 35px;
+	padding-right:15px;
+	text-shadow: 1px 1px 2px #000000;
+}
+
+.logo-header-small {
+	font-size: 15px;
 }
 
 #personal-header {
