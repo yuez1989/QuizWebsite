@@ -47,4 +47,10 @@ public class Friend {
 		String stmt = "DELETE FROM Friends WHERE usr1ID = \"" + usrID  + "\" OR usr2ID = \"" + usrID + "\";";
 		return QuizSystem.db.executeUpdate(stmt);
 	}
+	public String getFriend(String id){
+		if(id.equals(usr1ID))
+			return usr2ID;
+		else
+			return usr1ID;
+	}
 }

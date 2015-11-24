@@ -217,6 +217,12 @@ public class Quiz {
 		if(immediate_correction) spec+="I";
 		return spec;
 	}
+	public boolean isMultiplePages(){
+		return multiple_pages;
+	}
+	public boolean isRandom(){
+		return random_questions;
+	}
 	//setters
 	public void updateQuizName(String name){
 		quizName = name;

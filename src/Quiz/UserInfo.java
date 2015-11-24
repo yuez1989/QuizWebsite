@@ -9,16 +9,16 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class UserInfo {
-	protected String usrID;
+	public String usrID;
 	protected String password;
-	protected String time;
+	public String time;
 	protected boolean permission;
-	protected char privacy;
-	protected String imagePath;
-	protected ArrayList<Friend> friends;
+	public char privacy;
+	public String imagePath;
+	public ArrayList<Friend> friends;
 	protected ArrayList<Message> messages; // sort it according to time?
-	protected ArrayList<AchievementRecord> achievementRecords; // Only administrators can see
-	protected ArrayList<History> histories; // 
+	public ArrayList<AchievementRecord> achievementRecords; // Only administrators can see
+	public ArrayList<History> histories; // 
 
 	public UserInfo(String usrID) {
 		this.usrID = usrID;
@@ -95,7 +95,7 @@ public class UserInfo {
 		try {
 			ResultSet rs = QuizSystem.db.executeQuery(command);
 			while (rs.next()) {
-				String achID = rs.getString("achID");
+				//String achID = rs.getString("achID");
 				String quizID = rs.getString("quizID");
 				String playmode = rs.getString("playmode");
 				String start = rs.getString("start");
