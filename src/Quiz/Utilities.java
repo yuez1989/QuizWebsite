@@ -282,7 +282,7 @@ public class Utilities {
 		return popuQuiz;
 	}
 	
-	/**
+/**
 	 * Get the top 5% of players in total played quiz numbers
 	 * @return
 	 * @throws ClassNotFoundException 
@@ -290,25 +290,25 @@ public class Utilities {
 	static public ArrayList<User> getTopPlayer() throws ClassNotFoundException{
 		int count = 0;
 		DataBase db = QuizSystem.getQuizSystem().db;
-		ResultSet rsCount = db.executeQuery("COUNT distinct usrID FROM Histories GROUP BY usrID" +
-				" ORDER BY count(quizID)");
+		ResultSet rsCount = db.executeQuery("select count(distinct usrID) from Histories;");
 		try {
 			if(rsCount.next()){
-				count = rsCount.getInt("usrID");
+				count = rsCount.getInt(1);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}	
 		ArrayList<User> topUser = new ArrayList<User>();
+		ArrayList<String> usrIDs = new ArrayList<String>();
+
 		int limit = (int) (count * 0.05);
 		if(limit <= 1) limit = 1;
 		ResultSet rs = db.executeQuery("SELECT distinct usrID FROM Histories GROUP BY usrID" +
-				" ORDER BY count(quizID) LIMIT " + limit);
+				" ORDER BY count(quizID) LIMIT " + limit+";");
 		try {
 			while(rs.next()){
-				String usrID = rs.getString("usrID");
-				User user = new User(usrID);
-				topUser.add(user);
+				String usrID = rs.getString(1);
+				usrIDs.add(usrID);
 				}
 		} catch (SQLException e) {
 			e.printStackTrace();
