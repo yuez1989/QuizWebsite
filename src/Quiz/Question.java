@@ -25,6 +25,14 @@ public class Question{
 	protected final String EC_START = "<ans-list>";
 	protected final String EC_END = "</ans-list>";
 	
+	
+	static final String OPT_START = "<option>";
+	static final String OPT_END = "</option>";
+	static final String OPTLEFT_START = "<option_left>";
+	static final String OPTLEFT_END = "</option_left>";
+	static final String OPTRIGHT_START = "<option_right>";
+	static final String OPTRIGHT_END = "</option_right>";
+	
 	static String account = MyDBInfo.MYSQL_USERNAME;
 	static String password = MyDBInfo.MYSQL_PASSWORD;
 	static String server = MyDBInfo.MYSQL_DATABASE_SERVER;
@@ -95,7 +103,8 @@ public class Question{
 	// get the problem text	
 	public String getText(){
 		// get from database
-		return context;
+
+		return parseContext();
 	}
 	
 	public String getPic(){
@@ -223,10 +232,10 @@ public class Question{
 		if(!this.problemType.equals(TYPE_MULTIPLECHOICE)){
 			return null;
 		}
-		String[] choices = this.context.split("<option>");
+		String[] choices = this.context.split(OPT_START);
 		ArrayList<String> options = new ArrayList<String>();
 		for(int i=1; i<choices.length; i++){
-			options.add(choices[i].substring(0, choices[i].indexOf("</option>")));
+			options.add(choices[i].substring(0, choices[i].indexOf(OPT_END)));
 		}
 		return options;
 	}
@@ -235,10 +244,10 @@ public class Question{
 		if(!this.problemType.equals(TYPE_MATCHING)){
 			return null;
 		}
-		String[] choices = this.context.split("<option_left>");
+		String[] choices = this.context.split(OPTLEFT_START);
 		ArrayList<String> options = new ArrayList<String>();
 		for(int i=1; i<choices.length; i++){
-			options.add(choices[i].substring(0, choices[i].indexOf("</option_left>")));
+			options.add(choices[i].substring(0, choices[i].indexOf(OPTLEFT_END)));
 		}
 		return options;
 		
@@ -247,12 +256,23 @@ public class Question{
 		if(!this.problemType.equals(TYPE_MATCHING)){
 			return null;
 		}
-		String[] choices = this.context.split("<option_right>");
+		String[] choices = this.context.split(OPTRIGHT_START);
 		ArrayList<String> options = new ArrayList<String>();
 		for(int i=1; i<choices.length; i++){
-			options.add(choices[i].substring(0, choices[i].indexOf("</option_right>")));
+			options.add(choices[i].substring(0, choices[i].indexOf(OPTRIGHT_END)));
 		}
 		return options;
+	}
+	public String parseContext(){
+		int optindex = context.indexOf(OPT_START);
+		int optleftindex = context.indexOf(OPTLEFT_START);
+		if(optindex == -1)
+			optindex = Integer.MAX_VALUE;
+		if(optleftindex == -1)
+			optleftindex = Integer.MAX_VALUE;
+		if(Math.min(optindex, optleftindex)==Integer.MAX_VALUE)
+			return context;
+		return context.substring(0,Math.min(optindex, optleftindex));
 	}
 	
 	public static void main(String[] arg) throws SQLException{

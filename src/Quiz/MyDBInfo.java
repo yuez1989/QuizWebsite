@@ -15,4 +15,6 @@ public class MyDBInfo {
 	public static final String MYSQL_DATABASE_SERVER = "mysql-user.stanford.edu";
 	public static final String MYSQL_DATABASE_NAME = "c_cs108_xwu37";
 
+	//mysql -h mysql-user.stanford.edu -u ccs108xwu37 -p
+	
 }

@@ -38,13 +38,13 @@
 						out.print("<img src=\'"+q.getPic()+"\' class=\'question_image\'>");
 					out.print("<input type=\'text\' name=\'q"+count+"ans\' value=\'enter here\'>");
 				}else if(Question.TYPE_MULTIPLECHOICE.equals(q.getType())){
-					out.print("<p class=\'question_description\'>"+ q.getText().substring(0,q.getText().indexOf("<option>"))+"</p>");
+					out.print("<p class=\'question_description\'>"+ q.getText()+"</p>");
 					ArrayList<String> options = q.parseOption();
 					for(String opt: options){
 						out.print("<input type=\'radio\' name = \'q"+count+"ans\'>"+opt+"</input>");
 					}
 				}else if(Question.TYPE_MATCHING.equals(q.getType())){
-					out.print("<p class=\'question_description\'>"+ q.getText().substring(0,q.getText().indexOf("<option_left>"))+"</p>");
+					out.print("<p class=\'question_description\'>"+ q.getText()+"</p>");
 					ArrayList<String> optionsleft = q.parseOptionleft();
 					ArrayList<String> optionsright = q.parseOptionright();
 					int optcnt=1;
