@@ -18,7 +18,7 @@ public class Utilities {
 	 * @param QuizID
 	 * @return 
 	 */
-	public static ArrayList<History> getHighScoresOfQuiz(String QuizID) throws SQLException{
+	public static ArrayList<History> getHighRecordsOfQuiz(String QuizID) throws SQLException{
 		ArrayList<History> highScores = new ArrayList<History>();
 		String command = "SELECT * FROM Histories WHERE quizID = "+"\""+QuizID+"\" ORDER BY score DESC;";
 		ResultSet rs= db.executeQuery(command);
@@ -333,6 +333,34 @@ public class Utilities {
 			e.printStackTrace();
 		}
 		return topUser;
+	}
+	
+	/**
+	 * todo! return the highest score for a specific quiz
+	 * @param quizID
+	 * @return score
+	 */
+	public double getHighestScoreOfQuiz(String quizID){
+		//TODO
+		return 0;
+	}
+	
+	/**
+	 * todo! return average score for all players
+	 * @param quizID
+	 * @return
+	 */
+	public double getAverageScoreOfQuiz(String quizID){
+		return 0;
+	}
+	
+	/**
+	 * return how many times the quiz has been taken
+	 * @param quizID
+	 * @return
+	 */
+	public double getPlayTimesOfQuiz(String quizID){
+		return 0;
 	}
 	
 	static public void main(String[] args){

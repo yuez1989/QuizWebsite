@@ -24,7 +24,8 @@
 		out.print("<p>hi</p>");
 	}else{	
 %>
-	<form class='total_form' >
+
+	<form class='total_form' action = "QuizScore.jsp" method="post" >
 		<%
 			ArrayList<Question> questions = quiz.getQuestions();
 			int count=0;
@@ -40,8 +41,10 @@
 				}else if(Question.TYPE_MULTIPLECHOICE.equals(q.getType())){
 					out.print("<p class=\'question_description\'>"+ q.getText()+"</p>");
 					ArrayList<String> options = q.parseOption();
+					int optcnt = 0;
 					for(String opt: options){
-						out.print("<input type=\'radio\' name = \'q"+count+"ans\'>"+opt+"</input>");
+						optcnt++;
+						out.print("<input type=\'radio\' name = \'q"+count+"ans\' value = \'"+optcnt+"\'>"+opt+"</input>");
 					}
 				}else if(Question.TYPE_MATCHING.equals(q.getType())){
 					out.print("<p class=\'question_description\'>"+ q.getText()+"</p>");
@@ -60,6 +63,7 @@
 				out.print("</div>");
 			}
 		%>
+		<input type="hidden" name="quizID" value="<%=quiz.getQuizID() %>">
 		<input type="submit" class='total_submit'/>
 	</form>
 <%		

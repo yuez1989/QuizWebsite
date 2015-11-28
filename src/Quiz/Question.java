@@ -10,6 +10,9 @@ public class Question{
 	public static final String TYPE_MULTIPLECHOICE = "MC";
 	public static final String TYPE_FREERESPONCE = "FREERESPONSE";
 	public static final String TYPE_MATCHING = "MATCH";
+	public static final String TYPE_BLANKFILL = "BLANK";
+	public static final String TYPE_BLANKOPT = "BLANKOPT";
+	
 	
 	protected String problemID;
 	protected String context;
@@ -32,6 +35,7 @@ public class Question{
 	static final String OPTLEFT_END = "</option_left>";
 	static final String OPTRIGHT_START = "<option_right>";
 	static final String OPTRIGHT_END = "</option_right>";
+	static final String BLANK = "<blank>";
 	
 	static String account = MyDBInfo.MYSQL_USERNAME;
 	static String password = MyDBInfo.MYSQL_PASSWORD;
