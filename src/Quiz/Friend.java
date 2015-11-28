@@ -28,7 +28,7 @@ public class Friend {
 	}
 
 	public boolean saveToDB() throws SQLException {
-		removeFromDB(); // removing any existing friend object that is equal to this one
+		removeFromDB();// removing any existing friend object that is equal to this one
 		// after clear or is not duplicate, execute the insert
 		String saveValue = "\"" + usr1ID + "\",\"" + usr2ID + "\",\"" + time + "\"";
 		String saveStmt = "INSERT INTO Friends VALUES(" + saveValue + ");";	

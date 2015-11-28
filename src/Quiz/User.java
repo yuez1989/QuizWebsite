@@ -9,18 +9,18 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class User {
-	protected String usrID;
-	protected String password;
-	protected String time;
-	protected int permission;
-	protected char privacy;
-	protected UserInfo info; // not in db
+	public String usrID;
+	public String password;
+	public String time;
+	public int permission;
+	public char privacy;
+	public UserInfo info; // not in db
 	/*
-	protected ArrayList<String> imagePaths;
-	protected ArrayList<Friend> friends;
-	protected ArrayList<Message> Messages; // sort it according to time?
-	protected ArrayList<Achievement> achievements; // Only administrators can see
-	protected ArrayList<History> histories; // 
+	public ArrayList<String> imagePaths;
+	public ArrayList<Friend> friends;
+	public ArrayList<Message> Messages; // sort it according to time?
+	public ArrayList<Achievement> achievements; // Only administrators can see
+	public ArrayList<History> histories; // 
 	 */
 
 	/**
@@ -71,11 +71,11 @@ public class User {
 	 */
 	public void extractpermissionFromDB() {
 		permission = 0;
-		String command = "SELECT permission FROM Users WHERE usrID = \"" + usrID + "\"";
+		String command = "SELECT permission FROM Users WHERE usrID = \"" + usrID + "\";";		System.out.println(command);
 		try{
 			ResultSet rs = QuizSystem.db.executeQuery(command);
 			if(rs.next()){
-				String str = rs. getString("premission");
+				String str = rs. getString("permission");
 				if (str.equals("true")) {
 					permission = 1;
 				}

@@ -30,7 +30,7 @@ public class UserInfo {
 		achievementRecords = new ArrayList<AchievementRecord>();
 		histories = new ArrayList<History>();
 
-		extractFriendsFromDB();
+		update();
 	}
 
 	public void update() {
@@ -69,7 +69,8 @@ public class UserInfo {
 				String msg = rs.getString("msg");
 				String type = rs.getString("type");
 				String time = rs.getString("time");
-				messages.add(new Message(fromID, toID, msg, type, time));
+				int read = rs.getInt("read");
+				messages.add(new Message(fromID, toID, msg, type, time, read));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
