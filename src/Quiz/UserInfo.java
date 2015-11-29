@@ -69,7 +69,7 @@ public class UserInfo {
 				String msg = rs.getString("msg");
 				String type = rs.getString("type");
 				String time = rs.getString("time");
-				int read = rs.getInt("read");
+				int read = rs.getInt("isRead");
 				messages.add(new Message(fromID, toID, msg, type, time, read));
 			}
 		} catch (SQLException e) {
