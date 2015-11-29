@@ -135,8 +135,14 @@
  	if (frdIDs.size() == 0) {
  		out.println("No friends yet.");
  	}
+ 	int maxFrdsAppear = 0; // max number of friends shown
  	for (String frdID : frdIDs) {
  		out.println(frdID);
+ 		maxFrdsAppear++;
+ 		if (maxFrdsAppear > 20) {
+ 			out.println("...");
+ 			break;
+ 		}
  	}
  %>
 					</span>
