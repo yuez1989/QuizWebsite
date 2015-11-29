@@ -48,19 +48,18 @@
 				<span> Welcome, <%=usrID%></span>
 			</div>
 			<div class="inline-part" id="popup-parent">
-				<form name="submitForm" method="POST" action="Messages.jsp">
+				<form name="submitFormMsg" method="POST" action="Messages.jsp">
 					<input type="hidden" name="usrID" value="<%=usrID%>"> <a
-						href="javascript:document.submitForm.submit()">Messages
-							<%
-								if (unreadMsg.size() > 0) {
-									out.print("(" + unreadMsg.size() + ")");
-								}
-							%>
-						</a>
+						href="javascript:document.submitFormMsg.submit()">Messages <%
+ 	if (unreadMsg.size() > 0) {
+ 		out.print("(" + unreadMsg.size() + ")");
+ 	}
+ %>
+					</a>
 				</form>
 			</div>
 			<div id="popup-child">
-				<% 
+				<%
 					int newFriendRequests = 0, newChallenges = 0, newTextMessages = 0;
 					for (Message msg : unreadMsg) {
 						char type = msg.type.charAt(0);
@@ -80,9 +79,15 @@
 						}
 					}
 				%>
-				<p>New friend request: <%= newFriendRequests %></p>
-				<p>New challenges: <%= newChallenges %></p>
-				<p>New text messages: <%= newTextMessages %></p>
+				<p>
+					New friend request:
+					<%=newFriendRequests%></p>
+				<p>
+					New challenges:
+					<%=newChallenges%></p>
+				<p>
+					New text messages:
+					<%=newTextMessages%></p>
 			</div>
 			<div class="inline-part">
 				<a href="logout.jsp">Log Out</a>
@@ -105,12 +110,16 @@
 			<div class="uhp-user-inner">
 				<div>
 					<span class="section-name">Achievements </span> <span
-						class="column-indent"> <%
- 	ArrayList<AchievementRecord> achs = info.achievementRecords;
- 	for (AchievementRecord ach : achs) {
- 		out.println(ach.achID);
- 	}
- %> <%=achs.size()%>
+						class="column-indent"> 
+						<%
+						 	ArrayList<AchievementRecord> achs = info.achievementRecords;
+						 	if (achs.size() == 0) {
+						 		out.println("No achievements yet.");
+						 	}
+						 	for (AchievementRecord ach : achs) {
+						 		out.println(ach.achID);
+						 	}
+ 						%>
 					</span>
 				</div>
 				<div>
@@ -122,15 +131,18 @@
 				<div>
 					<span class="section-name">Friends List</span> <span
 						class="column-indent"> <%
- 	ArrayList<Friend> frds = info.friends;
- 	for (Friend frd : frds) {
- 		//out.println(frd.otherID);
+ 	ArrayList<String> frdIDs = Utilities.getFriendList(usrID);
+ 	if (frdIDs.size() == 0) {
+ 		out.println("No friends yet.");
  	}
- %> <%=frds.size()%>
+ 	for (String frdID : frdIDs) {
+ 		out.println(frdID);
+ 	}
+ %>
 					</span>
 				</div>
+				<div style="clear: both;"></div>
 			</div>
-			<div style="clear: both;"></div>
 		</div>
 		<div class="uhp-news col-md-6">
 			<div class="column-name">NEWS</div>
@@ -145,6 +157,7 @@
 			<div style="clear: both;"></div>
 		</div>
 		<div style="clear: both;"></div>
+	</div>
 	</div>
 </body>
 </html>

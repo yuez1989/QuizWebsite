@@ -6,8 +6,9 @@ import java.util.*;
 
 public class Utilities {
 
-	static DataBase db;
+	static DataBase db = QuizSystem.getQuizSystem().db;
 
+	// ERROR method. Cannot call it all the time. Fixed in line 9.
 	public Utilities(){
 		QuizSystem sys = QuizSystem.getQuizSystem();
 		db = sys.db;
