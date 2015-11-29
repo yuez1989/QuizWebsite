@@ -1,15 +1,16 @@
 @CHARSET "UTF-8";
+
 * {
 	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
 
 /* Header */
 body {
-	background-color: rgb(233,234,237) !important;
+	background-color: rgb(233, 234, 237) !important;
 }
 
 .header-line {
-	background-color: rgb(58,87,149);
+	background-color: rgb(58, 87, 149);
 	position: fixed;
 	top: 0;
 	left: 0;
@@ -19,7 +20,7 @@ body {
 	padding-right: 15px;
 	padding-bottom: 6px;
 	z-index: 9;
-	height:70px;
+	height: 70px;
 }
 
 .header-line * {
@@ -28,7 +29,7 @@ body {
 
 .logo-header {
 	float: left;
-	padding-left: 100px;
+	padding-left: 85px;
 }
 
 .logo-header * {
@@ -37,7 +38,7 @@ body {
 
 .logo-header-large {
 	font-size: 35px;
-	padding-right:15px;
+	padding-right: 15px;
 	text-shadow: 1px 1px 2px #000000;
 }
 
@@ -49,20 +50,39 @@ body {
 	float: right;
 }
 
-.personal-header * {
+.personal-header .inline-part {
 	display: inline-block;
-	padding-right: 20px;
-	padding-top:23px;
+	padding-right: 30px;
+	padding-top: 23px;
 	text-decoration: none;
+}
+
+#popup-child {
+	display: none; background-color : white;
+	position: absolute;
+	right: 65px;
+	border: 1px solid #fff;
+	width: 200px;
+	height: 100px;
+	background-color: white;
+	border-radius: 3px;
+}
+
+#popup-child p {
+	color: black;
+	margin-left:15px;
+	margin-right:15px;
+	margin-top:8px;
+	margin-bottom:5px;
 }
 
 .personal-header a:hover {
 	text-decoration: underline;
-	color:white;
+	color: white;
 }
 
 .uhp-content {
-	margin-top:70px;
+	margin-top: 70px;
 }
 
 .uhp-content div {
@@ -70,11 +90,11 @@ body {
 }
 
 .uhp-content a {
-	color:black;
+	color: black;
 	text-decoration: none;
 }
 
-.uhp-content > div {
+.uhp-content>div {
 	padding: 15px 10px 15px 20px;
 }
 
@@ -83,18 +103,18 @@ body {
 }
 
 .uhp-user-inner * {
-	display:block;
+	display: block;
 }
 
 .column-name {
 	font-size: 15px;
-	color: rgb(147,153,164);
-	padding-bottom:10px;
+	color: rgb(147, 153, 164);
+	padding-bottom: 10px;
 }
 
 .section-name {
-	color: rgb(147,153,164);
-	padding-top:10px;
+	color: rgb(147, 153, 164);
+	padding-top: 10px;
 }
 
 .column-indent {

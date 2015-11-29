@@ -6,8 +6,9 @@ import java.util.*;
 
 public class Utilities {
 
-	static DataBase db;
+	static DataBase db = QuizSystem.getQuizSystem().db;
 
+	// ERROR method. Cannot call it all the time. Fixed in line 9.
 	public Utilities(){
 		QuizSystem sys = QuizSystem.getQuizSystem();
 		db = sys.db;
@@ -361,6 +362,22 @@ public class Utilities {
 	 */
 	public double getPlayTimesOfQuiz(String quizID){
 		return 0;
+	}
+	
+	/**
+	 * Returns list of unread messages of a user
+	 * @param user
+	 * @return list of unread messages of a user
+	 */
+	public static ArrayList<Message> unreadMessages(User user) {
+		ArrayList<Message> msgs = user.info.messages;
+		ArrayList<Message> newmsgs = new ArrayList<Message>();
+		for (Message msg : msgs) {
+			if (msg.read == 1) {
+				newmsgs.add(msg);
+			}
+		}
+		return newmsgs;
 	}
 	
 	static public void main(String[] args){

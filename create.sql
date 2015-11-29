@@ -15,6 +15,7 @@ CREATE TABLE Messages(
 	msg TEXT,
 	time DATETIME,
 	type VARCHAR(255),
+	read INT,
 	FOREIGN KEY (fromID) REFERENCES Users(usrID),
 	FOREIGN KEY (toID) REFERENCES Users(usrID)
 );

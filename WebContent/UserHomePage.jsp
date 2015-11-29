@@ -19,22 +19,24 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"
 	integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ=="
 	crossorigin="anonymous"></script>
+<script src='UserHomePage.js'></script>
 </head>
-<title>
-	Quizzzz <%
-		String usrID = "default";
-		if (!session.isNew()) {
-			usrID = (String) session.getAttribute("user");
-			if (usrID == null)
-				usrID = "default";
-		}
-		out.println(usrID);
-	%>
+<title>Quizzzz <%
+	String usrID = "default";
+	if (!session.isNew()) {
+		usrID = (String) session.getAttribute("user");
+		if (usrID == null)
+			usrID = "default";
+	}
+	out.println(usrID);
+%>
 </title>
 <body>
 	<%
 		User user = new User(usrID);
 		UserInfo info = user.info;
+		ArrayList<Message> unreadMsg = new ArrayList<Message>();
+		unreadMsg = Utilities.unreadMessages(user);
 	%>
 	<div class="header-line">
 		<div class="logo-header">
@@ -42,10 +44,54 @@
 			<div class="logo-header-small">Only fun learning wakes us up</div>
 		</div>
 		<div class="personal-header">
-			<p>
-				Welcome,
-				<%=usrID%></p>
-			<a href="#">Messages</a> <a href="logout.jsp">Log Out</a>
+			<div class="inline-part">
+				<span> Welcome, <%=usrID%></span>
+			</div>
+			<div class="inline-part" id="popup-parent">
+				<form name="submitFormMsg" method="POST" action="Messages.jsp">
+					<input type="hidden" name="usrID" value="<%=usrID%>"> <a
+						href="javascript:document.submitFormMsg.submit()">Messages <%
+ 	if (unreadMsg.size() > 0) {
+ 		out.print("(" + unreadMsg.size() + ")");
+ 	}
+ %>
+					</a>
+				</form>
+			</div>
+			<div id="popup-child">
+				<%
+					int newFriendRequests = 0, newChallenges = 0, newTextMessages = 0;
+					for (Message msg : unreadMsg) {
+						char type = msg.type.charAt(0);
+						switch (type) {
+						case 'f':
+							newFriendRequests++;
+							break;
+						case 'c':
+							newChallenges++;
+							break;
+						case 't':
+							newTextMessages++;
+							break;
+						default:
+							newTextMessages++;
+							break;
+						}
+					}
+				%>
+				<p>
+					New friend request:
+					<%=newFriendRequests%></p>
+				<p>
+					New challenges:
+					<%=newChallenges%></p>
+				<p>
+					New text messages:
+					<%=newTextMessages%></p>
+			</div>
+			<div class="inline-part">
+				<a href="logout.jsp">Log Out</a>
+			</div>
 		</div>
 		<div style="clear: both;"></div>
 	</div>
@@ -63,33 +109,46 @@
 			<div>Administration Settings</div>
 			<div class="uhp-user-inner">
 				<div>
-					<span class="section-name">Achievements </span>
-					<span class="column-indent"> 
+					<span class="section-name">Achievements </span> <span
+						class="column-indent"> 
 						<%
-							ArrayList<AchievementRecord> achs = info.achievementRecords;
-							for (AchievementRecord ach : achs) {
-								out.println(ach.achID);
-							}	
-						%>
-						<%= achs.size() %>
+						 	ArrayList<AchievementRecord> achs = info.achievementRecords;
+						 	if (achs.size() == 0) {
+						 		out.println("No achievements yet.");
+						 	}
+						 	for (AchievementRecord ach : achs) {
+						 		out.println(ach.achID);
+						 	}
+ 						%>
 					</span>
 				</div>
-				<div><span class="section-name">Recent Quizzes</span></div>
-				<div><span class="section-name">Recent Creation</span></div>
 				<div>
-					<span class="section-name">Friends List</span>
-					<span class="column-indent"> 
-						<%
-							ArrayList<Friend> frds = info.friends;
-							for (Friend frd : frds) {
-								//out.println(frd.otherID);
-							}
-						%>
-						<%= frds.size() %>
+					<span class="section-name">Recent Quizzes</span>
+				</div>
+				<div>
+					<span class="section-name">Recent Creation</span>
+				</div>
+				<div>
+					<span class="section-name">Friends List</span> <span
+						class="column-indent"> <%
+ 	ArrayList<String> frdIDs = Utilities.getFriendList(usrID);
+ 	if (frdIDs.size() == 0) {
+ 		out.println("No friends yet.");
+ 	}
+ 	int maxFrdsAppear = 0; // max number of friends shown
+ 	for (String frdID : frdIDs) {
+ 		out.println(frdID);
+ 		maxFrdsAppear++;
+ 		if (maxFrdsAppear > 20) {
+ 			out.println("...");
+ 			break;
+ 		}
+ 	}
+ %>
 					</span>
 				</div>
+				<div style="clear: both;"></div>
 			</div>
-			<div style="clear: both;"></div>
 		</div>
 		<div class="uhp-news col-md-6">
 			<div class="column-name">NEWS</div>
@@ -104,6 +163,7 @@
 			<div style="clear: both;"></div>
 		</div>
 		<div style="clear: both;"></div>
+	</div>
 	</div>
 </body>
 </html>
