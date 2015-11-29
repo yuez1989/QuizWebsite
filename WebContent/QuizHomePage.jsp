@@ -8,6 +8,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <%String quizID =  request.getParameter("quizID");%>
+<% quizID = "xiaotihu2015-11-23 19:12:15";%>
 <%Quiz quiz = new Quiz(quizID);%>
 
 <title> Quiz <%=quiz.getQuizName() %>, by <%= quiz.getCreator()%></title>
@@ -15,8 +16,8 @@
 <body>
 <p>
 <%
-	out.print("Description: "+ quiz.getDescription());
-	out.print("Rating: "+quiz.getRating());
+	out.print("<p>Description: "+ quiz.getDescription()+"</p>");
+	out.print("<p>Rating: "+quiz.getRating()+"</p>");
 	ArrayList<String> recentReview = Utilities.getRecentQuizReviews(quizID);
 	for(String re : recentReview){
 		out.print("Recent review:\" " + re + "\"" );
