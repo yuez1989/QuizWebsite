@@ -34,12 +34,14 @@
 <body>
 	<%
 		User user = new User(usrID);
+	/*
 		if (usrID.equals("yuez1989")) {
 			History hist = new History("xiaotihu2015-11-23 19:12:15", "yuez1989", "Regular", "2015-11-28 10:02:21",
 					"2015-11-28 10:02:22", 1, 100, "good", 5);
 			user.addHistory(hist);
 		}
-
+	*/
+	
 		UserInfo info = user.info;
 		ArrayList<Message> unreadMsg = Utilities.unreadMessages(user);
 		ArrayList<History> histories = Utilities.getRecentActivitiesOfUser(usrID);
@@ -182,14 +184,10 @@
 					if (frdHistories.size() == 0) {
 						out.println("No friend activities; Add more friend!");
 					}
-					/*
-					public History(String quizID, String usrID, String playmode, String start, 
-					String end, long span, double score, String review, double rating) {
-					*/
 					for (History hist : frdHistories) {
 						Quiz quiz = new Quiz(hist.quizID);
 						String input = hist.usrID + " took quiz " + quiz.getQuizName() + " at " + hist.end + ", scoring "
-								+ hist.score + ". Review: " + hist.review + ". Rating: " + hist.rating;
+								+ hist.score + ". Review: " + hist.review + ". Rating: " + hist.rating + ".";
 						out.println("<span class='news-feed'>" + input + "</span>");
 					}
 				%>
