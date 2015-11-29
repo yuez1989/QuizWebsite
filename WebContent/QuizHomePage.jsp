@@ -32,7 +32,7 @@
 				" and got score of "+hist.getScore());
 	}
 
-	ArrayList<History> highScores = Utilities.getHighScoresOfQuiz(quizID);
+	ArrayList<History> highScores = Utilities.getHighRecordsOfQuiz(quizID);
 	int count2 = 0;
 	out.print("High Scores:");
 	for(History hist : highScores){
