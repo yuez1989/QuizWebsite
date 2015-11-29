@@ -10,11 +10,11 @@ public class History {
 	public String usrID;
 	public String playmode;
 	public String start;
-	protected String end;
-	protected long span;
-	protected double score;
-	protected String review;
-	protected double rating;
+	public String end;
+	public long span;
+	public double score;
+	public String review;
+	public double rating;
 
 	/**
 	 * Constructor of history - as creating a new history 
