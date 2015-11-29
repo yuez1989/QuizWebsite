@@ -69,13 +69,10 @@ public class UserInfo {
 				String msg = rs.getString("msg");
 				String type = rs.getString("type");
 				String time = rs.getString("time");
-<<<<<<< HEAD
 				int read = rs.getInt("isRead");
 				messages.add(new Message(fromID, toID, msg, type, time, read));
-=======
 				int isRead = rs.getInt("isRead");
 				messages.add(new Message(fromID, toID, msg, type, time, isRead));
->>>>>>> 5bb573a4245d67789b46cd4ed2136282db9c9b8a
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
