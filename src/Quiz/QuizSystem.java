@@ -84,9 +84,11 @@ public class QuizSystem {
 		Date dt2 = convertToDate(dat2);
 		return dt2.getTime() - dt1.getTime();
 	}
+	
 	static public void destroySystem(){
 		db.disconnectDB();
 	}
+	
 	static public long timeSpan(Date dat1,Date dat2){
 		return dat2.getTime()-dat1.getTime();
 	}

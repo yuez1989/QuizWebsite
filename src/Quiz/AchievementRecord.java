@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class AchievementRecord {
+public class AchievementRecord implements Comparable{
 	public String usrID;
 	public String achID;
 	public String time;
@@ -44,4 +44,13 @@ public class AchievementRecord {
 		return QuizSystem.db.executeUpdate(stmt);
 	}
 	
+	@Override
+	public int compareTo(Object o) {
+		Date timeDate = QuizSystem.convertToDate(time);
+		if (o instanceof Date) {
+			Date other = (Date)o;
+			return timeDate.compareTo(other);
+		}
+		return 0;
+	}
 }

@@ -5,7 +5,7 @@ import java.util.Date;
 import java.sql.*;
 import java.text.*;
 
-public class Message {
+public class Message implements Comparable{
 	public String fromID;
 	public String toID;
 	public String type; // "f" or "c" or "t": friend request, challenge, text
@@ -18,9 +18,10 @@ public class Message {
 		toID = to;
 		this.type = type;
 		
-		DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+		DateFormat df = new SimpleDateFormat("yy/MM/dd HH:mm:ss");
 		Date dateobj = new Date();
-		time = df.format(dateobj.getTime()).toString();
+		time = df.format(dateobj);
+		System.out.println("TIME IS: " + time);
 		
 		this.msg = msg;
 		this.isRead = 1; // set to be unread;
@@ -84,5 +85,15 @@ public class Message {
 			}
 		}
 		return false;
+	}
+	
+	@Override
+	public int compareTo(Object o) {
+		Date timeDate = QuizSystem.convertToDate(time);
+		if (o instanceof Date) {
+			Date other = (Date)o;
+			return timeDate.compareTo(other);
+		}
+		return 0;
 	}
 }

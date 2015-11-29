@@ -8,7 +8,7 @@ import java.text.SimpleDateFormat;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
-public class Friend {
+public class Friend implements Comparable{
 	String usr1ID;
 	String usr2ID;
 	String time;
@@ -47,10 +47,21 @@ public class Friend {
 		String stmt = "DELETE FROM Friends WHERE usr1ID = \"" + usrID  + "\" OR usr2ID = \"" + usrID + "\";";
 		return QuizSystem.db.executeUpdate(stmt);
 	}
+	
 	public String getFriend(String id){
 		if(id.equals(usr1ID))
 			return usr2ID;
 		else
 			return usr1ID;
+	}
+	
+	@Override
+	public int compareTo(Object o) {
+		Date timeDate = QuizSystem.convertToDate(time);
+		if (o instanceof Date) {
+			Date other = (Date)o;
+			return timeDate.compareTo(other);
+		}
+		return 0;
 	}
 }
