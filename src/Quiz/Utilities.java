@@ -170,6 +170,12 @@ public class Utilities {
 		return recentActs;
 	}
 
+	/**
+	 * Get recent scores of a specific user with userID
+	 * @param usrID
+	 * @return Arraylist of History related to the scores
+	 * @throws SQLException
+	 */
 	public static ArrayList<History> getRecentScoresOfUser(String usrID) throws SQLException{
 		ArrayList<History> recentScores = new ArrayList<History>();
 		String command = "SELECT * FROM Histories WHERE usrID = "+"\""+usrID+"\" ORDER BY end DESC;";
@@ -187,6 +193,12 @@ public class Utilities {
 		return recentScores;
 	}
 
+	/**
+	 * Get average score of a specific user for quizzes he/she has played
+	 * @param usrID
+	 * @return
+	 * @throws SQLException
+	 */
 	public static double getUserAverageScore(String usrID) throws SQLException{
 		double avg = 0;
 		String command = "SELECT * FROM Histories WHERE usrID = "+"\""+usrID+"\";";
@@ -202,22 +214,12 @@ public class Utilities {
 		return avg;
 	}
 
-
-	public static double getQuizAverageScore(String quizID) throws SQLException{
-		double avg = 0;
-		String command = "SELECT * FROM Histories WHERE quizID = "+"\""+quizID+"\";";
-		ResultSet rs = db.executeQuery(command);
-		int count = 0;
-		double total = 0;
-		while(rs.next()){
-			double score = rs.getDouble("score");
-			total += score;
-			count++;
-		}	
-		avg = total / count;
-		return avg;
-	}
-
+	/**
+	 * Given a time, get the performance of all players in last 24 hours
+	 * @param time
+	 * @return
+	 * @throws SQLException
+	 */
 	public static ArrayList<History> getTopPerformanceOfLastDay(String time) throws SQLException{
 		ArrayList<History> recentTopPerformance = new ArrayList<History>();
 		String lastDay = QuizSystem.minusDay(time);
@@ -238,8 +240,11 @@ public class Utilities {
 		return recentTopPerformance;
 	}
 	
+	/**
+	 * Get recent created Quizzes
+	 * @return Arraylist of recent created quizzes in order from newest to oldest
+	 */
 	static public ArrayList<String> getRecentQuiz(){
-		//TODO
 		DataBase db = QuizSystem.getQuizSystem().db;
 		ResultSet rs = db.executeQuery("Select name from Quizzes Order by createTime;");
 		ArrayList<String> recentquiz = new ArrayList<String>();
@@ -249,7 +254,6 @@ public class Utilities {
 			}
 			return recentquiz;
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 			return null;
 		}
@@ -295,7 +299,6 @@ public class Utilities {
 				q = new Quiz(qid);
 				popuQuiz.add(q);	
 			} catch (SQLException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
 		}
@@ -337,31 +340,56 @@ public class Utilities {
 	}
 	
 	/**
-	 * todo! return the highest score for a specific quiz
-	 * @param quizID
-	 * @return score
-	 */
-	public double getHighestScoreOfQuiz(String quizID){
-		//TODO
-		return 0;
-	}
-	
-	/**
-	 * todo! return average score for all players
+	 * Return average score for all players
 	 * @param quizID
 	 * @return
+	 * @throws SQLException
 	 */
-	public double getAverageScoreOfQuiz(String quizID){
-		return 0;
-	}
+		public static double getQuizAverageScore(String quizID) throws SQLException{
+			double avg = 0;
+			String command = "SELECT * FROM Histories WHERE quizID = "+"\""+quizID+"\";";
+			ResultSet rs = db.executeQuery(command);
+			int count = 0;
+			double total = 0;
+			while(rs.next()){
+				double score = rs.getDouble("score");
+				total += score;
+				count++;
+			}	
+			avg = total / count;
+			return avg;
+		}
 	
+	/**
+	 * Return the highest score for a specific quiz
+	 * @param quizID
+	 * @return score
+	 * @throws SQLException 
+	 */
+	public double getHighestScoreOfQuiz(String quizID) throws SQLException{
+		double hscore = 0;
+		String command = "SELECT * FROM Histories WHERE quizID = "+"\""+quizID+"\" ORDER BY score DESC limit 1;";
+		ResultSet rs = db.executeQuery(command);
+		if(rs.next()){
+			hscore = rs.getDouble("score");
+		}	
+		return hscore;		
+	}
+		
 	/**
 	 * return how many times the quiz has been taken
 	 * @param quizID
 	 * @return
+	 * @throws SQLException 
 	 */
-	public double getPlayTimesOfQuiz(String quizID){
-		return 0;
+	public int getPlayTimesOfQuiz(String quizID) throws SQLException{
+		int count = 0;
+		DataBase db = QuizSystem.getQuizSystem().db;
+		ResultSet rsCount = db.executeQuery("SELECT COUNT(DISTINCT quizID) FROM Histories;");
+			if(rsCount.next()){
+				count = rsCount.getInt(1);
+			}
+		return count;
 	}
 	
 	/**

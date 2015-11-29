@@ -55,7 +55,7 @@ public class User {
 	 * Constructor: extract an user from DB. It is used after a user entered the correct login information.
 	 * @param usrID
 	 */
-	public User(String usrID) throws ClassNotFoundException {
+	public User(String usrID) {
 		this.usrID = usrID;
 		// get instance variables in user table
 		// get other ivars loaded in info
