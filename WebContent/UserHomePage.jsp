@@ -34,19 +34,17 @@
 <body>
 	<%
 		User user = new User(usrID);
-		/*
-	public History(String quizID, String usrID, String playmode, String start, 
-			String end, long span, double score, String review, double rating)
-	*/
-	
 		if (usrID.equals("yuez1989")) {
-			History hist = new History("xiaotihu2015-11-23 19:12:15","yuez1989", "regular","2015-11-28 10:02:21","2015-11-28 10:02:22",1,100,"good", 5);
+			History hist = new History("xiaotihu2015-11-23 19:12:15", "yuez1989", "Regular", "2015-11-28 10:02:21",
+					"2015-11-28 10:02:22", 1, 100, "good", 5);
 			user.addHistory(hist);
 		}
-		
+
 		UserInfo info = user.info;
 		ArrayList<Message> unreadMsg = Utilities.unreadMessages(user);
 		ArrayList<History> histories = Utilities.getRecentActivitiesOfUser(usrID);
+		ArrayList<History> frdHistories = Utilities.getRecentFriendActivities(usrID);
+		ArrayList<Quiz> popQuizzes = Utilities.getPopularQuiz();
 	%>
 	<div class="header-line">
 		<div class="logo-header">
@@ -108,89 +106,130 @@
 	<div class="uhp-content">
 		<div class="uhp-user col-md-3">
 			<div class="column-name">PROFILE</div>
-			<div>
+			<div class="news-feed">
 				<form name="submitForm" method="POST" action="Person.jsp">
 					<input type="hidden" name="person" value="<%=usrID%>"> <a
 						href="javascript:document.submitForm.submit()"><%=usrID%>'s
 						profile</a>
 				</form>
 			</div>
-			<div>Setting</div>
-			<div>Administration Settings</div>
+			<div class="news-feed">Setting</div>
+			<div class="news-feed">Administration Settings</div>
 			<div class="uhp-user-inner">
 				<div>
-					<span class="section-name">Achievements </span> 
-					<span class="column-indent"> 
-						<%
-						 	ArrayList<AchievementRecord> achrs = info.achievementRecords;
-						 	if (achrs.size() == 0) {
-						 		out.println("No achievements yet.");
-						 	}
-						 	for (AchievementRecord achr : achrs) {
-						 		out.println("<span class='column-indent'>" + achr.achID + "</span>");
-						 	}
- 						%>
-					</span>
+					<span class="section-name">Achievements </span>
+					<%
+						ArrayList<AchievementRecord> achrs = info.achievementRecords;
+						if (achrs.size() == 0) {
+							out.println("No achievements yet.");
+						}
+						for (AchievementRecord achr : achrs) {
+							out.println("<span class='column-indent'>" + achr.achID + "</span>");
+						}
+					%>
 				</div>
 				<div>
 					<span class="section-name">Recent Quizzes</span>
-					<span class="column-indent"> 
-						<%
-							Calendar cal = new GregorianCalendar();
-							boolean hasRecent = false;
-							for (History hist : histories) {
-								Date endDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(hist.end);
-								// calculate a date of 3 days ago
-								cal.add(Calendar.DAY_OF_MONTH, -3);
-								Date threeDaysAgo = cal.getTime();
-								
-								if (endDate.compareTo(threeDaysAgo) >= 0) {
-									hasRecent = true;
-									out.println("<span class='column-indent'>" + hist.quizID + "</span>");
-								}
+					<%
+						Calendar cal = new GregorianCalendar();
+						boolean hasRecent = false;
+						for (History hist : histories) {
+							Date endDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(hist.end);
+							// calculate a date of 3 days ago
+							cal.add(Calendar.DAY_OF_MONTH, -3);
+							Date threeDaysAgo = cal.getTime();
+
+							if (endDate.compareTo(threeDaysAgo) >= 0) {
+								hasRecent = true;
+								String quizName = new Quiz(hist.quizID).getQuizName();
+								out.println("<span class='column-indent'>" + quizName + "</span>");
 							}
-							if (hasRecent == false) {
-								out.println("No recent history.");
-							}
- 						%>
-					</span>
+						}
+						if (hasRecent == false) {
+							out.println("No recent history.");
+						}
+					%>
 				</div>
 				<div>
 					<span class="section-name">Recent Creation</span>
 				</div>
 				<div>
-					<span class="section-name">Friends List</span> 
-					<span class="column-indent"> 
-						<%
-						 	ArrayList<String> frdIDs = Utilities.getFriendList(usrID);
-						 	if (frdIDs.size() == 0) {
-						 		out.println("No friends yet.");
-						 	}
-						 	int maxFrdsAppear = 0; // max number of friends shown
-						 	for (String frdID : frdIDs) {
-						 		out.println("<span class='column-indent'>" + frdID + "</span>");
-						 		maxFrdsAppear++;
-						 		if (maxFrdsAppear > 20) {
-						 			out.println("...");
-						 			break;
-						 		}
-						 	}
- 						%>
-					</span>
+					<span class="section-name">Friends List</span>
+					<%
+						ArrayList<String> frdIDs = Utilities.getFriendList(usrID);
+						if (frdIDs.size() == 0) {
+							out.println("No friends yet.");
+						}
+						int maxFrdsAppear = 0; // max number of friends shown
+						for (String frdID : frdIDs) {
+							out.println("<span class='column-indent'>" + frdID + "</span>");
+							maxFrdsAppear++;
+							if (maxFrdsAppear > 20) {
+								out.println("...");
+								break;
+							}
+						}
+					%>
 				</div>
 				<div style="clear: both;"></div>
 			</div>
 		</div>
 		<div class="uhp-news col-md-6">
 			<div class="column-name">NEWS</div>
-			<ul class="uhp-news-inner">
-			</ul>
+			<div>
+				<div class="column-name">Quizzes Taken</div>
+				<%
+					if (frdHistories.size() == 0) {
+						out.println("No friend activities; Add more friend!");
+					}
+					/*
+					public History(String quizID, String usrID, String playmode, String start, 
+					String end, long span, double score, String review, double rating) {
+					*/
+					for (History hist : frdHistories) {
+						Quiz quiz = new Quiz(hist.quizID);
+						String input = hist.usrID + " took quiz " + quiz.getQuizName() + " at " + hist.end + ", scoring "
+								+ hist.score + ". Review: " + hist.review + ". Rating: " + hist.rating;
+						out.println("<span class='news-feed'>" + input + "</span>");
+					}
+				%>
+			</div>
+			<div>
+				<div class="column-name">Quizzes Created</div>
+				<%
+					
+				%>
+			</div>
+			<div>
+				<div class="column-name">Achievements Earned</div>
+				<%
+					
+				%>
+			</div>
 			<div style="clear: both;"></div>
 		</div>
 		<div class="uhp-others col-md-3">
 			<div class="column-name">OTHERS</div>
-			<ul class="uhp-others-inner">
-			</ul>
+			<div>
+				<div class="column-name">Announcement</div>
+				<%
+					
+				%>
+			</div>
+			<div>
+				<div class="column-name">Popular Quizzes</div>
+				<%
+					for (Quiz quiz : popQuizzes) {
+						out.println("<span style='padding-left: 10px;'>" + quiz.getQuizName() + "</span>");
+					}
+				%>
+			</div>
+			<div>
+				<div class="column-name">Recently Created Quizzes</div>
+				<%
+					
+				%>
+			</div>
 			<div style="clear: both;"></div>
 		</div>
 		<div style="clear: both;"></div>
