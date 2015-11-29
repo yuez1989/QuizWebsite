@@ -8,6 +8,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <%String quizID =  request.getParameter("quizID");%>
+<% quizID =  "xiaotihu2015-11-23 19:12:15";%>
+
 <%Quiz quiz = new Quiz(quizID);%>
 
 <title> Quiz <%=quiz.getQuizName() %>, by <%= quiz.getCreator()%></title>
@@ -15,34 +17,34 @@
 <body>
 <p>
 <%
-	out.print("Description: "+ quiz.getDescription());
-	out.print("Rating: "+quiz.getRating());
+	out.print("<p>Description: "+ quiz.getDescription()+"</p>");
+	out.print("<p>Rating: "+quiz.getRating()+"</p>");
 	ArrayList<String> recentReview = Utilities.getRecentQuizReviews(quizID);
 	for(String re : recentReview){
-		out.print("Recent review:\" " + re + "\"" );
+		out.print("<p>Recent review:\" " + re + "\"</p>" );
 	}
 
 	ArrayList<History> recentActHist = Utilities.getRecentActivitiesOfQuiz(quizID);
 	int count1 = 0;
-	out.print("Recent Activities:");
+	out.print("<p>Recent Activities:</p>");
 	for(History hist : recentActHist){
 		if(count1 == 5) break;
 		count1++;
-		out.print("User "+hist.getUsrID()+" played this quiz at "+hist.getEndTime()+
-				" and got score of "+hist.getScore());
+		out.print("<p>User "+hist.getUsrID()+" played this quiz at "+hist.getEndTime()+
+				" and got score of "+hist.getScore()+"</p>");
 	}
-
+	
 	ArrayList<History> highScores = Utilities.getHighRecordsOfQuiz(quizID);
 	int count2 = 0;
-	out.print("High Scores:");
+	out.print("<p>High Scores:</p>");
 	for(History hist : highScores){
 		if(count2 == 10) break;
 		count2++;
-		out.print("User: "+hist.getUsrID()+", score: "+hist.getScore());
+		out.print("<p>User: "+hist.getUsrID()+", score: "+hist.getScore()+"</p>");
 	}
 	
 	double avgScore = Utilities.getQuizAverageScore(quizID);
-	out.print("The average score of this quiz is currently: "+avgScore);	
+	out.print("<p>The average score of this quiz is currently: "+avgScore+"</p>");	
 	
 	out.println("<p><a href=Quiz.jsp>Start Quiz</a> </p>");
 	out.println("<p><a href=Quiz.jsp>Start Quiz in Practice Mode</a> </p>");
