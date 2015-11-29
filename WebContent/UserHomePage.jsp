@@ -1,4 +1,4 @@
-<%@ page import="Quiz.*,java.util.*" language="java"
+<%@ page import="Quiz.*,java.util.*, java.text.*" language="java"
 	contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
@@ -35,14 +35,18 @@
 	<%
 		User user = new User(usrID);
 		/*
+	public History(String quizID, String usrID, String playmode, String start, 
+			String end, long span, double score, String review, double rating)
+	*/
+	
 		if (usrID.equals("yuez1989")) {
-			Message msg1 = new Message("xiaotihu","yuez1989","hi!","t");
-			user.addMessage(msg1);
+			History hist = new History("xiaotihu2015-11-23 19:12:15","yuez1989", "regular","2015-11-28 10:02:21","2015-11-28 10:02:22",1,100,"good", 5);
+			user.addHistory(hist);
 		}
-		*/
+		
 		UserInfo info = user.info;
 		ArrayList<Message> unreadMsg = Utilities.unreadMessages(user);
-		ArrayList<History> histUser = Utilities.getRecentActivitiesOfUser(usrID);
+		ArrayList<History> histories = Utilities.getRecentActivitiesOfUser(usrID);
 	%>
 	<div class="header-line">
 		<div class="logo-header">
@@ -115,42 +119,63 @@
 			<div>Administration Settings</div>
 			<div class="uhp-user-inner">
 				<div>
-					<span class="section-name">Achievements </span> <span
-						class="column-indent"> 
+					<span class="section-name">Achievements </span> 
+					<span class="column-indent"> 
 						<%
-						 	ArrayList<AchievementRecord> achs = info.achievementRecords;
-						 	if (achs.size() == 0) {
+						 	ArrayList<AchievementRecord> achrs = info.achievementRecords;
+						 	if (achrs.size() == 0) {
 						 		out.println("No achievements yet.");
 						 	}
-						 	for (AchievementRecord ach : achs) {
-						 		out.println("<span class='column-indent'>" + ach.achID + "</span>");
+						 	for (AchievementRecord achr : achrs) {
+						 		out.println("<span class='column-indent'>" + achr.achID + "</span>");
 						 	}
  						%>
 					</span>
 				</div>
 				<div>
 					<span class="section-name">Recent Quizzes</span>
+					<span class="column-indent"> 
+						<%
+							Calendar cal = new GregorianCalendar();
+							boolean hasRecent = false;
+							for (History hist : histories) {
+								Date endDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(hist.end);
+								// calculate a date of 3 days ago
+								cal.add(Calendar.DAY_OF_MONTH, -3);
+								Date threeDaysAgo = cal.getTime();
+								
+								if (endDate.compareTo(threeDaysAgo) >= 0) {
+									hasRecent = true;
+									out.println("<span class='column-indent'>" + hist.quizID + "</span>");
+								}
+							}
+							if (hasRecent == false) {
+								out.println("No recent history.");
+							}
+ 						%>
+					</span>
 				</div>
 				<div>
 					<span class="section-name">Recent Creation</span>
 				</div>
 				<div>
-					<span class="section-name">Friends List</span> <span
-						class="column-indent"> <%
- 	ArrayList<String> frdIDs = Utilities.getFriendList(usrID);
- 	if (frdIDs.size() == 0) {
- 		out.println("No friends yet.");
- 	}
- 	int maxFrdsAppear = 0; // max number of friends shown
- 	for (String frdID : frdIDs) {
- 		out.println("<span class='column-indent'>" + frdID + "</span>");
- 		maxFrdsAppear++;
- 		if (maxFrdsAppear > 20) {
- 			out.println("...");
- 			break;
- 		}
- 	}
- %>
+					<span class="section-name">Friends List</span> 
+					<span class="column-indent"> 
+						<%
+						 	ArrayList<String> frdIDs = Utilities.getFriendList(usrID);
+						 	if (frdIDs.size() == 0) {
+						 		out.println("No friends yet.");
+						 	}
+						 	int maxFrdsAppear = 0; // max number of friends shown
+						 	for (String frdID : frdIDs) {
+						 		out.println("<span class='column-indent'>" + frdID + "</span>");
+						 		maxFrdsAppear++;
+						 		if (maxFrdsAppear > 20) {
+						 			out.println("...");
+						 			break;
+						 		}
+						 	}
+ 						%>
 					</span>
 				</div>
 				<div style="clear: both;"></div>

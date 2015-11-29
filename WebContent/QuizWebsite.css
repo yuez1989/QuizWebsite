@@ -60,9 +60,10 @@ body {
 #popup-child {
 	display: none; background-color : white;
 	position: absolute;
+	top:62px;
 	right: 65px;
 	border: 1px solid #fff;
-	width: 200px;
+	width: 175px;
 	height: 100px;
 	background-color: white;
 	border-radius: 3px;

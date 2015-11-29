@@ -88,7 +88,7 @@ public class UserInfo {
 			ResultSet rs = QuizSystem.db.executeQuery(command);
 			while (rs.next()) {
 				String achID = rs.getString("achID");	
-				achievementRecords.add(new AchievementRecord(achID, usrID));
+				achievementRecords.add(new AchievementRecord(usrID, achID));
 			}
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block

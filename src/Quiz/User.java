@@ -170,8 +170,8 @@ public class User {
 	 * @param achievement object
 	 * @throws SQLException 
 	 */
-	public void addAchievement(Achievement ach) throws SQLException {
-		ach.saveToDB();
+	public void addAchievementRecord(AchievementRecord achr) throws SQLException {
+		achr.saveToDB();
 		info.update();
 	}
 
