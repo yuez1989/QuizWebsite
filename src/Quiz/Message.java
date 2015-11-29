@@ -6,11 +6,11 @@ import java.sql.*;
 import java.text.*;
 
 public class Message {
-	protected String fromID;
-	protected String toID;
-	protected String type;
-	protected String time;
-	protected String msg;
+	public String fromID;
+	public String toID;
+	public String type;
+	public String time;
+	public String msg;
 	public int read; // 0 to be read, 1 to be unread.
 
 	public Message(String from, String to, String msg, String type) {
@@ -33,7 +33,7 @@ public class Message {
 	
 		this.time = time;
 		this.msg = msg;
-		this.read = read; // set to be unread;
+		this.read = read;
 	}
 	
 	/**
@@ -69,6 +69,7 @@ public class Message {
 	public void setAsUnread() {
 		read = 1;
 	}
+	
 	/**
 	 * Whether one Message equals to another. If object is not Message, return false.
 	 * @return If equal, return true; if not equal or object other is not Message, return false.

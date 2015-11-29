@@ -363,6 +363,22 @@ public class Utilities {
 		return 0;
 	}
 	
+	/**
+	 * Returns list of unread messages of a user
+	 * @param user
+	 * @return list of unread messages of a user
+	 */
+	public static ArrayList<Message> unreadMessages(User user) {
+		ArrayList<Message> msgs = user.info.messages;
+		ArrayList<Message> newmsgs = new ArrayList<Message>();
+		for (Message msg : msgs) {
+			if (msg.read == 1) {
+				newmsgs.add(msg);
+			}
+		}
+		return newmsgs;
+	}
+	
 	static public void main(String[] args){
 		DataBase db = QuizSystem.getQuizSystem().db;
 //		DROP TABLE IF EXISTS Quizzes;
