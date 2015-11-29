@@ -169,7 +169,57 @@ public class Utilities {
 		}
 		return recentActs;
 	}
-
+	
+	/**
+	 * Get quizzes recently created by specific user
+	 * @param usrID
+	 * @return Arraylist of quizzes
+	 * @throws SQLException
+	 */
+	public static ArrayList<Quiz> getRecentCreatedQuiz(String usrID) throws SQLException{
+		ArrayList<Quiz> quizzes = new ArrayList<Quiz>();
+		String command = "SELECT * FROM Quizzes WHERE creator = "+"\""+usrID+"\" ORDER BY createTime DESC;";
+		ResultSet rs = db.executeQuery(command);
+		while(rs.next()){
+			String qID = rs.getString("quizID");
+			Quiz q = new Quiz(qID);
+			quizzes.add(q);
+		}
+		return quizzes;
+	}
+	
+	/**
+	 * Get recent achievements of specific user given his/her ID
+	 * @param usrID
+	 * @return Arraylist of achievement ID
+	 */
+	public static ArrayList<String> getRecentAchievements(String usrID){
+//		ArrayList<String> ach = new ArrayList<String>();
+		String command = "SELECT * FROM AchievementRecords WHERE usrID = "+"\""+usrID+"\" ORDER BY time DESC;";
+		ResultSet rs1 = db.executeQuery(command);
+		ArrayList<String> achID = new ArrayList<String>();
+		try {
+			while(rs1.next()){
+				achID.add(rs1.getString("achID"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+//		for(String achID1 : achID){
+//			String cmd = "SELECT * FROM Achievements WHERE achID = "+"\""+achID1+"\" ;";
+//			ResultSet rs2 = db.executeQuery(cmd);
+//			try {
+//				if(rs2.next()){
+//					ach.add(rs2.getString("description"));
+//				}
+//			} catch (SQLException e) {
+//				e.printStackTrace();
+//			}
+//
+//		}
+		return achID;
+	}
+		
 	/**
 	 * Get recent scores of a specific user with userID
 	 * @param usrID
@@ -425,7 +475,18 @@ public class Utilities {
 //			FOREIGN KEY (creator) REFERENCES Users(usrID)
 //		);
 		
-		ArrayList<Quiz> list = getPopularQuiz();
+		ArrayList<String> rQuiz = new ArrayList<String>();
+		rQuiz = getRecentQuiz();
+		System.out.print(rQuiz);
+		
+		try {
+			double s = getUserAverageScore("xinhuiwu");
+			System.out.print(s);
+
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 //		try {
 //			ResultSet rs=db.executeQuery("Select * from Quizzes;");
