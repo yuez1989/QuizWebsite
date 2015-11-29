@@ -46,7 +46,7 @@ public class History {
 		// the time user start taking quiz
 		this.start = start;
 		this.end = end;
-		this.span = QuizSystem.timeSpan(start, end);
+		this.span = QuizSystem.timeSpan(start,end);
 		this.score = score;
 		this.review = review;
 		this.rating = rating;

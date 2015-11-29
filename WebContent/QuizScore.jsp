@@ -52,16 +52,21 @@
 }
 	String usrID = (String) session.getAttribute("user");
 
-	int rating = 5;
-	switch(request.getParameter("rating")){
-	case "1": rating = 1;break;
-	case "2": rating = 2;break;
-	case "3": rating = 3; break;
-	case "4": rating = 4; break;
-	}
+	char ratch = request.getParameter("rating").charAt(0);
+	
+ 	int rating = 5;
+ 	
+	switch(ratch){
+	case '1': rating = 1;break;
+	case '2': rating = 2;break;
+	case '3': rating = 3; break;
+	case '4': rating = 4; break;
+	} 
 
-	History hst = new History(quizID, usrID, "R", startTime, endTime, grade, request.getParameter("review"), rating) ;
+  	History hst = new History(quizID, usrID, "Regular", startTime, endTime, grade, request.getParameter("review"),rating) ;
+	hst.saveToDB();  
 %>
+
 <h3>Congratulations!</h3>
 <h3>You get <%=grade %>/<%=quiz.getQuestions().size() %> in <%=quiz.getQuizName() %></h3>
 

@@ -64,20 +64,32 @@
 				out.print("</div>");
 			}
 		%>
-		<label>Rating</label>
-		<label for="1star">1</label>
-		<input type = "radio" name ="rating" value = "1" id = "1star">
-		<label for="2star">2</label>
-		<input type = "radio" name ="rating" value = "2" id = "2star">
-		<label for="3star">3</label>
-		<input type = "radio" name ="rating" value = "3" id = "3star">				
-		<label for ="4star">4</label>
-		<input type = "radio" name ="rating" value = "4" id = "4star">
-		<label for ="5star">5</label>
-		<input type = "radio" name ="rating" value = "5" id = "5star" checked="checked">
+		<div id = "rating_review">
+			<div id="rating">
+				<label>Rating</label>
+				<label for="1star">1</label>
+				<input type = "radio" name ="rating" value = "1" id = "1star">
+				<label for="2star">2</label>
+				<input type = "radio" name ="rating" value = "2" id = "2star">
+				<label for="3star">3</label>
+				<input type = "radio" name ="rating" value = "3" id = "3star">				
+				<label for ="4star">4</label>
+				<input type = "radio" name ="rating" value = "4" id = "4star">
+				<label for ="5star">5</label>
+				<input type = "radio" name ="rating" value = "5" id = "5star" checked="checked">
+			</div>
+
+			<div>
+				<p><label for="review">Submit Review</label></p>
+
+				<textarea rows="3" cols="50" name = "review" id = "review">
+				Love the quiz? Add a review now!
+				</textarea>		
+			</div>
+
 		
-		<label for="review">Review on Quiz?</label>
-		<input type="text" name = "review">
+		</div>
+
 		
 		<input type="hidden" name="quizID" value="<%=quiz.getQuizID() %>">
 		<input type="hidden" name="startTime" value="<%=startTime %>">
