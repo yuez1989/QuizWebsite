@@ -147,9 +147,10 @@ public class User {
 	 * @param friend
 	 * @throws SQLException 
 	 */
-	public void addFriend(Friend friend) throws SQLException {  //HOW TO ADD friend relationship to BOTH friends?
+	public void addFriend(String frdID) throws SQLException {  //HOW TO ADD friend relationship to BOTH friends?
 		// db command to add a new row of friend info
 		// info.extractFriendsFromDB()
+		Friend friend = new Friend(usrID, frdID);
 		friend.saveToDB();
 		info.update();
 	}

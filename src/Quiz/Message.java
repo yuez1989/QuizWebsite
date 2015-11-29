@@ -8,10 +8,10 @@ import java.text.*;
 public class Message {
 	public String fromID;
 	public String toID;
-	public String type;
+	public String type; // "f" or "c" or "t": friend request, challenge, text
 	public String time;
 	public String msg;
-	public int read; // 0 to be read, 1 to be unread.
+	public int isRead; // 0 to be read, 1 to be unread.
 
 	public Message(String from, String to, String msg, String type) {
 		fromID = from;
@@ -23,7 +23,7 @@ public class Message {
 		time = df.format(dateobj.getTime()).toString();
 		
 		this.msg = msg;
-		this.read = 1; // set to be unread;
+		this.isRead = 1; // set to be unread;
 	}
 	
 	public Message(String from, String to, String msg, String type, String time, int read) {
@@ -33,7 +33,7 @@ public class Message {
 	
 		this.time = time;
 		this.msg = msg;
-		this.read = read;
+		this.isRead = read;
 	}
 	
 	/**
@@ -44,7 +44,7 @@ public class Message {
 	public boolean saveToDB() throws SQLException {
 		removeFromDB(); // removing any existing friend object that is equal to this one
 		// after clear or is not duplicate, execute the insert
-		String saveValue = "\"" + fromID + "\",\"" + toID + "\",\"" + msg + "\",\"" + time + "\",\"" + type + "\",\"" + read + "\"";
+		String saveValue = "\"" + fromID + "\",\"" + toID + "\",\"" + msg + "\",\"" + time + "\",\"" + type + "\",\"" + isRead + "\"";
 		String saveStmt = "INSERT INTO Messages VALUES(" + saveValue + ");";		
 		return QuizSystem.db.executeUpdate(saveStmt); // if insert is failed, return false
 	}
@@ -63,11 +63,11 @@ public class Message {
 	}
 	
 	public void setAsRead() {
-		read = 0;
+		isRead = 0;
 	}
 	
 	public void setAsUnread() {
-		read = 1;
+		isRead = 1;
 	}
 	
 	/**

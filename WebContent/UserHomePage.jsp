@@ -34,9 +34,15 @@
 <body>
 	<%
 		User user = new User(usrID);
+		/*
+		if (usrID.equals("yuez1989")) {
+			Message msg1 = new Message("xiaotihu","yuez1989","hi!","t");
+			user.addMessage(msg1);
+		}
+		*/
 		UserInfo info = user.info;
-		ArrayList<Message> unreadMsg = new ArrayList<Message>();
-		unreadMsg = Utilities.unreadMessages(user);
+		ArrayList<Message> unreadMsg = Utilities.unreadMessages(user);
+		ArrayList<History> histUser = Utilities.getRecentActivitiesOfUser(usrID);
 	%>
 	<div class="header-line">
 		<div class="logo-header">
@@ -117,7 +123,7 @@
 						 		out.println("No achievements yet.");
 						 	}
 						 	for (AchievementRecord ach : achs) {
-						 		out.println(ach.achID);
+						 		out.println("<span class='column-indent'>" + ach.achID + "</span>");
 						 	}
  						%>
 					</span>
@@ -137,7 +143,7 @@
  	}
  	int maxFrdsAppear = 0; // max number of friends shown
  	for (String frdID : frdIDs) {
- 		out.println(frdID);
+ 		out.println("<span class='column-indent'>" + frdID + "</span>");
  		maxFrdsAppear++;
  		if (maxFrdsAppear > 20) {
  			out.println("...");

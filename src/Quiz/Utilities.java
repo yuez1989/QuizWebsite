@@ -370,10 +370,12 @@ public class Utilities {
 	 * @return list of unread messages of a user
 	 */
 	public static ArrayList<Message> unreadMessages(User user) {
+		user.info.update();
 		ArrayList<Message> msgs = user.info.messages;
+		System.out.println("msgs:" + msgs.size());
 		ArrayList<Message> newmsgs = new ArrayList<Message>();
 		for (Message msg : msgs) {
-			if (msg.read == 1) {
+			if (msg.isRead == 1) {
 				newmsgs.add(msg);
 			}
 		}
