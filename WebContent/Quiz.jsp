@@ -11,6 +11,7 @@
 	Quiz quiz = new Quiz(request.getParameter("quizID"));
 	quiz = new Quiz("xiaotihu2015-11-23 19:12:15");
 
+	String startTime = QuizSystem.generateCurrentTime();
 	if(quiz.isRandom()){
 		quiz.shuffleQuestion();
 	}
@@ -63,8 +64,25 @@
 				out.print("</div>");
 			}
 		%>
+		<label>Rating</label>
+		<label for="1star">1</label>
+		<input type = "radio" name ="rating" value = "1" id = "1star">
+		<label for="2star">2</label>
+		<input type = "radio" name ="rating" value = "2" id = "2star">
+		<label for="3star">3</label>
+		<input type = "radio" name ="rating" value = "3" id = "3star">				
+		<label for ="4star">4</label>
+		<input type = "radio" name ="rating" value = "4" id = "4star">
+		<label for ="5star">5</label>
+		<input type = "radio" name ="rating" value = "5" id = "5star" checked="checked">
+		
+		<label for="review">Review on Quiz?</label>
+		<input type="text" name = "review">
+		
 		<input type="hidden" name="quizID" value="<%=quiz.getQuizID() %>">
+		<input type="hidden" name="startTime" value="<%=startTime %>">
 		<input type="submit" class='total_submit'/>
+		
 	</form>
 <%		
 		

@@ -33,6 +33,24 @@ public class History {
 		this.review = review;
 		this.rating = rating;
 	}
+	
+	/**
+	 * Constructor of history - as creating a new history 
+	 */
+	public History(String quizID, String usrID, String playmode, String start, 
+			String end, double score, String review, double rating) {
+		this.quizID = quizID;
+		this.usrID = usrID;
+		this.playmode = playmode;
+		// start time should be set by calling method setStartQuizTime() at 
+		// the time user start taking quiz
+		this.start = start;
+		this.end = end;
+		this.span = QuizSystem.timeSpan(start, end);
+		this.score = score;
+		this.review = review;
+		this.rating = rating;
+	}
 
 	/**
 	 * Constructor of history - given a history ID, get all information from QuizSystem.db
