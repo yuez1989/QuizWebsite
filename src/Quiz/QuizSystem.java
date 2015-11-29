@@ -79,8 +79,17 @@ public class QuizSystem {
 
 	}
 	
-	
+	static public long timeSpan(String dat1,String dat2){
+		Date dt1 = convertToDate(dat1);
+		Date dt2 = convertToDate(dat2);
+		return dt2.getTime() - dt1.getTime();
+	}
 	static public void destroySystem(){
 		db.disconnectDB();
 	}
+	static public long timeSpan(Date dat1,Date dat2){
+		return dat2.getTime()-dat1.getTime();
+	}
+
 }
+

@@ -11,6 +11,8 @@
 </head>
 <body>
 <%
+	String endTime = QuizSystem.generateCurrentTime();
+	String startTime = request.getParameter("startTime");
 	String quizID = request.getParameter("quizID");
 	Quiz quiz = new Quiz(quizID);
 	double grade = 0;
@@ -48,8 +50,23 @@
 	
 	out.print("</div>");
 }
-new Utilities();
+	String usrID = (String) session.getAttribute("user");
+
+	char ratch = request.getParameter("rating").charAt(0);
+	
+ 	int rating = 5;
+ 	
+	switch(ratch){
+	case '1': rating = 1;break;
+	case '2': rating = 2;break;
+	case '3': rating = 3; break;
+	case '4': rating = 4; break;
+	} 
+
+  	History hst = new History(quizID, usrID, "Regular", startTime, endTime, grade, request.getParameter("review"),rating) ;
+	hst.saveToDB();  
 %>
+
 <h3>Congratulations!</h3>
 <h3>You get <%=grade %>/<%=quiz.getQuestions().size() %> in <%=quiz.getQuizName() %></h3>
 
