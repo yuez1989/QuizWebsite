@@ -47,9 +47,9 @@ public class AchievementRecord implements Comparable{
 	@Override
 	public int compareTo(Object o) {
 		Date timeDate = QuizSystem.convertToDate(time);
-		if (o instanceof Date) {
-			Date other = (Date)o;
-			return timeDate.compareTo(other);
+		if (o instanceof AchievementRecord) {
+			Date otherDate = QuizSystem.convertToDate(((AchievementRecord)o).time);
+			return -timeDate.compareTo(otherDate);
 		}
 		return 0;
 	}

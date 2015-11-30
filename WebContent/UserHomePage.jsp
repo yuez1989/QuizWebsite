@@ -38,7 +38,7 @@
 	
 		/*
 		if (usrID.equals("yuez1989")) {
-			Message msg = new Message("xinhuiwu","yuez1989","challenge","c");
+			Message msg = new Message("xinhuiwu","yuez1989","hello","t");
 			user.addMessage(msg);
 		}
 		*/
@@ -59,9 +59,9 @@
 				<span> Welcome, <%=usrID%></span>
 			</div>
 			<div class="inline-part" id="popup-parent">
-				<form name="submitFormMsg" method="POST" action="Messages.jsp">
+				<form name="submitFormMsg" method="POST" action="Messages.jsp" target="_blank">
 					<input type="hidden" name="usrID" value="<%=usrID%>"> <a
-						href="javascript:document.submitFormMsg.submit()">Messages <%
+						href="javascript:document.submitFormMsg.submit()" target="_blank">Messages <%
  	if (unreadMsg.size() > 0) {
  		out.print("(" + unreadMsg.size() + ")");
  	}
@@ -111,7 +111,7 @@
 		<div class="uhp-user col-md-3">
 			<div class="column-name">PROFILE</div>
 			<div class="news-feed">
-				<form name="submitForm" method="POST" action="Person.jsp">
+				<form name="submitForm" method="POST" action="Person.jsp" target="_blank">
 					<input type="hidden" name="person" value="<%=usrID%>"> <a
 						href="javascript:document.submitForm.submit()"><%=usrID%>'s
 						profile</a>

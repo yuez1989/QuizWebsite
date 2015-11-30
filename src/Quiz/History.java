@@ -209,10 +209,10 @@ public class History implements Comparable {
 
 	@Override
 	public int compareTo(Object o) {
-		Date time = QuizSystem.convertToDate(end);
-		if (o instanceof Date) {
-			Date other = (Date)o;
-			return time.compareTo(other);
+		Date timeDate = QuizSystem.convertToDate(end);
+		if (o instanceof History) {
+			Date otherDate = QuizSystem.convertToDate(((History)o).end);
+			return -timeDate.compareTo(otherDate);
 		}
 		return 0;
 	}
