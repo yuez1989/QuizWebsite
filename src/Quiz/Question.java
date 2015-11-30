@@ -26,6 +26,9 @@ public class Question{
 	protected Statement sql_command;
 	protected final String ANS_START = "<ans>";
 	protected final String ANS_END = "</ans>";
+	//<numSol> appear fisrt in solution text
+	protected final String NUMSOL_START = "<numSol>";
+	protected final String NUMSOL_END = "</numSol>";
 	protected final String EC_START = "<ans-list>";
 	protected final String EC_END = "</ans-list>";
 	
@@ -111,6 +114,7 @@ public class Question{
 			picutreUrl = rs.getString("picURL");
 			String solstring = rs.getString("solution");
 			parseStringtoSol(solstring);
+			parseStringToNumberOfSolution(solstring);
 			timed = rs.getLong("timed");
 			order = rs.getInt("solorder");
 			problemType = rs.getString("Type");
@@ -225,6 +229,23 @@ public class Question{
 			sol += EC_END;
 		}
 		return sol;
+	}
+	
+	/**
+	 * Parse number of solution in result string, if the number of solution is 
+	 * not specified, it will be set as the size of solution
+	 * @param result
+	 */
+	public void parseStringToNumberOfSolution(String result){
+		int indexStart = result.indexOf(NUMSOL_START);
+		if (indexStart<0){
+			 this.numberOfSolutions = this.solutions.size();
+			 return ;
+		}
+		int indexEnd = result.indexOf(NUMSOL_END);
+		String numSolStr = result.substring(indexStart+NUMSOL_START.length(), indexEnd);
+		this.numberOfSolutions = Integer.parseInt(numSolStr);
+
 	}
 	
 	public void parseStringtoSol(String result){

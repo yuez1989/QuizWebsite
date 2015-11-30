@@ -471,6 +471,24 @@ public static ArrayList<Quiz> getRecentCreatedQuiz(String usrID) throws SQLExcep
 		}
 
 	/**
+	 * Get the highest score a user has achieved in a specific quiz
+	 * @param quizID
+	 * @param UserID
+	 * @return
+	 * @throws SQLException 
+	 */
+	public static double getHighScoreOfUserInQuiz(String quizID, String userID) throws SQLException{
+		double score = 0;
+		String command = "SELECT * FROM Histories WHERE quizID = "+"\""+quizID+"\" AND usrID = "+"\""+userID+"\" ORDER BY score DESC;";
+		ResultSet rs = db.executeQuery(command);
+		if(rs.next()){
+			score = rs.getDouble("score");
+		}
+		return score;
+	}
+
+
+	/**
 	 * Returns list of unread messages of a user
 	 * @param user
 	 * @return list of unread messages of a user

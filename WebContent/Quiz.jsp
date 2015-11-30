@@ -67,10 +67,17 @@
 						optcnt++;
 					}
 				}else if(Question.TYPE_BLANKFILL.equals(q.getType())){
-					
+					String text = q.getText();
+					String[] contents = text.split("<blank>");
+					out.print("<p>");
+					for(int i = 1; i< contents.length ; i++){
+						out.print(contents[i-1]);
+						out.print("<input type = \'text\' name =\'q"+count+"ans"+i+"\'>");
+					}
+					out.print(contents[contents.length-1]);
+					out.print("</p>");
 				}
 
-				
 				out.print("</div>");
 			}
 		%>
