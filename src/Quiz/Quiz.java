@@ -171,7 +171,7 @@ public class Quiz {
 		String command = "SELECT * FROM Histories WHERE quizID = " + "\""
 				+ quizID + "\";";
 		ResultSet rs = db.executeQuery(command);
-		while (rs.next()) {
+		while (rs!=null && rs.next()) {
 			rating += rs.getInt("rating");
 			count++;
 		}
