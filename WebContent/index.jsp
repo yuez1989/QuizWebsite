@@ -68,13 +68,12 @@
 	</div>
 	<div class='recent_quiz'>
 		<%
- 			ArrayList<String> recentlist = Utilities.getRecentQuiz();
+ 			ArrayList<Quiz> recentlist = Utilities.getRecentQuiz();
 			if(recentlist!=null){
 				out.print("<h3>Recent Added Quizzes</h3>");
 				out.print("<ul>");
-				for(String quiz:recentlist){
-					out.print("<li><a href = \'QuizHomePage.jsp?quizID="+quiz+"</li>");	
-					//******************************************************************************************//
+				for(Quiz quiz:recentlist){
+					out.print("<li><a href = \'QuizHomePage.jsp?quizID="+quiz.getQuizID()+"\'>"+quiz.getQuizName()+"</li>");	
 				}
 				out.print("</ul>");
 			} 

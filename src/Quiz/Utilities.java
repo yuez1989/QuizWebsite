@@ -304,7 +304,7 @@ public static ArrayList<Quiz> getRecentCreatedQuiz(String usrID) throws SQLExcep
 	 */
 	static public ArrayList<Quiz> getRecentQuiz() throws SQLException{
 		ArrayList<Quiz> recentquiz = new ArrayList<Quiz>();
-		String command = "Select name from Quizzes Order by createTime;";
+		String command = "Select quizID from Quizzes Order by createTime;";
 		ResultSet rs = db.executeQuery(command);
 		ArrayList<String> qids = new ArrayList<String>();
 		while(rs.next()){

@@ -39,7 +39,7 @@
 					out.print("<p class=\'question_description\'>"+ q.getText()+"</p>");
 					if(!q.getPic().isEmpty())
 						out.print("<img src=\'"+q.getPic()+"\' class=\'question_image\'>");
-					out.print("<input type=\'text\' name=\'q"+count+"ans\' value=\'enter here\'>");
+					out.print("<input type=\'text\' name=\'q"+count+"ans\' placeholder=\'enter here\'>");
 				}else if(Question.TYPE_MULTIPLECHOICE.equals(q.getType())){
 					out.print("<p class=\'question_description\'>"+ q.getText()+"</p>");
 					ArrayList<String> options = q.parseOption();
@@ -83,9 +83,7 @@
 			<div>
 				<p><label for="review">Submit Review</label></p>
 
-				<textarea rows="3" cols="50" name = "review" id = "review">
-				Love the quiz? Add a review now!
-				</textarea>		
+				<textarea rows="3" cols="50" name = "review" id = "review" placeholder = "Love the quiz? Add a review now!"></textarea>
 			</div>
 
 		
