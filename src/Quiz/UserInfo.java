@@ -12,11 +12,11 @@ public class UserInfo {
 	public String usrID;
 	protected String password;
 	public String time;
-	protected boolean permission;
+	public boolean permission;
 	public char privacy;
 	public String imagePath;
 	public ArrayList<Friend> friends;
-	protected ArrayList<Message> messages; // sort it according to time?
+	public ArrayList<Message> messages; // sort it according to time?
 	public ArrayList<AchievementRecord> achievementRecords; // Only administrators can see
 	public ArrayList<History> histories; // 
 

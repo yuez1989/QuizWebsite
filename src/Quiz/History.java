@@ -2,10 +2,11 @@ package Quiz;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.*;
 
 //TODO in QuizSystem.db, score and rating is INT, should be double in this case, action needed
 
-public class History {
+public class History implements Comparable {
 	public String quizID;
 	public String usrID;
 	public String playmode;
@@ -36,6 +37,7 @@ public class History {
 	
 	/**
 	 * Constructor of history - as creating a new history 
+	 * Time span is automatically calculated;
 	 */
 	public History(String quizID, String usrID, String playmode, String start, 
 			String end, double score, String review, double rating) {
@@ -203,5 +205,15 @@ public class History {
 		str += " ";
 		str += String.valueOf(span);
 		return str;
+	}
+
+	@Override
+	public int compareTo(Object o) {
+		Date time = QuizSystem.convertToDate(end);
+		if (o instanceof Date) {
+			Date other = (Date)o;
+			return time.compareTo(other);
+		}
+		return 0;
 	}
 }

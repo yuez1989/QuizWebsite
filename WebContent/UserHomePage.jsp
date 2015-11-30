@@ -21,7 +21,8 @@
 	crossorigin="anonymous"></script>
 <script src='UserHomePage.js'></script>
 </head>
-<title>Quizzzz <%
+<title>Quizzzz 
+<%
 	String usrID = "default";
 	if (!session.isNew()) {
 		usrID = (String) session.getAttribute("user");
@@ -34,13 +35,13 @@
 <body>
 	<%
 		User user = new User(usrID);
-	/*
+	
+		/*
 		if (usrID.equals("yuez1989")) {
-			History hist = new History("xiaotihu2015-11-23 19:12:15", "yuez1989", "Regular", "2015-11-28 10:02:21",
-					"2015-11-28 10:02:22", 1, 100, "good", 5);
-			user.addHistory(hist);
+			Message msg = new Message("xinhuiwu","yuez1989","challenge","c");
+			user.addMessage(msg);
 		}
-	*/
+		*/
 	
 		UserInfo info = user.info;
 		ArrayList<Message> unreadMsg = Utilities.unreadMessages(user);
@@ -70,6 +71,7 @@
 			</div>
 			<div id="popup-child">
 				<%
+					// Calculate different kinds of messages.
 					int newFriendRequests = 0, newChallenges = 0, newTextMessages = 0;
 					for (Message msg : unreadMsg) {
 						char type = msg.type.charAt(0);
@@ -136,10 +138,9 @@
 						Calendar cal = new GregorianCalendar();
 						boolean hasRecent = false;
 						for (History hist : histories) {
-							Date endDate = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(hist.end);
 							// calculate a date of 3 days ago
-							cal.add(Calendar.DAY_OF_MONTH, -3);
-							Date threeDaysAgo = cal.getTime();
+							Date endDate = QuizSystem.convertToDate(hist.end);
+							Date threeDaysAgo = QuizSystem.convertToDate(QuizSystem.minusDay(hist.end, 3));
 
 							if (endDate.compareTo(threeDaysAgo) >= 0) {
 								hasRecent = true;

@@ -10,7 +10,7 @@ import java.security.NoSuchAlgorithmException;
 
 public class User {
 	public String usrID;
-	public String password;
+	protected String password;
 	public String time;
 	public int permission;
 	public char privacy;

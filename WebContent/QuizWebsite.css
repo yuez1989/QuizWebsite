@@ -141,3 +141,16 @@ body {
 	display:block;
 	margin-top:5px;
 }
+
+.msg-container {
+	margin-top: 40px;
+}
+
+.msg-container table {
+	margin-left:5%;
+	width:60%;
+}
+
+.msg-container td {
+	text-align:center;
+}
