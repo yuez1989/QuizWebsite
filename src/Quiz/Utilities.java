@@ -21,7 +21,7 @@ public class Utilities {
 	 */
 	public static ArrayList<History> getHighRecordsOfQuiz(String QuizID) throws SQLException{
 		ArrayList<History> highScores = new ArrayList<History>();
-		String command = "SELECT * FROM Histories WHERE quizID = "+"\""+QuizID+"\" ORDER BY score DESC;";
+		String command = "SELECT * FROM Histories WHERE quizID = "+"\""+QuizID+"\" ORDER BY span, score DESC;";
 		ResultSet rs= db.executeQuery(command);
 		ArrayList<String> qids = new ArrayList<String>();
 		ArrayList<String> uids = new ArrayList<String>();
