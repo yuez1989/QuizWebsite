@@ -176,12 +176,15 @@ public class Utilities {
 	 * @return Arraylist of quizzes
 	 * @throws SQLException
 	 */
-	public static ArrayList<Quiz> s(String usrID) throws SQLException{
+public static ArrayList<Quiz> getRecentCreatedQuiz(String usrID) throws SQLException{
 		ArrayList<Quiz> quizzes = new ArrayList<Quiz>();
 		String command = "SELECT * FROM Quizzes WHERE creator = "+"\""+usrID+"\" ORDER BY createTime DESC;";
 		ResultSet rs = db.executeQuery(command);
+		ArrayList<String> qids = new ArrayList<String>();
 		while(rs.next()){
-			String qID = rs.getString("quizID");
+			qids.add(rs.getString("quizID"));
+		}
+		for(int i = 0; i<qids.size();i++){
 			Quiz q = new Quiz(qID);
 			quizzes.add(q);
 		}
