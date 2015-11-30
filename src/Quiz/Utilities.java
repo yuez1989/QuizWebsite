@@ -21,7 +21,7 @@ public class Utilities {
 	 */
 	public static ArrayList<History> getHighRecordsOfQuiz(String QuizID) throws SQLException{
 		ArrayList<History> highScores = new ArrayList<History>();
-		String command = "SELECT * FROM Histories WHERE quizID = "+"\""+QuizID+"\" ORDER BY span, score DESC;";
+		String command = "SELECT * FROM Histories WHERE quizID = "+"\""+QuizID+"\" ORDER BY score DESC, span;";
 		ResultSet rs= db.executeQuery(command);
 		ArrayList<String> qids = new ArrayList<String>();
 		ArrayList<String> uids = new ArrayList<String>();
@@ -451,7 +451,6 @@ public class Utilities {
 
 	/**
 	 * return how many quizzes a user has played
-	*****************************	 TODO test and verify of this method   ************************************ 
 	 * @param quizID
 	 * @return
 	 * @throws SQLException 
@@ -459,7 +458,7 @@ public class Utilities {
 	public static int getQuizNumberPlayed(String usrID) throws SQLException{
 		int count = 0;
 		DataBase db = QuizSystem.getQuizSystem().db;
-		ResultSet rsCount = db.executeQuery("SELECT COUNT * FROM Histories where usrID = \'%" + usrID+"%\' ;");
+		ResultSet rsCount = db.executeQuery("SELECT COUNT(distinct quizID) FROM Histories where usrID =  \'" + usrID+"\' ;");
 		if(rsCount.next()){
 			count = rsCount.getInt(1);
 		}
@@ -471,10 +470,9 @@ public class Utilities {
 	 * @param quizID
 	 * @param UserID
 	 * @return
-	 * @throws SQLException 
 	 */
 	public static double getHighScoreOfUserInQuiz(String quizID, String userID) throws SQLException{
-		double score = 0;
+		double score = 0 ;
 		String command = "SELECT * FROM Histories WHERE quizID = "+"\""+quizID+"\" AND usrID = "+"\""+userID+"\" ORDER BY score DESC;";
 		ResultSet rs = db.executeQuery(command);
 		if(rs.next()){
@@ -510,7 +508,6 @@ public class Utilities {
 				list.add(rs.getString("usrID"));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return list;
@@ -525,7 +522,6 @@ public class Utilities {
 				list.add(rs.getString("quizID"));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return list;
@@ -577,11 +573,10 @@ public class Utilities {
 		DataBase db = QuizSystem.getQuizSystem().db;
 
 		try {
-			System.out.print(getTotalPlayedTimeOfQuizzes());
+			System.out.print(getHighScoreOfUserInQuiz("xinhuiwu2015-11-18 16:19:13","xiaotihu"));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-
 }
