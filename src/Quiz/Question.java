@@ -189,7 +189,7 @@ public class Question{
 			}
 			score = sol.size();
 		}
-		score = score/solutions.size();
+		score = score/numberOfSolutions;
 		return score;
 	}
 
