@@ -25,7 +25,10 @@ var main = function(){
 	$("#create_announcement_form").hide();
 	$("#remove_account_form").hide();
 	$("#search_account_form").hide();
-
+	$("#search_quiz_form").hide();
+	$("#remove_quiz_form").hide();
+	$("#clear_quiz_history_form").hide();
+	
 	
 	$("#create_announcement_tag").click(function(){
 		$("#create_announcement_form").toggle();
@@ -38,6 +41,19 @@ var main = function(){
 	$("#search_account_tag").click(function(){
 		$("#search_account_form").toggle();
 	});
+	
+	$("#remove_quiz_tag").click(function(){
+		$("#remove_quiz_form").toggle();
+	});
+	
+	$("#search_quiz_tag").click(function(){
+		$("#search_quiz_form").toggle();
+	});
+	
+	$("#clear_quiz_history_tag").click(function(){
+		$("#clear_quiz_history_form").toggle();
+	});
+
 }
 
 
@@ -71,6 +87,33 @@ $(document).ready(main);
 	<form name = "remove_account_form" id = "remove_account_form" method="post" action="AccountRemoved">
 	<input type='text' name = 'attempted_account'>
 	<a href="javascript:document.remove_account_form.submit()">Remove</a>
+	</form>
+</div>
+
+
+<div class = 'search_quiz'>
+	<p id = 'search_quiz_tag'>Search Quiz</p>
+	<form name = "search_quiz_form" id = "search_quiz_form" method="post" action="SearchQuizResult">
+	<input type='text' name = 'searched_quizID'>
+	<a href="javascript:document.search_quiz_form.submit()">Search</a>
+	</form>
+</div>
+
+
+<div class = 'remove_quiz'>
+	<p id = 'remove_quiz_tag'>Remove Quiz</p>
+	<form name = "remove_quiz_form" id = "remove_quiz_form" method="post" action="QuizRemoved">
+	<input type='text' name = 'attempted_quizID'>
+	<a href="javascript:document.remove_quiz_form.submit()">Remove</a>
+	</form>
+</div>
+
+
+<div class='clear_quiz_history'>
+	<p id = 'clear_quiz_history_tag'>Clear Quiz History</p>
+	<form name = "clear_quiz_history_form" id = "clear_quiz_history_form" method="post" action="QuizHistoryCleared">
+	<input type='text' name = 'clear_hist_quizID'>
+	<a href="javascript:document.clear_quiz_history_form.submit()">Clear</a>
 	</form>
 </div>
 
