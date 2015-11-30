@@ -38,11 +38,9 @@ public class Message implements Comparable{
 	}
 	
 	// Extract from DB
-	public Message(String from, String to, String msg, String type, String time) {
-		String command = "SELECT * FROM WHERE fromID = \"" + from + 
-				"\" AND toID = \"" + to + "\" AND type = \"" + type + 
-				"\" AND time = \"" + time + "\" AND msg = \"" + msg +
-				"\";";
+	public Message (String from, String to, String time) {
+		String command = "SELECT * FROM Messages WHERE fromID = \"" + from + 
+				"\" AND toID = \"" + to + "\" AND time = \"" + time + "\";";
 		ResultSet rs = QuizSystem.db.executeQuery(command);
 		try {
 			if (rs.next()) {
@@ -68,7 +66,7 @@ public class Message implements Comparable{
 		removeFromDB(); // removing any existing friend object that is equal to this one
 		// after clear or is not duplicate, execute the insert
 		String saveValue = "\"" + fromID + "\",\"" + toID + "\",\"" + msg + "\",\"" + time + "\",\"" + type + "\",\"" + isRead + "\"";
-		String saveStmt = "INSERT INTO Messages VALUES(" + saveValue + ");";		
+		String saveStmt = "INSERT INTO Messages VALUES(" + saveValue + ");";
 		return QuizSystem.db.executeUpdate(saveStmt); // if insert is failed, return false
 	}
 	

@@ -33,7 +33,6 @@
 <body>
 	<%
 		User user = new User(usrID);
-
 		UserInfo info = user.info;
 		ArrayList<Message> msgs = info.messages;
 		Collections.sort(msgs);
@@ -74,7 +73,7 @@
 							}
 
 							String readText = "Yes, click to read again.";
-							if (msg.isRead == 1)
+							if (msg.isRead == 1 && msg.toID.equals(usrID))
 								readText = "No, click to read it!";
 
 							out.println("<tr>");
@@ -82,8 +81,10 @@
 							out.println("<td>" + msg.toID + "</td>");
 							out.println("<td>" + typeText + "</td>");
 							out.println("<td>" + msg.time + "</td>");
-							out.println("<td><a href='#'>" + readText + "</a></td>");
-							out.println("<td><form name='deleteMsgForm" + i + "' method='POST' action='MsgDelete.jsp'>");
+							out.println("<td><a href='MsgRead.jsp?fromID=" + msg.fromID + 
+									"&toID=" + msg.toID + "&time=" + msg.time + " 'target='_blank'>" + readText + "</a></td>");
+							//<a href = "QuizHomePage.jsp?quizID=xiaotihu2015-11-23 19:12:15">Quiz HomePage</a
+							out.println("<td>"); // COME BACK HERE! FOR DELETING MESSAGE
 							out.println("</form></td>");
 							out.println("</tr>");
 						}

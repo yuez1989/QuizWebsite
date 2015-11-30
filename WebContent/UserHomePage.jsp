@@ -149,7 +149,7 @@
 							}
 						}
 						if (hasRecent == false) {
-							out.println("No recent history.");
+							out.println("<span class='column-indent'>No recent history.</span>");
 						}
 					%>
 				</div>
@@ -161,7 +161,7 @@
 					<%
 						ArrayList<String> frdIDs = Utilities.getFriendList(usrID);
 						if (frdIDs.size() == 0) {
-							out.println("No friends yet.");
+							out.println("<span class='column-indent'>No friends yet.</span>");
 						}
 						int maxFrdsAppear = 0; // max number of friends shown
 						for (String frdID : frdIDs) {
