@@ -9,6 +9,7 @@ import java.sql.*;
 public class Question{
 	public static final String TYPE_MULTIPLECHOICE = "MC";
 	public static final String TYPE_FREERESPONCE = "FREERESPONSE";
+	public static final String TYPE_PICTURERESPONCE = "PICTURERESPONCE";
 	public static final String TYPE_MATCHING = "MATCH";
 	public static final String TYPE_BLANKFILL = "BLANK";
 	public static final String TYPE_BLANKOPT = "BLANKOPT";
@@ -102,6 +103,9 @@ public class Question{
 	
 	public String getProbID(){
 		return problemID;
+	}
+	public int getsolNum(){
+		return solutions.size();
 	}
 
 	// get the problem text	
@@ -280,16 +284,14 @@ public class Question{
 	}
 	
 	public static void main(String[] arg) throws SQLException{
-		String context = "Match movie with director<option_left>Interstellar</option_left><option_left>Coherence</option_left><option_right>Nolan</option_right><option_right>James Ward Byrkit</option_right>";
+		String context = "Write down the category of fruit in picture";
 		//System.out.println(context);
-		String picutreUrl="";
+		String picutreUrl="http://globe-views.com/dcim/dreams/orange/orange-04.jpg";
 		ArrayList<ArrayList<String>> solutions = new ArrayList<ArrayList<String>>();
 		ArrayList<String> p1 = new ArrayList<String>();
-		p1.add("A");
+		p1.add("Orange");
+		p1.add("orange");
 		solutions.add(p1);
-		ArrayList<String> p2 = new ArrayList<String>();
-		p2.add("B");
-		solutions.add(p2);
 		
 		long timed = 0;
 		int order = 0;
