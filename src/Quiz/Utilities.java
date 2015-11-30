@@ -493,6 +493,48 @@ public static ArrayList<Quiz> getRecentCreatedQuiz(String usrID) throws SQLExcep
 		return list;
 	}
 
+		/**
+	 * Get the number of users in the system
+	 * @return
+	 * @throws SQLException 
+	 */
+	static public int getTotalNumberOfUsers() throws SQLException{
+		int num = 0;
+		ResultSet rs = db.executeQuery("select count(distinct usrID) from Users;");
+		if(rs.next()){
+			num = rs.getInt(1);
+		}
+		return num;
+	}
+	
+	/**
+	 * Get the total number of quizzes in the system
+	 * @return
+	 * @throws SQLException 
+	 */
+	static public int getTotalNumberOfQuizzes() throws SQLException{
+		int num = 0;
+		ResultSet rs = db.executeQuery("select count(distinct quizID) from Quizzes;");
+		if(rs.next()){
+			num = rs.getInt(1);
+		}
+		return num;
+	}
+	
+	/**
+	 * Get the total played times of all quizzes by all users in the system
+	 * @return
+	 * @throws SQLException 
+	 */
+	static public int getTotalPlayedTimeOfQuizzes() throws SQLException{
+		int num = 0;
+		ResultSet rs = db.executeQuery("select count (quizID) from Histories;");
+		if(rs.next()){
+			num = rs.getInt(1);
+		}
+		return num;
+	}
+	
 	static public void main(String[] args){
 		DataBase db = QuizSystem.getQuizSystem().db;
 
