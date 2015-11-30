@@ -14,11 +14,11 @@ public class Question{
 	public static final String TYPE_BLANKFILL = "BLANK";
 	public static final String TYPE_BLANKOPT = "BLANKOPT";
 	
-	
 	protected String problemID;
 	protected String context;
 	protected String picutreUrl;
 	protected ArrayList<ArrayList<String>> solutions;
+	protected int numberOfSolutions;
 	protected long timed;
 	protected int order;
 	protected String problemType;
@@ -28,7 +28,6 @@ public class Question{
 	protected final String ANS_END = "</ans>";
 	protected final String EC_START = "<ans-list>";
 	protected final String EC_END = "</ans-list>";
-	
 	
 	static final String OPT_START = "<option>";
 	static final String OPT_END = "</option>";
@@ -44,10 +43,7 @@ public class Question{
 	static String database = MyDBInfo.MYSQL_DATABASE_NAME;
 	
 	static DataBase db = DataBase.getDataBase();
-	
-
-
-	
+		
 	/**
 	 * constructor for generic problem object in the database
 	 * 
@@ -79,6 +75,26 @@ public class Question{
 		for(int i = 0; i<solutions.size(); i++){
 			System.out.println(solutions.get(i).get(0));
 		}
+		this.numberOfSolutions = this.solutions.size();
+		this.timed = timed;
+		String time = Long.toString(System.currentTimeMillis());
+		this.problemID = userID+time;
+		this.order = order;
+		this.problemType = type;
+	}
+	
+	/**
+	 * Another constructor - user created new problem, with user specify number of solutions
+	 */
+	public Question(String context, String url, ArrayList<ArrayList<String>> solutions, int numSol,
+			long timed,String userID, int order,String type){
+		this.context = context;
+		this.picutreUrl = url;
+		this.solutions = solutions;
+		for(int i = 0; i<solutions.size(); i++){
+			System.out.println(solutions.get(i).get(0));
+		}
+		this.numberOfSolutions = numSol;
 		this.timed = timed;
 		String time = Long.toString(System.currentTimeMillis());
 		this.problemID = userID+time;
@@ -105,7 +121,7 @@ public class Question{
 		return problemID;
 	}
 	public int getsolNum(){
-		return solutions.size();
+		return this.numberOfSolutions;
 	}
 
 	// get the problem text	
@@ -173,7 +189,7 @@ public class Question{
 			}
 			score = sol.size();
 		}
-		score = score/solutions.size();
+		score = score/numberOfSolutions;
 		return score;
 	}
 
