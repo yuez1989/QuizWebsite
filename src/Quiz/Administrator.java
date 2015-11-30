@@ -22,7 +22,7 @@ public class Administrator extends User{
 		String announceID = this.usrID + time;
 		String createtime = QuizSystem.generateCurrentTime();
 		
-		QuizSystem.db.executeUpdate("INSERT INTO Messages VALUES("+announceID+","+content+","+usrID+","+createtime+");");
+		QuizSystem.db.executeUpdate("INSERT INTO Announcements VALUES(\'"+announceID+"\',\'"+content+"\',\'"+usrID+"\',\'"+createtime+"\');");
 		
 	}
 	
@@ -31,8 +31,9 @@ public class Administrator extends User{
 		clearHistory(quizID);
 		//remove problem relationship
 		QuizSystem.db.executeUpdate("DELETE FROM ProblemBelongto WHERE quizID = \'"+quizID+"\';");
-		//TODO
-		// what about tags?????
+		QuizSystem.db.executeUpdate("DELETE FROM TagAssign WHERE quizID = \'"+quizID +"\';");
+		QuizSystem.db.executeUpdate("DELETE FROM Histories WHERE quizID = \'"+quizID +"\';");		
+		QuizSystem.db.executeUpdate("DELETE FROM Quizzes WHERE quizID = \'"+quizID+"\';");
 	}
 	
 	public void clearHistory(String quizID){
@@ -61,7 +62,7 @@ public class Administrator extends User{
 		QuizSystem.getQuizSystem();
 		
 		Administrator usr = new Administrator("xiaotihu");
-		usr.deleteUser("admintest");
+		usr.createAnnouncement("first announcement");
 		
 	}
 //	static String account = MyDBInfo.MYSQL_USERNAME;
