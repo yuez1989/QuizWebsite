@@ -8,7 +8,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%
-	Quiz quiz = new Quiz(request.getParameter("quizID"));
+	//Quiz quiz = new Quiz(request.getParameter("quizID"));
+	Quiz quiz = new Quiz("xinhuiwu2015-11-18 16:19:13");
 
 	String startTime = QuizSystem.generateCurrentTime();
 	if(quiz.isRandom()){
@@ -35,18 +36,24 @@
 				count++;
 				out.print("<div class = question"+count+">");
 				out.print("<h3>Question "+count+"<h3>");
-				if(Question.TYPE_FREERESPONCE.equals(q.getType())){
+				if(Question.TYPE_FREERESPONCE.equals(q.getType()) || Question.TYPE_PICTURERESPONCE.equals(q.getType())){
 					out.print("<p class=\'question_description\'>"+ q.getText()+"</p>");
 					if(!q.getPic().isEmpty())
 						out.print("<img src=\'"+q.getPic()+"\' class=\'question_image\'>");
-					out.print("<input type=\'text\' name=\'q"+count+"ans\' placeholder=\'enter here\'>");
+					for (int i = 1; i <= q.getsolNum(); i++){
+						out.print("<input type=\'text\' name=\'q"+count+"ans"+i+"\' placeholder=\'enter here\'>");				
+					}
 				}else if(Question.TYPE_MULTIPLECHOICE.equals(q.getType())){
 					out.print("<p class=\'question_description\'>"+ q.getText()+"</p>");
 					ArrayList<String> options = q.parseOption();
 					int optcnt = 0;
 					for(String opt: options){
 						optcnt++;
-						out.print("<input type=\'radio\' name = \'q"+count+"ans\' value = \'"+optcnt+"\'>"+opt+"</input>");
+						if(optcnt == 1){
+							out.print("<input type=\'radio\' name = \'q"+count+"ans\' value = \'"+optcnt+"\' checked=\'checked\'>"+opt+"</input>");							
+						}else{
+							out.print("<input type=\'radio\' name = \'q"+count+"ans\' value = \'"+optcnt+"\'>"+opt+"</input>");							
+						}
 					}
 				}else if(Question.TYPE_MATCHING.equals(q.getType())){
 					out.print("<p class=\'question_description\'>"+ q.getText()+"</p>");
@@ -59,6 +66,8 @@
 						out.print("<p>"+optionsright.get(optcnt-1)+"</p>");
 						optcnt++;
 					}
+				}else if(Question.TYPE_BLANKFILL.equals(q.getType())){
+					
 				}
 
 				

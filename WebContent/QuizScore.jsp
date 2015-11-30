@@ -21,26 +21,32 @@
 	int count=0;
 	for(Question q: questions){
 		count++;
-	if(Question.TYPE_FREERESPONCE.equals(q.getType())){
+	if(Question.TYPE_FREERESPONCE.equals(q.getType()) || Question.TYPE_PICTURERESPONCE.equals(q.getType())){
 		ArrayList<String> ans = new ArrayList<String>();
-		ans.add(request.getParameter("q"+count+"ans"));
+		for(int i = 1; i<= q.getsolNum();i++){
+			ans.add(request.getParameter("q"+count+"ans"+i));
+		}
 		out.print(q.grade(ans));
 		grade = grade + q.grade(ans);
 	}else if(Question.TYPE_MULTIPLECHOICE.equals(q.getType())){
 		ArrayList<String> ans = new ArrayList<String>();
-		char ch =(char)((int)(request.getParameter("q"+count+"ans").charAt(0) - '1')+'A');
-		ans.add(Character.toString(ch));
-		
-		out.print(q.grade(ans));
-		grade = grade + q.grade(ans);
+
+			char ch =(char)((int)(request.getParameter("q"+count+"ans").charAt(0) - '1')+'A');
+			ans.add(Character.toString(ch));
+			
+			out.print(q.grade(ans));
+			grade = grade + q.grade(ans);
+
 	}else if(Question.TYPE_MATCHING.equals(q.getType())){
 		ArrayList<String> optionsleft = q.parseOptionleft();
 		ArrayList<String> ans = new ArrayList<String>();
 		int optcnt=1;
 		for(String opt: optionsleft){
+			if(!request.getParameter("q"+count+"ans"+optcnt).isEmpty()){
 			char ch =(char)((int)(request.getParameter("q"+count+"ans"+optcnt).charAt(0) - '1')+'A');
 			ans.add(Character.toString(ch));
 			optcnt++;
+			}
 		}
 		out.print(q.grade(ans));
 		grade = grade + q.grade(ans);
@@ -48,7 +54,8 @@
 	
 	out.print("</div>");
 }
-	String usrID = (String) session.getAttribute("user");
+	//String usrID = (String) session.getAttribute("user");
+	String usrID = "xiaotihu";
 
 	char ratch = request.getParameter("rating").charAt(0);
 	
