@@ -513,6 +513,11 @@ public class Utilities {
 		return list;
 	}
 
+	/**
+	 * Search and return an arraylist of quiz by quizID if there are any
+	 * @param quizID
+	 * @return
+	 */
 	public static ArrayList<String> searchQuizzes(String quizID){
 		ArrayList<String> list = new ArrayList<String>();
 		ResultSet rs = QuizSystem.db.executeQuery("Select quizID from Quizzes where quizID like \'%" + quizID+"%\';");
@@ -528,6 +533,44 @@ public class Utilities {
 		return list;
 	}
 
+	/**
+	 * Search and return an arraylist of quiz by quiz name if there are any
+	 * @param quizID
+	 * @return
+	 */
+	public static ArrayList<String> searchQuizzesByName(String quizName){
+		ArrayList<String> list = new ArrayList<String>();
+		ResultSet rs = QuizSystem.db.executeQuery("Select quizID, name from Quizzes where name like \'%" + quizName+"%\';");
+		try {
+			while(rs.next()){
+				String str = "";
+				str += rs.getString("quizID");
+				str += "##";
+				str += rs.getString("name");
+				list.add(str);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+		
+		
+		
+		
+		ArrayList<Quiz> quizzes = new ArrayList<Quiz>();
+		String command = "SELECT * FROM Quizzes WHERE creator = "+"\""+usrID+"\" ORDER BY createTime DESC;";
+		ResultSet rs = db.executeQuery(command);
+		ArrayList<String> qids = new ArrayList<String>();
+		while(rs.next()){
+			qids.add(rs.getString("quizID"));
+		}
+		for(int i = 0; i<qids.size();i++){
+			Quiz q = new Quiz(qids.get(i));
+			quizzes.add(q);
+		}
+		return quizzes;
+	}
+	
 	/**
 	 * Get the number of users in the system
 	 * @return
@@ -570,6 +613,7 @@ public class Utilities {
 		return num;
 	}
 
+	
 	static public void main(String[] args){
 		DataBase db = QuizSystem.getQuizSystem().db;
 
