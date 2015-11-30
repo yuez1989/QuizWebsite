@@ -16,7 +16,6 @@
 	String quizID = request.getParameter("quizID");
 	Quiz quiz = new Quiz(quizID);
 	double grade = 0;
-
 	ArrayList<Question> questions = quiz.getQuestions();
 	
 	int count=0;
@@ -37,7 +36,6 @@
 	}else if(Question.TYPE_MATCHING.equals(q.getType())){
 		ArrayList<String> optionsleft = q.parseOptionleft();
 		ArrayList<String> ans = new ArrayList<String>();
-
 		int optcnt=1;
 		for(String opt: optionsleft){
 			char ch =(char)((int)(request.getParameter("q"+count+"ans"+optcnt).charAt(0) - '1')+'A');
@@ -62,9 +60,37 @@
 	case '3': rating = 3; break;
 	case '4': rating = 4; break;
 	} 
-
   	History hst = new History(quizID, usrID, "Regular", startTime, endTime, grade, request.getParameter("review"),rating) ;
-	hst.saveToDB();  
+	hst.saveToDB(); 
+	
+	//get number of histories of current user ID and check what achievement is available
+	//***************TODO: check and complete******************
+	int quizPlayed = Utilities.getQuizNumberPlayed(usrID);
+	if(quizPlayed == 1){
+		AchievementRecord achRec = new AchievementRecord(usrID, "Quiz Taker");
+		achRec.saveToDB();
+	}
+	if(quizPlayed == 5){
+		AchievementRecord achRec = new AchievementRecord(usrID, "Kindergarten");
+		achRec.saveToDB();	
+	}
+	if(quizPlayed == 10){
+		AchievementRecord achRec = new AchievementRecord(usrID, "Primary School");
+		achRec.saveToDB();	
+	}
+	if(quizPlayed == 30){
+		AchievementRecord achRec = new AchievementRecord(usrID, "Middle School");
+		achRec.saveToDB();	
+	}
+	if(quizPlayed == 50){
+		AchievementRecord achRec = new AchievementRecord(usrID, "High School");
+		achRec.saveToDB();	
+	}
+	if(quizPlayed == 100){
+		AchievementRecord achRec = new AchievementRecord(usrID, "Quizzzz University Alumini");
+		achRec.saveToDB();	
+	}
+	
 %>
 
 <h3>Congratulations!</h3>
