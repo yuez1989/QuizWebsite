@@ -4,12 +4,13 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.sql.ResultSet;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZoneId;
+//import java.time.LocalDate;
+//import java.time.LocalDateTime;
+//import java.time.ZoneId;
+import java.util.Calendar;
 import java.util.Date;
 
-import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
+//import com.sun.org.apache.xerces.internal.impl.xpath.regex.ParseException;
 
 public class QuizSystem {
 	static public QuizSystem qzsys;
@@ -45,26 +46,62 @@ public class QuizSystem {
 
 		return sdf.format(d);
 	}
-	
-	static public String minusDay(String datestr){
-
-		Date in = convertToDate(datestr);
-		LocalDateTime ldt = LocalDateTime.ofInstant(in.toInstant(), ZoneId.systemDefault());
-		LocalDateTime nldt = ldt.minusDays(1);
-		Date out = Date.from(nldt.atZone(ZoneId.systemDefault()).toInstant());
+		static public String minusDay(String datestr){
+		int year = Integer.parseInt(datestr.substring(0, 4));
+		int month = Integer.parseInt(datestr.substring(5, 7));
+		int day = Integer.parseInt(datestr.substring(8, 10));
+		int hour =Integer.parseInt(datestr.substring(11, 13));
+		int min = Integer.parseInt(datestr.substring(14, 16));
+		int sec = Integer.parseInt(datestr.substring(17, 19));
+		System.out.println(year+" "+month+" "+day+" "+hour+" "+min+" "+sec);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss");
-		return sdf.format(out);
+		@SuppressWarnings("deprecation")
+		Date mydate = new Date(year-1900, month-1, day, hour, min, sec);
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(mydate);
+		cal.add(Calendar.DAY_OF_YEAR,-1);
+		Date oneDayBefore= cal.getTime();
+		return sdf.format(oneDayBefore);
 	}
 	
 	static public String minusDay(String datestr,int num){
-
-		Date in = convertToDate(datestr);
-		LocalDateTime ldt = LocalDateTime.ofInstant(in.toInstant(), ZoneId.systemDefault());
-		LocalDateTime nldt = ldt.minusDays(num);
-		Date out = Date.from(nldt.atZone(ZoneId.systemDefault()).toInstant());
+		int year = Integer.parseInt(datestr.substring(0, 4));
+		int month = Integer.parseInt(datestr.substring(5, 7));
+		int day = Integer.parseInt(datestr.substring(8, 10));
+		int hour =Integer.parseInt(datestr.substring(11, 13));
+		int min = Integer.parseInt(datestr.substring(14, 16));
+		int sec = Integer.parseInt(datestr.substring(17, 19));
+		System.out.println(year+" "+month+" "+day+" "+hour+" "+min+" "+sec);
 		SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss");
-		return sdf.format(out);
+		@SuppressWarnings("deprecation")
+		Date mydate = new Date(year-1900, month-1, day, hour, min, sec);
+		Calendar cal = Calendar.getInstance();
+		cal.setTime(mydate);
+		cal.add(Calendar.DAY_OF_YEAR,-num);
+		Date oneDayBefore= cal.getTime();
+		return sdf.format(oneDayBefore);
 	}
+
+// old version that doesnt work on JRE 1.6
+	// static public String minusDay(String datestr){
+
+	// 	Date in = convertToDate(datestr);
+	// 	LocalDateTime ldt = LocalDateTime.ofInstant(in.toInstant(), ZoneId.systemDefault());
+	// 	LocalDateTime nldt = ldt.minusDays(1);
+	// 	Date out = Date.from(nldt.atZone(ZoneId.systemDefault()).toInstant());
+	// 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss");
+	// 	return sdf.format(out);
+	// }
+	
+	// static public String minusDay(String datestr,int num){
+
+	// 	Date in = convertToDate(datestr);
+	// 	LocalDateTime ldt = LocalDateTime.ofInstant(in.toInstant(), ZoneId.systemDefault());
+	// 	LocalDateTime nldt = ldt.minusDays(num);
+	// 	Date out = Date.from(nldt.atZone(ZoneId.systemDefault()).toInstant());
+	// 	SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd' 'HH:mm:ss");
+	// 	return sdf.format(out);
+	// }
 	
 
 	static public Date convertToDate(String datetime){

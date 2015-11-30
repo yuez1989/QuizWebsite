@@ -58,7 +58,9 @@ public class AccountPromoted extends HttpServlet {
 			}
 			out.print("</ul>");
 		}
-		out.println("<p><a href = \'AdminHomePage.jsp\'>return to homepage...</p>");	
+		out.println("<p>Redirect to administrator page in 3 seconds...</p>");
+		out.println("<p><a href = \'AdminHomePage.jsp\'>click here to return immediately</p>");	
+		response.sendRedirect("AdminHomePage.jsp");
 	}
 
 }
