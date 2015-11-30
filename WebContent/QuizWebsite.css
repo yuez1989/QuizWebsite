@@ -169,3 +169,18 @@ body {
 .msg-control a {
 	text-decoration:none;
 }
+
+.msg-write-box {
+	margin-top: 60px;
+	margin-left:20%;
+}
+
+.msg-write-header {
+	margin-top: 10px;
+	margin-bottom: 10px;
+}
+
+.msg-write-input {
+	margin-top: 10px;
+	margin-bottom:10px;
+}
