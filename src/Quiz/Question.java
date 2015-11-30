@@ -26,6 +26,8 @@ public class Question{
 	protected Statement sql_command;
 	protected final String ANS_START = "<ans>";
 	protected final String ANS_END = "</ans>";
+	protected final String NUMSOL_START = "<numSol>";
+	protected final String NUMSOL_END = "</numSol>";
 	protected final String EC_START = "<ans-list>";
 	protected final String EC_END = "</ans-list>";
 	
@@ -111,6 +113,7 @@ public class Question{
 			picutreUrl = rs.getString("picURL");
 			String solstring = rs.getString("solution");
 			parseStringtoSol(solstring);
+			parseStringToNumberOfSolution(solstring);
 			timed = rs.getLong("timed");
 			order = rs.getInt("solorder");
 			problemType = rs.getString("Type");
@@ -227,6 +230,20 @@ public class Question{
 		return sol;
 	}
 	
+	/**
+	 * Parse number of solution in result string, if the number of solution is 
+	 * not specified, it will be set as the size of solution
+	 * @param result
+	 */
+	public void parseStringToNumberOfSolution(String result){
+		int indexStart = result.indexOf(NUMSOL_START);
+		if (indexStart<0) this.numberOfSolutions = this.solutions.size();
+		int indexEnd = result.indexOf(NUMSOL_END);
+		String numSolStr = result.substring(indexStart+NUMSOL_START.length(), indexEnd);
+		this.numberOfSolutions = Integer.parseInt(numSolStr);
+
+	}
+	
 	public void parseStringtoSol(String result){
 		solutions = new ArrayList<ArrayList<String>>();
 		while(result.length()>0){
@@ -300,21 +317,18 @@ public class Question{
 	}
 	
 	public static void main(String[] arg) throws SQLException{
-		String context = "Stanford University, officially <blank>, is a private research university in <blank>, California";
+		String context = "Write down the category of fruit in picture";
 		//System.out.println(context);
-		String picutreUrl="https://en.wikipedia.org/wiki/File:Stanford_Oval_May_2011_panorama.jpg";
+		String picutreUrl="http://globe-views.com/dcim/dreams/orange/orange-04.jpg";
 		ArrayList<ArrayList<String>> solutions = new ArrayList<ArrayList<String>>();
 		ArrayList<String> p1 = new ArrayList<String>();
-		p1.add("Leland Stanford Junior University");
+		p1.add("Orange");
+		p1.add("orange");
 		solutions.add(p1);
-		ArrayList<String> p2 = new ArrayList<String>();		
-		p2.add("Stanford");
-		p2.add("Palo Alto");
-		solutions.add(p2);
 		
 		long timed = 0;
 		int order = 0;
-		String problemType = TYPE_BLANKFILL;
+		String problemType = TYPE_MATCHING;
 		Question q = new Question(context, picutreUrl, solutions, 
 				timed, "xiaotihu", order,problemType);
 		try {
