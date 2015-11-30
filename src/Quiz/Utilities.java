@@ -553,22 +553,6 @@ public class Utilities {
 			e.printStackTrace();
 		}
 		return list;
-		
-		
-		
-		
-		ArrayList<Quiz> quizzes = new ArrayList<Quiz>();
-		String command = "SELECT * FROM Quizzes WHERE creator = "+"\""+usrID+"\" ORDER BY createTime DESC;";
-		ResultSet rs = db.executeQuery(command);
-		ArrayList<String> qids = new ArrayList<String>();
-		while(rs.next()){
-			qids.add(rs.getString("quizID"));
-		}
-		for(int i = 0; i<qids.size();i++){
-			Quiz q = new Quiz(qids.get(i));
-			quizzes.add(q);
-		}
-		return quizzes;
 	}
 	
 	/**
