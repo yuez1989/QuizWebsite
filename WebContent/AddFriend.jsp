@@ -35,7 +35,7 @@
 		String friendID = request.getParameter("friendID");
 		Friend friend = new Friend(usrID, friendID);
 		friend.saveToDB();
-		out.println("<h3>Already added " + friendID + " as your friend. Redirecting to your messages...</h1>");
+		out.println("<h3>Already added " + friendID + " as your friend. Redirecting to your messages...</h3>");
 		response.setHeader("Refresh", "4;url=Messages.jsp");
 	%>
 </body>

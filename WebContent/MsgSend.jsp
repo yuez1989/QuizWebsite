@@ -31,14 +31,23 @@
 </title>
 </head>
 <body>
+	<h3>Message sent. Redirecting to Messages...</h3>
 	<%
 		String fromID = request.getParameter("fromID");
 		String toID = request.getParameter("toID");
 		String type = request.getParameter("type");
-		String msg = request.getParameter("msg");
+		String quizID = request.getParameter("quizID");
+		String msg = "";
+		if (quizID != null && type.equals("c")) { //store quizID into the message
+			double bestScoreOfFriend = 0;
+			msg = "Hi! I would like to challenge you on the quiz I have just taken. My best score is: " + bestScoreOfFriend + " The address of this Quiz: Quiz.jsp?quizID="+ request.getParameter("quizID");
+		}
+		else {
+			msg = request.getParameter("msg");
+		}
 		Message message = new Message(fromID, toID, msg, type);
 		message.saveToDB();
-		response.sendRedirect("UserHomePage.jsp");
+		response.setHeader("Refresh", "3;Messages.jsp");
 	%>
 </body>
 </html>
