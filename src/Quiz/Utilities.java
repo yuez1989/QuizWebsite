@@ -297,19 +297,24 @@ public static ArrayList<Quiz> getRecentCreatedQuiz(String usrID) throws SQLExcep
 	 * Get recent created Quizzes
 	 * @return Arraylist of recent created quizzes in order from newest to oldest
 	 */
-	static public ArrayList<String> getRecentQuiz(){
-		DataBase db = QuizSystem.getQuizSystem().db;
-		ResultSet rs = db.executeQuery("Select name from Quizzes Order by createTime;");
-		ArrayList<String> recentquiz = new ArrayList<String>();
-		try {
-			while(rs.next()){
-				recentquiz.add(rs.getString("name"));
-			}
-			return recentquiz;
-		} catch (SQLException e) {
-			e.printStackTrace();
-			return null;
+	/**
+	 * Get recent created Quizzes
+	 * @return Arraylist of recent created quizzes in order from newest to oldest
+	 * @throws SQLException 
+	 */
+	static public ArrayList<Quiz> getRecentQuiz() throws SQLException{
+		ArrayList<Quiz> recentquiz = new ArrayList<Quiz>();
+		String command = "Select name from Quizzes Order by createTime;";
+		ResultSet rs = db.executeQuery(command);
+		ArrayList<String> qids = new ArrayList<String>();
+		while(rs.next()){
+			qids.add(rs.getString("quizID"));
 		}
+		for(int i = 0; i<qids.size();i++){
+			Quiz q = new Quiz(qids.get(i));
+			recentquiz.add(q);
+		}
+		return recentquiz;	
 	}
 
 	/**
