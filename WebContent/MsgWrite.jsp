@@ -37,7 +37,8 @@
 		else { // challenge mode
 			document.getElementById("friend-radio").disabled = true;
 			document.getElementById("text-radio").disabled = true;
-			document.getElementById("msg-content").innerHTML = '<textarea id="msg-content" class="msg-write-input" name="msg" cols="50" rows="10" placeholder="Hi! I would like to challenge you on the quiz I have just taken."></textarea>';
+			document.getElementById("challenge-radio").checked = true;
+			document.getElementById("msg-content").innerHTML = "Hi! I would like to challenge you on the quiz I have just taken.";
 		}
 	};
 </script>
@@ -51,6 +52,9 @@
 		// Let javascript control what options are grayed
 		if (quizID == null) { // see if a valid quizID is passed here
 			out.println("<div id='challenge-indicator' style='display:none;'>NO</div>");
+		}
+		else {
+			out.println("<div id='challenge-indicator' style='display:none;'>YES</div>");
 		}
 	%>
 	<div class="msg-write-box">
@@ -69,7 +73,6 @@
 				</div>
 				<textarea id="msg-content" class="msg-write-input" name="msg" cols="50" rows="10"
 					placeholder="Enter text content."></textarea>
-				
 				<br>
 				<br> <input type="submit" value="Send"> <input
 					type="reset" value="Reset">

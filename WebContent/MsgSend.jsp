@@ -39,7 +39,7 @@
 		String quizID = request.getParameter("quizID");
 		String msg = "";
 		if (quizID != null && type.equals("c")) { //store quizID into the message
-			double bestScoreOfFriend = 0;
+			double bestScoreOfFriend = Utilities.getHighScoreOfUserInQuiz(usrID, quizID);
 			msg = "Hi! I would like to challenge you on the quiz I have just taken. My best score is: " + bestScoreOfFriend + " The address of this Quiz: Quiz.jsp?quizID="+ request.getParameter("quizID");
 		}
 		else {
