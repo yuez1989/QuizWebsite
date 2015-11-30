@@ -460,6 +460,21 @@ public class Utilities {
 		return newmsgs;
 	}
 	
+	public static ArrayList<String> searchAccounts(String usrID){
+		ArrayList<String> list = new ArrayList<String>();
+		ResultSet rs = QuizSystem.db.executeQuery("Select usrID from Users where usrID like \'%" + usrID+"%\';");
+
+		try {
+			while(rs.next()){
+				list.add(rs.getString("usrID"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
 	static public void main(String[] args){
 		DataBase db = QuizSystem.getQuizSystem().db;
 //		DROP TABLE IF EXISTS Quizzes;
