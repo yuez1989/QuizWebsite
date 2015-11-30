@@ -64,11 +64,10 @@ body {
 	top: 62px;
 	right: 50px;
 	border: 1px solid #fff;
-	width: 175px;
+	width: 180px;
 	height: 100px;
 	background-color: white;
 	border-radius: 3px;
-	
 }
 
 #popup-child:before {
@@ -142,15 +141,31 @@ body {
 	margin-top:5px;
 }
 
+.msg-box {
+	margin-top:60px;
+}
+
+.msg-header {
+	margin-left:43px;
+}
+
 .msg-container {
-	margin-top: 40px;
+	margin-top: 20px;
+	text-align:center;
 }
 
 .msg-container table {
-	margin-left:5%;
-	width:60%;
+	width:100%;
 }
 
-.msg-container td {
-	text-align:center;
+.msg-container th {
+	text-align:center!important;
+}
+
+.msg-write {
+	margin-top:20px;
+}
+
+.msg-control a {
+	text-decoration:none;
 }

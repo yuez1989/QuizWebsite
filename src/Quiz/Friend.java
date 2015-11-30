@@ -58,9 +58,9 @@ public class Friend implements Comparable{
 	@Override
 	public int compareTo(Object o) {
 		Date timeDate = QuizSystem.convertToDate(time);
-		if (o instanceof Date) {
-			Date other = (Date)o;
-			return timeDate.compareTo(other);
+		if (o instanceof Friend) {
+			Date otherDate = QuizSystem.convertToDate(((Friend)o).time);
+			return -timeDate.compareTo(otherDate);
 		}
 		return 0;
 	}

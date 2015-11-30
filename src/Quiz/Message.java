@@ -37,6 +37,28 @@ public class Message implements Comparable{
 		this.isRead = read;
 	}
 	
+	// Extract from DB
+	public Message(String from, String to, String msg, String type, String time) {
+		String command = "SELECT * FROM WHERE fromID = \"" + from + 
+				"\" AND toID = \"" + to + "\" AND type = \"" + type + 
+				"\" AND time = \"" + time + "\" AND msg = \"" + msg +
+				"\";";
+		ResultSet rs = QuizSystem.db.executeQuery(command);
+		try {
+			if (rs.next()) {
+				fromID = rs.getString("fromID");
+				toID = rs.getString("toID");
+				this.msg = rs.getString("msg");
+				this.type = rs.getString("type");
+				this.time = rs.getString("time");
+				this.isRead = rs.getInt("isRead");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	/**
 	 * Save current Message object to database
 	 * @return if success, return true; otherwise return false.
@@ -90,9 +112,9 @@ public class Message implements Comparable{
 	@Override
 	public int compareTo(Object o) {
 		Date timeDate = QuizSystem.convertToDate(time);
-		if (o instanceof Date) {
-			Date other = (Date)o;
-			return timeDate.compareTo(other);
+		if (o instanceof Message) {
+			Date otherDate = QuizSystem.convertToDate(((Message)o).time);
+			return -timeDate.compareTo(otherDate);
 		}
 		return 0;
 	}
