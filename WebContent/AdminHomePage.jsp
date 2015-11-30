@@ -133,7 +133,8 @@ $(document).ready(main);
 
 <div class = 'site_statistics'>
 <p>Site Statistics</p>
-
+<p>Total number of users: <%=Utilities.getTotalNumberOfUsers() %></p>
+<p>Total number of quizzes: <%=Utilities.getTotalNumberOfQuizzes() %></p>
 </div>
 </body>
 </html>

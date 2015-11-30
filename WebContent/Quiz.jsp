@@ -9,7 +9,6 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%
 	Quiz quiz = new Quiz(request.getParameter("quizID"));
-	quiz = new Quiz("xiaotihu2015-11-23 19:12:15");
 
 	String startTime = QuizSystem.generateCurrentTime();
 	if(quiz.isRandom()){
@@ -21,8 +20,10 @@
 </head>
 <body>
 <%
-	if(quiz.isMultiplePages()){
-		out.print("<p>hi</p>");
+/* 	if(quiz.isMultiplePages()){
+		out.print("<p>hi</p>"); */
+	if(false){
+		System.out.println("--");
 	}else{	
 %>
 

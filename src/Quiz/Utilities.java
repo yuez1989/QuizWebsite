@@ -332,7 +332,7 @@ public static ArrayList<Quiz> getRecentCreatedQuiz(String usrID) throws SQLExcep
 		System.out.println(count);
 		ArrayList<Quiz> popuQuiz = new ArrayList<Quiz>();
 		int limit = (int) (count * 0.05);
-		if(limit <= 1) limit = 1;
+		if(limit <= 3) limit = 3;
 		ResultSet rs = db.executeQuery("SELECT distinct quizID FROM Histories GROUP BY quizID" +
 				" ORDER BY count(usrID) LIMIT " + limit+";");
 		ArrayList<String> quizids = new ArrayList<String>();
@@ -378,9 +378,9 @@ public static ArrayList<Quiz> getRecentCreatedQuiz(String usrID) throws SQLExcep
 		ArrayList<String> usrIDs = new ArrayList<String>();
 
 		int limit = (int) (count * 0.05);
-		if(limit <= 1) limit = 1;
-		ResultSet rs = db.executeQuery("SELECT distinct usrID FROM Histories GROUP BY usrID" +
-				" ORDER BY count(quizID) LIMIT " + limit+";");
+		if(limit <= 3) limit = 3;
+		ResultSet rs = db.executeQuery("SELECT usrID FROM Histories GROUP BY usrID" +
+				" ORDER BY count(quizID) DESC LIMIT " + limit+";");
 		try {
 			while(rs.next()){
 				String usrID = rs.getString(1);
@@ -388,6 +388,9 @@ public static ArrayList<Quiz> getRecentCreatedQuiz(String usrID) throws SQLExcep
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}
+		for(String usrid: usrIDs){
+			topUser.add(new User(usrid));			
 		}
 		return topUser;
 	}

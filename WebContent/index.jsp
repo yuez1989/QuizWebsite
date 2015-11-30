@@ -47,7 +47,7 @@
 				out.print("<h3>Most Popular Quizzes</h3>");
 				out.print("<ul>");
 				for(Quiz quiz:poplist){
-					out.print("<li>" + quiz.getQuizName() + "</li>");
+					out.print("<li><a href = \'QuizHomePage.jsp?quizID="+quiz.getQuizID()+"\'>" + quiz.getQuizName() + "</a></li>");
 				}
 				out.print("</ul>");
 			} 
@@ -60,7 +60,7 @@
 				out.print("<h3>Toppest Player</h3>");
 				out.print("<ul>");
 				for(User player:toplist){
-					out.print("<li>" + player + "</li>");
+					out.print("<li><a href = \'Person.jsp?person="+player.usrID+"\'>"+ player.usrID + "</a></li>");
 				}
 				out.print("</ul>");
 			} 
@@ -73,15 +73,13 @@
 				out.print("<h3>Recent Added Quizzes</h3>");
 				out.print("<ul>");
 				for(String quiz:recentlist){
-					out.print("<li>"+quiz+"</li>");	
+					out.print("<li><a href = \'QuizHomePage.jsp?quizID="+quiz+"</li>");	
+					//******************************************************************************************//
 				}
 				out.print("</ul>");
 			} 
 		%>
 	</div>
-	<div>
-	<a href = "Person.jsp?person=xiaotihu">Xiaoti Hu</a>
-	<a href = "Person.jsp?person=jinzhiwang">Jinzhi Wang</a>
-	</div>
+
 </body>
 </html>
