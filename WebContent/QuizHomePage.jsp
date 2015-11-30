@@ -8,7 +8,6 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 <%String quizID =  request.getParameter("quizID");%>
-<% quizID =  "xiaotihu2015-11-23 19:12:15";%>
 
 <%Quiz quiz = new Quiz(quizID);%>
 
@@ -46,7 +45,7 @@
 	double avgScore = Utilities.getQuizAverageScore(quizID);
 	out.print("<p>The average score of this quiz is currently: "+avgScore+"</p>");	
 	
-	out.println("<p><a href=Quiz.jsp>Start Quiz</a> </p>");
+	out.println("<p><a href=\'Quiz.jsp?quizID="+quizID+"\'>Start Quiz</a> </p>");
 	out.println("<p><a href=Quiz.jsp>Start Quiz in Practice Mode</a> </p>");
 	//TODO realization of editing the quiz
 	out.println("<p><a href=homepage.jsp>Go Back To Home Page</a> </p>");

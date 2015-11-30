@@ -77,7 +77,7 @@
 <li>Highest Score: <%=Utilities.getHighRecordsOfQuiz(quiz.getQuizID()) %></li>
 <li>Average Score: <%=Utilities.getQuizAverageScore(quiz.getQuizID()) %></li>
 <li>Play Times: </li>
-<li>You have played: <%=0 %> times</li>
+<li>You have played: <%=Utilities.getPlayTimesOfQuiz(quiz.getQuizID()) %> times</li>
 </ul>
 
 <p>Toppest Records for <%=quiz.getQuizName() %>:</p>

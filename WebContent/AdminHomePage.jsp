@@ -28,6 +28,7 @@ var main = function(){
 	$("#search_quiz_form").hide();
 	$("#remove_quiz_form").hide();
 	$("#clear_quiz_history_form").hide();
+	$("#promote_account_form").hide();
 	
 	
 	$("#create_announcement_tag").click(function(){
@@ -54,6 +55,11 @@ var main = function(){
 		$("#clear_quiz_history_form").toggle();
 	});
 
+
+	$("#promote_account_tag").click(function(){
+		$("#promote_account_form").toggle();
+	});
+	
 }
 
 
@@ -76,7 +82,7 @@ $(document).ready(main);
 <div class = 'create_announcement'>
 	<p id = 'create_announcement_tag'>Create Announcement</p>
 	<form name="create_announcement_form" id="create_announcement_form" method="POST" action="AnnouncementSent">
-	<textarea rows='4' cols='100' name = 'announcement_content' id = 'announcement_content' >Enter Message Here</textarea>
+	<textarea rows='4' cols='100' name = 'announcement_content' id = 'announcement_content' placeholder = 'Enter Message Here'></textarea>
 
 	<a href="javascript:document.create_announcement_form.submit()">Send</a>
 	</form>
@@ -117,6 +123,18 @@ $(document).ready(main);
 	</form>
 </div>
 
+<div class = 'promote_account'>
+	<p id = 'promote_account_tag'>Promote Account to Administrator</p>
+	<form name = 'promote_account_form' id = 'promote_account_form' method='post' action='AccountPromoted'>
+	<input type = 'text' name = 'attempted_account'>
+	<a href="javascript:document.promote_account_form.submit()">Promote</a>
+	</form>
+</div>
 
+<div class = 'site_statistics'>
+<p>Site Statistics</p>
+<p>Total number of users: <%=Utilities.getTotalNumberOfUsers() %></p>
+<p>Total number of quizzes: <%=Utilities.getTotalNumberOfQuizzes() %></p>
+</div>
 </body>
 </html>
