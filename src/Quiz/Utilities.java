@@ -185,7 +185,7 @@ public static ArrayList<Quiz> getRecentCreatedQuiz(String usrID) throws SQLExcep
 			qids.add(rs.getString("quizID"));
 		}
 		for(int i = 0; i<qids.size();i++){
-			Quiz q = new Quiz(qID);
+			Quiz q = new Quiz(qids.get(i));
 			quizzes.add(q);
 		}
 		return quizzes;
@@ -495,50 +495,13 @@ public static ArrayList<Quiz> getRecentCreatedQuiz(String usrID) throws SQLExcep
 
 	static public void main(String[] args){
 		DataBase db = QuizSystem.getQuizSystem().db;
-		//		DROP TABLE IF EXISTS Quizzes;
-		//		CREATE TABLE Quizzes(
-		//			quizID VARCHAR(255),
-		//			name VARCHAR(1023),
-		//			creator VARCHAR(255),
-		//			createTime DATETIME,
-		//			updateTime DATETIME,
-		//			description TEXT,
-		//			spec TEXT,
-		//			PRIMARY KEY (quizID),
-		//			FOREIGN KEY (creator) REFERENCES Users(usrID)
-		//		);
 
-//		getRecentAchievements(String usrID)
-//		ArrayList<String> rAch = new ArrayList<String>();
-//		rAch = getRecentAchievements("xiaotihu");//getRecentQuiz();
 		try {
-			System.out.print(getHighestScoreOfQuiz("xiaotihu2015-11-23 19:12:15"));
+			System.out.print(getRecentCreatedQuiz("xiaotihu"));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-
-		
-//		try {
-//			double s = getUserAverageScore("xinhuiwu");
-//			System.out.print(s);
-//
-//		} catch (SQLException e) {
-//			// TODO Auto-generated catch block
-//			e.printStackTrace();
-//		}
-
-		//		try {
-		//			ResultSet rs=db.executeQuery("Select * from Quizzes;");
-		//			while(rs.next()){
-		//				System.out.println(rs.getString(1));
-		//				System.out.println(rs.getString(2));
-		//				
-		//			}
-		//		} catch (SQLException e) {
-		//			// TODO Auto-generated catch block
-		//			e.printStackTrace();
-		//		}
 	}
 
 }
