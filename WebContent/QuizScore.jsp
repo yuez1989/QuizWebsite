@@ -87,7 +87,7 @@
 		achRec.saveToDB();	
 	}
 	if(quizPlayed == 100){
-		AchievementRecord achRec = new AchievementRecord(usrID, "Quizzzz University Alumini");
+		AchievementRecord achRec = new AchievementRecord(usrID, "Quizzzz University Alumni");
 		achRec.saveToDB();	
 	}
 	
