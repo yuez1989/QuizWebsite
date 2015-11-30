@@ -79,5 +79,9 @@
 			} 
 		%>
 	</div>
+	<div>
+	<a href = "Person.jsp?person=xiaotihu">Xiaoti Hu</a>
+	<a href = "Person.jsp?person=jinzhiwang">Jinzhi Wang</a>
+	</div>
 </body>
 </html>

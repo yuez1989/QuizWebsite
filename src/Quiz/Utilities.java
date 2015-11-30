@@ -528,7 +528,7 @@ public static ArrayList<Quiz> getRecentCreatedQuiz(String usrID) throws SQLExcep
 	 */
 	static public int getTotalPlayedTimeOfQuizzes() throws SQLException{
 		int num = 0;
-		ResultSet rs = db.executeQuery("select count (quizID) from Histories;");
+		ResultSet rs = db.executeQuery("select count(quizID) from Histories;");
 		if(rs.next()){
 			num = rs.getInt(1);
 		}
@@ -539,7 +539,7 @@ public static ArrayList<Quiz> getRecentCreatedQuiz(String usrID) throws SQLExcep
 		DataBase db = QuizSystem.getQuizSystem().db;
 
 		try {
-			System.out.print(getRecentCreatedQuiz("xiaotihu"));
+			System.out.print(getTotalPlayedTimeOfQuizzes());
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
