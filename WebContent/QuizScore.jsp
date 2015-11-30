@@ -21,7 +21,7 @@
 	int count=0;
 	for(Question q: questions){
 		count++;
-	if(Question.TYPE_FREERESPONCE.equals(q.getType()) || Question.TYPE_PICTURERESPONCE.equals(q.getType())){
+	if(Question.TYPE_FREERESPONCE.equals(q.getType()) || Question.TYPE_PICTURERESPONCE.equals(q.getType()) || Question.TYPE_BLANKFILL.equals(q.getType())){
 		ArrayList<String> ans = new ArrayList<String>();
 		for(int i = 1; i<= q.getsolNum();i++){
 			ans.add(request.getParameter("q"+count+"ans"+i));
@@ -72,7 +72,8 @@
 	
 	//get number of histories of current user ID and check what achievement is available
 	//***************TODO: check and complete******************
-	int quizPlayed = Utilities.getQuizNumberPlayed(usrID);
+	
+/* 	int quizPlayed = Utilities.getQuizNumberPlayed(usrID);
 	if(quizPlayed == 1){
 		AchievementRecord achRec = new AchievementRecord(usrID, "Quiz Taker");
 		achRec.saveToDB();
@@ -96,7 +97,7 @@
 	if(quizPlayed == 100){
 		AchievementRecord achRec = new AchievementRecord(usrID, "Quizzzz University Alumni");
 		achRec.saveToDB();	
-	}
+	} */
 	
 %>
 

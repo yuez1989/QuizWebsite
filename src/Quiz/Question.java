@@ -284,18 +284,21 @@ public class Question{
 	}
 	
 	public static void main(String[] arg) throws SQLException{
-		String context = "Write down the category of fruit in picture";
+		String context = "Stanford University, officially <blank>, is a private research university in <blank>, California";
 		//System.out.println(context);
-		String picutreUrl="http://globe-views.com/dcim/dreams/orange/orange-04.jpg";
+		String picutreUrl="https://en.wikipedia.org/wiki/File:Stanford_Oval_May_2011_panorama.jpg";
 		ArrayList<ArrayList<String>> solutions = new ArrayList<ArrayList<String>>();
 		ArrayList<String> p1 = new ArrayList<String>();
-		p1.add("Orange");
-		p1.add("orange");
+		p1.add("Leland Stanford Junior University");
 		solutions.add(p1);
+		ArrayList<String> p2 = new ArrayList<String>();		
+		p2.add("Stanford");
+		p2.add("Palo Alto");
+		solutions.add(p2);
 		
 		long timed = 0;
 		int order = 0;
-		String problemType = TYPE_MATCHING;
+		String problemType = TYPE_BLANKFILL;
 		Question q = new Question(context, picutreUrl, solutions, 
 				timed, "xiaotihu", order,problemType);
 		try {
