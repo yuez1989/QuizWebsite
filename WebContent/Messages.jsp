@@ -98,7 +98,10 @@
 				<div class="msg-write">
 					<a href="MsgWrite.jsp" target="_blank">Write A New Message</a>
 				</div>
-				<div class="msg-wipe-all">
+				<div class="msg-delete-selected">
+					Delete selected Messages
+				</div>
+				<div class="msg-delete-all">
 					Delete all Messages
 				</div>
 			</div>
