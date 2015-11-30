@@ -184,3 +184,18 @@ body {
 	margin-top: 10px;
 	margin-bottom:10px;
 }
+
+.msg-read-box {
+	margin-top:60px;
+	margin-left: 20%;
+}
+
+.msg-read-body td{
+	position:relative;
+	left:10px;
+}
+
+.msg-read-option-abreast {
+	display:inline-block;
+	margin-right:20px;
+}

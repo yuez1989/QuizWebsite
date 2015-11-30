@@ -35,6 +35,9 @@
 		String fromID = request.getParameter("fromID");
 		String toID = request.getParameter("toID");
 		String time = request.getParameter("time");
+		String friendID = fromID;
+		if (fromID.equals(usrID))
+				friendID = toID;
 		Message msg = new Message(fromID, toID, time);
 
 		// Translate type
@@ -54,6 +57,8 @@
 			typeText = "Text";
 			break;
 		}
+		
+		msg.setAsRead(); // set this message as read
 	%>
 	<div class="msg-read-box">
 		<div class="msg-read-header"><%=msg.fromID%> to <%=msg.toID%></div>
@@ -72,6 +77,27 @@
 					<td><%=msg.msg%></td>
 				</tr>
 			</table>
+		</div>
+		<br>
+		<div class="msg-read-option">
+			<%
+				switch (typeCh) {
+				case 'f':
+					String strAgree = "<div><div class='msg-read-option-abreast'><form name='addFriendForm' method='POST' action='AddFriend.jsp'><input type='hidden' name='friendID' value='" + friendID + "'><a href='javascript:document.addFriendForm.submit()'>Agree</a></form></div>";
+					String strDecline = "<div class='msg-read-option-abreast'><a href = 'Messages.jsp'>Decline</a></div></div>";
+					out.println(strAgree);
+					out.println(strDecline);
+					break;
+				case 'c':
+					out.println();
+					break;
+				case 't':
+					break;
+				default:
+					break;
+			}
+			%>
+			<br><a href="Messages.jsp">Go back</a>
 		</div>
 	</div>
 </body>

@@ -36,12 +36,10 @@
 	<%
 		User user = new User(usrID);
 	
-		/*
 		if (usrID.equals("yuez1989")) {
-			Message msg = new Message("xinhuiwu","yuez1989","hello","t");
+			Message msg = new Message("yuezhang","yuez1989","hello may I add as friend?","f");
 			user.addMessage(msg);
 		}
-		*/
 	
 		UserInfo info = user.info;
 		ArrayList<Message> unreadMsg = Utilities.unreadMessages(user);

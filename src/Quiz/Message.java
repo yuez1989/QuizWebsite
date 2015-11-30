@@ -83,12 +83,14 @@ public class Message implements Comparable{
 		return QuizSystem.db.executeUpdate(stmt);
 	}
 	
-	public void setAsRead() {
+	public void setAsRead() throws SQLException {
 		isRead = 0;
+		saveToDB();
 	}
 	
-	public void setAsUnread() {
+	public void setAsUnread() throws SQLException {
 		isRead = 1;
+		saveToDB();
 	}
 	
 	/**
