@@ -21,7 +21,7 @@ public class Utilities {
 	 */
 	public static ArrayList<History> getHighRecordsOfQuiz(String QuizID) throws SQLException{
 		ArrayList<History> highScores = new ArrayList<History>();
-		String command = "SELECT * FROM Histories WHERE quizID = "+"\""+QuizID+"\" ORDER BY score DESC;";
+		String command = "SELECT * FROM Histories WHERE quizID = "+"\""+QuizID+"\" ORDER BY score DESC, span;";
 		ResultSet rs= db.executeQuery(command);
 		ArrayList<String> qids = new ArrayList<String>();
 		ArrayList<String> uids = new ArrayList<String>();
@@ -176,7 +176,7 @@ public class Utilities {
 	 * @return Arraylist of quizzes
 	 * @throws SQLException
 	 */
-public static ArrayList<Quiz> getRecentCreatedQuiz(String usrID) throws SQLException{
+	public static ArrayList<Quiz> getRecentCreatedQuiz(String usrID) throws SQLException{
 		ArrayList<Quiz> quizzes = new ArrayList<Quiz>();
 		String command = "SELECT * FROM Quizzes WHERE creator = "+"\""+usrID+"\" ORDER BY createTime DESC;";
 		ResultSet rs = db.executeQuery(command);
@@ -222,7 +222,7 @@ public static ArrayList<Quiz> getRecentCreatedQuiz(String usrID) throws SQLExcep
 		//		}
 		return achID;
 	}
-			
+
 	/**
 	 * Get recent scores of a specific user with userID
 	 * @param usrID
@@ -293,10 +293,6 @@ public static ArrayList<Quiz> getRecentCreatedQuiz(String usrID) throws SQLExcep
 		return recentTopPerformance;
 	}
 
-	/**
-	 * Get recent created Quizzes
-	 * @return Arraylist of recent created quizzes in order from newest to oldest
-	 */
 	/**
 	 * Get recent created Quizzes
 	 * @return Arraylist of recent created quizzes in order from newest to oldest
@@ -453,32 +449,30 @@ public static ArrayList<Quiz> getRecentCreatedQuiz(String usrID) throws SQLExcep
 		return count;
 	}
 
-/**
-		 * return how many quizzes a user has played
-		 TODO test 
-		 * @param quizID
-		 * @return
-		 * @throws SQLException 
-		 */
-		 public static int getQuizNumberPlayed(String usrID) throws SQLException{
-			int count = 0;
-			DataBase db = QuizSystem.getQuizSystem().db;
-			ResultSet rsCount = db.executeQuery("SELECT COUNT * FROM Histories where usrID = \'%" + usrID+"%\' ;");
-			if(rsCount.next()){
-				count = rsCount.getInt(1);
-			}
-			return count;
+	/**
+	 * return how many quizzes a user has played
+	 * @param quizID
+	 * @return
+	 * @throws SQLException 
+	 */
+	public static int getQuizNumberPlayed(String usrID) throws SQLException{
+		int count = 0;
+		DataBase db = QuizSystem.getQuizSystem().db;
+		ResultSet rsCount = db.executeQuery("SELECT COUNT(distinct quizID) FROM Histories where usrID =  \'" + usrID+"\' ;");
+		if(rsCount.next()){
+			count = rsCount.getInt(1);
 		}
+		return count;
+	}
 
 	/**
 	 * Get the highest score a user has achieved in a specific quiz
 	 * @param quizID
 	 * @param UserID
 	 * @return
-	 * @throws SQLException 
 	 */
 	public static double getHighScoreOfUserInQuiz(String quizID, String userID) throws SQLException{
-		double score = 0;
+		double score = 0 ;
 		String command = "SELECT * FROM Histories WHERE quizID = "+"\""+quizID+"\" AND usrID = "+"\""+userID+"\" ORDER BY score DESC;";
 		ResultSet rs = db.executeQuery(command);
 		if(rs.next()){
@@ -486,8 +480,7 @@ public static ArrayList<Quiz> getRecentCreatedQuiz(String usrID) throws SQLExcep
 		}
 		return score;
 	}
-
-
+	
 	/**
 	 * Returns list of unread messages of a user
 	 * @param user
@@ -515,7 +508,6 @@ public static ArrayList<Quiz> getRecentCreatedQuiz(String usrID) throws SQLExcep
 				list.add(rs.getString("usrID"));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return list;
@@ -530,13 +522,12 @@ public static ArrayList<Quiz> getRecentCreatedQuiz(String usrID) throws SQLExcep
 				list.add(rs.getString("quizID"));
 			}
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 		return list;
 	}
 
-		/**
+	/**
 	 * Get the number of users in the system
 	 * @return
 	 * @throws SQLException 
@@ -549,7 +540,7 @@ public static ArrayList<Quiz> getRecentCreatedQuiz(String usrID) throws SQLExcep
 		}
 		return num;
 	}
-	
+
 	/**
 	 * Get the total number of quizzes in the system
 	 * @return
@@ -563,7 +554,7 @@ public static ArrayList<Quiz> getRecentCreatedQuiz(String usrID) throws SQLExcep
 		}
 		return num;
 	}
-	
+
 	/**
 	 * Get the total played times of all quizzes by all users in the system
 	 * @return
@@ -577,16 +568,15 @@ public static ArrayList<Quiz> getRecentCreatedQuiz(String usrID) throws SQLExcep
 		}
 		return num;
 	}
-	
+
 	static public void main(String[] args){
 		DataBase db = QuizSystem.getQuizSystem().db;
 
 		try {
-			System.out.print(getTotalPlayedTimeOfQuizzes());
+			System.out.print(getHighScoreOfUserInQuiz("xinhuiwu2015-11-18 16:19:13","xiaotihu"));
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-
 }
