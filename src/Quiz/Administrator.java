@@ -31,8 +31,9 @@ public class Administrator extends User{
 		clearHistory(quizID);
 		//remove problem relationship
 		QuizSystem.db.executeUpdate("DELETE FROM ProblemBelongto WHERE quizID = \'"+quizID+"\';");
-		//TODO
-		// what about tags?????
+		QuizSystem.db.executeUpdate("DELETE FROM TagAssign WHERE quizID = \'"+quizID +"\';");
+		QuizSystem.db.executeUpdate("DELETE FROM Histories WHERE quizID = \'"+quizID +"\';");		
+		QuizSystem.db.executeUpdate("DELETE FROM Quizzes WHERE quizID = \'"+quizID+"\';");
 	}
 	
 	public void clearHistory(String quizID){
