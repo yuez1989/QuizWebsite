@@ -453,6 +453,23 @@ public static ArrayList<Quiz> getRecentCreatedQuiz(String usrID) throws SQLExcep
 		return count;
 	}
 
+/**
+		 * return how many quizzes a user has played
+		 TODO test 
+		 * @param quizID
+		 * @return
+		 * @throws SQLException 
+		 */
+		 public static int getQuizNumberPlayed(String usrID) throws SQLException{
+			int count = 0;
+			DataBase db = QuizSystem.getQuizSystem().db;
+			ResultSet rsCount = db.executeQuery("SELECT COUNT * FROM Histories where usrID = \'%" + usrID+"%\' ;");
+			if(rsCount.next()){
+				count = rsCount.getInt(1);
+			}
+			return count;
+		}
+
 	/**
 	 * Returns list of unread messages of a user
 	 * @param user
