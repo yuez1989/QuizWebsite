@@ -516,6 +516,7 @@ public class Utilities {
 	public static ArrayList<String> searchQuizzes(String quizID){
 		ArrayList<String> list = new ArrayList<String>();
 		ResultSet rs = QuizSystem.db.executeQuery("Select quizID from Quizzes where quizID like \'%" + quizID+"%\';");
+		System.out.println("Select quizID from Quizzes where quizID like \'%" + quizID+"%\';");
 
 		try {
 			while(rs.next()){
@@ -575,7 +576,6 @@ public class Utilities {
 		try {
 			System.out.print(getHighScoreOfUserInQuiz("xinhuiwu2015-11-18 16:19:13","xiaotihu"));
 		} catch (SQLException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}

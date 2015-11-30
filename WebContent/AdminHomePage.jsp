@@ -97,6 +97,14 @@ $(document).ready(main);
 </div>
 
 
+<div class = 'search_quiz_name'>
+	<p id = 'search_quiz_name_tag'>Search Quiz By Name</p>
+	<form name = "search_quiz_name_form" id = "search_quiz_name_form" method="post" action="SearchQuizByNameResult">
+	<input type='text' name = 'searched_quizName'>
+	<a href="javascript:document.search_quiz_name_form.submit()">Search</a>
+	</form>
+</div>
+
 <div class = 'search_quiz'>
 	<p id = 'search_quiz_tag'>Search Quiz</p>
 	<form name = "search_quiz_form" id = "search_quiz_form" method="post" action="SearchQuizResult">
