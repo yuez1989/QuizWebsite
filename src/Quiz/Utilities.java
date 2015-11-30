@@ -475,6 +475,21 @@ public class Utilities {
 		return list;
 	}
 	
+	public static ArrayList<String> searchQuizzes(String quizID){
+		ArrayList<String> list = new ArrayList<String>();
+		ResultSet rs = QuizSystem.db.executeQuery("Select quizID from Quizzes where quizID like \'%" + quizID+"%\';");
+
+		try {
+			while(rs.next()){
+				list.add(rs.getString("quizID"));
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
 	static public void main(String[] args){
 		DataBase db = QuizSystem.getQuizSystem().db;
 //		DROP TABLE IF EXISTS Quizzes;

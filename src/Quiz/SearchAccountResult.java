@@ -47,9 +47,11 @@ public class SearchAccountResult extends HttpServlet {
 		if(list.size() == 0){
 			out.print("<p>None...</p>");
 		}else{
+			out.print("<ul>");
 			for(String str:list){
-				out.println("<p>"+str+"</p>");
+				out.println("<li>"+str+"</li>");
 			}
+			out.print("</ul>");
 		}
 		out.println("<p><a href = \'AdminHomePage.jsp\'>return to homepage...</p>");	
 	}

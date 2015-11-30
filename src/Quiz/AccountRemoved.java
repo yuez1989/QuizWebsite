@@ -41,16 +41,7 @@ public class AccountRemoved extends HttpServlet {
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String inputaccount = request.getParameter("attempted_account");
-		ResultSet rs = QuizSystem.db.executeQuery("Select usrID from Users where usrID like \'%" + inputaccount+"%\';");
-		ArrayList<String> similarids = new ArrayList<String>();
-		try {
-			while(rs.next()){
-				similarids.add(rs.getString("usrID"));
-			}
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+		ArrayList<String> similarids = Utilities.searchAccounts(inputaccount);
 		
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
@@ -64,9 +55,11 @@ public class AccountRemoved extends HttpServlet {
 			out.print("<p> You have Deleted "+similarids.get(0)+"</p>");
 		}else{
 			out.print("<h3>Do you mean...<h3>");
+			out.print("<ul>");
 			for(String str:similarids){
-				out.print("<p>"+str+"</p>");
+				out.print("<li>"+str+"</li>");
 			}
+			out.print("</ul>");
 		}
 		out.println("<p><a href = \'AdminHomePage.jsp\'>return to homepage...</p>");	
 	}
