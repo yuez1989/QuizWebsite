@@ -56,8 +56,9 @@
 		<div class="personal-header">
 			<div class="inline-part">
 				<form method="POST" action="Person.jsp" target="_blank">
-					<input type="search" name="person" placeholder="search by user ID" style="color:black;" size="25">
-					<input type="submit" value="Submit" style="color:black;">
+					<input type="search" name="person" placeholder="search by user ID"
+						style="color: black;" size="25"> <input type="submit"
+						value="Submit" style="color: black;">
 				</form>
 			</div>
 			<div class="inline-part">
@@ -127,11 +128,19 @@
 			</div>
 			<div class="news-feed">Setting</div>
 			<div class="news-feed">Administration Settings</div>
-			<div class="create-quiz-button">
-				<form name="submitForm" method="POST" action="CreateQuiz.jsp"
-					target="_blank">
-					<input type="submit" value="Create New Quiz"></input>
-				</form>
+			<div class="quiz-options">
+				<div class="create-quiz-button">
+					<form method="POST" action="CreateQuiz.jsp"
+						target="_blank">
+						<input type="submit" value="Create New Quiz"></input>
+					</form>
+				</div>
+				<div class="create-quiz-button">
+					<form method="POST" action="Quiz.jsp" target="_blank">
+						<input type="search" name = "quizID" value="xinhuiwu2015-11-18 16:19:13">
+						<input type="submit" value="Search Quiz">
+					</form>
+				</div>
 			</div>
 			<div class="uhp-user-inner">
 				<div>

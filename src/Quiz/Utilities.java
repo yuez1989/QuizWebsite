@@ -500,9 +500,14 @@ public class Utilities {
 		return newmsgs;
 	}
 
+	/**
+	 * Get the account IDs given the partial string of desired user ID
+	 * @param usrID
+	 * @return
+	 */
 	public static ArrayList<String> searchAccounts(String usrID){
 		ArrayList<String> list = new ArrayList<String>();
-		ResultSet rs = QuizSystem.db.executeQuery("Select usrID from Users where usrID like \'%" + usrID +"%\';");
+		ResultSet rs = QuizSystem.db.executeQuery("Select usrID from Users where usrID like \'%" + usrID+"%\';");
 
 		try {
 			while(rs.next()){
@@ -514,16 +519,16 @@ public class Utilities {
 		return list;
 	}
 
+	
 	/**
 	 * Search and return an arraylist of quiz by quizID if there are any
-	 * @param quizID
-	 * @return quizID
+	 * @param str
+	 * @return
 	 */
-	public static ArrayList<String> searchQuizzes(String quizID){
+	public static ArrayList<String> searchQuizzes(String str){
 		ArrayList<String> list = new ArrayList<String>();
-		ResultSet rs = QuizSystem.db.executeQuery("Select quizID from Quizzes where quizID like \'%" + quizID+"%\';");
-		System.out.println("Select quizID from Quizzes where quizID like \'%" + quizID+"%\';");
-
+		ResultSet rs = QuizSystem.db.executeQuery("Select quizID from Quizzes where quizID like \'%" + str+"%\';");
+//		System.out.println("Select quizID from Quizzes where quizID like \'%" + quizID+"%\';");
 		try {
 			while(rs.next()){
 				list.add(rs.getString("quizID"));
@@ -535,13 +540,13 @@ public class Utilities {
 	}
 
 	/**
-	 * Search and return an arraylist of quiz by quiz name if there are any
-	 * @param quizID
+	 * Search and return an arraylist of quizID and quiz name, divided by ## by quiz name if there are any
+	 * @param string
 	 * @return
 	 */
-	public static ArrayList<String> searchQuizzesByName(String quizName){
+	public static ArrayList<String> searchQuizzesByName(String string){
 		ArrayList<String> list = new ArrayList<String>();
-		ResultSet rs = QuizSystem.db.executeQuery("Select quizID, name from Quizzes where name like \'%" + quizName+"%\';");
+		ResultSet rs = QuizSystem.db.executeQuery("Select quizID, name from Quizzes where name like \'%" + string+"%\';");
 		try {
 			while(rs.next()){
 				String str = "";
@@ -597,7 +602,6 @@ public class Utilities {
 		}
 		return num;
 	}
-
 	
 	static public void main(String[] args){
 		DataBase db = QuizSystem.getQuizSystem().db;

@@ -8,8 +8,18 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%
-	//Quiz quiz = new Quiz(request.getParameter("quizID"));
-	Quiz quiz = new Quiz("xinhuiwu2015-11-18 16:19:13");
+	String quizID = request.getParameter("quizID");
+	ArrayList<String> searchRes = Utilities.searchQuizzes(quizID);
+	if (searchRes.size() != 0) { // if there is a search result
+		quizID = searchRes.get(0);
+	}
+	else {
+		quizID = "xinhuiwu2015-11-18 16:19:13";
+		out.println("<h3>The quiz you searched does not exist. We will redirect you to the list of quizzes we have...</h3>");
+		response.setHeader("Refresh", "1;Quizzes.jsp");		
+	}
+	
+	Quiz quiz = new Quiz(quizID);
 
 	String startTime = QuizSystem.generateCurrentTime();
 	if(quiz.isRandom()){
@@ -25,7 +35,7 @@
 		out.print("<p>hi</p>"); */
 	if(false){
 		System.out.println("--");
-	}else{	
+	}else{
 %>
 
 	<form class='total_form' action = "QuizScore.jsp" method="post" >
