@@ -502,7 +502,7 @@ public class Utilities {
 
 	public static ArrayList<String> searchAccounts(String usrID){
 		ArrayList<String> list = new ArrayList<String>();
-		ResultSet rs = QuizSystem.db.executeQuery("Select usrID from Users where usrID like \'%" + usrID+"%\';");
+		ResultSet rs = QuizSystem.db.executeQuery("Select usrID from Users where usrID like \'%" + usrID +"%\';");
 
 		try {
 			while(rs.next()){
@@ -517,7 +517,7 @@ public class Utilities {
 	/**
 	 * Search and return an arraylist of quiz by quizID if there are any
 	 * @param quizID
-	 * @return
+	 * @return quizID
 	 */
 	public static ArrayList<String> searchQuizzes(String quizID){
 		ArrayList<String> list = new ArrayList<String>();

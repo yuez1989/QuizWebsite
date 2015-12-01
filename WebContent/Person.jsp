@@ -7,19 +7,11 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%
-	//String user = (String)session.getAttribute("user");
 	String person = (String)request.getParameter("person");
-	//String person = "xiaotihu";
-	/*
-	String person = "xiaotihu";
-	if(user!=null && user.equals(person)){
-		RequestDispatcher dispatcher = request.getRequestDispatcher("UserHomePage.jsp");
-		dispatcher.forward(request, response);
-	}
-	*/
+	person = Utilities.searchAccounts(person).get(0);
 	UserInfo UserInfo = new UserInfo(person); 
 %>
-<title>Quizzzz</title>
+<title>Quizzzz: Homepage of <%=person%> </title>
 <link rel="stylesheet" type="text/css" href="Person.css">
 </head>
 <body>

@@ -71,7 +71,8 @@
 				<%
 					String placeText = "Enter text content.";
 					if (quizID != null) {
-						placeText = "Hi! I would like to challenge you on the quiz I have just taken. My best score is: " + Utilities.getHighScoreOfUserInQuiz(quizID, usrID) + " The address of this Quiz: Quiz.jsp?quizID=" + quizID;
+						placeText = "Hi! I would like to challenge you on the quiz I have just taken. My best score is: " + Utilities.getHighScoreOfUserInQuiz(quizID, usrID) + 
+								" Quiz.jsp?quizID=" + quizID + "";
 					}
 				%>
 				<textarea id="msg-content" class="msg-write-input" name="msg" cols="50" rows="10"><%=placeText%></textarea>

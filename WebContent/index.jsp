@@ -28,18 +28,6 @@
 			<li id='signup' class='rightmenu'>Sign Up</li>
 		</ul>
 	</div>
-	<h1>
-		You are
-		<%
-		String usrID = "default";
-		if (!session.isNew()) {
-			usrID = (String) session.getAttribute("user");
-			if (usrID == null)
-				usrID = "default";
-		}
-		out.println(usrID);
-	%>
-	</h1>
 	<div class='most_popular'>
 		<%
  			ArrayList<Quiz> poplist = Utilities.getPopularQuiz();

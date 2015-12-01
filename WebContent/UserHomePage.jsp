@@ -21,8 +21,7 @@
 	crossorigin="anonymous"></script>
 <script src='UserHomePage.js'></script>
 </head>
-<title>Quizzzz 
-<%
+<title>Quizzzz <%
 	String usrID = "default";
 	if (!session.isNew()) {
 		usrID = (String) session.getAttribute("user");
@@ -35,14 +34,14 @@
 <body>
 	<%
 		User user = new User(usrID);
-	
+
 		/*
 		if (usrID.equals("yuez1989")) {
 			Message msg = new Message("yuezhang","yuez1989","hello may I add as friend?","f");
 			user.addMessage(msg);
 		}
 		*/
-		
+
 		UserInfo info = user.info;
 		ArrayList<Message> unreadMsg = Utilities.unreadMessages(user);
 		ArrayList<History> histories = Utilities.getRecentActivitiesOfUser(usrID);
@@ -56,12 +55,20 @@
 		</div>
 		<div class="personal-header">
 			<div class="inline-part">
+				<form method="POST" action="Person.jsp" target="_blank">
+					<input type="search" name="person" placeholder="search by user ID" style="color:black;" size="25">
+					<input type="submit" value="Submit" style="color:black;">
+				</form>
+			</div>
+			<div class="inline-part">
 				<span> Welcome, <%=usrID%></span>
 			</div>
 			<div class="inline-part" id="popup-parent">
-				<form name="submitFormMsg" method="POST" action="Messages.jsp" target="_blank">
+				<form name="submitFormMsg" method="POST" action="Messages.jsp"
+					target="_blank">
 					<input type="hidden" name="usrID" value="<%=usrID%>"> <a
-						href="javascript:document.submitFormMsg.submit()" target="_blank">Messages <%
+						href="javascript:document.submitFormMsg.submit()" target="_blank">Messages
+						<%
  	if (unreadMsg.size() > 0) {
  		out.print("(" + unreadMsg.size() + ")");
  	}
@@ -111,7 +118,8 @@
 		<div class="uhp-user col-md-3">
 			<div class="column-name">PROFILE</div>
 			<div class="news-feed">
-				<form name="submitForm" method="POST" action="Person.jsp" target="_blank">
+				<form name="submitForm" method="POST" action="Person.jsp"
+					target="_blank">
 					<input type="hidden" name="person" value="<%=usrID%>"> <a
 						href="javascript:document.submitForm.submit()"><%=usrID%>'s
 						profile</a>
@@ -119,7 +127,12 @@
 			</div>
 			<div class="news-feed">Setting</div>
 			<div class="news-feed">Administration Settings</div>
-			<div><input type="submit" value="Create New Quiz"></input></div>
+			<div class="create-quiz-button">
+				<form name="submitForm" method="POST" action="CreateQuiz.jsp"
+					target="_blank">
+					<input type="submit" value="Create New Quiz"></input>
+				</form>
+			</div>
 			<div class="uhp-user-inner">
 				<div>
 					<span class="section-name">Achievements </span>
