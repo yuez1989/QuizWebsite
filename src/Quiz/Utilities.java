@@ -200,32 +200,21 @@ public class Utilities {
 	 * Get recent achievements of specific user given his/her ID
 	 * @param usrID
 	 * @return Arraylist of achievement ID
+	 * @throws SQLException 
 	 */
-	public static ArrayList<String> getRecentAchievements(String usrID){
-		//		ArrayList<String> ach = new ArrayList<String>();
+	public static ArrayList<AchievementRecord> getRecentAchievements(String usrID) throws SQLException{
+		ArrayList<AchievementRecord> achRecs = new ArrayList<AchievementRecord>();
+		ArrayList<String> achIDs = new ArrayList<String>();
 		String command = "SELECT * FROM AchievementRecords WHERE usrID = "+"\""+usrID+"\" ORDER BY time DESC;";
 		ResultSet rs1 = db.executeQuery(command);
-		ArrayList<String> achID = new ArrayList<String>();
-		try {
-			while(rs1.next()){
-				achID.add(rs1.getString("achID"));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		while(rs1.next()){
+			achIDs.add(rs1.getString("achID"));
 		}
-		//		for(String achID1 : achID){
-		//			String cmd = "SELECT * FROM Achievements WHERE achID = "+"\""+achID1+"\" ;";
-		//			ResultSet rs2 = db.executeQuery(cmd);
-		//			try {
-		//				if(rs2.next()){
-		//					ach.add(rs2.getString("description"));
-		//				}
-		//			} catch (SQLException e) {
-		//				e.printStackTrace();
-		//			}
-		//
-		//		}
-		return achID;
+		for(String achID : achIDs){
+			AchievementRecord AR = new AchievementRecord(usrID, achID);
+			achRecs.add(AR);
+		}
+		return achRecs;
 	}
 
 	/**
