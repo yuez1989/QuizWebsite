@@ -333,6 +333,29 @@ public class Utilities {
 	}
 
 	/**
+	 * Get recent created Quizzes, with specific days of recent defined
+	 * TODO revise to take into some parameter as recent time 
+	 * @return Arraylist of recent created quizzes in order from newest to oldest
+	 * @throws SQLException 
+	 */
+	static public ArrayList<Quiz> getRecentQuiz(int daysRecent) throws SQLException{
+		String currentTime = QuizSystem.generateCurrentTime();
+		String time = QuizSystem.minusDay(currentTime, daysRecent);
+		ArrayList<Quiz> recentquiz = new ArrayList<Quiz>();
+		String command = "Select quizID from Quizzes WHERE createTime > "+"\""+time+"\"Order by createTime DESC;";
+		ResultSet rs = db.executeQuery(command);
+		ArrayList<String> qids = new ArrayList<String>();
+		while(rs.next()){
+			qids.add(rs.getString("quizID"));
+		}
+		for(int i = 0; i<qids.size();i++){
+			Quiz q = new Quiz(qids.get(i));
+			recentquiz.add(q);
+		}
+		return recentquiz;	
+	}
+
+	/**
 	 * Get the top 5% of Quizzes in total played times 
 	 * @return
 	 */
