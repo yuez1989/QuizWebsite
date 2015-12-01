@@ -13,6 +13,7 @@ public class Utilities {
 		QuizSystem sys = QuizSystem.getQuizSystem();
 		db = sys.db;
 	}
+	
 
 	/**
 	 * Get the top ten scored history items for a specific quiz
