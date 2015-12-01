@@ -29,7 +29,8 @@ var main = function(){
 	$("#remove_quiz_form").hide();
 	$("#clear_quiz_history_form").hide();
 	$("#promote_account_form").hide();
-	
+	$("#search_quiz_name_form").hide();
+
 	
 	$("#create_announcement_tag").click(function(){
 		$("#create_announcement_form").toggle();
@@ -51,6 +52,11 @@ var main = function(){
 		$("#search_quiz_form").toggle();
 	});
 	
+	$("#search_quiz_name_tag").click(function(){
+		$("#search_quiz_name_form").toggle();
+	})
+	
+	
 	$("#clear_quiz_history_tag").click(function(){
 		$("#clear_quiz_history_form").toggle();
 	});
@@ -59,6 +65,8 @@ var main = function(){
 	$("#promote_account_tag").click(function(){
 		$("#promote_account_form").toggle();
 	});
+	
+	
 	
 }
 
@@ -106,7 +114,7 @@ $(document).ready(main);
 </div>
 
 <div class = 'search_quiz'>
-	<p id = 'search_quiz_tag'>Search Quiz</p>
+	<p id = 'search_quiz_tag'>Search Quiz By ID</p>
 	<form name = "search_quiz_form" id = "search_quiz_form" method="post" action="SearchQuizResult">
 	<input type='text' name = 'searched_quizID'>
 	<a href="javascript:document.search_quiz_form.submit()">Search</a>
