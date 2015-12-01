@@ -47,6 +47,7 @@
 		ArrayList<History> histories = Utilities.getRecentActivitiesOfUser(usrID);
 		ArrayList<History> frdHistories = Utilities.getRecentFriendActivities(usrID);
 		ArrayList<Quiz> popQuizzes = Utilities.getPopularQuiz();
+		String recent = QuizSystem.minusDay(QuizSystem.generateCurrentTime(), 3);
 	%>
 	<div class="header-line">
 		<div class="logo-header">
@@ -182,6 +183,14 @@
 				</div>
 				<div>
 					<span class="section-name">Recent Creation</span>
+					<%
+						ArrayList<Quiz> createSelf = Utilities.getRecentCreatedQuiz(usrID);
+						for (Quiz quiz : createSelf) {
+					%>
+						<span class='column-indent'><%=quiz.getQuizName()%></span>
+					<%
+						}
+					%>
 				</div>
 				<div>
 					<span class="section-name">Friends List</span>
@@ -242,7 +251,17 @@
 			<div>
 				<div class="column-name">Achievements Earned</div>
 				<%
-					
+					ArrayList<AchievementRecord> achrFrd = new ArrayList<AchievementRecord>();
+					for (String frdID : frdIDs) {
+						ArrayList<AchievementRecord> recents = new ArrayList<AchievementRecord>();
+						achrFrd.addAll(recents);
+					}
+					Collections.sort(achrFrd);
+					for (AchievementRecord achr : achrFrd) {
+				%>
+					<span class='news-feed'><%=achr.usrID%> achieved <%=achr.achID%> at <%=achr.time%></span>
+				<%
+					}
 				%>
 			</div>
 			<div style="clear: both;"></div>
@@ -266,13 +285,17 @@
 			<div>
 				<div class="column-name">Recently Created Quizzes(in Public)</div>
 				<%
-					
+					ArrayList<Quiz> recentQuizzesPublic = Utilities.getRecentQuiz(recent);
+					for (Quiz quiz : recentQuizzesPublic) {
+				%>
+					<span style='padding-left: 10px;'><%=quiz.getQuizName()%></span>
+				<%
+					}
 				%>
 			</div>
 			<div style="clear: both;"></div>
 		</div>
 		<div style="clear: both;"></div>
-	</div>
 	</div>
 </body>
 </html>
