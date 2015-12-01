@@ -9,12 +9,13 @@ public class Utilities {
 	static DataBase db = QuizSystem.getQuizSystem().db;
 	// Defines how many days ahead of current time is "recent" referring to in the system
 	protected static int daysOfRecent = 3;
+	
 	// ERROR method. Cannot call it all the time. Fixed in line 9.
 	public Utilities(){
 		QuizSystem sys = QuizSystem.getQuizSystem();
 		db = sys.db;
 	}
-	
+
 
 	/**
 	 * Get the top ten scored history items for a specific quiz
@@ -114,7 +115,7 @@ public class Utilities {
 	 * @throws SQLException
 	 */
 	public static ArrayList<String> getRecentQuizReviews(String quizID) throws SQLException{
-		
+
 		ArrayList<String> recentReviews = new ArrayList<String>();
 		String command = "SELECT * FROM Histories WHERE quizID = "+"\""+quizID+"\" ORDER BY end DESC;";
 		ResultSet rs = db.executeQuery(command);
@@ -151,14 +152,17 @@ public class Utilities {
 	}
 
 	/**
-	 * 
+	 * Get recent user Histories
+	 * TODO test
 	 * @param usrID
 	 * @return
 	 * @throws SQLException
 	 */
 	public static ArrayList<History> getRecentActivitiesOfUser(String usrID) throws SQLException{
 		ArrayList<History> recentActs = new ArrayList<History>();
-		String command = "SELECT * FROM Histories WHERE usrID = "+"\""+usrID+"\" ORDER BY end DESC;";
+		String currentTime = QuizSystem.generateCurrentTime();
+		String time = QuizSystem.minusDay(currentTime, daysOfRecent);
+		String command = "SELECT * FROM Histories WHERE end > \""+time+"\" AND usrID = \""+usrID+"\" ORDER BY end DESC;";
 		ResultSet rs = db.executeQuery(command);
 		ArrayList<String> qids = new ArrayList<String>();
 		ArrayList<String> endtimes = new ArrayList<String>();
@@ -173,6 +177,32 @@ public class Utilities {
 		return recentActs;
 	}
 
+	/**
+	 * Get recent user Histories
+	 * TODO test
+	 * @param usrID
+	 * @return
+	 * @throws SQLException
+	 */
+	public static ArrayList<History> getRecentActivitiesOfUser(String usrID, int daysRecent) throws SQLException{
+		ArrayList<History> recentActs = new ArrayList<History>();
+		String currentTime = QuizSystem.generateCurrentTime();
+		String time = QuizSystem.minusDay(currentTime, daysRecent);
+		String command = "SELECT * FROM Histories WHERE end > \""+time+"\" AND usrID = \""+usrID+"\" ORDER BY end DESC;";
+		ResultSet rs = db.executeQuery(command);
+		ArrayList<String> qids = new ArrayList<String>();
+		ArrayList<String> endtimes = new ArrayList<String>();
+		while(rs.next()){
+			qids.add(rs.getString("quizID"));
+			endtimes.add(rs.getString("end"));	
+		}
+		for(int i = 0; i<qids.size();i++){
+			History hist = new History(qids.get(i), usrID , endtimes.get(i));
+			recentActs.add(hist);
+		}
+		return recentActs;
+	}
+	
 	/**
 	 * Get quizzes recently created by specific user
 	 * @param usrID
@@ -194,8 +224,6 @@ public class Utilities {
 		return quizzes;
 	}
 
-	
-	
 	/**
 	 * Get recent achievements of specific user given his/her ID
 	 * @param usrID
@@ -307,19 +335,17 @@ public class Utilities {
 		}
 		return quizzes;	
 	}
-	
+
 	/**
 	 * Get recent created Quizzes
-	 * TODO revise to take into some parameter as recent time 
 	 * @return Arraylist of recent created quizzes in order from newest to oldest
 	 * @throws SQLException 
 	 */
 	static public ArrayList<Quiz> getRecentQuiz() throws SQLException{
 		String currentTime = QuizSystem.generateCurrentTime();
 		String time = QuizSystem.minusDay(currentTime, daysOfRecent);
-		
 		ArrayList<Quiz> recentquiz = new ArrayList<Quiz>();
-		String command = "Select quizID from Quizzes WHERE createTime > "+"\""+time+"\"Order by createTime;";
+		String command = "Select quizID from Quizzes WHERE createTime > "+"\""+time+"\" Order by createTime DESC;";
 		ResultSet rs = db.executeQuery(command);
 		ArrayList<String> qids = new ArrayList<String>();
 		while(rs.next()){
@@ -334,7 +360,6 @@ public class Utilities {
 
 	/**
 	 * Get recent created Quizzes, with specific days of recent defined
-	 * TODO revise to take into some parameter as recent time 
 	 * @return Arraylist of recent created quizzes in order from newest to oldest
 	 * @throws SQLException 
 	 */
@@ -353,8 +378,8 @@ public class Utilities {
 			recentquiz.add(q);
 		}
 		return recentquiz;	
-	}
-
+	}	
+	
 	/**
 	 * Get the top 5% of Quizzes in total played times 
 	 * @return
@@ -522,7 +547,7 @@ public class Utilities {
 		}
 		return score;
 	}
-	
+
 	/**
 	 * Returns list of unread messages of a user
 	 * @param user
@@ -560,7 +585,7 @@ public class Utilities {
 		return list;
 	}
 
-	
+
 	/**
 	 * Search and return an arraylist of quiz by quizID if there are any
 	 * @param str
@@ -569,7 +594,7 @@ public class Utilities {
 	public static ArrayList<String> searchQuizzes(String str){
 		ArrayList<String> list = new ArrayList<String>();
 		ResultSet rs = QuizSystem.db.executeQuery("Select quizID from Quizzes where quizID like \'%" + str+"%\';");
-//		System.out.println("Select quizID from Quizzes where quizID like \'%" + quizID+"%\';");
+		//		System.out.println("Select quizID from Quizzes where quizID like \'%" + quizID+"%\';");
 		try {
 			while(rs.next()){
 				list.add(rs.getString("quizID"));
@@ -601,7 +626,7 @@ public class Utilities {
 		}
 		return list;
 	}
-	
+
 	/**
 	 * Get the number of users in the system
 	 * @return
@@ -643,7 +668,7 @@ public class Utilities {
 		}
 		return num;
 	}
-	
+
 	static public void main(String[] args){
 		DataBase db = QuizSystem.getQuizSystem().db;
 
