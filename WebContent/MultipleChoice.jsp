@@ -15,6 +15,29 @@ if(questions != null){
 	System.out.println("question list passed");
 	request.getSession().setAttribute("QuestionList" , questions);
 }
+String[] result = request.getParameterValues("Quiz Name");
+String QuizName="";
+if (result != null && result.length != 0) {
+	QuizName = result[0];
+}
+
+String Description = "";
+result = request.getParameterValues("Description");
+if (result != null && result.length != 0) {
+	Description = result[0];
+}
+
+String Tags = "";
+result = request.getParameterValues("Tags");
+if (result != null && result.length != 0) {
+	Tags = result[0];
+}
+
+String Spec = "";
+result = request.getParameterValues("Spec");
+if (result != null && result.length != 0) {
+	Spec = result[0];
+}
 %>
 <form name="submitQuestion" method="POST" action="AddMCToDB.jsp">
 	Please enter the question here
@@ -62,13 +85,18 @@ if(questions != null){
 	please enter the solution here, if multiple choices are correct, seperate with","
 	<INPUT TYPE="TEXT" NAME="solution" value=""><BR>
 	<p><input type='button' onclick='removeInputBox(divIdName);updateName()' NAME= 'remove solution' value='remove Choice'/></p> 
-	<input type="hidden" name="SolutionCount" value="">
-
+	<input type="hidden" name="Quiz Name" value="<%=QuizName%>">
+	<input type="hidden" name="Description" value="<%=Description%>">
+	<input type="hidden" name="Tags" value="<%=Tags%>">
+	<input type="hidden" name="Spec" value="<%=Spec%>">
 	 <a href="javascript:document.submitQuestion.submit()">Finish</a>
 </form>
 <form name="cancel" method="POST" action="CreateQuiz.jsp">
-	<input type="hidden" name="QuestionList" value="">
-	 <a href="javascript:document.cancel.submit()">Cancel</a>
+	<input type="hidden" name="Quiz Name" value="<%=QuizName%>">
+	<input type="hidden" name="Description" value="<%=Description%>">
+	<input type="hidden" name="Tags" value="<%=Tags%>">
+	<input type="hidden" name="Spec" value="<%=Spec%>">
+	<a href="javascript:document.cancel.submit()">Cancel</a>
 </form>
 </body>
 </html>
