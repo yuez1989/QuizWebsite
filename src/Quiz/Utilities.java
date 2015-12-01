@@ -7,7 +7,8 @@ import java.util.*;
 public class Utilities {
 
 	static DataBase db = QuizSystem.getQuizSystem().db;
-
+	//TODO define recentTime in String 
+	protected String recentTime = "";
 	// ERROR method. Cannot call it all the time. Fixed in line 9.
 	public Utilities(){
 		QuizSystem sys = QuizSystem.getQuizSystem();
@@ -192,6 +193,8 @@ public class Utilities {
 		return quizzes;
 	}
 
+	
+	
 	/**
 	 * Get recent achievements of specific user given his/her ID
 	 * @param usrID
@@ -295,13 +298,36 @@ public class Utilities {
 	}
 
 	/**
+	 * Get all quizzes 
+	 * @param usrID
+	 * @return Arraylist of quizzes
+	 * @throws SQLException
+	 */
+	public static ArrayList<Quiz> getAllQuizzes() throws SQLException{
+		ArrayList<Quiz> quizzes = new ArrayList<Quiz>();
+		String command = "Select quizID from Quizzes Order by createTime;";
+		ResultSet rs = db.executeQuery(command);
+		ArrayList<String> qids = new ArrayList<String>();
+		while(rs.next()){
+			qids.add(rs.getString("quizID"));
+		}
+		for(int i = 0; i<qids.size();i++){
+			Quiz q = new Quiz(qids.get(i));
+			quizzes.add(q);
+		}
+		return quizzes;	
+	}
+	
+	/**
 	 * Get recent created Quizzes
+	 * TODO revise to take into some parameter as recent time 
 	 * @return Arraylist of recent created quizzes in order from newest to oldest
 	 * @throws SQLException 
 	 */
-	static public ArrayList<Quiz> getRecentQuiz() throws SQLException{
+	static public ArrayList<Quiz> getRecentQuiz(String time) throws SQLException{
 		ArrayList<Quiz> recentquiz = new ArrayList<Quiz>();
-		String command = "Select quizID from Quizzes Order by createTime;";
+		String command = "Select quizID from Quizzes WHERE createTime > "+"\""+time+"\"Order by createTime;";
+//		String command = "Select quizID from Quizzes WHERE createTime > "+"\""+recentTime+"\"Order by createTime;";
 		ResultSet rs = db.executeQuery(command);
 		ArrayList<String> qids = new ArrayList<String>();
 		while(rs.next()){
@@ -500,9 +526,14 @@ public class Utilities {
 		return newmsgs;
 	}
 
+	/**
+	 * Get the account IDs given the partial string of desired user ID
+	 * @param usrID
+	 * @return
+	 */
 	public static ArrayList<String> searchAccounts(String usrID){
 		ArrayList<String> list = new ArrayList<String>();
-		ResultSet rs = QuizSystem.db.executeQuery("Select usrID from Users where usrID like \'%" + usrID +"%\';");
+		ResultSet rs = QuizSystem.db.executeQuery("Select usrID from Users where usrID like \'%" + usrID+"%\';");
 
 		try {
 			while(rs.next()){
@@ -514,16 +545,16 @@ public class Utilities {
 		return list;
 	}
 
+	
 	/**
 	 * Search and return an arraylist of quiz by quizID if there are any
-	 * @param quizID
-	 * @return quizID
+	 * @param str
+	 * @return
 	 */
-	public static ArrayList<String> searchQuizzes(String quizID){
+	public static ArrayList<String> searchQuizzes(String str){
 		ArrayList<String> list = new ArrayList<String>();
-		ResultSet rs = QuizSystem.db.executeQuery("Select quizID from Quizzes where quizID like \'%" + quizID+"%\';");
-		System.out.println("Select quizID from Quizzes where quizID like \'%" + quizID+"%\';");
-
+		ResultSet rs = QuizSystem.db.executeQuery("Select quizID from Quizzes where quizID like \'%" + str+"%\';");
+//		System.out.println("Select quizID from Quizzes where quizID like \'%" + quizID+"%\';");
 		try {
 			while(rs.next()){
 				list.add(rs.getString("quizID"));
@@ -535,13 +566,13 @@ public class Utilities {
 	}
 
 	/**
-	 * Search and return an arraylist of quiz by quiz name if there are any
-	 * @param quizID
+	 * Search and return an arraylist of quizID and quiz name, divided by ## by quiz name if there are any
+	 * @param string
 	 * @return
 	 */
-	public static ArrayList<String> searchQuizzesByName(String quizName){
+	public static ArrayList<String> searchQuizzesByName(String string){
 		ArrayList<String> list = new ArrayList<String>();
-		ResultSet rs = QuizSystem.db.executeQuery("Select quizID, name from Quizzes where name like \'%" + quizName+"%\';");
+		ResultSet rs = QuizSystem.db.executeQuery("Select quizID, name from Quizzes where name like \'%" + string+"%\';");
 		try {
 			while(rs.next()){
 				String str = "";
@@ -597,7 +628,6 @@ public class Utilities {
 		}
 		return num;
 	}
-
 	
 	static public void main(String[] args){
 		DataBase db = QuizSystem.getQuizSystem().db;
