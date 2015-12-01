@@ -7,7 +7,8 @@ import java.util.*;
 public class Utilities {
 
 	static DataBase db = QuizSystem.getQuizSystem().db;
-
+	//TODO define recentTime in String 
+	protected String recentTime = "";
 	// ERROR method. Cannot call it all the time. Fixed in line 9.
 	public Utilities(){
 		QuizSystem sys = QuizSystem.getQuizSystem();
@@ -192,6 +193,8 @@ public class Utilities {
 		return quizzes;
 	}
 
+	
+	
 	/**
 	 * Get recent achievements of specific user given his/her ID
 	 * @param usrID
@@ -295,13 +298,36 @@ public class Utilities {
 	}
 
 	/**
+	 * Get all quizzes 
+	 * @param usrID
+	 * @return Arraylist of quizzes
+	 * @throws SQLException
+	 */
+	public static ArrayList<Quiz> getAllQuizzes() throws SQLException{
+		ArrayList<Quiz> quizzes = new ArrayList<Quiz>();
+		String command = "Select quizID from Quizzes Order by createTime;";
+		ResultSet rs = db.executeQuery(command);
+		ArrayList<String> qids = new ArrayList<String>();
+		while(rs.next()){
+			qids.add(rs.getString("quizID"));
+		}
+		for(int i = 0; i<qids.size();i++){
+			Quiz q = new Quiz(qids.get(i));
+			quizzes.add(q);
+		}
+		return quizzes;	
+	}
+	
+	/**
 	 * Get recent created Quizzes
+	 * TODO revise to take into some parameter as recent time 
 	 * @return Arraylist of recent created quizzes in order from newest to oldest
 	 * @throws SQLException 
 	 */
-	static public ArrayList<Quiz> getRecentQuiz() throws SQLException{
+	static public ArrayList<Quiz> getRecentQuiz(String time) throws SQLException{
 		ArrayList<Quiz> recentquiz = new ArrayList<Quiz>();
-		String command = "Select quizID from Quizzes Order by createTime;";
+		String command = "Select quizID from Quizzes WHERE createTime > "+"\""+time+"\"Order by createTime;";
+//		String command = "Select quizID from Quizzes WHERE createTime > "+"\""+recentTime+"\"Order by createTime;";
 		ResultSet rs = db.executeQuery(command);
 		ArrayList<String> qids = new ArrayList<String>();
 		while(rs.next()){
