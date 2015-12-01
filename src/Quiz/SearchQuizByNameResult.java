@@ -50,7 +50,8 @@ public class SearchQuizByNameResult extends HttpServlet {
 			for(String str:list){
 				String[] spice = str.split("##");
 				String quizurl = spice[0];
-				out.println("<li><a href = \'Quiz.jsp?quizID="+quizurl+"\'>"+str+"</a></li>");
+				String genstr = spice[0]+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+spice[1];
+				out.println("<li><a href = \'QuizHomePage.jsp?quizID="+quizurl+"\'>"+genstr+"</a></li>");
 			}
 			out.print("</ul>");
 		}
