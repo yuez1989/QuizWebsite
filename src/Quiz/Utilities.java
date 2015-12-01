@@ -7,8 +7,8 @@ import java.util.*;
 public class Utilities {
 
 	static DataBase db = QuizSystem.getQuizSystem().db;
-	//TODO define recentTime in String 
-	protected String recentTime = "";
+	// Defines how many days ahead of current time is "recent" referring to in the system
+	protected static int daysOfRecent = 3;
 	// ERROR method. Cannot call it all the time. Fixed in line 9.
 	public Utilities(){
 		QuizSystem sys = QuizSystem.getQuizSystem();
@@ -114,6 +114,7 @@ public class Utilities {
 	 * @throws SQLException
 	 */
 	public static ArrayList<String> getRecentQuizReviews(String quizID) throws SQLException{
+		
 		ArrayList<String> recentReviews = new ArrayList<String>();
 		String command = "SELECT * FROM Histories WHERE quizID = "+"\""+quizID+"\" ORDER BY end DESC;";
 		ResultSet rs = db.executeQuery(command);
@@ -199,32 +200,21 @@ public class Utilities {
 	 * Get recent achievements of specific user given his/her ID
 	 * @param usrID
 	 * @return Arraylist of achievement ID
+	 * @throws SQLException 
 	 */
-	public static ArrayList<String> getRecentAchievements(String usrID){
-		//		ArrayList<String> ach = new ArrayList<String>();
+	public static ArrayList<AchievementRecord> getRecentAchievements(String usrID) throws SQLException{
+		ArrayList<AchievementRecord> achRecs = new ArrayList<AchievementRecord>();
+		ArrayList<String> achIDs = new ArrayList<String>();
 		String command = "SELECT * FROM AchievementRecords WHERE usrID = "+"\""+usrID+"\" ORDER BY time DESC;";
 		ResultSet rs1 = db.executeQuery(command);
-		ArrayList<String> achID = new ArrayList<String>();
-		try {
-			while(rs1.next()){
-				achID.add(rs1.getString("achID"));
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
+		while(rs1.next()){
+			achIDs.add(rs1.getString("achID"));
 		}
-		//		for(String achID1 : achID){
-		//			String cmd = "SELECT * FROM Achievements WHERE achID = "+"\""+achID1+"\" ;";
-		//			ResultSet rs2 = db.executeQuery(cmd);
-		//			try {
-		//				if(rs2.next()){
-		//					ach.add(rs2.getString("description"));
-		//				}
-		//			} catch (SQLException e) {
-		//				e.printStackTrace();
-		//			}
-		//
-		//		}
-		return achID;
+		for(String achID : achIDs){
+			AchievementRecord AR = new AchievementRecord(usrID, achID);
+			achRecs.add(AR);
+		}
+		return achRecs;
 	}
 
 	/**
@@ -324,10 +314,12 @@ public class Utilities {
 	 * @return Arraylist of recent created quizzes in order from newest to oldest
 	 * @throws SQLException 
 	 */
-	static public ArrayList<Quiz> getRecentQuiz(String time) throws SQLException{
+	static public ArrayList<Quiz> getRecentQuiz() throws SQLException{
+		String currentTime = QuizSystem.generateCurrentTime();
+		String time = QuizSystem.minusDay(currentTime, daysOfRecent);
+		
 		ArrayList<Quiz> recentquiz = new ArrayList<Quiz>();
 		String command = "Select quizID from Quizzes WHERE createTime > "+"\""+time+"\"Order by createTime;";
-//		String command = "Select quizID from Quizzes WHERE createTime > "+"\""+recentTime+"\"Order by createTime;";
 		ResultSet rs = db.executeQuery(command);
 		ArrayList<String> qids = new ArrayList<String>();
 		while(rs.next()){
