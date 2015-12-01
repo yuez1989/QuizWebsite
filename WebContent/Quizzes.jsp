@@ -35,7 +35,7 @@
 		ArrayList<Quiz> quizzes = Utilities.getRecentQuiz();
 		for (Quiz quiz : quizzes) {
 	%>
-	<div><%= quiz.getQuizID() %></div>
+	<div style="margin-top:60px; margin-left:20%;"><%= quiz.getQuizID() %></div>
 	<%
 			
 		}

@@ -16,7 +16,7 @@ import java.util.*;
  * 
  * 
  */
-public class Quiz {
+public class Quiz implements Comparable {
 	// quiz info variables
 	protected String quizID; //user could supply
 	protected String quizName; //user could supply
@@ -349,6 +349,16 @@ public class Quiz {
 		db.executeUpdate(cmd);
 		cmd = "DELETE FROM Quizzes WHERE quizID = \""+id+"\";";
 		db.executeUpdate(cmd);
+	}
+
+	@Override
+	public int compareTo(Object o) {
+		Date timeDate = QuizSystem.convertToDate(updateTime);
+		if (o instanceof Quiz) {
+			Date otherDate = QuizSystem.convertToDate(((Quiz)o).updateTime);
+			return -timeDate.compareTo(otherDate);
+		}
+		return 0;
 	}
 
 }

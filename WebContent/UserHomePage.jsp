@@ -138,6 +138,7 @@
 				<div class="create-quiz-button">
 					<form method="POST" action="Quiz.jsp" target="_blank">
 						<input type="search" name = "quizID" value="xinhuiwu2015-11-18 16:19:13">
+						<br>
 						<input type="submit" value="Search Quiz">
 					</form>
 				</div>
@@ -160,7 +161,10 @@
 					<%
 						Calendar cal = new GregorianCalendar();
 						boolean hasRecent = false;
+						int counter = 0;
 						for (History hist : histories) {
+							counter++;
+							if (counter == 10) break;
 							// calculate a date of 3 days ago
 							Date endDate = QuizSystem.convertToDate(hist.end);
 							Date threeDaysAgo = QuizSystem.convertToDate(QuizSystem.minusDay(hist.end, 3));
@@ -208,7 +212,10 @@
 					if (frdHistories.size() == 0) {
 						out.println("No friend activities; Add more friend!");
 					}
+					int counterHist = 0;
 					for (History hist : frdHistories) {
+						counterHist++;
+						if (counterHist > 20) break;
 						Quiz quiz = new Quiz(hist.quizID);
 						String input = hist.usrID + " took quiz " + quiz.getQuizName() + " at " + hist.end + ", scoring "
 								+ hist.score + ". Review: " + hist.review + ". Rating: " + hist.rating + ".";
@@ -219,7 +226,17 @@
 			<div>
 				<div class="column-name">Quizzes Created</div>
 				<%
-					
+					ArrayList<Quiz> recentCreatedQuizzesFrd = new ArrayList<Quiz>();
+					for (String frdID : frdIDs) {
+						ArrayList<Quiz> recents = Utilities.getRecentCreatedQuiz(frdID);
+						recentCreatedQuizzesFrd.addAll(recents);
+					}
+					Collections.sort(recentCreatedQuizzesFrd);
+					for (Quiz quiz : recentCreatedQuizzesFrd) {		
+				%>
+					<span class='news-feed'><%=quiz.getQuizName()%></span>
+				<% 
+					}
 				%>
 			</div>
 			<div>
