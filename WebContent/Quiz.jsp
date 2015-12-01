@@ -111,11 +111,6 @@
 		<input type="submit" class='total_submit'/>
 		
 	</form>
-	
-	<form name='challengeForm' action = "MsgWrite.jsp" method="post">
-		<input type="hidden" name="quizID" value="<%=quiz.getQuizID()%>">
-		<a href="javascript:document.challengeForm.submit()">Challenge your friend!</a>
-	</form>
 <%		
 		
 	}

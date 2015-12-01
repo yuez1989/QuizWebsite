@@ -43,7 +43,6 @@
 		}
 		*/
 		
-	
 		UserInfo info = user.info;
 		ArrayList<Message> unreadMsg = Utilities.unreadMessages(user);
 		ArrayList<History> histories = Utilities.getRecentActivitiesOfUser(usrID);
@@ -120,6 +119,7 @@
 			</div>
 			<div class="news-feed">Setting</div>
 			<div class="news-feed">Administration Settings</div>
+			<div><input type="submit" value="Create New Quiz"></input></div>
 			<div class="uhp-user-inner">
 				<div>
 					<span class="section-name">Achievements </span>

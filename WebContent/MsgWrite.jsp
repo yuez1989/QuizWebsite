@@ -33,12 +33,10 @@
 	window.onload = function() {
 		if (document.getElementById("challenge-indicator").innerHTML == "NO") { // not challenge mode
 			document.getElementById("challenge-radio").disabled = true;
-		}	
-		else { // challenge mode
+		} else { // challenge mode
 			document.getElementById("friend-radio").disabled = true;
 			document.getElementById("text-radio").disabled = true;
 			document.getElementById("challenge-radio").checked = true;
-			document.getElementById("msg-content").innerHTML = "Hi! I would like to challenge you on the quiz I have just taken.";
 		}
 	};
 </script>
@@ -47,35 +45,39 @@
 	<%
 		User user = new User(usrID);
 		UserInfo info = user.info;
-		
+
 		String quizID = request.getParameter("quizID");
 		// Let javascript control what options are grayed
 		if (quizID == null) { // see if a valid quizID is passed here
 			out.println("<div id='challenge-indicator' style='display:none;'>NO</div>");
-		}
-		else {
+		} else {
 			out.println("<div id='challenge-indicator' style='display:none;'>YES</div>");
 		}
 	%>
 	<div class="msg-write-box">
 		<div class="msg-write-header">Write a New Message</div>
 		<div class="msg-write-container">
-			<form action="MsgSend.jsp" method="POST">
-				<input type="hidden" name="fromID" value="<%=usrID%>"> 
+			<form name="submitMsgForm" action="MsgSend.jsp" method="POST">
+				<input type="hidden" name="fromID" value="<%=usrID%>">
 				<input type="hidden" name="quizID" value="<%=quizID%>">
-				<input
-					class="msg-write-input" type="text" name="toID"
-					placeholder="Enter Receiver ID">
+				<input class="msg-write-input" type="text" name="toID" placeholder="Enter Receiver ID">
 				<div class="msg-write-input">
-					<input id="friend-radio" type="radio" name="type" value="f">&nbsp;Friend Request&nbsp;&nbsp; 
-					<input id="challenge-radio" type="radio" name="type" value="c">&nbsp;Challenge&nbsp;&nbsp; 
-					<input id="text-radio" type="radio" name="type" value="t">&nbsp;Pure Text&nbsp;&nbsp;
+					<input id="friend-radio" type="radio" name="type" value="f">&nbsp;Friend
+					Request&nbsp;&nbsp; <input id="challenge-radio" type="radio"
+						name="type" value="c">&nbsp;Challenge&nbsp;&nbsp; <input
+						id="text-radio" type="radio" name="type" value="t">&nbsp;Pure
+					Text&nbsp;&nbsp;
 				</div>
-				<textarea id="msg-content" class="msg-write-input" name="msg" cols="50" rows="10"
-					placeholder="Enter text content."></textarea>
-				<br>
-				<br> <input type="submit" value="Send"> <input
-					type="reset" value="Reset">
+				<%
+					String placeText = "Enter text content.";
+					if (quizID != null) {
+						placeText = "Hi! I would like to challenge you on the quiz I have just taken. My best score is: " + Utilities.getHighScoreOfUserInQuiz(quizID, usrID) + " The address of this Quiz: Quiz.jsp?quizID=" + quizID;
+					}
+				%>
+				<textarea id="msg-content" class="msg-write-input" name="msg" cols="50" rows="10"><%=placeText%></textarea>
+				<br> <br> 
+				<input type="submit" value="Send">
+				<input type="reset" value="Reset">
 			</form>
 		</div>
 	</div>

@@ -37,17 +37,10 @@
 		String toID = request.getParameter("toID");
 		String type = request.getParameter("type");
 		String quizID = request.getParameter("quizID");
-		String msg = "";
-		if (quizID != null && type.equals("c")) { //store quizID into the message
-			double bestScoreOfFriend = Utilities.getHighScoreOfUserInQuiz(usrID, quizID);
-			msg = "Hi! I would like to challenge you on the quiz I have just taken. My best score is: " + bestScoreOfFriend + " The address of this Quiz: Quiz.jsp?quizID="+ request.getParameter("quizID");
-		}
-		else {
-			msg = request.getParameter("msg");
-		}
+		String msg = request.getParameter("msg");
 		Message message = new Message(fromID, toID, msg, type);
 		message.saveToDB();
-		response.setHeader("Refresh", "3;Messages.jsp");
+		response.setHeader("Refresh", "2;Messages.jsp");
 	%>
 </body>
 </html>
