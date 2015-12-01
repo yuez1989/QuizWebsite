@@ -41,7 +41,7 @@ public class Quiz implements Comparable {
 	static DataBase db = DataBase.getDataBase();
 
 	/**
-	 * Constructor when created by a user
+	 * Constructor - when initialize an empty quiz
 	 */
 	public Quiz() {
 		this.quizID= "";		
@@ -57,6 +57,9 @@ public class Quiz implements Comparable {
 		this.rankList = new ArrayList<String>();
 	}
 	
+	/**
+	 * Constructor - when quiz is created by a user
+	 */
 	public Quiz(String name, String descrip, String creator,
 				ArrayList<String> tags, ArrayList<Question> questions, 
 				String spec) throws SQLException {	
@@ -80,13 +83,8 @@ public class Quiz implements Comparable {
 		 }
 		
 	}
-
-
-	
-	
 	/**
-	 * constructor from database
-	 * 
+	 * Constructor - when get a quiz from database
 	 * @throws SQLException
 	 */
 	public Quiz(String quizID) throws SQLException {
@@ -315,7 +313,7 @@ public class Quiz implements Comparable {
 		updateTags(tags);
 		updateQuestions(questions);
 	}
-	//randomlize question order
+	//Randomize question order
 	public void shuffleQuestion(){
 		Collections.shuffle(questions);
 	}
