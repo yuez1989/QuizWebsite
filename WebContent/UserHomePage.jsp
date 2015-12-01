@@ -47,7 +47,6 @@
 		ArrayList<History> histories = Utilities.getRecentActivitiesOfUser(usrID);
 		ArrayList<History> frdHistories = Utilities.getRecentFriendActivities(usrID);
 		ArrayList<Quiz> popQuizzes = Utilities.getPopularQuiz();
-		String recent = QuizSystem.minusDay(QuizSystem.generateCurrentTime(), 3);
 	%>
 	<div class="header-line">
 		<div class="logo-header">
@@ -185,6 +184,9 @@
 					<span class="section-name">Recent Creation</span>
 					<%
 						ArrayList<Quiz> createSelf = Utilities.getRecentCreatedQuiz(usrID);
+						if (createSelf.size() == 0) {
+							out.println("<span class='column-indent'>You did not created any quizzes yet.</span>");
+						}
 						for (Quiz quiz : createSelf) {
 					%>
 						<span class='column-indent'><%=quiz.getQuizName()%></span>
@@ -253,7 +255,7 @@
 				<%
 					ArrayList<AchievementRecord> achrFrd = new ArrayList<AchievementRecord>();
 					for (String frdID : frdIDs) {
-						ArrayList<AchievementRecord> recents = new ArrayList<AchievementRecord>();
+						ArrayList<AchievementRecord> recents = Utilities.getRecentAchievements(frdID);
 						achrFrd.addAll(recents);
 					}
 					Collections.sort(achrFrd);
@@ -283,10 +285,12 @@
 				%>
 			</div>
 			<div>
-				<div class="column-name">Recently Created Quizzes(in Public)</div>
+				<div class="column-name">Recently Created Quizzes (in Public)</div>
 				<%
-					ArrayList<Quiz> recentQuizzesPublic = Utilities.getRecentQuiz(recent);
+					ArrayList<Quiz> recentQuizzesPublic = Utilities.getRecentQuiz();
+					Collections.sort(recentQuizzesPublic);
 					for (Quiz quiz : recentQuizzesPublic) {
+						//Quiz quiz = recentQuizzesPublic.get(i);
 				%>
 					<span style='padding-left: 10px;'><%=quiz.getQuizName()%></span>
 				<%
