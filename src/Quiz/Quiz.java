@@ -42,7 +42,7 @@ public class Quiz implements Comparable {
 
 	/**
 	 * Constructor - when initialize an empty quiz
-	 * /
+	 */
 	public Quiz() {
 		this.quizID= "";		
 		this.quizName = "";
