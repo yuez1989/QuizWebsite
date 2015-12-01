@@ -221,7 +221,7 @@
 				<div class="column-name">Quizzes Taken</div>
 				<%
 					if (frdHistories.size() == 0) {
-						out.println("No friend activities; Add more friend!");
+						out.println("No recent friend activities; Add more friend!");
 					}
 					int counterHist = 0;
 					for (History hist : frdHistories) {
