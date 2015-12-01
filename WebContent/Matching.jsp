@@ -15,6 +15,29 @@ if(questions != null){
 	System.out.println("question list passed");
 	request.getSession().setAttribute("QuestionList" , questions);
 }
+String[] result = request.getParameterValues("Quiz Name");
+String QuizName="";
+if (result != null && result.length != 0) {
+	QuizName = result[0];
+}
+
+String Description = "";
+result = request.getParameterValues("Description");
+if (result != null && result.length != 0) {
+	Description = result[0];
+}
+
+String Tags = "";
+result = request.getParameterValues("Tags");
+if (result != null && result.length != 0) {
+	Tags = result[0];
+}
+
+String Spec = "";
+result = request.getParameterValues("Spec");
+if (result != null && result.length != 0) {
+	Spec = result[0];
+}
 %>
 <form name="submitQuestion" method="POST" action="AddMatchToDB.jsp">
 	Please enter the question here
@@ -142,7 +165,11 @@ if(questions != null){
 	
 	</script>
 	
-	<p><input type='button' onclick='removeInputBox2(divIdName2);updateName2()' NAME= 'Remove Left Solution' value='Remove Left Solution'/></p> 
+	<p><input type='button' onclick='removeInputBox2(divIdName2);updateName2()' NAME= 'Remove Left Solution' value='Remove Left Solution'/></p>
+	<input type="hidden" name="Quiz Name" value="<%=QuizName%>">
+	<input type="hidden" name="Description" value="<%=Description%>">
+	<input type="hidden" name="Tags" value="<%=Tags%>"> 
+	<input type="hidden" name="Spec" value="<%=Spec%>">
 	<a href="javascript:document.submitQuestion.submit()">Finish</a>
 </form>
 <%
@@ -150,7 +177,10 @@ if(questions != null){
 //	System.out.println("in free response, problem list is: "+probList);
 	%>
 <form name="cancel" method="POST" action="CreateQuiz.jsp">
-	<input type="hidden" name="QuestionList" value="">
+	<input type="hidden" name="Quiz Name" value="<%=QuizName%>">
+	<input type="hidden" name="Description" value="<%=Description%>">
+	<input type="hidden" name="Tags" value="<%=Tags%>">
+	<input type="hidden" name="Spec" value="<%=Spec%>">
 	 <a href="javascript:document.cancel.submit()">Cancel</a>
 </form>
 </body>
