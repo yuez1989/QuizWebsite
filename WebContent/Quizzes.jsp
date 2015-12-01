@@ -32,7 +32,7 @@
 </head>
 <body>
 	<%
-		ArrayList<Quiz> quizzes = Utilities.getRecentQuiz();
+		ArrayList<Quiz> quizzes = Utilities.getAllQuizzes();
 		for (Quiz quiz : quizzes) {
 	%>
 	<div style="margin-top:60px; margin-left:20%;"><%= quiz.getQuizID() %></div>

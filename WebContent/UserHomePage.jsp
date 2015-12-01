@@ -264,7 +264,7 @@
 				%>
 			</div>
 			<div>
-				<div class="column-name">Recently Created Quizzes</div>
+				<div class="column-name">Recently Created Quizzes(in Public)</div>
 				<%
 					
 				%>
