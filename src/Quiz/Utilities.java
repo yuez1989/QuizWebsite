@@ -730,19 +730,16 @@ public class Utilities {
 	}
 
 	/**
-	 * return how many quizzes a user has played, except for one specific quiz
-	 * @param quizID
+	 * Check whether a specific user has already got a specific achievement
+	 * @param achID
+	 * @param usrID
 	 * @return
-	 * @throws SQLException 
+	 * @throws SQLException
 	 */
-	public static int getQuizNumberPlayed(String usrID, String quizID) throws SQLException{
-		int count = 0;
+	public static boolean hasAchievement(String achID, String usrID) throws SQLException{
 		DataBase db = QuizSystem.getQuizSystem().db;
-		ResultSet rsCount = db.executeQuery("SELECT COUNT(distinct quizID) FROM Histories where quizID <> \"" +quizID+ "\" AND usrID =  \'" + usrID+"\' ;");
-		if(rsCount.next()){
-			count = rsCount.getInt(1);
-		}
-		return count;
+		ResultSet rs = db.executeQuery("SELECT * FROM AchievementRecords usrID = \""+usrID+"\" AND achID = "+"\""+achID+"\";");
+		return rs.next();
 	}
 
 	/**
