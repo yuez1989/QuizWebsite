@@ -142,6 +142,42 @@ public class Utilities {
 	}
 
 	/**
+	 * Get recent announcement of a specific quiz
+	 * @param quizID
+	 * @return
+	 * @throws SQLException
+	 */
+	public static ArrayList<String> getRecentAnnouncements() throws SQLException{
+		String currentTime = QuizSystem.generateCurrentTime();
+		String time = QuizSystem.minusDay(currentTime, days_of_recent);
+		ArrayList<String> recentAnnouncements = new ArrayList<String>();
+		String command = "SELECT * FROM Announcements WHERE time > \""+time+"\" ORDER BY end DESC;";
+		ResultSet rs = db.executeQuery(command);
+		while(rs.next()){
+			recentAnnouncements.add(rs.getString("content"));
+		}
+		return recentAnnouncements;
+	}
+	
+	/**
+	 * Get recent announcement of a specific quiz, with recent number of days specified as daysRecent
+	 * @param quizID
+	 * @return
+	 * @throws SQLException
+	 */
+	public static ArrayList<String> getRecentAnnouncements(int daysRecent) throws SQLException{
+		String currentTime = QuizSystem.generateCurrentTime();
+		String time = QuizSystem.minusDay(currentTime, daysRecent);
+		ArrayList<String> recentAnnouncements = new ArrayList<String>();
+		String command = "SELECT * FROM Announcements WHERE time > \""+time+"\" ORDER BY end DESC;";
+		ResultSet rs = db.executeQuery(command);
+		while(rs.next()){
+			recentAnnouncements.add(rs.getString("content"));
+		}
+		return recentAnnouncements;
+	}
+
+	/**
 	 * Get recent review of a specific quiz
 	 * @param quizID
 	 * @return
