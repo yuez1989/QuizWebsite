@@ -31,7 +31,7 @@
 	}else if(Question.TYPE_MULTIPLECHOICE.equals(q.getType())){
 		ArrayList<String> ans = new ArrayList<String>();
 
-			char ch =(char)((int)(request.getParameter("q"+count+"ans").charAt(0) - '1')+'A');
+			char ch =request.getParameter("q"+count+"ans1").charAt(0);
 			ans.add(Character.toString(ch));
 			
 			out.print(q.grade(ans));
@@ -41,10 +41,13 @@
 		ArrayList<String> optionsleft = q.parseOptionleft();
 		ArrayList<String> ans = new ArrayList<String>();
 		int optcnt=1;
+		System.out.println("This is the solution for director*****");
+		System.out.println(q.getSol());
 		for(String opt: optionsleft){
 			if(!request.getParameter("q"+count+"ans"+optcnt).isEmpty()){
-			char ch =(char)((int)(request.getParameter("q"+count+"ans"+optcnt).charAt(0) - '1')+'A');
+			char ch =(request.getParameter("q"+count+"ans"+optcnt).charAt(0));
 			ans.add(Character.toString(ch));
+			System.out.println(ans);
 			optcnt++;
 			}
 		}
@@ -69,6 +72,7 @@
 	} 
   	History hst = new History(quizID, usrID, "Regular", startTime, endTime, grade, request.getParameter("review"),rating) ;
 	hst.saveToDB(); 
+	
 	
 	//get number of histories of current user ID and check what achievement is available
 	//***************TODO: check and complete******************

@@ -9,8 +9,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%
 	//Quiz quiz = new Quiz(request.getParameter("quizID"));
-	Quiz quiz = new Quiz("xinhuiwu2015-11-18 16:19:13");
-
+	//Quiz quiz = new Quiz("xinhuiwu2015-11-18 16:19:13");
+	Quiz quiz = new Quiz("xiaotihu2015-11-23 19:12:15");
 	String startTime = QuizSystem.generateCurrentTime();
 	if(quiz.isRandom()){
 		quiz.shuffleQuestion();
@@ -49,10 +49,11 @@
 					int optcnt = 0;
 					for(String opt: options){
 						optcnt++;
+						char chopt =(char)( 'A'+optcnt - 1);
 						if(optcnt == 1){
-							out.print("<input type=\'radio\' name = \'q"+count+"ans\' value = \'"+optcnt+"\' checked=\'checked\'>"+opt+"</input>");							
+							out.print("<input type=\'radio\' name = \'q"+count+"ans1\' value = \'"+chopt+"\' checked=\'checked\'>"+opt+"</input>");							
 						}else{
-							out.print("<input type=\'radio\' name = \'q"+count+"ans\' value = \'"+optcnt+"\'>"+opt+"</input>");							
+							out.print("<input type=\'radio\' name = \'q"+count+"ans1\' value = \'"+chopt+"\'>"+opt+"</input>");							
 						}
 					}
 				}else if(Question.TYPE_MATCHING.equals(q.getType())){
