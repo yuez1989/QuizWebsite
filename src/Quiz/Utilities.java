@@ -130,6 +130,18 @@ public class Utilities {
 	}
 
 	/**
+	 * Given two user IDs, check if these two users are friends
+	 * @param usr1
+	 * @param usr2
+	 * @return
+	 * @throws SQLException 
+	 */
+	public static boolean isFriend(String usr1, String usr2) throws SQLException{
+		ArrayList<String> friendList = getFriendList(usr1);
+		return friendList.contains(usr2);
+	}
+
+	/**
 	 * Get recent review of a specific quiz
 	 * @param quizID
 	 * @return
