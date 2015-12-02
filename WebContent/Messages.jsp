@@ -33,6 +33,7 @@
 <body>
 	<%
 		User user = new User(usrID);
+		user.info.update();
 		UserInfo info = user.info;
 		ArrayList<Message> msgs = info.messages;
 		Collections.sort(msgs);
@@ -54,6 +55,8 @@
 					<%
 						for (int i = 0; i < msgs.size(); i++) {
 							Message msg = msgs.get(i);
+							// Remove all the messages the user sent -- we cannot see them
+							if (!msg.toID.equals(usrID)) continue;
 							// Translate type
 							String typeText = "";
 							char typeCh = msg.type.charAt(0);
@@ -84,8 +87,22 @@
 							out.println("<td><a href='MsgRead.jsp?fromID=" + msg.fromID + 
 									"&toID=" + msg.toID + "&time=" + msg.time + " 'target='_blank'>" + readText + "</a></td>");
 							//<a href = "QuizHomePage.jsp?quizID=xiaotihu2015-11-23 19:12:15">Quiz HomePage</a
-							out.println("<td>"); // COME BACK HERE! FOR DELETING MESSAGE
-							out.println("</form></td>");
+							out.println("<td>"); // COME BACK HERE! FOR DELETING MESSAGE 
+							String formName = "DeleteMsgForm" + i;
+							String formHrefName = "javascript:document." + formName + ".submit()";
+							String msgTime = msg.time.replaceAll("\\s+","");
+							System.out.println("msgTime:" + msgTime);
+							%>
+							
+					<form name=<%=formName%> method="POST" action="MsgDelete.jsp">
+						<input type="hidden" name="fromIDDelete" value=<%=msg.fromID%>>
+						<input type="hidden" name="toIDDelete" value=<%=msg.toID%>>
+						<input type="hidden" name="timeDelete" value=<%=msgTime%>>
+						<a href=<%=formHrefName%>>Delete this message</a>
+					</form>
+				
+					<%							
+							out.println("</td>");
 							out.println("</tr>");
 						}
 					%>
@@ -98,11 +115,8 @@
 				<div class="msg-write">
 					<a href="MsgWrite.jsp" target="_blank">Write A New Message</a>
 				</div>
-				<div class="msg-delete-selected">
-					Delete selected Messages
-				</div>
 				<div class="msg-delete-all">
-					Delete all Messages
+					<a href="MsgDeleteAll.jsp">Delete All Messages (USE WITH CAUTION!)</a>
 				</div>
 			</div>
 		</div>

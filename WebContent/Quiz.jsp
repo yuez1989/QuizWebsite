@@ -9,9 +9,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%
 
-//Quiz quiz = new Quiz(request.getParameter("quizID"));
-Quiz quiz = new Quiz("xinhuiwu2015-11-18 16:19:13");
-session.setAttribute("user","xiaotihu");
+Quiz quiz = new Quiz(request.getParameter("quizID"));
+//Quiz quiz = new Quiz("xinhuiwu2015-11-18 16:19:13");
+//session.setAttribute("user","xiaotihu");
 //Quiz quiz = new Quiz("xiaotihu2015-11-23 19:12:15");
 String startTime = QuizSystem.generateCurrentTime();
 /* if(quiz.isRandom()){

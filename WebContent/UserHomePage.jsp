@@ -25,8 +25,10 @@
 	String usrID = "default";
 	if (!session.isNew()) {
 		usrID = (String) session.getAttribute("user");
-		if (usrID == null)
+		if (usrID == null) {
 			usrID = "default";
+			response.setHeader("Refresh", "0;index.jsp");
+		}		
 	}
 	out.println(usrID);
 %>
@@ -50,7 +52,7 @@
 	%>
 	<div class="header-line">
 		<div class="logo-header">
-			<div class="logo-header-large">Quizzzz</div>
+			<div class="logo-header-large"><a href="UserHomePage.jsp">Quizzzz</a></div>
 			<div class="logo-header-small">Only fun learning wakes us up</div>
 		</div>
 		<div class="personal-header">
@@ -119,11 +121,9 @@
 		<div class="uhp-user col-md-3">
 			<div class="column-name">PROFILE</div>
 			<div class="news-feed">
-				<form name="submitForm" method="POST" action="Person.jsp"
-					target="_blank">
-					<input type="hidden" name="person" value="<%=usrID%>"> <a
-						href="javascript:document.submitForm.submit()"><%=usrID%>'s
-						profile</a>
+				<form name="submitForm" method="POST" action="Person.jsp" target="_blank">
+					<input type="hidden" name="person" value="<%=usrID%>">
+					<a href="javascript:document.submitForm.submit()"><%=usrID%>'s profile</a>
 				</form>
 			</div>
 			<div class="news-feed">Setting</div>

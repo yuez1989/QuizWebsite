@@ -75,11 +75,27 @@ public class Message implements Comparable{
 				"\" AND toID = \"" + toID + "\" AND type = \"" + type + 
 				"\" AND time = \"" + time + "\" AND msg = \"" + msg +
 				"\";"; // no need to search for "read" property because it is already sufficient to identify the message
+		System.out.println(stmt);
 		return QuizSystem.db.executeUpdate(stmt);
 	}
 	
+	/**
+	 * Remove all the messages of one user, sent or received. Used when user removing account.
+	 * @param usrID
+	 * @return
+	 */
 	public static boolean removeByUserID(String usrID) {
 		String stmt = "DELETE FROM Messages WHERE fromID = \"" + usrID  + "\" OR toID = \"" + usrID + "\";";
+		return QuizSystem.db.executeUpdate(stmt);
+	}
+	
+	/**
+	 * Remove all the messages one user has sent.
+	 * @param usrID
+	 * @return
+	 */
+	public static boolean removeByUserIDReceivedOnly(String usrID) {
+		String stmt = "DELETE FROM Messages WHERE toID = \"" + usrID  + "\";";
 		return QuizSystem.db.executeUpdate(stmt);
 	}
 	
