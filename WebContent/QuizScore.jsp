@@ -14,9 +14,12 @@
 	String endTime = QuizSystem.generateCurrentTime();
 	String startTime = request.getParameter("startTime");
 	String quizID = request.getParameter("quizID");
-	Quiz quiz = new Quiz(quizID);
+	String quizName = request.getParameter("quizName");
+	ArrayList<Question> questions = (ArrayList<Question>)session.getAttribute(quizID+"questions");
+	session.removeAttribute(quizID+"questions");
+//	Quiz quiz = new Quiz(quizID);
 	double grade = 0;
-	ArrayList<Question> questions = quiz.getQuestions();
+//	ArrayList<Question> questions = quiz.getQuestions();
 	
 	int count=0;
 	for(Question q: questions){
@@ -112,29 +115,29 @@
 	<h3>Congratulations!</h3>
 	<h3>
 		You get
-		<%=grade%>/<%=quiz.getQuestions().size()%>
+		<%=grade%>/<%=questions.size()%>
 		in
-		<%=quiz.getQuizName()%></h3>
+		<%=quizName%></h3>
 
 
 
 	<p>Quiz Statisics</p>
 	<ul>
-		<li>Highest Score: <%=Utilities.getHighRecordsOfQuiz(quiz.getQuizID())%></li>
-		<li>Average Score: <%=Utilities.getQuizAverageScore(quiz.getQuizID())%></li>
+		<li>Highest Score: <%=Utilities.getHighRecordsOfQuiz(quizID)%></li>
+		<li>Average Score: <%=Utilities.getQuizAverageScore(quizID)%></li>
 		<li>Play Times:</li>
-		<li>You have played: <%=Utilities.getPlayTimesOfQuiz(quiz.getQuizID())%>
+		<li>You have played: <%=Utilities.getPlayTimesOfQuiz(quizID) %>		
 			times
 		</li>
 	</ul>
 
 	<p>
 		Toppest Records for
-		<%=quiz.getQuizName()%>:
+		<%=quizName%>:
 	</p>
 	<ul>
 		<%
-			ArrayList<History> highrecords = Utilities.getHighRecordsOfQuiz(quiz.getQuizID());
+			ArrayList<History> highrecords = Utilities.getHighRecordsOfQuiz(quizID);
 			for (History rec : highrecords) {
 				out.print("<li>" + rec.toString() + "</li>");
 			}
@@ -145,7 +148,7 @@
 	<p>Other quizzes</p>
 
 	<form name='challengeForm' action="MsgWrite.jsp" method="post">
-		<input type="hidden" name="quizID" value="<%=quiz.getQuizID()%>">
+		<input type="hidden" name="quizID" value="<%=quizID%>">
 		<a href="javascript:document.challengeForm.submit()">Challenge your friend!</a>
 	</form>
 </body>

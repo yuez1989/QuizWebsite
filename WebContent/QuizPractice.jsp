@@ -18,33 +18,32 @@
 		Quiz pract_quiz;
 		HashMap<String,Integer> correct_map = null;
 		int cursor = 0;
+		boolean flag = false;
 		
 		if(session.getAttribute("pract_quiz") != null){
-			System.out.println("			//some quiz is running in practice mode");
 			//some quiz is running in practice mode
 			pract_quiz = (Quiz)session.getAttribute("pract_quiz");
 			
 			if(request.getParameter("quizID")!=null && !pract_quiz.getQuizID().equals(request.getParameter("quizID"))){
 				//try to take another practice quiz. Not allowed. Redirect to quizhomepage
-				System.out.println("				//try to take another practice quiz. Not allowed. Redirect to quizhomepage");
 				String quizID = request.getParameter("quizID");
 				out.print("<h3>Sorry, you can only practice one quiz per time. Focus on exercise makes progress!</h3>");
 				out.println("<p>Redirect to Quiz Page in 2 seconds...</p>");
-				out.println("<p><a href = \'QuizHomePage.jsp?quizID="+quizID+"\'>click here to return immediately</p>");	
-				response.setHeader("Refresh", "2;url=QuizHomePage.jsp?quizID="+quizID);
-				out.close();
+						
+				out.println("<p><a href = \'QuizHomePage.jsp?quizID="+quizID+"\'>click here to return immediately</p>");
+				out.print("<p><a href = \'QuizCancel.jsp?quizID="+quizID+"&practice=true\'>clear paused quiz</a></p>");
+
+				response.setHeader("Refresh", "0;url=QuizHomePage.jsp?quizID="+quizID);
+				flag = true;
+				//out.close();
 			}else{
-				System.out.println("				// resume the quiz in practice mode");
 				// resume the quiz in practice mode
 				correct_map = (HashMap<String,Integer>)session.getAttribute("correct_map");
 				cursor = (Integer)session.getAttribute("cursor");
-				if(correct_map == null){
-					System.out.println("****Wrong. You can get quiz object, but you can't get correct map.****");
-				}
+
 			}
 		}else{
 			//starting a quiz in practice mode
-			System.out.println("			//starting a quiz in practice mode");
 			pract_quiz = new Quiz(request.getParameter("quizID"));
 			correct_map = new LinkedHashMap<String,Integer>();
 			ArrayList<Question> qlist = pract_quiz.getQuestions();
@@ -58,19 +57,17 @@
 			session.setAttribute("correct_map", correct_map);
 			session.setAttribute("cursor", 0);
 		}
-		System.out.println("target 1");
+	if(!flag){
 		if(pract_quiz.isRandom()){
 			pract_quiz.shuffleQuestion();
 			cursor = 0;
 		}
-		System.out.println("target 2");
 
 		ArrayList<Question> questionlist = pract_quiz.getQuestions();
 		for(; ;cursor = (cursor+1)%questionlist.size()){
 			if(correct_map.containsKey(questionlist.get(cursor).getProbID()))
 				break;
 		}	
-		System.out.println("target 3");
 
 		Question q = questionlist.get(cursor);
 		cursor = (cursor+1)%questionlist.size();
@@ -122,10 +119,20 @@
 			out.print(contents[contents.length-1]);
 			out.print("</p>");
 		}
-		
+	
 	%>
 	<input type = 'hidden' name = 'proID' value = <%=q.getProbID() %>>
 	<p><input type = 'submit' value = 'Try'></p>
 	</form>
+	<div>
+		<form class='cancel_form' action="QuizCancel.jsp" method="get">
+		<input type="hidden" name="quizID" value="<%=pract_quiz.getQuizID() %>">
+		<input type = "hidden" name = "practice" value='true'>
+		<input type="submit" class = 'total_cancel' value='cancel'> 
+		</form>
+	</div>
+	<% 
+	}
+	%>
 </body>
 </html>
