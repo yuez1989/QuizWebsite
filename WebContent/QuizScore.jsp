@@ -86,32 +86,32 @@
 
 		//get number of histories of current user ID and check what achievement is available
 		//***************TODO: check and complete******************
-
-		/* 	int quizPlayed = Utilities.getQuizNumberPlayed(usrID);
+		int quizPlayed = Utilities.getQuizNumberPlayed((String) session.getAttribute("user"));
 			if(quizPlayed == 1){
 				AchievementRecord achRec = new AchievementRecord(usrID, "Quiz Taker");
 				achRec.saveToDB();
 			}
-			if(quizPlayed == 5){
+			else if(quizPlayed == 5){
 				AchievementRecord achRec = new AchievementRecord(usrID, "Kindergarten");
 				achRec.saveToDB();	
 			}
-			if(quizPlayed == 10){
+			else if(quizPlayed == 10){
 				AchievementRecord achRec = new AchievementRecord(usrID, "Primary School");
 				achRec.saveToDB();	
 			}
-			if(quizPlayed == 30){
+			else if(quizPlayed == 30){
 				AchievementRecord achRec = new AchievementRecord(usrID, "Middle School");
 				achRec.saveToDB();	
 			}
-			if(quizPlayed == 50){
+			else if(quizPlayed == 50){
 				AchievementRecord achRec = new AchievementRecord(usrID, "High School");
 				achRec.saveToDB();	
 			}
-			if(quizPlayed == 100){
+			else if(quizPlayed == 100){
 				AchievementRecord achRec = new AchievementRecord(usrID, "Quizzzz University Alumni");
 				achRec.saveToDB();	
-			} */
+			} 
+		
 	%>
 
 	<h3>Congratulations!</h3>
