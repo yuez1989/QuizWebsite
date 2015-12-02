@@ -9,12 +9,26 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 public class Achievement {
-	String achID;
-	String description;
+	public String achID;
+	public String description;
 	
 	public Achievement(String id, String description) {
 		this.achID = id;
 		this.description = description;
+	}
+	
+	public Achievement(String id) {
+		String command = "SELECT * FROM Achievements WHERE achID = \"" + id + "\";";
+		ResultSet rs = QuizSystem.db.executeQuery(command);
+		try {
+			if (rs.next()) {
+				this.achID = rs.getString("achID");
+				this.description = rs.getString("description");
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	public boolean saveToDB() throws SQLException {

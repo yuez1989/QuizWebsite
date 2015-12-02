@@ -152,7 +152,13 @@
 							out.println("No achievements yet.");
 						}
 						for (AchievementRecord achr : achrs) {
-							out.println("<span class='column-indent'>" + achr.achID + "</span>");
+							%>
+					<div id="popup-ach-parent">
+						<span class='column-indent'><%=achr.achID%></span>
+						<% Achievement ach = new Achievement(achr.achID); %>
+						<div id='popup-ach-child'><%=ach.description%></div>
+					</div>
+					<%						
 						}
 					%>
 				</div>
