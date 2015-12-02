@@ -136,8 +136,8 @@
 					</form>
 				</div>
 				<div class="create-quiz-button">
-					<form method="POST" action="QuizSearch.jsp" target="_blank">
-						<input type="search" name = "quizName" value="haha">
+					<form method="POST" action="Quiz.jsp" target="_blank">
+						<input type="search" name = "quizID" value="xinhuiwu2015-11-18 16:19:13">
 						<br>
 						<input type="submit" value="Search Quiz">
 					</form>

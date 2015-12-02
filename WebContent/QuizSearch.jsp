@@ -34,7 +34,10 @@
 	<h3>Message sent. Redirecting to Messages...</h3>
 	<%
 		String name = request.getParameter("quizName");
-		
+		ArrayList<String> quizIDs = Utilities.searchQuizzesByExactName(name);
+		if (quizIDs.size() == 0) {
+			
+		}
 		response.setHeader("Refresh", "2;Quizzes.jsp");
 	%>
 </body>
