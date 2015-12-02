@@ -3,6 +3,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@page import="Quiz.*"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="java.text.DecimalFormat"%>
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -80,7 +82,7 @@
 		}
 		
 		//warning this user should be user id not object
-		History hst = new History(quizID, (String)session.getAttribute("user"), "Regular", startTime, endTime, qgrade,
+		History hst = new History(quizID, (String)session.getAttribute("user"), "Regular", startTime, endTime, pregrade,
 				request.getParameter("review"), rating);
 		
 		hst.saveToDB();
@@ -91,7 +93,7 @@
 		
 		String usrID = (String) session.getAttribute("user");
 		
-		int quizPlayed = Utilities.getQuizNumberPlayed((String) session.getAttribute("user"));
+		int quizPlayed = Utilities.getQuizNumberPlayed((String) session.getAttribute("user"),quizID);
 			if(quizPlayed == 1){
 				AchievementRecord achRec = new AchievementRecord(usrID, "Quiz Taker");
 				achRec.saveToDB();
@@ -132,7 +134,7 @@
 	<h3>Congratulations!</h3>
 	<h3>
 		You get
-		<%=pregrade%>
+		<%=new DecimalFormat("#0.00").format(pregrade).toString()%>
 		in
 		<%=quizName%></h3>
 
