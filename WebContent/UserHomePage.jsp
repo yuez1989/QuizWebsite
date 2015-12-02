@@ -25,8 +25,10 @@
 	String usrID = "default";
 	if (!session.isNew()) {
 		usrID = (String) session.getAttribute("user");
-		if (usrID == null)
+		if (usrID == null) {
 			usrID = "default";
+			response.setHeader("Refresh", "0;index.jsp");
+		}		
 	}
 	out.println(usrID);
 %>
@@ -50,7 +52,7 @@
 	%>
 	<div class="header-line">
 		<div class="logo-header">
-			<div class="logo-header-large">Quizzzz</div>
+			<div class="logo-header-large"><a href="UserHomePage.jsp">Quizzzz</a></div>
 			<div class="logo-header-small">Only fun learning wakes us up</div>
 		</div>
 		<div class="personal-header">
@@ -119,11 +121,9 @@
 		<div class="uhp-user col-md-3">
 			<div class="column-name">PROFILE</div>
 			<div class="news-feed">
-				<form name="submitForm" method="POST" action="Person.jsp"
-					target="_blank">
-					<input type="hidden" name="person" value="<%=usrID%>"> <a
-						href="javascript:document.submitForm.submit()"><%=usrID%>'s
-						profile</a>
+				<form name="submitForm" method="POST" action="Person.jsp" target="_blank">
+					<input type="hidden" name="person" value="<%=usrID%>">
+					<a href="javascript:document.submitForm.submit()"><%=usrID%>'s profile</a>
 				</form>
 			</div>
 			<div class="news-feed">Setting</div>
@@ -182,6 +182,17 @@
 				</div>
 				<div>
 					<span class="section-name">Recent Creation</span>
+					<%
+						ArrayList<Quiz> createSelf = Utilities.getRecentCreatedQuiz(usrID);
+						if (createSelf.size() == 0) {
+							out.println("<span class='column-indent'>You did not created any quizzes yet.</span>");
+						}
+						for (Quiz quiz : createSelf) {
+					%>
+						<span class='column-indent'><%=quiz.getQuizName()%></span>
+					<%
+						}
+					%>
 				</div>
 				<div>
 					<span class="section-name">Friends List</span>
@@ -192,30 +203,35 @@
 						}
 						int maxFrdsAppear = 0; // max number of friends shown
 						for (String frdID : frdIDs) {
-							out.println("<span class='column-indent'>" + frdID + "</span>");
+							String frdLink = "Person.jsp?person=" + frdID;
+					%>
+						<span class='column-indent'><a href=<%=frdLink%> target="_blank"><%=frdID%></a></span>
+					<%	
 							maxFrdsAppear++;
 							if (maxFrdsAppear > 20) {
-								out.println("...");
 								break;
 							}
 						}
+						String personLink = "Person.jsp?person=" + usrID;
 					%>
+					<span class='column-indent'><a href=<%=personLink%> target="_blank">...Go to profile to see all</a>
+					</span>
 				</div>
 				<div style="clear: both;"></div>
 			</div>
 		</div>
 		<div class="uhp-news col-md-6">
-			<div class="column-name">NEWS</div>
+			<div class="column-name">NEWS OF FRIENDS</div>
 			<div>
-				<div class="column-name">Quizzes Taken</div>
+				<div class="column-name">Quizzes Taken Recent</div>
 				<%
 					if (frdHistories.size() == 0) {
-						out.println("No friend activities; Add more friend!");
+						out.println("No recent friend activities; Add more friend!");
 					}
 					int counterHist = 0;
 					for (History hist : frdHistories) {
 						counterHist++;
-						if (counterHist > 20) break;
+						if (counterHist > 15) break;
 						Quiz quiz = new Quiz(hist.quizID);
 						String input = hist.usrID + " took quiz " + quiz.getQuizName() + " at " + hist.end + ", scoring "
 								+ hist.score + ". Review: " + hist.review + ". Rating: " + hist.rating + ".";
@@ -242,7 +258,17 @@
 			<div>
 				<div class="column-name">Achievements Earned</div>
 				<%
-					
+					ArrayList<AchievementRecord> achrFrd = new ArrayList<AchievementRecord>();
+					for (String frdID : frdIDs) {
+						ArrayList<AchievementRecord> recents = Utilities.getRecentAchievements(frdID);
+						achrFrd.addAll(recents);
+					}
+					Collections.sort(achrFrd);
+					for (AchievementRecord achr : achrFrd) {
+				%>
+					<span class='news-feed'><%=achr.usrID%> achieved <%=achr.achID%> at <%=achr.time%></span>
+				<%
+					}
 				%>
 			</div>
 			<div style="clear: both;"></div>
@@ -250,10 +276,29 @@
 		<div class="uhp-others col-md-3">
 			<div class="column-name">OTHERS</div>
 			<div>
-				<div class="column-name">Announcement</div>
+				<div class="column-name">Announcements</div>
 				<%
+					ArrayList<String> announcements = new ArrayList<String>();
+					announcements = Utilities.getRecentAnnouncements(10);
 					
+					if (announcements != null) {
+						if (announcements.size() != 0) {
+							for (String s : announcements) {
 				%>
+				<p><%=s%></p>
+				<%
+					}
+						} else {
+				%>
+				<p>No Announcement</p>
+				<%
+					}
+					} else {
+				%>
+				<p>No Announcement</p>
+				<%
+}
+%>
 			</div>
 			<div>
 				<div class="column-name">Popular Quizzes</div>
@@ -264,15 +309,20 @@
 				%>
 			</div>
 			<div>
-				<div class="column-name">Recently Created Quizzes(in Public)</div>
+				<div class="column-name">Recently Created Quizzes (in Public)</div>
 				<%
-					
+					ArrayList<Quiz> recentQuizzesPublic = Utilities.getRecentQuiz();
+					Collections.sort(recentQuizzesPublic);
+					for (Quiz quiz : recentQuizzesPublic) {
+				%>
+					<span style='padding-left: 10px;'><%=quiz.getQuizName()%></span>
+				<%
+					}
 				%>
 			</div>
 			<div style="clear: both;"></div>
 		</div>
 		<div style="clear: both;"></div>
-	</div>
 	</div>
 </body>
 </html>

@@ -36,8 +36,8 @@
 	<%
 		String friendID = request.getParameter("friendID");
 		Friend friend = new Friend(usrID, friendID);
-		friend.saveToDB();
-		out.println("<h3>Already added " + friendID + " as your friend. Redirecting to your homepage...</h3>");
+		friend.removeFromDB();
+		out.println("<h3>Already removed " + friendID + " from your friend. Redirecting to your homepage...</h3>");
 		response.setHeader("Refresh", "2;url=UserHomePage.jsp");
 	%>
 </body>

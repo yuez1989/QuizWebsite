@@ -23,22 +23,27 @@
 	String usrID = "default";
 	if (!session.isNew()) {
 		usrID = (String) session.getAttribute("user");
-		if (usrID == null) {
+		if (usrID == null)
 			usrID = "default";
-			response.setHeader("Refresh", "0;index.jsp");
-		}		
 	}
 	out.println(usrID);
 %>
 </title>
 </head>
 <body>
+	<h3>Message deleted. Redirecting to Messages...</h3>
 	<%
-		String friendID = request.getParameter("friendID");
-		Friend friend = new Friend(usrID, friendID);
-		friend.saveToDB();
-		out.println("<h3>Already added " + friendID + " as your friend. Redirecting to your homepage...</h3>");
-		response.setHeader("Refresh", "2;url=UserHomePage.jsp");
+		String fromID = request.getParameter("fromIDDelete");
+		String toID = request.getParameter("toIDDelete");
+		String time = request.getParameter("timeDelete");
+		// Fixing the bug that automatically omits all after the blank in the time string
+		StringBuilder timeb = new StringBuilder(request.getParameter("timeDelete"));
+		timeb.insert(10, " ");
+		time = timeb.toString();
+		
+		Message message = new Message(fromID, toID, time);
+		message.removeFromDB();
+		response.setHeader("Refresh", "1;Messages.jsp");
 	%>
 </body>
 </html>

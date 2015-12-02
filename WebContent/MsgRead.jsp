@@ -50,6 +50,9 @@
 			break;
 		case 'c':
 			int start = msg.msg.indexOf("Quiz.jsp?quizID=");
+			if (start == -1) {
+				start = msg.msg.length();
+			}
 			url = msg.msg.substring(start);
 			messageShown = msg.msg.substring(0, start - 1);
 			typeText = "Challenge";

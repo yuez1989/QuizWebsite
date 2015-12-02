@@ -23,22 +23,18 @@
 	String usrID = "default";
 	if (!session.isNew()) {
 		usrID = (String) session.getAttribute("user");
-		if (usrID == null) {
+		if (usrID == null)
 			usrID = "default";
-			response.setHeader("Refresh", "0;index.jsp");
-		}		
 	}
 	out.println(usrID);
 %>
 </title>
 </head>
 <body>
+	<h3>All of your messages are deleted. Redirecting to your homepage...</h3>
 	<%
-		String friendID = request.getParameter("friendID");
-		Friend friend = new Friend(usrID, friendID);
-		friend.saveToDB();
-		out.println("<h3>Already added " + friendID + " as your friend. Redirecting to your homepage...</h3>");
-		response.setHeader("Refresh", "2;url=UserHomePage.jsp");
+		Message.removeByUserIDReceivedOnly(usrID);
+		response.setHeader("Refresh", "1;UserHomePage.jsp");
 	%>
 </body>
 </html>

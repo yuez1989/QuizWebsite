@@ -11,6 +11,16 @@
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src='index.js'></script>
+<%
+// Test if you have already logged in
+String usrID = "default";
+if (!session.isNew()) {
+	usrID = (String) session.getAttribute("user");
+	if (usrID != null) {
+		response.setHeader("Refresh", "0;UserHomePage.jsp");
+	}
+	else {
+%>
 </head>
 <body>
 	<div class='menubar'>
@@ -67,6 +77,10 @@
 			} 
 		%>
 	</div>
-
+<%
+		
+	}
+}
+%>
 </body>
 </html>
