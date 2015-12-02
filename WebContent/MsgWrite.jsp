@@ -33,6 +33,7 @@
 	window.onload = function() {
 		if (document.getElementById("challenge-indicator").innerHTML == "NO") { // not challenge mode
 			document.getElementById("challenge-radio").disabled = true;
+			document.getElementById("text-radio").checked = true;
 		} else { // challenge mode
 			document.getElementById("friend-radio").disabled = true;
 			document.getElementById("text-radio").disabled = true;
@@ -60,7 +61,7 @@
 			<form name="submitMsgForm" action="MsgSend.jsp" method="POST">
 				<input type="hidden" name="fromID" value="<%=usrID%>">
 				<input type="hidden" name="quizID" value="<%=quizID%>">
-				<input class="msg-write-input" type="text" name="toID" placeholder="Enter Receiver ID">
+				<input class="msg-write-input" type="text" name="toID" placeholder="Enter Receiver ID" required>
 				<div class="msg-write-input">
 					<input id="friend-radio" type="radio" name="type" value="f">&nbsp;Friend
 					Request&nbsp;&nbsp; <input id="challenge-radio" type="radio"
