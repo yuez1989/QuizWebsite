@@ -173,6 +173,7 @@ public class Question{
 	}
 
 	public double grade(ArrayList<String> userInput) {
+
 		double score = 0;
 		int iter = Math.min(userInput.size(), solutions.size());
 		if(order>0){

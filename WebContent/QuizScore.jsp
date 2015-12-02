@@ -10,77 +10,74 @@
 <title>Get Your Grade!</title>
 </head>
 <body>
-	<%
-		String endTime = QuizSystem.generateCurrentTime();
-		String startTime = request.getParameter("startTime");
-		String quizID = request.getParameter("quizID");
-		Quiz quiz = new Quiz(quizID);
-		double grade = 0;
-		ArrayList<Question> questions = quiz.getQuestions();
-
-		int count = 0;
-		for (Question q : questions) {
-			count++;
-			if (Question.TYPE_FREERESPONCE.equals(q.getType()) || Question.TYPE_PICTURERESPONCE.equals(q.getType())
-					|| Question.TYPE_BLANKFILL.equals(q.getType())) {
-				ArrayList<String> ans = new ArrayList<String>();
-				for (int i = 1; i <= q.getsolNum(); i++) {
-					ans.add(request.getParameter("q" + count + "ans" + i));
-				}
-				out.print(q.grade(ans));
-				grade = grade + q.grade(ans);
-			} else if (Question.TYPE_MULTIPLECHOICE.equals(q.getType())) {
-				ArrayList<String> ans = new ArrayList<String>();
-
-				char ch = (char) ((int) (request.getParameter("q" + count + "ans").charAt(0) - '1') + 'A');
-				ans.add(Character.toString(ch));
-
-				out.print(q.grade(ans));
-				grade = grade + q.grade(ans);
-
-			} else if (Question.TYPE_MATCHING.equals(q.getType())) {
-				ArrayList<String> optionsleft = q.parseOptionleft();
-				ArrayList<String> ans = new ArrayList<String>();
-				int optcnt = 1;
-				for (String opt : optionsleft) {
-					if (!request.getParameter("q" + count + "ans" + optcnt).isEmpty()) {
-						char ch = (char) ((int) (request.getParameter("q" + count + "ans" + optcnt).charAt(0) - '1')
-								+ 'A');
-						ans.add(Character.toString(ch));
-						optcnt++;
-					}
-				}
-				out.print(q.grade(ans));
-				grade = grade + q.grade(ans);
+<%
+	String endTime = QuizSystem.generateCurrentTime();
+	String startTime = request.getParameter("startTime");
+	String quizID = request.getParameter("quizID");
+	Quiz quiz = new Quiz(quizID);
+	double grade = 0;
+	ArrayList<Question> questions = quiz.getQuestions();
+	
+	int count=0;
+	for(Question q: questions){
+		count++;
+		if(Question.TYPE_FREERESPONCE.equals(q.getType()) || Question.TYPE_PICTURERESPONCE.equals(q.getType()) || Question.TYPE_BLANKFILL.equals(q.getType())){
+			ArrayList<String> ans = new ArrayList<String>();
+			for(int i = 1; i<= q.getsolNum();i++){
+				ans.add(request.getParameter("q"+count+"ans"+i));
 			}
-
-			out.print("</div>");
-		}
+			out.print(q.grade(ans));
+			grade = grade + q.grade(ans);
+		}else if(Question.TYPE_MULTIPLECHOICE.equals(q.getType())){
+			ArrayList<String> ans = new ArrayList<String>();
+	
+			char ch =request.getParameter("q"+count+"ans1").charAt(0);
+			ans.add(Character.toString(ch));
+			out.print(q.grade(ans));
+			grade = grade + q.grade(ans);
+	
+		}else if(Question.TYPE_MATCHING.equals(q.getType())){
+			ArrayList<String> optionsleft = q.parseOptionleft();
+			ArrayList<String> ans = new ArrayList<String>();
+			int optcnt=1;
+			for(String opt: optionsleft){
+				if(!request.getParameter("q"+count+"ans"+optcnt).isEmpty()){
+				char ch =(request.getParameter("q"+count+"ans"+optcnt).charAt(0));
+				ans.add(Character.toString(ch));
+				optcnt++;
+				}else{
+					ans.add("-");
+				}
+			}
+			out.print(q.grade(ans));
+			grade = grade + q.grade(ans);
+		} 		
+	}
+			
 		
-		String usrID = (String) session.getAttribute("user");
+	String usrID = (String) session.getAttribute("user");
 
-		char ratch = request.getParameter("rating").charAt(0);
+	char ratch = request.getParameter("rating").charAt(0);
 
-		int rating = 5;
+	int rating = 5;
 
-		switch (ratch) {
-		case '1':
-			rating = 1;
-			break;
-		case '2':
-			rating = 2;
-			break;
-		case '3':
-			rating = 3;
-			break;
-		case '4':
-			rating = 4;
-			break;
-		}
-		History hst = new History(quizID, usrID, "Regular", startTime, endTime, grade,
-				request.getParameter("review"), rating);
-		hst.saveToDB();
-		System.out.println("*********SAVED TO DB**********");
+	switch (ratch) {
+	case '1':
+		rating = 1;
+		break;
+	case '2':
+		rating = 2;
+		break;
+	case '3':
+		rating = 3;
+		break;
+	case '4':
+		rating = 4;
+		break;
+	}
+	History hst = new History(quizID, usrID, "Regular", startTime, endTime, grade,
+	request.getParameter("review"), rating);
+	hst.saveToDB();
 
 		//get number of histories of current user ID and check what achievement is available
 		//***************TODO: check and complete******************

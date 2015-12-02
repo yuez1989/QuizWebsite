@@ -8,32 +8,21 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%
-	String quizID = request.getParameter("quizID");
-	Quiz quiz = null;
-	ArrayList<String> searchRes = Utilities.searchQuizzes(quizID);
-	if (searchRes.size() == 0) { // if there is a search result
-		quizID = "xinhuiwu2015-11-18 16:19:13";
-		out.println("<h3>The quiz you searched does not exist. We will redirect you to the list of quizzes we have...</h3>");
-		response.setHeader("Refresh", "2;Quizzes.jsp");	
-		
-	}
-	else {
-		quizID = searchRes.get(0);
-	
-		quiz = new Quiz(quizID);
-	
-		String startTime = QuizSystem.generateCurrentTime();
-		if(quiz.isRandom()){
-			quiz.shuffleQuestion();
-		}
+
+//Quiz quiz = new Quiz(request.getParameter("quizID"));
+Quiz quiz = new Quiz("xinhuiwu2015-11-18 16:19:13");
+session.setAttribute("user","xiaotihu");
+//Quiz quiz = new Quiz("xiaotihu2015-11-23 19:12:15");
+String startTime = QuizSystem.generateCurrentTime();
+/* if(quiz.isRandom()){
+	quiz.shuffleQuestion();
+} */
 %>
 
 <title>Welcome to <%=quiz.getQuizName() %></title>
 </head>
 <body>
 	<%
-/* 	if(quiz.isMultiplePages()){
-		out.print("<p>hi</p>"); */
 	if(false){
 		System.out.println("--");
 	}else{
@@ -60,10 +49,11 @@
 					int optcnt = 0;
 					for(String opt: options){
 						optcnt++;
+						char chopt =(char)( 'A'+optcnt - 1);
 						if(optcnt == 1){
-							out.print("<input type=\'radio\' name = \'q"+count+"ans\' value = \'"+optcnt+"\' checked=\'checked\'>"+opt+"</input>");							
+							out.print("<input type=\'radio\' name = \'q"+count+"ans1\' value = \'"+chopt+"\' checked=\'checked\'>"+opt+"</input>");							
 						}else{
-							out.print("<input type=\'radio\' name = \'q"+count+"ans\' value = \'"+optcnt+"\'>"+opt+"</input>");							
+							out.print("<input type=\'radio\' name = \'q"+count+"ans1\' value = \'"+chopt+"\'>"+opt+"</input>");							
 						}
 					}
 				}else if(Question.TYPE_MATCHING.equals(q.getType())){
@@ -122,9 +112,8 @@
 		<input type="submit" class='total_submit' />
 
 	</form>
-	<%		
-		
-	}
+	<%	
+
 }
 %>
 </body>
