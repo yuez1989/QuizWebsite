@@ -206,17 +206,19 @@
 							out.println("<span class='column-indent'>" + frdID + "</span>");
 							maxFrdsAppear++;
 							if (maxFrdsAppear > 20) {
-								out.println("...");
 								break;
 							}
 						}
+						String personLink = "Person.jsp?person=" + usrID;
 					%>
+					<span class='column-indent'><a href=<%=personLink%> target="_blank">...Go to profile to see all</a>
+					</span>
 				</div>
 				<div style="clear: both;"></div>
 			</div>
 		</div>
 		<div class="uhp-news col-md-6">
-			<div class="column-name">NEWS</div>
+			<div class="column-name">NEWS OF FRIENDS</div>
 			<div>
 				<div class="column-name">Quizzes Taken Recent</div>
 				<%

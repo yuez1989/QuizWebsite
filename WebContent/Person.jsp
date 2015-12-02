@@ -11,13 +11,16 @@
 	person = Utilities.searchAccounts(person).get(0);
 	//person = "xinhuiwu";
 	UserInfo UserInfo = new UserInfo(person);
-	
 %>
 <title>Quizzzz: Homepage of <%=person%> </title>
 <link rel="stylesheet" type="text/css" href="Person.css">
 </head>
 <body>
 <h1>Quizzzz: Homepage of <%=person%></h1>
+<div class="add-remove-friends">Add and Remove Friends
+	<% //COME BACK HERE: ADD AND REMOVE FRIENDS
+	%>
+</div>
 <%//********************** TODO: Revise this part************************************************************* %>
 		<form name="friendRequest" method="POST" action="???.jsp"
 			target="_blank"><input type="hidden" name="usrID"
