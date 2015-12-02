@@ -152,7 +152,10 @@
 							out.println("No achievements yet.");
 						}
 						for (AchievementRecord achr : achrs) {
-							out.println("<span class='column-indent'>" + achr.achID + "</span>");
+							%>
+							<span class='column-indent'>" + achr.achID + </span>
+					<%
+							
 						}
 					%>
 				</div>

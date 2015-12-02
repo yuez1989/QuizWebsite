@@ -19,9 +19,7 @@
 	}
 	else {
 		quizID = searchRes.get(0);
-	
 		quiz = new Quiz(quizID);
-	
 		String startTime = QuizSystem.generateCurrentTime();
 		if(quiz.isRandom()){
 			quiz.shuffleQuestion();
