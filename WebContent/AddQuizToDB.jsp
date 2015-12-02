@@ -53,11 +53,14 @@ String userID = (String)session.getAttribute("user");
 	}
 	Quiz q = new Quiz(QuizName, Description, userID, tags, questions, Spec);
 
-//	result = request.getParameterValues("Submit Quiz"); 
-//	if (select != null && select.length != 0){
-//		q = new Quiz(quizName, description, userID, tags, questions, spec);
-		q.saveToDB();
-//	}
+	String oldQuizID = null;
+	oldQuizID = (String)request.getSession().getAttribute("OldQuizID");
+	if(oldQuizID!=null){
+		if(oldQuizID.length()>0){
+			Quiz.deleteQuiz(oldQuizID);
+		}
+	}
+	q.saveToDB();
 %>
 
 <form name="FinishQuiz" method="POST" action="UserHomePage.jsp">
