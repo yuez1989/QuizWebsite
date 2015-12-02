@@ -90,26 +90,36 @@
 			if(quizPlayed == 1){
 				AchievementRecord achRec = new AchievementRecord(usrID, "Quiz Taker");
 				achRec.saveToDB();
+				out.println("<p>Congrats! You have just won a new Achievement: Quiz Taker</p>");
 			}
 			else if(quizPlayed == 5){
 				AchievementRecord achRec = new AchievementRecord(usrID, "Kindergarten");
 				achRec.saveToDB();	
+				out.println("<p>Congrats! You have just won a new Achievement: Kindergarten</p>");
+
 			}
 			else if(quizPlayed == 10){
 				AchievementRecord achRec = new AchievementRecord(usrID, "Primary School");
 				achRec.saveToDB();	
+				out.println("<p>Congrats! You have just won a new Achievement: Primary School</p>");
+
 			}
 			else if(quizPlayed == 30){
 				AchievementRecord achRec = new AchievementRecord(usrID, "Middle School");
 				achRec.saveToDB();	
+				out.println("<p>Congrats! You have just won a new Achievement: Middle School</p>");
 			}
 			else if(quizPlayed == 50){
 				AchievementRecord achRec = new AchievementRecord(usrID, "High School");
 				achRec.saveToDB();	
+				out.println("<p>Congrats! You have just won a new Achievement: High School</p>");
+
 			}
 			else if(quizPlayed == 100){
 				AchievementRecord achRec = new AchievementRecord(usrID, "Quizzzz University Alumni");
 				achRec.saveToDB();	
+				out.println("<p>Congrats! You have just won a new Achievement: Quizzzz University Alumni</p>");
+
 			} 
 		
 	%>
