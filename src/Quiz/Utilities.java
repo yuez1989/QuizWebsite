@@ -785,11 +785,8 @@ public class Utilities {
 		ResultSet rs = QuizSystem.db.executeQuery("Select quizID, name from Quizzes where name = \"" + string+"\";");
 		try {
 			while(rs.next()){
-				String str = "";
-				str += rs.getString("quizID");
-				str += "##";
-				str += rs.getString("name");
-				list.add(str);
+				String qID = rs.getString("quizID");
+				list.add(qID);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
