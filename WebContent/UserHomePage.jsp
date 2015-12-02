@@ -203,7 +203,10 @@
 						}
 						int maxFrdsAppear = 0; // max number of friends shown
 						for (String frdID : frdIDs) {
-							out.println("<span class='column-indent'>" + frdID + "</span>");
+							String frdLink = "Person.jsp?person=" + frdID;
+					%>
+						<span class='column-indent'><a href=<%=frdLink%> target="_blank"><%=frdID%></a></span>
+					<%	
 							maxFrdsAppear++;
 							if (maxFrdsAppear > 20) {
 								break;
