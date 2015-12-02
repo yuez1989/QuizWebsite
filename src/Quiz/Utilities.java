@@ -730,6 +730,22 @@ public class Utilities {
 	}
 
 	/**
+	 * return how many quizzes a user has created
+	 * @param quizID
+	 * @return
+	 * @throws SQLException 
+	 */
+	public static int getQuizNumberCreated(String usrID) throws SQLException{
+		int count = 0;
+		DataBase db = QuizSystem.getQuizSystem().db;
+		ResultSet rsCount = db.executeQuery("SELECT COUNT(distinct quizID) FROM Quizzes where creator =  \'" + usrID+"\' ;");
+		if(rsCount.next()){
+			count = rsCount.getInt(1);
+		}
+		return count;
+	}
+
+	/**
 	 * Get the highest score a user has achieved in a specific quiz
 	 * @param quizID
 	 * @param UserID
