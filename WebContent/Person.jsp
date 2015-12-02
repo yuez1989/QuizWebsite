@@ -32,8 +32,22 @@
 		Quizzzz: Homepage of
 		<%=person%></h1>
 	<div class="add-remove-friends">
-		<% //COME BACK HERE: ADD AND REMOVE FRIENDS
-		//if (Utilities.isFriend(usrID, ))
+		<%
+		if (!person.equals(usrID)) {	
+		
+		if (Utilities.isFriend(usrID, person)) {
+			String removeStr = "RemoveFriend.jsp?friendID=" + person;
+		%>
+		<a href=<%=removeStr%> target="_blank">Remove this friend</a>
+		<%
+		}
+		else {
+			String addStr = "AddFriend.jsp?friendID=" + person;
+		%>
+			<a href=<%=addStr%> target="_blank">Add as friend</a>
+		<%	
+			}
+		}
 	%>
 	</div>
 	<%//********************** TODO: Revise this part************************************************************* %>

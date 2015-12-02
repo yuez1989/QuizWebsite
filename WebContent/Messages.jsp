@@ -23,8 +23,10 @@
 	String usrID = "default";
 	if (!session.isNew()) {
 		usrID = (String) session.getAttribute("user");
-		if (usrID == null)
+		if (usrID == null) {
 			usrID = "default";
+			response.setHeader("Refresh", "0;index.jsp");
+		}		
 	}
 	out.println(usrID);
 %>
