@@ -93,7 +93,7 @@
 		
 		String usrID = (String) session.getAttribute("user");
 		
-		int quizPlayed = Utilities.getQuizNumberPlayed((String) session.getAttribute("user"),quizID);
+		int quizPlayed = Utilities.getQuizNumberPlayed((String) session.getAttribute("user"));
 			if(quizPlayed == 1){
 				AchievementRecord achRec = new AchievementRecord(usrID, "Quiz Taker");
 				achRec.saveToDB();

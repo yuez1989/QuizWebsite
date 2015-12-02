@@ -88,7 +88,7 @@
 
 		//get number of histories of current user ID and check what achievement is available
 		//***************TODO: check and complete******************
-		int quizPlayed = Utilities.getQuizNumberPlayed((String) session.getAttribute("user"),quizID);
+		int quizPlayed = Utilities.getQuizNumberPlayed((String) session.getAttribute("user"));
 			if(quizPlayed == 1){
 				AchievementRecord achRec = new AchievementRecord(usrID, "Quiz Taker");
 				achRec.saveToDB();
