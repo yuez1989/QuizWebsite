@@ -33,7 +33,7 @@
 				out.println("<p><a href = \'QuizHomePage.jsp?quizID="+quizID+"\'>click here to return immediately</p>");
 				out.print("<p><a href = \'QuizCancel.jsp?quizID="+quizID+"&practice=true\'>clear paused quiz</a></p>");
 
-				response.setHeader("Refresh", "0;url=QuizHomePage.jsp?quizID="+quizID);
+				response.setHeader("Refresh", "2;url=QuizHomePage.jsp?quizID="+quizID);
 				flag = true;
 				//out.close();
 			}else{

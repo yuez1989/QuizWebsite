@@ -16,6 +16,15 @@
 	
 	ArrayList<Question> questions = (ArrayList<Question>)session.getAttribute(quizID+"questions");
 	
+	if(quizID==null || quizName == null || questions == null )
+		response.setHeader("Refresh", "0;UserHomePage.jsp");
+	
+	if(questions.isEmpty()){
+		out.print("<h3>Error. You are taking this quiz simultaneously</h3>");
+		response.setHeader("Refresh", "0;QuizHomePage.jsp?quizID="+quizID);
+	}
+
+
 	Question q = questions.get(questions.size()-1);
 	
 	out.print("<div>");

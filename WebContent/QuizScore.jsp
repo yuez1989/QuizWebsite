@@ -16,10 +16,12 @@
 	String quizID = request.getParameter("quizID");
 	String quizName = request.getParameter("quizName");
 	ArrayList<Question> questions = (ArrayList<Question>)session.getAttribute(quizID+"questions");
+	
+	if(startTime == null || quizID == null || quizName == null || questions == null)
+		response.setHeader("Refresh", "0;UserHomePage.jsp");
+	else {
 	session.removeAttribute(quizID+"questions");
-//	Quiz quiz = new Quiz(quizID);
 	double grade = 0;
-//	ArrayList<Question> questions = quiz.getQuestions();
 	
 	int count=0;
 	for(Question q: questions){
@@ -123,12 +125,11 @@
 
 	<p>Quiz Statisics</p>
 	<ul>
-		<li>Highest Score: <%=Utilities.getHighRecordsOfQuiz(quizID)%></li>
+		<li>Highest Score: <%= Utilities.getHighestScoreOfQuiz(quizID) %></li>
 		<li>Average Score: <%=Utilities.getQuizAverageScore(quizID)%></li>
-		<li>Play Times:</li>
-		<li>You have played: <%=Utilities.getPlayTimesOfQuiz(quizID) %>		
-			times
-		</li>
+		<li>Play Times:You have played: <%=Utilities.getPlayTimesOfQuiz(quizID) %>		
+			times</li>
+
 	</ul>
 
 	<p>
@@ -139,17 +140,19 @@
 		<%
 			ArrayList<History> highrecords = Utilities.getHighRecordsOfQuiz(quizID);
 			for (History rec : highrecords) {
-				out.print("<li>" + rec.toString() + "</li>");
+				out.print("<li>" + rec.toStrinQHome() + "</li>");
 			}
 		%>
 	</ul>
 
-	<p>HomePage</p>
-	<p>Other quizzes</p>
+	<p><a href = 'QuizHomePage.jsp?quizID=<%=quizID %>'>QuizHomePage</a></p>
+	<p>TODO: User Home Page </p>
+	<p>TODO: Other quizzes</p>
 
 	<form name='challengeForm' action="MsgWrite.jsp" method="post">
 		<input type="hidden" name="quizID" value="<%=quizID%>">
 		<a href="javascript:document.challengeForm.submit()">Challenge your friend!</a>
 	</form>
+	<%} %>
 </body>
 </html>

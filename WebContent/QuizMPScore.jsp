@@ -13,9 +13,14 @@
 	String quizID = request.getParameter("quizID");
 	String quizName = request.getParameter("quizName");
 	ArrayList<Question> questions = (ArrayList<Question>) session.getAttribute(quizID+"questions");
+	String strgrade = (String)session.getAttribute(quizID+"grade");
+	
+	if(quizID == null || quizName == null || questions== null || strgrade == null){
+		response.setHeader("Refresh", "0;UserHomePage.jsp");
+	}else{
+		
 	double pregrade = Double.parseDouble((String)session.getAttribute(quizID+"grade"));
-	
-	
+
 	Question q = questions.get(questions.size() - 1);
 	
 	double qgrade = 0;
@@ -97,12 +102,10 @@
 
 	<p>Quiz Statisics</p>
 	<ul>
-		<li>Highest Score: <%=Utilities.getHighRecordsOfQuiz(quizID)%></li>
+		<li>Highest Score: <%=Utilities.getHighestScoreOfQuiz(quizID)%></li>
 		<li>Average Score: <%=Utilities.getQuizAverageScore(quizID)%></li>
-		<li>Play Times:</li>
-		<li>You have played: <%=Utilities.getPlayTimesOfQuiz(quizID) %>		
-			times
-		</li>
+		<li>Play Times:You have played: <%=Utilities.getPlayTimesOfQuiz(quizID) %>		
+			times</li>
 	</ul>
 
 	<p>
@@ -118,8 +121,9 @@
 		%>
 	</ul>
 
-	<p>HomePage</p>
-	<p>Other quizzes</p>
+	<p><a href = 'QuizHomePage.jsp?quizID=<%=quizID %>'>QuizHomePage</a></p>
+	<p>TODO: User Home Page </p>
+	<p>TODO: Other quizzes</p>
 	
 	<form name='challengeForm' action="MsgWrite.jsp" method="post">
 		<input type="hidden" name="quizID" value="<%=quizID%>">
@@ -129,21 +133,26 @@
 <%
 						
 	}else{
-		if(qgrade >=1)
-			out.print("<h3>Congrats, it's correct!</h3>");
-		else if(qgrade == 0){
-			out.print("<h3>Sorry, you are wrong</h3>");
-			out.print("<p>The answer should be "+q.getSol()+" </p>");
-		}
-		else{
-			out.println("<h3>Partially Correct!</h3>");
-			out.print("<p>The answer should be "+q.getSol()+" </p>");		
-		}
-		session.setAttribute(quizID+"questions",questions);
-		session.setAttribute(quizID+"grade", Double.toString(pregrade));
-		response.setHeader("Refresh", "2;url=QuizMultiPage.jsp?quizID="+quizID+"&quizName="+quizName);
+		if("true".equals(session.getAttribute(quizID+"correction"))){
+			if(qgrade >=1)
+				out.print("<h3>Congrats, it's correct!</h3>");
+			else if(qgrade == 0){
+				out.print("<h3>Sorry, you are wrong</h3>");
+				out.print("<p>The answer should be "+q.getSol()+" </p>");
+			}
+			else{
+				out.println("<h3>Partially Correct!</h3>");
+				out.print("<p>The answer should be "+q.getSol()+" </p>");		
+			}
+			session.setAttribute(quizID+"questions",questions);
+			session.setAttribute(quizID+"grade", Double.toString(pregrade));
+			response.setHeader("Refresh", "2;url=QuizMultiPage.jsp?quizID="+quizID+"&quizName="+quizName);
 
+		}else{
+			response.setHeader("Refresh","0;url=QuizMultiPage.jsp?quizID="+quizID+"&quizName="+quizName);
+		}
 	}
+}
 %>
 </body>
 </html>
