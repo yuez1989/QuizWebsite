@@ -738,7 +738,7 @@ public class Utilities {
 	 */
 	public static boolean hasAchievement(String achID, String usrID) throws SQLException{
 		DataBase db = QuizSystem.getQuizSystem().db;
-		ResultSet rs = db.executeQuery("SELECT * FROM AchievementRecords usrID = \""+usrID+"\" AND achID = "+"\""+achID+"\";");
+		ResultSet rs = db.executeQuery("SELECT * FROM AchievementRecords where usrID = \""+usrID+"\" AND achID = "+"\""+achID+"\";");
 		return rs.next();
 	}
 
