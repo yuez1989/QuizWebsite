@@ -33,67 +33,7 @@
 <title>Welcome to <%=quiz.getQuizName() %></title>
 </head>
 <body>
-<<<<<<< HEAD
 
-=======
-	<%
-/* 	if(quiz.isMultiplePages()){
-		out.print("<p>hi</p>"); */
-	if(false){
-		System.out.println("--");
-	}else{
-%>
-
-	<form class='total_form' action="QuizScore.jsp" method="post">
-		<%
-			ArrayList<Question> questions = quiz.getQuestions();
-			int count=0;
-			for(Question q: questions){
-				count++;
-				out.print("<div class = question"+count+">");
-				out.print("<h3>Question "+count+"<h3>");
-				if(Question.TYPE_FREERESPONCE.equals(q.getType()) || Question.TYPE_PICTURERESPONCE.equals(q.getType())){
-					out.print("<p class=\'question_description\'>"+ q.getText()+"</p>");
-					if(!q.getPic().isEmpty())
-						out.print("<img src=\'"+q.getPic()+"\' class=\'question_image\'>");
-					for (int i = 1; i <= q.getsolNum(); i++){
-						out.print("<input type=\'text\' name=\'q"+count+"ans"+i+"\' placeholder=\'enter here\'>");				
-					}
-				}else if(Question.TYPE_MULTIPLECHOICE.equals(q.getType())){
-					out.print("<p class=\'question_description\'>"+ q.getText()+"</p>");
-					ArrayList<String> options = q.parseOption();
-					int optcnt = 0;
-					for(String opt: options){
-						optcnt++;
-						if(optcnt == 1){
-							out.print("<input type=\'radio\' name = \'q"+count+"ans\' value = \'"+optcnt+"\' checked=\'checked\'>"+opt+"</input>");							
-						}else{
-							out.print("<input type=\'radio\' name = \'q"+count+"ans\' value = \'"+optcnt+"\'>"+opt+"</input>");							
-						}
-					}
-				}else if(Question.TYPE_MATCHING.equals(q.getType())){
-					out.print("<p class=\'question_description\'>"+ q.getText()+"</p>");
-					ArrayList<String> optionsleft = q.parseOptionleft();
-					ArrayList<String> optionsright = q.parseOptionright();
-					int optcnt=1;
-					for(String opt: optionsleft){
-						out.print("<input type=\'text\' name = \'q"+count+"ans"+optcnt+"\'></input>");
-						out.print("<p>"+opt+"</p>");
-						out.print("<p>"+optionsright.get(optcnt-1)+"</p>");
-						optcnt++;
-					}
-				}else if(Question.TYPE_BLANKFILL.equals(q.getType())){
-					String text = q.getText();
-					String[] contents = text.split("<blank>");
-					out.print("<p>");
-					for(int i = 1; i< contents.length ; i++){
-						out.print(contents[i-1]);
-						out.print("<input type = \'text\' name =\'q"+count+"ans"+i+"\'>");
-					}
-					out.print(contents[contents.length-1]);
-					out.print("</p>");
-				}
->>>>>>> be55c9995f62e0cd79705efa56ab411c4131dcac
 
 <%
 
@@ -213,7 +153,6 @@
 		</div>
 	</div>
 		<input type="hidden" name="quizID" value="<%=quiz.getQuizID() %>">
-<<<<<<< HEAD
 		<input type="hidden" name="quizName" value = "<%=quiz.getQuizName() %>">
 		<input type="hidden" name="startTime" value="<%=QuizSystem.generateCurrentTime() %>">
 		<input type="submit" class='total_submit' value='submit now'/>
@@ -225,14 +164,6 @@
 </form>
 <%		
 		}	
-=======
-		<input type="hidden" name="startTime" value="<%=startTime %>">
-		<input type="submit" class='total_submit' />
-
-	</form>
-	<%		
-		
->>>>>>> be55c9995f62e0cd79705efa56ab411c4131dcac
 	}
 }
 %>
