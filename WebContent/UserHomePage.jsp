@@ -218,7 +218,7 @@
 		<div class="uhp-news col-md-6">
 			<div class="column-name">NEWS</div>
 			<div>
-				<div class="column-name">Quizzes Taken</div>
+				<div class="column-name">Quizzes Taken Recent</div>
 				<%
 					if (frdHistories.size() == 0) {
 						out.println("No recent friend activities; Add more friend!");
@@ -226,7 +226,7 @@
 					int counterHist = 0;
 					for (History hist : frdHistories) {
 						counterHist++;
-						if (counterHist > 20) break;
+						if (counterHist > 15) break;
 						Quiz quiz = new Quiz(hist.quizID);
 						String input = hist.usrID + " took quiz " + quiz.getQuizName() + " at " + hist.end + ", scoring "
 								+ hist.score + ". Review: " + hist.review + ". Rating: " + hist.rating + ".";
@@ -290,7 +290,6 @@
 					ArrayList<Quiz> recentQuizzesPublic = Utilities.getRecentQuiz();
 					Collections.sort(recentQuizzesPublic);
 					for (Quiz quiz : recentQuizzesPublic) {
-						//Quiz quiz = recentQuizzesPublic.get(i);
 				%>
 					<span style='padding-left: 10px;'><%=quiz.getQuizName()%></span>
 				<%
