@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@page import="Quiz.*"%>
 <%@page import="java.util.ArrayList"%>
@@ -8,27 +8,27 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%
-	//Quiz quiz = new Quiz(request.getParameter("quizID"));
-	//Quiz quiz = new Quiz("xinhuiwu2015-11-18 16:19:13");
-	Quiz quiz = new Quiz("xiaotihu2015-11-23 19:12:15");
-	String startTime = QuizSystem.generateCurrentTime();
-	if(quiz.isRandom()){
-		quiz.shuffleQuestion();
-	}
+
+//Quiz quiz = new Quiz(request.getParameter("quizID"));
+Quiz quiz = new Quiz("xinhuiwu2015-11-18 16:19:13");
+session.setAttribute("user","xiaotihu");
+//Quiz quiz = new Quiz("xiaotihu2015-11-23 19:12:15");
+String startTime = QuizSystem.generateCurrentTime();
+/* if(quiz.isRandom()){
+	quiz.shuffleQuestion();
+} */
 %>
 
 <title>Welcome to <%=quiz.getQuizName() %></title>
 </head>
 <body>
-<%
-/* 	if(quiz.isMultiplePages()){
-		out.print("<p>hi</p>"); */
+	<%
 	if(false){
 		System.out.println("--");
-	}else{	
+	}else{
 %>
 
-	<form class='total_form' action = "QuizScore.jsp" method="post" >
+	<form class='total_form' action="QuizScore.jsp" method="post">
 		<%
 			ArrayList<Question> questions = quiz.getQuestions();
 			int count=0;
@@ -82,44 +82,39 @@
 				out.print("</div>");
 			}
 		%>
-		<div id = "rating_review">
+		<div id="rating_review">
 			<div id="rating">
-				<label>Rating</label>
-				<label for="1star">1</label>
-				<input type = "radio" name ="rating" value = "1" id = "1star">
-				<label for="2star">2</label>
-				<input type = "radio" name ="rating" value = "2" id = "2star">
-				<label for="3star">3</label>
-				<input type = "radio" name ="rating" value = "3" id = "3star">				
-				<label for ="4star">4</label>
-				<input type = "radio" name ="rating" value = "4" id = "4star">
-				<label for ="5star">5</label>
-				<input type = "radio" name ="rating" value = "5" id = "5star" checked="checked">
+				<label>Rating</label> <label for="1star">1</label> <input
+					type="radio" name="rating" value="1" id="1star"> <label
+					for="2star">2</label> <input type="radio" name="rating" value="2"
+					id="2star"> <label for="3star">3</label> <input
+					type="radio" name="rating" value="3" id="3star"> <label
+					for="4star">4</label> <input type="radio" name="rating" value="4"
+					id="4star"> <label for="5star">5</label> <input
+					type="radio" name="rating" value="5" id="5star" checked="checked">
 			</div>
 
 			<div>
-				<p><label for="review">Submit Review</label></p>
+				<p>
+					<label for="review">Submit Review</label>
+				</p>
 
-				<textarea rows="3" cols="50" name = "review" id = "review" placeholder = "Love the quiz? Add a review now!"></textarea>
+				<textarea rows="3" cols="50" name="review" id="review"
+					placeholder="Love the quiz? Add a review now!"></textarea>
 			</div>
 
-		
+
 		</div>
 
-		
+
 		<input type="hidden" name="quizID" value="<%=quiz.getQuizID() %>">
 		<input type="hidden" name="startTime" value="<%=startTime %>">
-		<input type="submit" class='total_submit'/>
-		
+		<input type="submit" class='total_submit' />
+
 	</form>
-	
-	<form name='challengeForm' action = "MsgWrite.jsp" method="post">
-		<input type="hidden" name="quizID" value="<%=quiz.getQuizID()%>">
-		<a href="javascript:document.challengeForm.submit()">Challenge your friend!</a>
-	</form>
-<%		
-		
-	}
+	<%	
+
+}
 %>
 </body>
 </html>

@@ -11,89 +11,80 @@
 <body>
 
 <h2>Create a new Quiz:</h2>
-
-<form ACTION="CreateQuiz.jsp">
-Please enter Quiz name:
-<INPUT TYPE="TEXT" NAME="" value="Quiz Name"><BR>
-Please enter Quiz description:
-<INPUT TYPE="TEXT" NAME="" value="Description"><BR>
-Please enter Quiz tags, separate by space:
-<INPUT TYPE="TEXT" NAME="" value="Tags"><BR>
-<input type="checkbox" name="quizopt" value="R"> Question appear in random order<BR>
-<input type="checkbox" name="quizopt" value="M"> Question appear on multiple pages<BR>
-<input type="checkbox" name="quizopt" value="I"> provide immediate correction<BR>
-</form>
-
-<%
-String result[] = request.getParameterValues("Quiz Name"); 
-String quizName = "";
-if (result != null && result.length != 0) {
-	quizName = result[0];
-} 
-String description ="";
-result = request.getParameterValues("Description"); 
-if (result != null && result.length != 0) {
-	description = result[0];
-} 
-
-ArrayList<String> tags = new ArrayList<String>();
-result = request.getParameterValues("Tags");
-if (result != null && result.length != 0) {
-	tags = new ArrayList<String>(Arrays.asList(result[0].split(" ")));
-}
-String userID = (String)session.getAttribute("user");
-String spec = "";
-String select[] = request.getParameterValues("quizopt"); 
-if (select != null && select.length != 0) {
-	//out.println("You have selected: ");
-	for (int i = 0; i < select.length; i++) {
-		spec+=select[i];
+<%	
+	String QuizName = "";
+	String[] result = request.getParameterValues("Quiz Name");
+	if (result != null && result.length != 0) {
+		QuizName = result[0];
 	}
-}
+	
+	String Description = "";
+	result = request.getParameterValues("Description");
+	if (result != null && result.length != 0) {
+		Description = result[0];
+	}
+	
+	String Tags = "";
+	result = request.getParameterValues("Tags");
+	if (result != null && result.length != 0) {
+		Tags = result[0];
+	}
+	
+	String Spec = "";
+	result = request.getParameterValues("Spec");
+	if (result != null && result.length != 0) {
+		Spec = result[0];
+	}
+	
 %>
+
+
+<form name="AddQuestion" method="POST" action="CreateQuestion.jsp">
+Please enter Quiz name:
+<INPUT TYPE="TEXT" NAME="Quiz Name" value="<%=QuizName%>"><BR>
+Please enter Quiz description:
+<INPUT TYPE="TEXT" NAME="Description" value="<%=Description%>"><BR>
+Please enter Quiz tags, separate by space:
+<INPUT TYPE="TEXT" NAME="Tags" value="<%=Tags%>"><BR>
+Please enter Quiz option:
+If you want question appear in random order, enter "R".
+If you want question appear on multiple pages, enter "M".
+If you want provide immediate correction, enter "I".
+You can have multiple options, order does not matter.
+<INPUT TYPE="TEXT" NAME="Spec" value="<%=Spec%>"><BR>
+
+
 <%	
 	ArrayList<Question> questions =  new ArrayList<Question>();	
-//	String questionIDs = "";
-//	String questionText="";
 	if(request.getSession().getAttribute("QuestionList") == null){
 		request.getSession().setAttribute("QuestionList" , questions);	
+	}else{
+		questions = (ArrayList<Question>) request.getSession().getAttribute("QuestionList");
 	}
-	Quiz q = new Quiz(quizName, description, userID, tags, questions, spec);
-	questions = (ArrayList<Question>) request.getSession().getAttribute("QuestionList");
+	
+	
 %>
 Current questions in the Quiz
 <%	
 	int count = 1;
-//	if((String) request.getParameter("QuestionList")!=null){
-//		questionIDs = (String) request.getParameter("QuestionList");
-//	}
-//	if(questionIDs!=null){
-//		for(int i = 0; i<questionIDs.split("#").length; i++){
-//			Question p = new Question(questionIDs.split("#")[i]);
-//			questions.add(p);
-//		}
-//	}
 	if(questions != null){
 		for(Question p:questions){
-			out.println(p.getProbID());
+			out.println("<p> Question "+count+"</p>");
 			count++;
 		}
 	}
-	//System.out.println("in quiz level, problem list is: "+questionIDs);
 %>
-
-<form name="AddQuestion" method="POST" action="CreateQuestion.jsp">
 	 <a href="javascript:document.AddQuestion.submit()">Add Problem</a>
 </form>
-<input type="submit" name = "Submit Quiz" value="Submit Quiz">
-<%
-	result = request.getParameterValues("Submit Quiz"); 
-	if (select != null && select.length != 0){
-		q = new Quiz(quizName, description, userID, tags, questions, spec);
-		q.saveToDB();
-	}
-	
-	
-%>
+<form name="AddQuiz" method="POST" action="AddQuizToDB.jsp">
+	<input type="hidden" name="Quiz Name" value="<%=QuizName%>">
+	<input type="hidden" name="Description" value="<%=Description%>">
+	<input type="hidden" name="Tags" value="<%=Tags%>">
+	<input type="hidden" name="Spec" value="<%=Spec%>">
+	 <a href="javascript:document.AddQuiz.submit()">Create</a>
+</form>
+<form name="CancelQuiz" method="POST" action="UserHomePage.jsp">
+	 <a href="javascript:document.CancelQuiz.submit()">Discard</a>
+</form>
 </body>
 </html>

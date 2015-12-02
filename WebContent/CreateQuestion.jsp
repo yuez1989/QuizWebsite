@@ -16,22 +16,66 @@ if(questions == null){
 	System.out.println("no question list passed in createQuestion");
 	//request.setAttribute("QuestionList", questions);
 }
-System.out.println("in create question, problem list is: "+questions);
-
+//System.out.println("in create question, problem list is: "+questions);
+	String[] result = request.getParameterValues("Quiz Name");
+	String QuizName="";
+	if (result != null && result.length != 0) {
+		QuizName = result[0];
+	}
+	
+	String Description = "";
+	result = request.getParameterValues("Description");
+	if (result != null && result.length != 0) {
+		Description = result[0];
+	}
+	
+	String Tags = "";
+	result = request.getParameterValues("Tags");
+	if (result != null && result.length != 0) {
+		Tags = result[0];
+	}
+	
+	String Spec = "";
+	result = request.getParameterValues("Spec");
+	if (result != null && result.length != 0) {
+		Spec = result[0];
+	}
+	
 %>
 
 <form name="AddFreeResponse" method="POST" action="FreeResponse.jsp">
+	<input type="hidden" name="Quiz Name" value="<%=QuizName%>">
+	<input type="hidden" name="Description" value="<%=Description%>">
+	<input type="hidden" name="Tags" value="<%=Tags%>">
+	<input type="hidden" name="Spec" value="<%=Spec%>">
 	<a href="javascript:document.AddFreeResponse.submit()">Add Free Response Problem</a>
 </form>
 
 
 <form name="AddMultipleChoices" method="POST" action="MultipleChoice.jsp">
+	<input type="hidden" name="Quiz Name" value="<%=QuizName%>">
+	<input type="hidden" name="Description" value="<%=Description%>">
+	<input type="hidden" name="Tags" value="<%=Tags%>">
+	<input type="hidden" name="Spec" value="<%=Spec%>">
 	<a href="javascript:document.AddMultipleChoices.submit()">Add Multiple ChoicesProblem</a>
 </form>
 
 
+
 <form name="AddMatching" method="POST" action="Matching.jsp">
+	<input type="hidden" name="Quiz Name" value="<%=QuizName%>">
+	<input type="hidden" name="Description" value="<%=Description%>">
+	<input type="hidden" name="Tags" value="<%=Tags%>">
+	<input type="hidden" name="Spec" value="<%=Spec%>">
 	<a href="javascript:document.AddMatching.submit()">Add Matching Problem</a>
+</form>
+
+<form name="cancel" method="POST" action="CreateQuiz.jsp">
+	<input type="hidden" name="Quiz Name" value="<%=QuizName%>">
+	<input type="hidden" name="Description" value="<%=Description%>">
+	<input type="hidden" name="Tags" value="<%=Tags%>">
+	<input type="hidden" name="Spec" value="<%=Spec%>">
+	 <a href="javascript:document.cancel.submit()">Cancel</a>
 </form>
 </body>
 </html>

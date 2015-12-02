@@ -31,16 +31,14 @@
 </title>
 </head>
 <body>
-	<h3>Message sent. Redirecting to Messages...</h3>
 	<%
-		String fromID = request.getParameter("fromID");
-		String toID = request.getParameter("toID");
-		String type = request.getParameter("type");
-		String quizID = request.getParameter("quizID");
-		String msg = request.getParameter("msg");
-		Message message = new Message(fromID, toID, msg, type);
-		message.saveToDB();
-		response.setHeader("Refresh", "2;Messages.jsp");
+		ArrayList<Quiz> quizzes = Utilities.getAllQuizzes();
+		for (Quiz quiz : quizzes) {
+	%>
+	<div style="margin-top:60px; margin-left:20%;"><%= quiz.getQuizID() %></div>
+	<%
+			
+		}
 	%>
 </body>
 </html>

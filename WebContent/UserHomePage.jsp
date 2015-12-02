@@ -21,8 +21,7 @@
 	crossorigin="anonymous"></script>
 <script src='UserHomePage.js'></script>
 </head>
-<title>Quizzzz 
-<%
+<title>Quizzzz <%
 	String usrID = "default";
 	if (!session.isNew()) {
 		usrID = (String) session.getAttribute("user");
@@ -35,15 +34,14 @@
 <body>
 	<%
 		User user = new User(usrID);
-	
+
 		/*
 		if (usrID.equals("yuez1989")) {
 			Message msg = new Message("yuezhang","yuez1989","hello may I add as friend?","f");
 			user.addMessage(msg);
 		}
 		*/
-		
-	
+
 		UserInfo info = user.info;
 		ArrayList<Message> unreadMsg = Utilities.unreadMessages(user);
 		ArrayList<History> histories = Utilities.getRecentActivitiesOfUser(usrID);
@@ -57,12 +55,21 @@
 		</div>
 		<div class="personal-header">
 			<div class="inline-part">
+				<form method="POST" action="Person.jsp" target="_blank">
+					<input type="search" name="person" placeholder="search by user ID"
+						style="color: black;" size="25"> <input type="submit"
+						value="Submit" style="color: black;">
+				</form>
+			</div>
+			<div class="inline-part">
 				<span> Welcome, <%=usrID%></span>
 			</div>
 			<div class="inline-part" id="popup-parent">
-				<form name="submitFormMsg" method="POST" action="Messages.jsp" target="_blank">
+				<form name="submitFormMsg" method="POST" action="Messages.jsp"
+					target="_blank">
 					<input type="hidden" name="usrID" value="<%=usrID%>"> <a
-						href="javascript:document.submitFormMsg.submit()" target="_blank">Messages <%
+						href="javascript:document.submitFormMsg.submit()" target="_blank">Messages
+						<%
  	if (unreadMsg.size() > 0) {
  		out.print("(" + unreadMsg.size() + ")");
  	}
@@ -112,7 +119,8 @@
 		<div class="uhp-user col-md-3">
 			<div class="column-name">PROFILE</div>
 			<div class="news-feed">
-				<form name="submitForm" method="POST" action="Person.jsp" target="_blank">
+				<form name="submitForm" method="POST" action="Person.jsp"
+					target="_blank">
 					<input type="hidden" name="person" value="<%=usrID%>"> <a
 						href="javascript:document.submitForm.submit()"><%=usrID%>'s
 						profile</a>
@@ -120,6 +128,21 @@
 			</div>
 			<div class="news-feed">Setting</div>
 			<div class="news-feed">Administration Settings</div>
+			<div class="quiz-options">
+				<div class="create-quiz-button">
+					<form method="POST" action="CreateQuiz.jsp"
+						target="_blank">
+						<input type="submit" value="Create New Quiz"></input>
+					</form>
+				</div>
+				<div class="create-quiz-button">
+					<form method="POST" action="Quiz.jsp" target="_blank">
+						<input type="search" name = "quizID" value="xinhuiwu2015-11-18 16:19:13">
+						<br>
+						<input type="submit" value="Search Quiz">
+					</form>
+				</div>
+			</div>
 			<div class="uhp-user-inner">
 				<div>
 					<span class="section-name">Achievements </span>
@@ -138,7 +161,10 @@
 					<%
 						Calendar cal = new GregorianCalendar();
 						boolean hasRecent = false;
+						int counter = 0;
 						for (History hist : histories) {
+							counter++;
+							if (counter == 10) break;
 							// calculate a date of 3 days ago
 							Date endDate = QuizSystem.convertToDate(hist.end);
 							Date threeDaysAgo = QuizSystem.convertToDate(QuizSystem.minusDay(hist.end, 3));
@@ -186,7 +212,10 @@
 					if (frdHistories.size() == 0) {
 						out.println("No friend activities; Add more friend!");
 					}
+					int counterHist = 0;
 					for (History hist : frdHistories) {
+						counterHist++;
+						if (counterHist > 20) break;
 						Quiz quiz = new Quiz(hist.quizID);
 						String input = hist.usrID + " took quiz " + quiz.getQuizName() + " at " + hist.end + ", scoring "
 								+ hist.score + ". Review: " + hist.review + ". Rating: " + hist.rating + ".";
@@ -197,7 +226,17 @@
 			<div>
 				<div class="column-name">Quizzes Created</div>
 				<%
-					
+					ArrayList<Quiz> recentCreatedQuizzesFrd = new ArrayList<Quiz>();
+					for (String frdID : frdIDs) {
+						ArrayList<Quiz> recents = Utilities.getRecentCreatedQuiz(frdID);
+						recentCreatedQuizzesFrd.addAll(recents);
+					}
+					Collections.sort(recentCreatedQuizzesFrd);
+					for (Quiz quiz : recentCreatedQuizzesFrd) {		
+				%>
+					<span class='news-feed'><%=quiz.getQuizName()%></span>
+				<% 
+					}
 				%>
 			</div>
 			<div>
@@ -225,7 +264,7 @@
 				%>
 			</div>
 			<div>
-				<div class="column-name">Recently Created Quizzes</div>
+				<div class="column-name">Recently Created Quizzes(in Public)</div>
 				<%
 					
 				%>

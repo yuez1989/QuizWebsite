@@ -16,7 +16,7 @@ import java.util.*;
  * 
  * 
  */
-public class Quiz {
+public class Quiz implements Comparable {
 	// quiz info variables
 	protected String quizID; //user could supply
 	protected String quizName; //user could supply
@@ -41,7 +41,7 @@ public class Quiz {
 	static DataBase db = DataBase.getDataBase();
 
 	/**
-	 * Constructor when created by a user
+	 * Constructor - when initialize an empty quiz
 	 */
 	public Quiz() {
 		this.quizID= "";		
@@ -57,6 +57,9 @@ public class Quiz {
 		this.rankList = new ArrayList<String>();
 	}
 	
+	/**
+	 * Constructor - when quiz is created by a user
+	 */
 	public Quiz(String name, String descrip, String creator,
 				ArrayList<String> tags, ArrayList<Question> questions, 
 				String spec) throws SQLException {	
@@ -80,13 +83,8 @@ public class Quiz {
 		 }
 		
 	}
-
-
-	
-	
 	/**
-	 * constructor from database
-	 * 
+	 * Constructor - when get a quiz from database
 	 * @throws SQLException
 	 */
 	public Quiz(String quizID) throws SQLException {
@@ -315,7 +313,7 @@ public class Quiz {
 		updateTags(tags);
 		updateQuestions(questions);
 	}
-	//randomlize question order
+	//Randomize question order
 	public void shuffleQuestion(){
 		Collections.shuffle(questions);
 	}
@@ -349,6 +347,16 @@ public class Quiz {
 		db.executeUpdate(cmd);
 		cmd = "DELETE FROM Quizzes WHERE quizID = \""+id+"\";";
 		db.executeUpdate(cmd);
+	}
+
+	@Override
+	public int compareTo(Object o) {
+		Date timeDate = QuizSystem.convertToDate(updateTime);
+		if (o instanceof Quiz) {
+			Date otherDate = QuizSystem.convertToDate(((Quiz)o).updateTime);
+			return -timeDate.compareTo(otherDate);
+		}
+		return 0;
 	}
 
 }

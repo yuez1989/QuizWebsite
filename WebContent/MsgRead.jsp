@@ -39,7 +39,8 @@
 		if (fromID.equals(usrID))
 				friendID = toID;
 		Message msg = new Message(fromID, toID, time);
-
+		String messageShown = msg.msg;
+		String url = "";
 		// Translate type
 		String typeText = "";
 		char typeCh = msg.type.charAt(0);
@@ -48,6 +49,9 @@
 			typeText = "Friend Request";
 			break;
 		case 'c':
+			int start = msg.msg.indexOf("Quiz.jsp?quizID=");
+			url = msg.msg.substring(start);
+			messageShown = msg.msg.substring(0, start - 1);
 			typeText = "Challenge";
 			break;
 		case 't':
@@ -74,7 +78,13 @@
 				</tr>
 				<tr>
 					<th>Message</th>
-					<td><%=msg.msg%></td>
+					<td><%=messageShown%>
+					<%
+						if (!url.equals("")) { // if there is an url here
+							out.println("<a href='" + url + "'>Click to take the Quiz.</a>");
+						}
+					%>
+					</td>
 				</tr>
 			</table>
 		</div>
@@ -83,10 +93,12 @@
 			<%
 				switch (typeCh) {
 				case 'f':
-					String strAgree = "<div><div class='msg-read-option-abreast'><form name='addFriendForm' method='POST' action='AddFriend.jsp'><input type='hidden' name='friendID' value='" + friendID + "'><a href='javascript:document.addFriendForm.submit()'>Agree</a></form></div>";
-					String strDecline = "<div class='msg-read-option-abreast'><a href = 'Messages.jsp'>Decline</a></div></div>";
-					out.println(strAgree);
-					out.println(strDecline);
+					if (toID.equals(usrID)) {
+						String strAgree = "<div><div class='msg-read-option-abreast'><form name='addFriendForm' method='POST' action='AddFriend.jsp'><input type='hidden' name='friendID' value='" + friendID + "'><a href='javascript:document.addFriendForm.submit()'>Agree</a></form></div>";
+						String strDecline = "<div class='msg-read-option-abreast'><a href = 'Messages.jsp'>Decline</a></div></div>";
+						out.println(strAgree);
+						out.println(strDecline);
+					}
 					break;
 				case 'c':
 					out.println();
