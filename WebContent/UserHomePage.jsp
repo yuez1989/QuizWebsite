@@ -276,10 +276,29 @@
 		<div class="uhp-others col-md-3">
 			<div class="column-name">OTHERS</div>
 			<div>
-				<div class="column-name">Announcement</div>
+				<div class="column-name">Announcements</div>
 				<%
+					ArrayList<String> announcements = new ArrayList<String>();
+					announcements = Utilities.getRecentAnnouncements(10);
 					
+					if (announcements != null) {
+						if (announcements.size() != 0) {
+							for (String s : announcements) {
 				%>
+				<p><%=s%></p>
+				<%
+					}
+						} else {
+				%>
+				<p>No Announcement</p>
+				<%
+					}
+					} else {
+				%>
+				<p>No Announcement</p>
+				<%
+}
+%>
 			</div>
 			<div>
 				<div class="column-name">Popular Quizzes</div>
