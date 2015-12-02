@@ -730,6 +730,22 @@ public class Utilities {
 	}
 
 	/**
+	 * return how many quizzes a user has played, except for one specific quiz
+	 * @param quizID
+	 * @return
+	 * @throws SQLException 
+	 */
+	public static int getQuizNumberPlayed(String usrID, String quizID) throws SQLException{
+		int count = 0;
+		DataBase db = QuizSystem.getQuizSystem().db;
+		ResultSet rsCount = db.executeQuery("SELECT COUNT(distinct quizID) FROM Histories where quizID <> \"" +quizID+ "\" AND usrID =  \'" + usrID+"\' ;");
+		if(rsCount.next()){
+			count = rsCount.getInt(1);
+		}
+		return count;
+	}
+
+	/**
 	 * return how many quizzes a user has created
 	 * @param quizID
 	 * @return
