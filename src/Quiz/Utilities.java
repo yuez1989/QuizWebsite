@@ -151,7 +151,7 @@ public class Utilities {
 		String currentTime = QuizSystem.generateCurrentTime();
 		String time = QuizSystem.minusDay(currentTime, days_of_recent);
 		ArrayList<String> recentAnnouncements = new ArrayList<String>();
-		String command = "SELECT * FROM Announcements WHERE time > \""+time+"\" ORDER BY end DESC;";
+		String command = "SELECT * FROM Announcements WHERE time > \""+time+"\" ORDER BY time DESC;";
 		ResultSet rs = db.executeQuery(command);
 		while(rs.next()){
 			recentAnnouncements.add(rs.getString("content"));
@@ -169,7 +169,7 @@ public class Utilities {
 		String currentTime = QuizSystem.generateCurrentTime();
 		String time = QuizSystem.minusDay(currentTime, daysRecent);
 		ArrayList<String> recentAnnouncements = new ArrayList<String>();
-		String command = "SELECT * FROM Announcements WHERE time > \""+time+"\" ORDER BY end DESC;";
+		String command = "SELECT * FROM Announcements WHERE time > \""+time+"\" ORDER BY time DESC;";
 		ResultSet rs = db.executeQuery(command);
 		while(rs.next()){
 			recentAnnouncements.add(rs.getString("content"));
