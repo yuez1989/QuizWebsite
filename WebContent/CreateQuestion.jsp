@@ -51,6 +51,21 @@ if(questions == null){
 	<a href="javascript:document.AddFreeResponse.submit()">Add Free Response Problem</a>
 </form>
 
+<form name="AddBlank" method="POST" action="FreeResponse.jsp">
+	<input type="hidden" name="Quiz Name" value="<%=QuizName%>">
+	<input type="hidden" name="Description" value="<%=Description%>">
+	<input type="hidden" name="Tags" value="<%=Tags%>">
+	<input type="hidden" name="Spec" value="<%=Spec%>">
+	<a href="javascript:document.AddBlank.submit()">Add Fill in Blank Problem</a>
+</form>
+
+<form name="AddPicResponse" method="POST" action="FreeResponse.jsp">
+	<input type="hidden" name="Quiz Name" value="<%=QuizName%>">
+	<input type="hidden" name="Description" value="<%=Description%>">
+	<input type="hidden" name="Tags" value="<%=Tags%>">
+	<input type="hidden" name="Spec" value="<%=Spec%>">
+	<a href="javascript:document.AddPicResponse.submit()">Add Picture Response Problem</a>
+</form>
 
 <form name="AddMultipleChoices" method="POST" action="MultipleChoice.jsp">
 	<input type="hidden" name="Quiz Name" value="<%=QuizName%>">
