@@ -12,8 +12,10 @@
 <%
 ArrayList<Question> questions = (ArrayList<Question>) request.getSession().getAttribute("QuestionList");
 if(questions != null){
-	System.out.println("question list passed");
+	//System.out.println("question list passed");
 	request.getSession().setAttribute("QuestionList" , questions);
+}else{
+	System.out.println("NO question list passed");
 }
 String[] result = request.getParameterValues("Quiz Name");
 String QuizName="";
@@ -38,27 +40,72 @@ result = request.getParameterValues("Spec");
 if (result != null && result.length != 0) {
 	Spec = result[0];
 }
-%>
-<form name="submitQuestion" method="POST" action="AddFRToDB.jsp">
-	Please enter the question here
-	<INPUT TYPE="TEXT" NAME="question" value=""><BR>
-	Please enter the picture url here
-	<INPUT TYPE="TEXT" NAME="picture" value=""><BR>
-	Please enter the time limit in seconds, if untimed, left it 0
-	<INPUT TYPE="TEXT" NAME="time" value="0"><BR>
-	please enter the solution here(if two solution means the same thing, enter in the same line and seperate with #)
-	<input type="hidden" value="0" id="theValue" /> 
 
-	<p><input type='button' onclick='addInputBox();' NAME= 'Add solution' value='Add solution'/></p> 
+
+String context="";
+String url="";
+String time = "0";
+ArrayList<ArrayList<String>> sol = new ArrayList<ArrayList<String>>();
+String index = "";
+String order = "N";
+result = request.getParameterValues("indexInList");
+if (result != null && result.length != 0) {
+	index = result[0];
+	System.out.println("This is question #"+index);
+}
+if(index!=""){
+	Question p = questions.get(Integer.parseInt(index)-1);
+	if(p!=null){
+		System.out.println("edit a old problem:)");
+		context = p.getText();
+		url = p.getPic();
+		time = Long.toString(p.getTime()/1000);
+		sol = p.getAllSol();
+		if(p.getOrder()!=0){
+			order="Y";
+		}
+	}
+}
+
+%>
+<form name="submitQuestion" method="POST" action="CreateQuiz.jsp">
+	Please enter the question here
+	<INPUT TYPE="TEXT" NAME="question" value="<%=context%>"><BR>
+	Please enter the picture url here
+	<INPUT TYPE="TEXT" NAME="picture" value="<%=url %>"><BR>
+	Please enter the time limit in seconds, if untimed, left it 0
+	<INPUT TYPE="TEXT" NAME="time" value="<%=time %>"><BR>
+	please enter the solution here(if two solution means the same thing, enter in the same line and seperate with #)
+	<input type="hidden" value="<%=sol.size()%>" id="solutionLength" /> 
+	<input type="hidden" value="0" id="theValue" /> 
+	<% 
+	ArrayList<String> soltobox = new ArrayList<String>();
+	for(int i = 0; i<sol.size();i++){
+		String s= "";
+		for(int j = 0; j<sol.get(i).size();j++){
+			s+=sol.get(i).get(j)+"#";
+		}
+		s = s.substring(0,s.length()-1);
+		soltobox.add(s);
+	}
+	for(int i = 0; i<soltobox.size(); i++){
+		%>
+			<input type="hidden" value="<%=soltobox.get(i)%>" id="<%="sol"+i %>" /> 
+		<%
+	}
+	
+	%>
+	<p><input type='button' onclick='addInputBox("");' NAME= 'Add solution' value='Add solution'/></p> 
 
 	<div id="myDiv"> </div> 
 	<script> 
-	<%
-	int count = 0;
-	%>
 	var counter=0;
+	var n = document.getElementById("solutionLength").value;
+	for(i = 0; i<n; i++){
+		addInputBox(document.getElementById('sol'+i).value);
+	}
 	var divIdName;
-	function addInputBox() { 
+	function addInputBox(value) { 
 		var ni = document.getElementById('myDiv'); 
 		var numi = document.getElementById('theValue'); 
 		//var num = (document.getElementById('theValue').value -1)+ 2; 
@@ -70,6 +117,7 @@ if (result != null && result.length != 0) {
 		newdiv.name = divIdName;
 		newdiv.id = divIdName;
 		newdiv.type = "text";
+		newdiv.value = value;
 		//document.write(divIdName);
 		//newdiv.innerHTML ="<input type=\"text\"/>"+divIdName;//<input type=\"button\" onclick=\"removeInputBox(\'"+divIdName+"\')\" value='Remove'/>"+divIdName; 
 		//console.log("*********" + newdiv.innerHTML);
@@ -89,11 +137,14 @@ if (result != null && result.length != 0) {
 	
 	</script>
 	<p><input type='button' onclick='removeInputBox(divIdName);updateName()' NAME= 'remove solution' value='remove solution'/></p> 
-	<input type="checkbox" name="order" value="order"> select if you the solution need to appear in this order<BR>
+	Do solutions need to appear in this order?(Y/N)<BR>
+	<input type="TEXT" name="order" value="<%=order %>"><BR>
 	<input type="hidden" name="Quiz Name" value="<%=QuizName%>">
 	<input type="hidden" name="Description" value="<%=Description%>">
 	<input type="hidden" name="Tags" value="<%=Tags%>">
 	<input type="hidden" name="Spec" value="<%=Spec%>">
+	<input type="hidden" name="questionType" value="FREERESPONSE">
+	<input type="hidden" name="indexInList" value="<%=index%>">
 	 <a href="javascript:document.submitQuestion.submit()">Finish</a>
 </form>
 <form name="cancel" method="POST" action="CreateQuiz.jsp">
@@ -101,6 +152,7 @@ if (result != null && result.length != 0) {
 	<input type="hidden" name="Description" value="<%=Description%>">
 	<input type="hidden" name="Tags" value="<%=Tags%>">
 	<input type="hidden" name="Spec" value="<%=Spec%>">
+	<input type="hidden" name="QuestionCancelled" value="CancelQuestion">
 	 <a href="javascript:document.cancel.submit()">Cancel</a>
 </form>
 
