@@ -34,6 +34,7 @@
 		questions = myquiz.getQuestions();
 		request.getSession().setAttribute("QuestionList" , questions);
 		QuizName = myquiz.getQuizName();
+		System.out.println("edit old quiz name "+QuizName);
 		Description = myquiz.getDescription();
 		for(String s:myquiz.getTags()){
 			Tags += s+" ";
@@ -51,8 +52,9 @@
 		result = request.getParameterValues("Quiz Name");
 		if (result != null && result.length != 0) {
 			QuizName = result[0];
+			System.out.println("new passed in quiz name "+QuizName);
 		}
-		
+	
 		result = request.getParameterValues("Description");
 		if (result != null && result.length != 0) {
 			Description = result[0];
@@ -108,9 +110,13 @@ if(!probCancel.equals("CancelQuestion")){
 		String oneSol[] = sol.split("#");
 		ArrayList<String> oneClass = new ArrayList<String>();
 		for(int j = 0; j<oneSol.length; j++){
-			oneClass.add(oneSol[j]);
+			if(oneSol[j].trim().length()>0){
+				oneClass.add(oneSol[j]);
+			}
 		}
-		solutions.add(oneClass);
+		if(oneClass.size()>0){
+			solutions.add(oneClass);
+		}
 		count++;
 	}	
 	//System.out.println("Solution is:"+solutions);
@@ -147,7 +153,7 @@ if(!probCancel.equals("CancelQuestion")){
 			String oneSol[] = result[0].split(" ");
 			for(int i = 0; i<oneSol.length; i++){
 				ArrayList<String> oneClass = new ArrayList<String>();
-				if(!oneSol[i].equals("")){
+				if(!oneSol[i].trim().equals("")){
 					oneClass.add(oneSol[i]);
 					solutions.add(oneClass);
 				}
@@ -158,7 +164,7 @@ if(!probCancel.equals("CancelQuestion")){
 		String choice = "";
 		while((choice = request.getParameter("Choice "+Character.toString ((char) (count+64))))!=null){
 			System.out.println(choice);
-			if(!choice.equals("")){
+			if(!choice.trim().equals("")){
 				questionText +="<option>"+choice+"</option>";
 			}
 			count++;
@@ -170,7 +176,7 @@ if(!probCancel.equals("CancelQuestion")){
 		String choice = "";
 		while((choice = request.getParameter("Left "+count))!=null){
 			System.out.println(choice);
-			if(!choice.equals("")){
+			if(!choice.trim().equals("")){
 				questionText +="<option_left>"+choice+"</option_left>";
 			}
 			count++;
@@ -179,15 +185,26 @@ if(!probCancel.equals("CancelQuestion")){
 		choice = "";
 		while((choice = request.getParameter("Right "+Character.toString ((char) (count+64))))!=null){
 			System.out.println(choice);
-			if(!choice.equals("")){
+			if(!choice.trim().equals("")){
 				questionText +="<option_right>"+choice+"</option_right>";
 			}
 			count++;
 		}
 		p = new Question(questionText, pictureUrl, solutions,time, userID,order, "MATCH");
 	}else if(QuesType!=null){
+		int solnum = solutions.size();
+		result = request.getParameterValues("NumberOfSulution");
+		if (result != null && result.length != 0) {
+			try { 
+				solnum = Integer.parseInt(result[0]); 
+		    } catch(NumberFormatException e) { 
+		    	solnum = solutions.size();
+		    } catch(NullPointerException e) {
+		    	solnum = solutions.size();
+		    }
+		} 
 		if(!QuesType.equals("")){
-			p = new Question(questionText, pictureUrl, solutions,time, userID,order, QuesType);
+			p = new Question(questionText, pictureUrl, solutions,solnum, time, userID,order, QuesType);
 		}
 	}
 	String index = "";
@@ -221,7 +238,7 @@ If you want question appear on multiple pages, enter "M".<BR>
 If you want provide immediate correction, enter "I".<BR>
 You can have multiple options, order does not matter.<BR>
 <INPUT TYPE="TEXT" NAME="Spec" value="<%=Spec%>"><BR>
-<a href="javascript:document.AddQuestion.submit()">Add Problem</a>
+<a href="javascript:document.AddQuestion.submit()">Add Problem or Finish</a>
 </form>
 
 <%	
@@ -308,14 +325,6 @@ Current questions in the Quiz
 		}
 	}
 %>
-
-<form name="AddQuiz" method="POST" action="AddQuizToDB.jsp">
-	<input type="hidden" name="Quiz Name" value="<%=QuizName%>">
-	<input type="hidden" name="Description" value="<%=Description%>">
-	<input type="hidden" name="Tags" value="<%=Tags%>">
-	<input type="hidden" name="Spec" value="<%=Spec%>">
-	 <a href="javascript:document.AddQuiz.submit()">Create</a>
-</form>
 <form name="CancelQuiz" method="POST" action="AddQuizToDB.jsp">
 	<input type="hidden" name="Discard" value="Discard">
 	 <a href="javascript:document.CancelQuiz.submit()">Discard</a>
