@@ -76,7 +76,16 @@ if(questiongrade >= 1){
 	response.setHeader("Refresh", "1;url=QuizPractice.jsp");
 } 
 
+	if(questiongrade>=1){
 %>
-<p> you get <%=questiongrade %></p>
+	<h3>Yes! You are correct!</h3>
+
+<% }else if (questiongrade==0){ %>
+	<h3>Sorry. You are wrong.</h3>
+	<div>
+		<p>The correct answer should be:</p>
+		<span><%= q.getSol() %></span>
+	</div>
+<%} %>
 </body>
 </html>

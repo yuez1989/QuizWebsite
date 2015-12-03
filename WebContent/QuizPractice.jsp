@@ -114,9 +114,16 @@
 			ArrayList<String> optionsright = q.parseOptionright();
 			int optcnt=1;
 			for(String opt: optionsleft){
-				out.print("<input type=\'text\' name = \'q"+"ans"+optcnt+"\'></input>");
-				out.print("<p>"+opt+"</p>");
-				out.print("<p>"+optionsright.get(optcnt-1)+"</p>");
+				
+				out.println("<p>"+opt);
+				out.print("<select name = \'qans"+optcnt+"\'>");
+				char selectvalue = 'A';
+				for(String optright: optionsright){
+					out.println("<option value=\'"+Character.toString(selectvalue)+"\'>"+optright+"</option>");
+					selectvalue =(char) (selectvalue+1);
+				}
+				out.print("</select></p>");	
+				
 				optcnt++;
 			}
 		}else if(Question.TYPE_BLANKFILL.equals(q.getType())){
