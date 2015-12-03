@@ -90,6 +90,7 @@
 		if(!Utilities.hasAchievement("Amateur Author", userID)){
 			AchievementRecord achRec = new AchievementRecord(userID, "Amateur Author");
 			achRec.saveToDB();
+			out.print("<img src=\'"+Utilities.getImagePathOfAch("Amateur Author")+"\' style=\'width:250px;height:150px;\'>");
 			out.println("<p><b>Congrats! You have just won a new Achievement: Amateur Author by successfully creating one quiz.</b></p>");
 		}
 	}
@@ -97,6 +98,7 @@
 		if(!Utilities.hasAchievement("Prolific Author", userID)){
 			AchievementRecord achRec = new AchievementRecord(userID, "Prolific Author");
 			achRec.saveToDB();	
+			out.print("<img src=\'"+Utilities.getImagePathOfAch("Prolific Author")+"\' style=\'width:250px;height:150px;\'>");
 			out.println("<p><b>Congrats! You have just won a new Achievement: Prolific Author by successfully creating five quizzes.</b></p>");
 		}
 	}
@@ -104,7 +106,8 @@
 		if(!Utilities.hasAchievement("Prodigious Author", userID)){
 	
 		AchievementRecord achRec = new AchievementRecord(userID, "Prodigious Author");
-		achRec.saveToDB();	
+		achRec.saveToDB();
+		out.print("<img src=\'"+Utilities.getImagePathOfAch("Prodigious Author")+"\' style=\'width:250px;height:150px;\'>");
 		out.println("<p><b>Congrats! You have created ten quizzes. You have just won a new Achievement: Prodigious Author</b></p>");
 		}
 	}
@@ -113,6 +116,7 @@
 	
 		AchievementRecord achRec = new AchievementRecord(userID, "Phenomenal Author");
 		achRec.saveToDB();	
+		out.print("<img src=\'"+Utilities.getImagePathOfAch("Phenomenal Author")+"\' style=\'width:250px;height:150px;\'>");
 		out.println("<p><b>Amazing! You have just created thirty quizzes! You have just won a new Achievement: Phenomenal Author</b></p>");
 		}
 	}
@@ -121,6 +125,7 @@
 	
 		AchievementRecord achRec = new AchievementRecord(userID, "Confucius");
 		achRec.saveToDB();	
+		out.print("<img src=\'"+Utilities.getImagePathOfAch("Confucius")+"\' style=\'width:250px;height:150px;\'>");
 		out.println("<p><b>You have just created fifty quizzes!!! You have just won the Achievement of Confucius. You are the king of quiz creators!</b></p>");
 		}
 	}
