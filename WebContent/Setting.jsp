@@ -30,16 +30,10 @@
 <script>
 	window.onload = function() {
 		if (document.getElementById("privacy-indicator").innerHTML == "p") {
-			document.getElementById("default-radio").disabled = true;
-			document.getElementById("friend-radio").disabled = true;
 			document.getElementById("private-radio").checked = true;
 		} else if (document.getElementById("privacy-indicator").innerHTML == "f") {
-			document.getElementById("default-radio").disabled = true;
-			document.getElementById("private-radio").disabled = true;
 			document.getElementById("friend-radio").checked = true;
 		} else if (document.getElementById("privacy-indicator").innerHTML == "d") {
-			document.getElementById("friend-radio").disabled = true;
-			document.getElementById("private-radio").disabled = true;
 			document.getElementById("default-radio").checked = true;
 		} 
 	};
@@ -60,9 +54,10 @@
 	%>
 	<div>
 		<form name="submitMsgForm" action="PrivacySend.jsp" method="POST">
-			<input id="private-radio" type="radio" name="type" value="f">&nbsp;Private: only you could see your profile&nbsp;&nbsp; 
-			<input id="default-radio" type="radio" name="type" value="c">&nbsp;Default: everybody could see your profile&nbsp;&nbsp; 
-			<input id="friend-radio" type="radio" name="type" value="t">&nbsp;Friend: only you and your friend could see your profile&nbsp;&nbsp;
+			<input id="private-radio" type="radio" name="privacy" value='f'>&nbsp;Private: only you could see your profile&nbsp;&nbsp; 
+			<input id="default-radio" type="radio" name="privacy" value='c'>&nbsp;Default: everybody could see your profile&nbsp;&nbsp; 
+			<input id="friend-radio" type="radio" name="privacy" value='t'>&nbsp;Friend: only you and your friend could see your profile&nbsp;&nbsp;
+			<input type="submit" value="Submit">
 		</form>
 	</div>
 </body>
