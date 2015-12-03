@@ -958,6 +958,18 @@ public class Utilities {
 			QuizSystem.db.executeUpdate(cmd);
 	}
 
+	/**
+	 * Check if the user ID is already in database
+	 * @param usrID
+	 * @return
+	 * @throws SQLException
+	 */
+	public static boolean ifUserExists(String usrID) throws SQLException{
+		DataBase db = QuizSystem.getQuizSystem().db;
+		ResultSet rs = db.executeQuery("select * from Users where usrID = \""+usrID+"\";");
+		return rs.next();
+	}
+
 	static public void main(String[] args){
 		DataBase db = QuizSystem.getQuizSystem().db;
 
