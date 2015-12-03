@@ -135,6 +135,14 @@
 				out.println("<p>You made it! Your new Achievement: Quizzzz University Alumni! You have graduated from Quizzzz University by finishing 100 quizzes</p>");
 				}
 			}
+			%>
+	<%
+	double hiScore = Double.parseDouble(Utilities.getHighestScoreOfQuiz(quizID));
+	if(grade >= hiScore){
+		AchievementRecord achRec = new AchievementRecord(usrID, "I am the Greatest");
+		achRec.saveToDB();	
+		out.println("<p>Guess What! You just broke the record of this quiz! We give you the Achievement of \"I am the Greatest\" as reward.</p>");
+	}
 	%>
 
 	<h3>Congratulations!</h3>

@@ -49,12 +49,12 @@ ArrayList<String> options = new ArrayList<String>();
 result = request.getParameterValues("indexInList");
 if (result != null && result.length != 0) {
 	index = result[0];
-	System.out.println("This is question #"+index);
+	//System.out.println("This is question #"+index);
 }
 if(index!=""){
 	Question p = questions.get(Integer.parseInt(index)-1);
 	if(p!=null){
-		System.out.println("edit a old problem:)");
+		//System.out.println("edit a old problem:)");
 		context = p.getText();
 		url = p.getPic();
 		time = Long.toString(p.getTime()/1000);
@@ -67,26 +67,29 @@ if(index!=""){
 }
 %>
 <form name="submitQuestion" method="POST" action="CreateQuiz.jsp">
-	Please enter the question here
-	<INPUT TYPE="TEXT" NAME="question" value="<%=context%>"><BR>
-	Please enter the picture url here
-	<INPUT TYPE="TEXT" NAME="picture" value="<%=url %>"><BR>
-	Please enter the time limit in seconds, if untimed, left it 0
+	Please enter the question here<BR>
+	<textarea  NAME="question" cols="100" rows="5" ><%=context%></textarea><BR>
+	Please enter the picture url here<BR>
+	<INPUT TYPE="TEXT" NAME="picture" value="<%=url %>" style="width: 500px;"><BR>
+	Please enter the time limit in second, if untimed, left it 0<BR>
 	<INPUT TYPE="TEXT" NAME="time" value="<%=time %>"><BR>
 	<input type="hidden" value="<%=sol.size()%>" id="solutionLength" /> 
 	<input type="hidden" value="<%=options.size()%>" id="optLength" />
-	please enter the choices here(if two solution means the same thing, enter in the same line and seperate with #)
+	please enter the choices here<BR>
 	<input type="hidden" value="0" id="theValue" /> 
 	<% 
 	ArrayList<String> soltobox = new ArrayList<String>();
-
+	String soltext="";
 	for(int i = 0; i<sol.size();i++){
-		String s= "";
 		for(int j = 0; j<sol.get(i).size();j++){
-			s+=sol.get(i).get(j)+",";
+			soltext+=sol.get(i).get(j)+"#";
 		}
-		s = s.substring(0,s.length()-1);
-		soltobox.add(s);
+		soltext = soltext.substring(0,soltext.length()-1);
+		soltext +=" ";
+		soltobox.add(soltext);
+	}
+	if(soltext.length()>0){
+		soltext = soltext.substring(0,soltext.length()-1);
 	}
 	if(soltobox.size()==0){
 		String s= "";
@@ -117,11 +120,13 @@ if(index!=""){
 		//var num = (document.getElementById('theValue').value -1)+ 2; 
 		numi.value = counter; 
 		counter++;
-		var newdiv = document.createElement('input'); 
+		var newdiv = document.createElement('textarea'); 
 		divIdName = 'Choice '+String.fromCharCode(counter+64); 
 		newdiv.name = divIdName;
 		newdiv.id = divIdName;
-		newdiv.type = "text";
+		//newdiv.type = "text";
+		newdiv.cols = "40";
+		newdiv.rows = "3";
 		newdiv.value = value;
 		newdiv.placeholder = String.fromCharCode(counter+64);
 		//newdiv.innerHTML ="<input />"+divIdName;//<input type=\"button\" onclick=\"removeInputBox(\'"+divIdName+"\')\" value='Remove'/>"+divIdName; 
@@ -138,9 +143,9 @@ if(index!=""){
 		divIdName = 'Choice '+counter; 
 	}
 	</script>
-	please enter the solution here, if multiple choices are correct, seperate with","
-	<INPUT TYPE="TEXT" NAME="solution" value="<%=soltobox.get(0) %>"><BR>
 	<p><input type='button' onclick='removeInputBox(divIdName);updateName()' NAME= 'remove solution' value='remove Choice'/></p> 
+	please enter the solution here, if multiple choices are correct, separate with space<BR>
+	<INPUT TYPE="TEXT" NAME="solution" value="<%=soltext%>"><BR>
 	<input type="hidden" name="Quiz Name" value="<%=QuizName%>">
 	<input type="hidden" name="Description" value="<%=Description%>">
 	<input type="hidden" name="Tags" value="<%=Tags%>">

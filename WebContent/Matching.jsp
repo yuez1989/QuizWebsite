@@ -70,17 +70,17 @@ if(index!=""){
 }
 %>
 <form name="submitQuestion" method="POST" action="CreateQuiz.jsp">
-	Please enter the question here
-	<INPUT TYPE="TEXT" NAME="question" value="<%=context%>"><BR>
-	Please enter the picture url here
-	<INPUT TYPE="TEXT" NAME="picture" value="<%=url%>"><BR>
-	Please enter the time limit in seconds, if untimed, left it 0
+	Please enter the question here<BR>
+	<textarea  NAME="question" cols="100" rows="5" ><%=context%></textarea><BR>
+	Please enter the picture url here<BR>
+	<INPUT TYPE="TEXT" NAME="picture" value="<%=url %>" style="width: 500px;"><BR>
+	Please enter the time limit in second, if untimed, left it 0<BR>
 	<INPUT TYPE="TEXT" NAME="time" value="<%=time%>"><BR>
 	<input type="hidden" value="<%=sol.size()%>" id="solutionLength" /> 
 	<input type="hidden" value="<%=optionsL.size()%>" id="optLSize" />
 	<input type="hidden" value="<%=optionsR.size()%>" id="optRSize" />
 	
-	please enter the matches here(if two solution means the same thing, enter in the same line and seperate with #)
+	please enter the matches here<BR>
 	<% 
 
 	for(int i = 0; i<optionsL.size(); i++){
@@ -112,12 +112,14 @@ if(index!=""){
 		//var num = (document.getElementById('theValue').value -1)+ 2; 
 		numi.value = counter; 
 		counter++;
-		var newdiv = document.createElement('input'); 
+		var newdiv = document.createElement('textarea'); 
 		divIdName = 'Left '+counter; 
 		//newdiv.setAttribute('id',divIdName); 
 		newdiv.name = divIdName;
 		newdiv.id = divIdName;
-		newdiv.type = "text";
+		//newdiv.type = "text";
+		newdiv.cols = "40";
+		newdiv.rows = "3";
 		newdiv.value = value;
 		newdiv.placeholder = counter;
 		//document.write(divIdName);
@@ -157,12 +159,14 @@ if(index!=""){
 		//var num = (document.getElementById('theValue').value -1)+ 2; 
 		numi.value = counter1; 
 		counter1++;
-		var newdiv = document.createElement('input'); 
+		var newdiv = document.createElement('textarea'); 
 		divIdName1 = 'Right '+String.fromCharCode(counter1+64); 
 		//newdiv.setAttribute('id',divIdName); 
 		newdiv.name = divIdName1;
 		newdiv.id = divIdName1;
-		newdiv.type = "text";
+		newdiv.cols = "40";
+		newdiv.rows = "3";
+		//newdiv.type = "text";
 		newdiv.value = value;
 		newdiv.placeholder = String.fromCharCode(counter1+64);
 		//document.write(divIdName);

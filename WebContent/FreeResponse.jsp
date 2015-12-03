@@ -69,13 +69,13 @@ if(index!=""){
 
 %>
 <form name="submitQuestion" method="POST" action="CreateQuiz.jsp">
-	Please enter the question here
-	<INPUT TYPE="TEXT" NAME="question" value="<%=context%>"><BR>
-	Please enter the picture url here
-	<INPUT TYPE="TEXT" NAME="picture" value="<%=url %>"><BR>
-	Please enter the time limit in seconds, if untimed, left it 0
+	Please enter the question here<BR>
+	<textarea  NAME="question" cols="100" rows="5" ><%=context%></textarea><BR>
+	Please enter the picture url here<BR>
+	<INPUT TYPE="TEXT" NAME="picture" value="<%=url %>" style="width: 500px;"><BR>
+	Please enter the time limit in second, if untimed, left it 0<BR>
 	<INPUT TYPE="TEXT" NAME="time" value="<%=time %>"><BR>
-	please enter the solution here(if two solution means the same thing, enter in the same line and seperate with #)
+	please enter the solution here(if two solution means the same thing, enter in the same line and seperate with #)<BR>
 	<input type="hidden" value="<%=sol.size()%>" id="solutionLength" /> 
 	<input type="hidden" value="0" id="theValue" /> 
 	<% 
@@ -111,13 +111,16 @@ if(index!=""){
 		//var num = (document.getElementById('theValue').value -1)+ 2; 
 		numi.value = counter; 
 		counter++;
-		var newdiv = document.createElement('input'); 
+		var newdiv = document.createElement('textarea'); 
 		divIdName = 'Solution '+counter; 
 		//newdiv.setAttribute('id',divIdName); 
 		newdiv.name = divIdName;
 		newdiv.id = divIdName;
-		newdiv.type = "text";
+		//newdiv.type = "text";
+		newdiv.cols = "80";
+		newdiv.rows = "5";
 		newdiv.value = value;
+		newdiv.placeholder = divIdName;
 		//document.write(divIdName);
 		//newdiv.innerHTML ="<input type=\"text\"/>"+divIdName;//<input type=\"button\" onclick=\"removeInputBox(\'"+divIdName+"\')\" value='Remove'/>"+divIdName; 
 		//console.log("*********" + newdiv.innerHTML);
