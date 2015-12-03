@@ -96,6 +96,13 @@
 		<p><%=person%>
 			has achieved
 		</p>
+		<div class = 'achievements_imag'>
+			<%
+				for (AchievementRecord ach : UserInfo.achievementRecords) {
+					out.print("<img src=\'"+Utilities.getImagePathOfAch(ach.achID)+"\' title = \'"+ach.achID+"\'style=\'width:250px;height:150px;\'>");
+					}
+			%>
+		</div>
 		<ul id='achievements_ul'>
 			<%
 				for (AchievementRecord ach : UserInfo.achievementRecords) {
