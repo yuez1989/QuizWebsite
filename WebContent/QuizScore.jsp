@@ -93,14 +93,14 @@
 				if(!Utilities.hasAchievement("Quiz Taker", usrID)){
 					AchievementRecord achRec = new AchievementRecord(usrID, "Quiz Taker");
 					achRec.saveToDB();
-					out.println("<p>Congrats! You have done your first quiz in Quizzzz, you now have a new Achievement: Quiz Taker</p>");
+					out.println("<p><b>Congrats! You have done your first quiz in Quizzzz, you now have a new Achievement: Quiz Taker</b></p>");
 				}
 			}
 			else if(quizPlayed == 5){
 				if(!Utilities.hasAchievement("Kindergarten", usrID)){
 					AchievementRecord achRec = new AchievementRecord(usrID, "Kindergarten");
 					achRec.saveToDB();	
-					out.println("<p>Congrats! You have just finished your fifth quiz, you have just won a new Achievement: Kindergarten</p>");
+					out.println("<p><b>Congrats! You have just finished your fifth quiz, you have just won a new Achievement: Kindergarten</b></p>");
 				}
 			}
 			else if(quizPlayed == 10){
@@ -108,7 +108,7 @@
 
 				AchievementRecord achRec = new AchievementRecord(usrID, "Primary School");
 				achRec.saveToDB();	
-				out.println("<p>Congrats! You have just finished your tenth quiz, you have just won a new Achievement: Primary School</p>");
+				out.println("<p><b>Congrats! You have just finished your tenth quiz, you have just won a new Achievement: Primary School</b></p>");
 				}
 			}
 			else if(quizPlayed == 30){
@@ -116,7 +116,7 @@
 
 				AchievementRecord achRec = new AchievementRecord(usrID, "Middle School");
 				achRec.saveToDB();	
-				out.println("<p>Nice! You have just won the Achievement of Middle School, you have finished 30 quizzes!</p>");
+				out.println("<p><b>Nice! You have just won the Achievement of Middle School, you have finished 30 quizzes!</b></p>");
 				}
 			}
 			else if(quizPlayed == 50){
@@ -124,7 +124,7 @@
 
 				AchievementRecord achRec = new AchievementRecord(usrID, "High School");
 				achRec.saveToDB();	
-				out.println("<p>Amazing! 50 quizzes have been taken by you, 50 more to go to graduate from Quizzzz University. Your new Achievement: High School</p>");
+				out.println("<p><b>Amazing! 50 quizzes have been taken by you, 50 more to go to graduate from Quizzzz University. Your new Achievement: High School</b></p>");
 				}
 			}
 			else if(quizPlayed == 100){
@@ -132,7 +132,7 @@
 
 				AchievementRecord achRec = new AchievementRecord(usrID, "Quizzzz University Alumni");
 				achRec.saveToDB();	
-				out.println("<p>You made it! Your new Achievement: Quizzzz University Alumni! You have graduated from Quizzzz University by finishing 100 quizzes</p>");
+				out.println("<p><b>You made it! Your new Achievement: Quizzzz University Alumni! You have graduated from Quizzzz University by finishing 100 quizzes</b></p>");
 				}
 			}
 			%>
@@ -141,7 +141,7 @@
 	if(grade >= hiScore){
 		AchievementRecord achRec = new AchievementRecord(usrID, "I am the Greatest");
 		achRec.saveToDB();	
-		out.println("<p>Guess What! You just broke the record of this quiz! We give you the Achievement of \"I am the Greatest\" as reward.</p>");
+		out.println("<p><b>Guess What! You just broke the record of this quiz! We give you the Achievement of \"I am the Greatest\" as reward.</b></p>");
 	}
 	%>
 
