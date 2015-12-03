@@ -48,6 +48,7 @@ String time = "0";
 ArrayList<ArrayList<String>> sol = new ArrayList<ArrayList<String>>();
 String index = "";
 String order = "N";
+String solnum = "";
 result = request.getParameterValues("indexInList");
 if (result != null && result.length != 0) {
 	index = result[0];
@@ -61,9 +62,11 @@ if(index!=""){
 		url = p.getPic();
 		time = Long.toString(p.getTime()/1000);
 		sol = p.getAllSol();
+		solnum = Integer.toString(p.getsolNum());
 		if(p.getOrder()!=0){
 			order="Y";
 		}
+		
 	}
 }
 
@@ -141,7 +144,9 @@ if(index!=""){
 	</script>
 	<p><input type='button' onclick='removeInputBox(divIdName);updateName()' NAME= 'remove solution' value='remove solution'/></p> 
 	Do solutions need to appear in this order?(Y/N)<BR>
-	<input type="TEXT" name="order" value="<%=order %>"><BR>
+	<input type="TEXT" name="order" value="<%=order%>"><BR>
+	Please enter the number of solution needed if number of solution is different from the number of solutions you entered.
+	<input type="TEXT" name="NumberOfSulution" value="<%=solnum%>"><BR>
 	<input type="hidden" name="Quiz Name" value="<%=QuizName%>">
 	<input type="hidden" name="Description" value="<%=Description%>">
 	<input type="hidden" name="Tags" value="<%=Tags%>">
