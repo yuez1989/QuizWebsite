@@ -257,11 +257,16 @@
 						counterHist++;
 						if (counterHist > 15) break;
 						Quiz quiz = new Quiz(hist.quizID);
-						String input = hist.usrID + " took quiz " + quiz.getQuizName() + " at " + hist.end + ", scoring "
-								+ hist.score + ". Review: " + hist.review + ". Rating: " + hist.rating + ".";
-						out.println("<span class='news-feed'>" + input + "</span>");
-					}
-				%>
+						String histPersonStr = "Person.jsp?person=" + hist.usrID;
+						String quizStr = "QuizHomePage.jsp?quizID=" + quiz.getQuizID();
+						quizStr= quizStr.substring(0,quizStr.indexOf(" "))+"_"+quizStr.substring(quizStr.indexOf(" ")+1);
+						%>
+						<span class='news-feed'>
+							<a href=<%=histPersonStr%> target="_blank"><%=hist.usrID%></a> took quiz 
+							<a href=<%=quizStr%> target="_blank"><%=quiz.getQuizName()%></a> at <%=hist.end%>, 
+							scoring <%=hist.score%>. Review: <%= hist.review %>; Rating: <%= hist.rating %>.
+						</span>
+					<% } %>
 			</div>
 			<div>
 				<div class="column-name">Quizzes Created</div>

@@ -944,6 +944,20 @@ public class Utilities {
 		return num;
 	}
 
+	/**
+	 * Update the user privacy status
+	 * TODO test
+	 * @param usrID 
+	 * @param prv the String representation of privacy option
+	 */
+	public static void updateUserPrivacy(String usrID, char prv){
+		String p = Character.toString(prv);
+//		p = p.toLowerCase();
+//		if(p.equals("p") || p.equals("d") || p.equals("f"))
+			String cmd = "UPDATE Users SET privacy = \""+p+"\" WHERE usrID = \""+usrID+"\";";
+			QuizSystem.db.executeUpdate(cmd);
+	}
+
 	static public void main(String[] args){
 		DataBase db = QuizSystem.getQuizSystem().db;
 

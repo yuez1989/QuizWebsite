@@ -23,7 +23,6 @@ public class UserInfo {
 
 	public UserInfo(String usrID) {
 		this.usrID = usrID;
-
 		/* Initialize all supporting info */
 		imagePath = "";
 		friends = new ArrayList<Friend>();
@@ -40,7 +39,7 @@ public class UserInfo {
 		extractAchievementRecordsFromDB();
 		extractHistoriesFromDB();
 	}
-
+	
 	public void extractFriendsFromDB() {
 		// use usrID to query the db and fill the friends list.
 		String command = "SELECT * FROM Friends WHERE usr1ID =\"" + usrID + "\" OR usr2ID = \"" + usrID + "\";";
