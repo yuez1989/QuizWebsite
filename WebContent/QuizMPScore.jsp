@@ -142,6 +142,14 @@
 				}
 			} 
 			
+			
+			double hiScore = Double.parseDouble(Utilities.getHighestScoreOfQuiz(quizID));
+			if(pregrade >= hiScore){
+				AchievementRecord achRec = new AchievementRecord(usrID, "I am the Greatest");
+				achRec.saveToDB();	
+				out.println("<p><b>Guess What! You just broke the record of this quiz! We give you the Achievement of \"I am the Greatest\" as reward.</b></p>");
+			}
+			
 		%>
 		
 	<h3>Congratulations!</h3>
@@ -186,6 +194,10 @@
 <%
 						
 	}else{
+		System.out.println("Previous"+pregrade);
+		System.out.println("Currently"+qgrade);
+
+		
 		if("true".equals(session.getAttribute(quizID+"correction"))){
 			if(qgrade >=1)
 				out.print("<h3>Congrats, it's correct!</h3>");

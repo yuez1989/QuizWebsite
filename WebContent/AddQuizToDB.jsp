@@ -79,7 +79,7 @@
 	}
 %>
 <%
-//	String userID = (String)session.getAttribute("user");
+	String userID = (String)session.getAttribute("user");
 	int quizCreated = Utilities.getQuizNumberCreated(userID);
 	if(quizCreated == 1){
 		if(!Utilities.hasAchievement("Amateur Author", userID)){
