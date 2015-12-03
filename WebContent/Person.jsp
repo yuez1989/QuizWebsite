@@ -21,7 +21,6 @@
 	String person = (String) request.getParameter("person");
 	person = Utilities.searchAccounts(person).get(0);
 	//person = "xinhuiwu";
-	User user = new User(person);
 	UserInfo UserInfo = new UserInfo(person);
 %>
 <title>Quizzzz: Homepage of <%=person%>
@@ -60,10 +59,12 @@
 	</form>
 	<%
 	//can not access the homepage.
-	if (user.privacy == 'P' ||(user.privacy == 'F' && !Utilities.isFriend(usrID, person))) {
+	if (UserInfo.privacy == 'P' ||(UserInfo.privacy == 'F' && !Utilities.isFriend(usrID, person))) {
 		out.print("<h2>Sorry, you don't have access to " + person
 				+ "\'s Homepage</h2>");
 	} else {
+		int countOverAll =0;
+		
 		UserInfo.update();
 %>
 	<div class='friends'>
@@ -72,7 +73,16 @@
 		<ul id='friends_ul'>
 			<%
 				for (Friend frd : UserInfo.friends) {
-						out.print("<li>" + frd.getFriend(person) + "</li>");
+					countOverAll++;
+					String formname = "AccessPerson"+frd.getFriend(person)+countOverAll;
+					String formsubmit = "javascript:document."+formname+".submit()";
+					%>
+						<form name=<%=formname%> method="POST" action="Person.jsp">
+							<input type="hidden" name="person" value="<%=frd.getFriend(person)%>">
+						 	<a href=<%=formsubmit%>> <%=frd.getFriend(person)%></a>
+						</form>
+					<%
+						//out.print("<li>" + frd.getFriend(person) + "</li>");
 					}
 			%>
 		</ul>
