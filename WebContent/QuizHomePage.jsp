@@ -44,7 +44,16 @@
 	
 	double avgScore = Utilities.getQuizAverageScore(quizID);
 	out.print("<p>The average score of this quiz is currently: "+avgScore+"</p>");	
-	
+	String userID = (String)session.getAttribute("user");
+//	if(userID==null) userID = "jinzhiwang";
+	if(quiz.getCreator().equals(userID)){
+		%>
+			<form name="EditQuiz" method="POST" action="CreateQuiz.jsp">
+			<input type="hidden" name="QuizID" value="<%=quizID%>">
+			 <a href="javascript:document.EditQuiz.submit()">Edit</a>
+			</form>
+		<%
+	}
 	out.println("<p><a href=\'Quiz.jsp?quizID="+quizID+"\'>Start Quiz</a> </p>");
 	out.println("<p><a href='QuizPractice.jsp?quizID="+quizID+"\'>Start Quiz in Practice Mode</a> </p>");
 	//TODO realization of editing the quiz
