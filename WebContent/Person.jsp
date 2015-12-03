@@ -12,7 +12,7 @@
 		usrID = (String) session.getAttribute("user");
 		if (usrID == null) {
 			usrID = "default";
-			out.println("<h3>You have not loggedin yet. Please login before visiting the page!</h3>");
+			out.println("<h3>You have not logged in yet. Please login before visiting the page!</h3>");
 			response.setHeader("Refresh", "2;index.jsp");
 		}
 		else {
