@@ -119,12 +119,14 @@ public class Utilities {
 		ResultSet rs1= db.executeQuery(command1);
 		while(rs1.next()){
 			String frdID = rs1.getString("usr2ID");
+			if(!frdID.equals(usrID) && !friendIDs.contains(frdID))
 			friendIDs.add(frdID);
 		}
 		String command2 = "SELECT * FROM Friends WHERE usr2ID = "+"\""+usrID+"\";";
 		ResultSet rs2= db.executeQuery(command2);
 		while(rs2.next()){
-			String frdID = rs2.getString("usr2ID");
+			String frdID = rs2.getString("usr1ID");
+			if(!frdID.equals(usrID) && !friendIDs.contains(frdID))
 			friendIDs.add(frdID);
 		}
 		return friendIDs;
