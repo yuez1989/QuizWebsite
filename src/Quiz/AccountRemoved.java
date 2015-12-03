@@ -48,11 +48,19 @@ public class AccountRemoved extends HttpServlet {
 		
 		if(similarids.isEmpty()){
 			out.println("<h3>No accounts found.</h3>");
+			out.println("<p>Redirect to administrator page in 2 seconds...</p>");
+			response.setHeader("Refresh", "2;url=AdminHomePage.jsp");
+			out.println("<p><a href = \'AdminHomePage.jsp\'>click here to return immediately</p>");	
+			
 		}else if(similarids.size() == 1){
 			out.print("<h3>One accounts found</h3>");
 			Administrator admin = (Administrator)request.getSession().getAttribute("admin");
 			admin.deleteUser(similarids.get(0));
 			out.print("<p> You have Deleted "+similarids.get(0)+"</p>");
+			out.println("<p>Redirect to administrator page in 3 seconds...</p>");
+			out.println("<p><a href = \'AdminHomePage.jsp\'>click here to return immediately</p>");	
+			response.setHeader("Refresh", "3;url=AdminHomePage.jsp");
+			
 		}else{
 			out.print("<h3>Do you mean...<h3>");
 			out.print("<ul>");
@@ -61,7 +69,7 @@ public class AccountRemoved extends HttpServlet {
 			}
 			out.print("</ul>");
 		}
-		out.println("<p><a href = \'AdminHomePage.jsp\'>return to homepage...</p>");	
+		out.println("<p><a href = \'AdminHomePage.jsp\'>return to administration page...</p>");	
 	}
 
 }

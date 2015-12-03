@@ -19,6 +19,8 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"
 	integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ=="
 	crossorigin="anonymous"></script>
+	
+	
 <title>Quizzzz <%
 	String usrID = "default";
 	if (!session.isNew()) {
@@ -31,18 +33,55 @@
 </title>
 </head>
 <body>
-	<%
-		ArrayList<Quiz> quizzes = Utilities.getAllQuizzes();
-		for (Quiz quiz : quizzes) {
-	%>
-	<div style="margin-top:30px; margin-left:20%;">
-	<p>Name: <a href = "QuizHomePage.jsp?quizID=<%=quiz.getQuizID() %>"><%=quiz.getQuizName() %></a></p>
-	<p>Creator: <a href = "Person.jsp?person=<%=quiz.getCreator() %>"><%=quiz.getCreator() %></a></p>
-	<p>Description: <%=quiz.getDescription() %></p>
-	</div>
-	<%
+	<div class="header-line">
+		<div class="logo-header">
+			<div class="logo-header-large"><a href="UserHomePage.jsp">Quizzzz</a></div>
+			<div class="logo-header-small">Only fun learning wakes us up</div>
+		</div>
+		
+		<div class="personal-header">
+			<div class="inline-part">
+				<span> Welcome, <%=usrID%></span>
+			</div>
+		
+			<div class="inline-part">
+				<a href="logout.jsp">Log Out</a>
+			</div>
 			
-		}
-	%>
+		</div>
+	</div>
+	<div class="uhp-content">
+		<div class="uhp-user col-md-3">
+		</div>
+			<div class="uhp-news col-md-6">
+				<div class="column-name">List Of Quizzes</div>
+				<div>
+				
+					<%
+						ArrayList<Quiz> quizzes = Utilities.getAllQuizzes();
+						for (Quiz quiz : quizzes) {
+					%>
+					<div style="margin-top:30px; margin-left:0%;">
+						<p>Name: <a href = "QuizHomePage.jsp?quizID=<%=quiz.getQuizID() %>"><%=quiz.getQuizName() %></a>
+						&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+						Creator: <a href = "Person.jsp?person=<%=quiz.getCreator() %>"><%=quiz.getCreator() %></a></p>
+						<p></p>
+						<p>Description: <%=quiz.getDescription() %></p>
+					</div>
+					<%
+							
+						}
+					%>
+		
+				</div>
+	
+			</div>
+		
+	</div>
+		
+
+
+
+
 </body>
 </html>
