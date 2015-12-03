@@ -24,13 +24,22 @@
 	}
 
 	ArrayList<History> recentActHist = Utilities.getRecentActivitiesOfQuiz(quizID);
+	int countOverAll =0;
 	int count1 = 0;
 	out.print("<p>Recent Activities:</p>");
 	for(History hist : recentActHist){
 		if(count1 == 5) break;
 		count1++;
-		out.print("<p>User "+hist.getUsrID()+" played this quiz at "+hist.getEndTime()+
-				" and got score of "+hist.getScore()+"</p>");
+		countOverAll++;
+		String formname = "AccessPerson"+hist.getUsrID()+countOverAll;
+		String formsubmit = "javascript:document."+formname+".submit()";
+		%>
+			<form name=<%=formname%> method="POST" action="Person.jsp">
+				<input type="hidden" name="person" value="<%=hist.getUsrID()%>">
+			 	<p>User: <a href=<%=formsubmit%>> <%=hist.getUsrID()%></a> played this quiz at <%=hist.getEndTime()%>
+				 and got score of <%=hist.getScore()%></p>
+			</form>
+		<%
 	}
 	
 	ArrayList<History> highScores = Utilities.getHighRecordsOfQuiz(quizID);
@@ -39,7 +48,15 @@
 	for(History hist : highScores){
 		if(count2 == 10) break;
 		count2++;
-		out.print("<p>User: "+hist.getUsrID()+", score: "+hist.getScore()+"</p>");
+		countOverAll++;
+		String formname = "AccessPerson"+hist.getUsrID()+countOverAll;
+		String formsubmit = "javascript:document."+formname+".submit()";
+		%>
+			<form name=<%=formname%> method="POST" action="Person.jsp">
+				<input type="hidden" name="person" value="<%=hist.getUsrID()%>">
+			 	<p>User: <a href=<%=formsubmit%>> <%=hist.getUsrID()%></a> score: <%=hist.getScore()%></p>
+			</form>
+		<%
 	}
 	
 	double avgScore = Utilities.getQuizAverageScore(quizID);
