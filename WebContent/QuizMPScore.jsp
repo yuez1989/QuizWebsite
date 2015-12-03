@@ -34,9 +34,20 @@
 		qgrade = q.grade(ans);
 	}else if(Question.TYPE_MULTIPLECHOICE.equals(q.getType())){
 		ArrayList<String> ans = new ArrayList<String>();
+		if(q.getsolNum()>1){
+			int N = q.parseOption().size();
+			for(int i=1; i<=N; i++){
+				char A = 'A';
+				if( "true".equals(request.getParameter("qans"+i))){
+					ans.add(Character.toString((char)(A+i-1)));
+				}
+			}
+			
+		}else{
+			char ch =request.getParameter("qans1").charAt(0);
+			ans.add(Character.toString(ch));
+		}
 
-		char ch =request.getParameter("qans1").charAt(0);
-		ans.add(Character.toString(ch));
 		qgrade = q.grade(ans);
 	}else if(Question.TYPE_MATCHING.equals(q.getType())){
 		ArrayList<String> optionsleft = q.parseOptionleft();
