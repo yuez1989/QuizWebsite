@@ -89,6 +89,23 @@
 		</form>
 		<%
 	}
+	ArrayList<History> highScoresLastday = Utilities.getTopPerformanceOfLastDay(quizID, QuizSystem.generateCurrentTime());
+	
+	int count3 = 0;
+	out.print("<p>High Scores of last day:</p>");
+	for(History hist : highScoresLastday){
+		if(count3 == 10) break;
+		count3++;
+		countOverAll++;
+		String formname = "AccessPerson"+hist.getUsrID()+countOverAll;
+		String formsubmit = "javascript:document."+formname+".submit()";
+		%>
+			<form name=<%=formname%> method="POST" action="Person.jsp">
+				<input type="hidden" name="person" value="<%=hist.getUsrID()%>">
+			 	<p>User: <a href=<%=formsubmit%>> <%=hist.getUsrID()%></a> score: <%=hist.getScore()%></p>
+			</form>
+		<%
+	}
 	
 	double avgScore = Utilities.getQuizAverageScore(quizID);
 	out.print("<p>The average score of this quiz is currently: "+avgScore+"</p>");	
