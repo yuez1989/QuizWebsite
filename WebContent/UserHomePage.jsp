@@ -45,7 +45,12 @@
 		*/
 
 		UserInfo info = user.info;
-		ArrayList<Message> unreadMsg = Utilities.unreadMessages(user);
+		ArrayList<Message> unreadMsgAll = Utilities.unreadMessages(user);
+		ArrayList<Message> unreadMsg = new ArrayList<Message>(); //(All messages that are received)
+		for (Message msg : unreadMsgAll) {
+			if ((msg.fromID).equals(usrID)) continue;
+			unreadMsg.add(msg);
+		}
 		ArrayList<History> histories = Utilities.getRecentActivitiesOfUser(usrID);
 		ArrayList<History> frdHistories = Utilities.getRecentFriendActivities(usrID);
 		ArrayList<Quiz> popQuizzes = Utilities.getPopularQuiz();
@@ -84,6 +89,7 @@
 					// Calculate different kinds of messages.
 					int newFriendRequests = 0, newChallenges = 0, newTextMessages = 0;
 					for (Message msg : unreadMsg) {
+						if((msg.fromID).equals(usrID)) continue;
 						char type = msg.type.charAt(0);
 						switch (type) {
 						case 'f':
