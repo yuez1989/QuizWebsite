@@ -13,7 +13,13 @@ public class Friend implements Comparable{
 	String usr2ID;
 	String time;
 
+	/**
+	 * Constructor of Friend
+	 * @param usr1ID
+	 * @param usr2ID
+	 */
 	public Friend(String usr1ID, String usr2ID) {
+		if(usr1ID.equals(usr2ID)) return;
 		this.usr1ID = usr1ID;
 		this.usr2ID = usr2ID;
 		DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
@@ -21,7 +27,14 @@ public class Friend implements Comparable{
 		time = df.format(dateobj.getTime()).toString();
 	}
 	
+	/**
+	 * Constructor of Friend
+	 * @param usr1ID
+	 * @param usr2ID
+	 * @param time
+	 */
 	public Friend(String usr1ID, String usr2ID, String time) {
+		if(usr1ID.equals(usr2ID)) return;
 		this.usr1ID = usr1ID;
 		this.usr2ID = usr2ID;
 		this.time = time;
