@@ -8,6 +8,8 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%
 	String quizID = request.getParameter("quizID");
+	if(quizID == null)
+		response.setHeader("Refresh", "0;UserHomePage.jsp");	
 	Quiz quiz = null;
 	ArrayList<String> searchRes = Utilities.searchQuizzes(quizID);
 	if (searchRes.size() == 0) { // if there is a search result

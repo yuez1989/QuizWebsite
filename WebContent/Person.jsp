@@ -19,7 +19,6 @@
 %>
 <%
 	String person = (String) request.getParameter("person");
-	User user = new User(person);
 	person = Utilities.searchAccounts(person).get(0);
 	//person = "xinhuiwu";
 	UserInfo UserInfo = new UserInfo(person);
@@ -45,18 +44,22 @@
 		else {
 			String addStr = "AddFriend.jsp?friendID=" + person;
 		%>
-		<form name='addFriendForm' action="MsgWrite.jsp" method="post">
-			<input type="hidden" name="frdID" value="<%=person%>"> 
-			<a href="javascript:document.addFriendForm.submit()">Send a friend request</a>
-		</form>
+			<a href=<%=addStr%> target="_blank">Add as friend</a>
 		<%	
 			}
 		}
 	%>
 	</div>
+	<%//********************** TODO: Revise this part************************************************************* %>
+	<form name="friendRequest" method="POST" action="???.jsp"
+		target="_blank">
+		<input type="hidden" name="usrID" value="<%=UserInfo.usrID%>">
+		<a href="javascript:document.friendRequest.submit()" target="_blank">
+		</a>
+	</form>
 	<%
 	//can not access the homepage.
-	if (user.privacy == 'p' ||(user.privacy == 'f' && !Utilities.isFriend(usrID, person))) {
+	if (UserInfo.privacy == 'P' ||(UserInfo.privacy == 'F' && !Utilities.isFriend(usrID, person))) {
 		out.print("<h2>Sorry, you don't have access to " + person
 				+ "\'s Homepage</h2>");
 	} else {
@@ -74,12 +77,11 @@
 					String formname = "AccessPerson"+frd.getFriend(person)+countOverAll;
 					String formsubmit = "javascript:document."+formname+".submit()";
 					%>
-			<form name=<%=formname%> method="POST" action="Person.jsp">
-				<input type="hidden" name="person"
-					value="<%=frd.getFriend(person)%>"> <a href=<%=formsubmit%>>
-					<%=frd.getFriend(person)%></a>
-			</form>
-			<%
+						<form name=<%=formname%> method="POST" action="Person.jsp">
+							<input type="hidden" name="person" value="<%=frd.getFriend(person)%>">
+						 	<a href=<%=formsubmit%>> <%=frd.getFriend(person)%></a>
+						</form>
+					<%
 						//out.print("<li>" + frd.getFriend(person) + "</li>");
 					}
 			%>
