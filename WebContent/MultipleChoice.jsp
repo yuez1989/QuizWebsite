@@ -85,7 +85,7 @@ if(index!=""){
 			soltext+=sol.get(i).get(j)+"#";
 		}
 		soltext = soltext.substring(0,soltext.length()-1);
-		soltext +=" ";
+		soltext +=",";
 		soltobox.add(soltext);
 	}
 	if(soltext.length()>0){
