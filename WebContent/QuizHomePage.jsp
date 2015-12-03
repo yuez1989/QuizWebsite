@@ -37,7 +37,7 @@
 			<form name=<%=formname%> method="POST" action="Person.jsp">
 				<input type="hidden" name="person" value="<%=hist.getUsrID()%>">
 			 	<p>User: <a href=<%=formsubmit%>> <%=hist.getUsrID()%></a> played this quiz at <%=hist.getEndTime()%>
-				 and got score of "+hist.getScore()</p>
+				 and got score of <%=hist.getScore()%></p>
 			</form>
 		<%
 	}
