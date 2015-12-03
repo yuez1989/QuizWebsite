@@ -30,22 +30,22 @@
 </title>
 </head>
 <body>
-	<h3>Message Sent, redirecting back...</h3>
 	<%
 		String fromID = usrID;
 		String toID = request.getParameter("toID");
 		User receiver = new User(toID);
 		if (fromID.equals(toID)) {
-			out.println("<h3>You are trying to send a message to yourself...</h3>");
-			response.setHeader("Refresh", "1;Messages.jsp");
-		} else if (!Utilities.userExists(usrID)) {
-			out.println("<h3>The user you send message to does not exist!</h3>");
-			response.setHeader("Refresh", "1;Messages.jsp");
+			out.println("<h3>You are trying to send a message to yourself! Redirecting back...</h3>");
+			response.setHeader("Refresh", "2;Messages.jsp");
+		} else if (!Utilities.ifUserExists(toID)) {
+			out.println("<h3>The user you send message to does not exist! Redirecting back...</h3>");
+			response.setHeader("Refresh", "2;Messages.jsp");
 		}
 		else { // normal sending situation
 	%>
+	<h3>Message Sent, redirecting back...</h3>
 	<%
-		String type = request.getParameter("type");
+			String type = request.getParameter("type");
 			String quizID = request.getParameter("quizID");
 			String msg = request.getParameter("msg");
 			Message message = new Message(fromID, toID, msg, type);
