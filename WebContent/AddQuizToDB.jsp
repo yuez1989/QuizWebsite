@@ -78,6 +78,48 @@
 		q.saveToDB();
 	}
 %>
+<%
+//	String userID = (String)session.getAttribute("user");
+	int quizCreated = Utilities.getQuizNumberCreated(userID);
+	if(quizCreated == 1){
+		if(!Utilities.hasAchievement("Amateur Author", userID)){
+			AchievementRecord achRec = new AchievementRecord(userID, "Amateur Author");
+			achRec.saveToDB();
+			out.println("<p>Congrats! You have just won a new Achievement: Amateur Author by successfully creating one quiz.</p>");
+		}
+	}
+	else if(quizCreated == 5){
+		if(!Utilities.hasAchievement("Prolific Author", userID)){
+			AchievementRecord achRec = new AchievementRecord(userID, "Prolific Author");
+			achRec.saveToDB();	
+			out.println("<p>Congrats! You have just won a new Achievement: Prolific Author by successfully creating five quizzes.</p>");
+		}
+	}
+	else if(quizCreated == 10){
+		if(!Utilities.hasAchievement("Prodigious Author", userID)){
+	
+		AchievementRecord achRec = new AchievementRecord(userID, "Prodigious Author");
+		achRec.saveToDB();	
+		out.println("<p>Congrats! You have created ten quizzes. You have just won a new Achievement: Prodigious Author</p>");
+		}
+	}
+	else if(quizCreated == 30){
+		if(!Utilities.hasAchievement("Phenomenal Author", userID)){
+	
+		AchievementRecord achRec = new AchievementRecord(userID, "Phenomenal Author");
+		achRec.saveToDB();	
+		out.println("<p>Amazing! You have just created thirty quizzes! You have just won a new Achievement: Phenomenal Author</p>");
+		}
+	}
+	else if(quizCreated == 50){
+		if(!Utilities.hasAchievement("Confucius", userID)){
+	
+		AchievementRecord achRec = new AchievementRecord(userID, "Confucius");
+		achRec.saveToDB();	
+		out.println("<p>You have just created fifty quizzes!!! You have just won the Achievement of Confucius. You are the king of quiz creators! </p>");
+		}
+	}
+%>
 
 <form name="FinishQuiz" method="POST" action="UserHomePage.jsp">
 	 <a href="javascript:document.FinishQuiz.submit()">Back to Homepage</a>
