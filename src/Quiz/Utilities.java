@@ -514,6 +514,32 @@ public class Utilities {
 	}
 
 	/**
+	 * Given a time period and quiz ID, get the performance of all players in last 24 hours
+	 * @param time
+	 * @return
+	 * @throws SQLException
+	 */
+	public static ArrayList<History> getTopPerformanceOfLastDay(String quizID,String time) throws SQLException{
+		ArrayList<History> recentTopPerformance = new ArrayList<History>();
+		String lastDay = QuizSystem.minusDay(time);
+		String command = "SELECT * FROM Histories WHERE end > \""+lastDay+"\" AND quizID = "+"\""+quizID+"\" ORDER BY score DESC;";
+		ResultSet rs = db.executeQuery(command);
+		ArrayList<String> qids = new ArrayList<String>();
+		ArrayList<String> uids = new ArrayList<String>();
+		ArrayList<String> endtimes = new ArrayList<String>();
+		while(rs.next()){
+			qids.add(rs.getString("quizID"));
+			uids.add(rs.getString("usrID"));
+			endtimes.add(rs.getString("end"));
+		}
+		for(int i = 0; i<qids.size();i++){
+			History hist = new History(qids.get(i),uids.get(i), endtimes.get(i));
+			recentTopPerformance.add(hist);
+		}
+		return recentTopPerformance;
+	}
+
+	/**
 	 * Get all quizzes 
 	 * @param usrID
 	 * @return Arraylist of quizzes
