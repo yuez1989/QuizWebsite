@@ -127,7 +127,11 @@
 				</form>
 			</div>
 			<div class="news-feed">Setting</div>
-			<div class="news-feed">Administration Settings</div>
+			<% if (info.permission) { %>
+				<div class="news-feed"><a href="AdminHomePage.jsp">Administration Settings</a></div>
+			<%
+				}
+			%>
 			<div class="quiz-options">
 				<div class="create-quiz-button">
 					<form method="POST" action="CreateQuiz.jsp"
