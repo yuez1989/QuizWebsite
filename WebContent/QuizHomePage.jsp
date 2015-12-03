@@ -10,7 +10,7 @@
 <%
 	String quizID =  request.getParameter("quizID");
 	System.out.println("*********QUIZID" + quizID + "*********");
-	if (quizID.indexOf('_') >= 0) {
+	if (quizID.lastIndexOf('_') >= 0) {
 		quizID = quizID.substring(0,quizID.indexOf("_"))+" "+quizID.substring(quizID.indexOf("_") + 1);
 		System.out.println("*********DE%OF" + quizID + "*********");
 	}

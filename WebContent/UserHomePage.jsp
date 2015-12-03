@@ -190,6 +190,7 @@
 								hasRecent = true;
 								String quizName = new Quiz(hist.quizID).getQuizName();
 								String quizStr = "QuizHomePage.jsp?quizID=" + hist.quizID;
+								quizStr= quizStr.substring(0,quizStr.indexOf(" "))+"_"+quizStr.substring(quizStr.indexOf(" ")+1);
 							%>
 							<span class='column-indent'><a href=<%=quizStr%> target="_blank"><%= quizName %></a></span>
 							<%
@@ -210,7 +211,6 @@
 						for (Quiz quiz : createSelf) {
 							String quizStr = "QuizHomePage.jsp?quizID=" + quiz.getQuizID();
 							quizStr= quizStr.substring(0,quizStr.indexOf(" "))+"_"+quizStr.substring(quizStr.indexOf(" ")+1);
-							System.out.println("********LINKED:" + quizStr + "");
 					%>
 						<span class='column-indent'><a href=<%=quizStr%> target="_blank"><%=quiz.getQuizName()%></a></span>
 					<%
@@ -273,6 +273,7 @@
 					Collections.sort(recentCreatedQuizzesFrd);
 					for (Quiz quiz : recentCreatedQuizzesFrd) {		
 						String quizStr = "QuizHomePage.jsp?quizID=" + quiz.getQuizID();
+						quizStr= quizStr.substring(0,quizStr.indexOf(" "))+"_"+quizStr.substring(quizStr.indexOf(" ")+1);
 				%>
 					<span class='news-feed'><a href=<%=quizStr%> target="_blank"><%=quiz.getQuizName()%></a></span>
 				<% 
@@ -329,6 +330,7 @@
 				<%
 					for (Quiz quiz : popQuizzes) {
 						String quizStr = "QuizHomePage.jsp?quizID=" + quiz.getQuizID();
+						quizStr= quizStr.substring(0,quizStr.indexOf(" "))+"_"+quizStr.substring(quizStr.indexOf(" ")+1);
 				%>
 					<span style='padding-left: 10px;'><a href=<%=quizStr%> target="_blank"><%=quiz.getQuizName()%></a></span>
 				<%
@@ -342,6 +344,7 @@
 					Collections.sort(recentQuizzesPublic);
 					for (Quiz quiz : recentQuizzesPublic) {
 						String quizStr = "QuizHomePage.jsp?quizID=" + quiz.getQuizID();
+						quizStr= quizStr.substring(0,quizStr.indexOf(" "))+"_"+quizStr.substring(quizStr.indexOf(" ")+1);
 				%>
 					<span style='padding-left: 10px;'><a href=<%=quizStr%> target="_blank"><%=quiz.getQuizName()%></a></span>
 				<%
