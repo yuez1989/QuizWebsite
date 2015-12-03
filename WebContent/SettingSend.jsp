@@ -30,7 +30,7 @@
 </title>
 </head>
 <body>
-	<h3>Message Sent, redirecting back...</h3>
+	<h3>Message sent. Redirecting to Messages...</h3>
 	<%
 		String fromID = request.getParameter("fromID");
 		String toID = request.getParameter("toID");
@@ -39,7 +39,7 @@
 		String msg = request.getParameter("msg");
 		Message message = new Message(fromID, toID, msg, type);
 		message.saveToDB();
-		response.setHeader("Refresh", "0;Messages.jsp");
+		response.setHeader("Refresh", "2;Messages.jsp");
 	%>
 </body>
 </html>
