@@ -127,8 +127,8 @@
 				</form>
 			</div>
 			<div class="news-feed">Setting</div>
-			<% if (info.permission) { %>
-				<div class="news-feed"><a href="AdminHomePage.jsp">Administration Settings</a></div>
+			<% if (user.permission == 1) { %>
+				<div class="news-feed"><a href="AdminHomePage.jsp" target="_blank">Administration Settings</a></div>
 			<%
 				}
 			%>

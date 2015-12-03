@@ -70,14 +70,15 @@ public class User {
 	 * Extract permission information from DB
 	 */
 	public void extractpermissionFromDB() {
-		permission = 0;
-		String command = "SELECT permission FROM Users WHERE usrID = \"" + usrID + "\";";		System.out.println(command);
+		this.permission = 0;
+		System.out.println("********permission is 0*********");
+		String command = "SELECT permission FROM Users WHERE usrID = \"" + usrID + "\";";		
 		try{
 			ResultSet rs = QuizSystem.db.executeQuery(command);
 			if(rs.next()){
-				String str = rs. getString("permission");
-				if (str.equals("true")) {
-					permission = 1;
+				if (rs. getInt("permission") == 1) {
+					System.out.println("********permission is 1*********");
+					this.permission = 1;
 				}
 			}
 		} catch (SQLException e) {

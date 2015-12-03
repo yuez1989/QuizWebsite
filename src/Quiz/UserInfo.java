@@ -10,10 +10,11 @@ import java.security.NoSuchAlgorithmException;
 
 public class UserInfo {
 	public String usrID;
+	/*
 	protected String password;
 	public String time;
-	public boolean permission;
-	public char privacy;
+	public int permission;
+	public char privacy;*/
 	public String imagePath;
 	public ArrayList<Friend> friends;
 	public ArrayList<Message> messages; // sort it according to time?
