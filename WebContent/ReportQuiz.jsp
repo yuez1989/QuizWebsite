@@ -16,7 +16,7 @@
 	ArrayList<String> Admins = new ArrayList<String>();
 	Admins = Utilities.getAllAdminIDs();
 	for(String admin:Admins){
-		String report = "Quiz with Quiz ID "+"\""+quizID+"\""+" is Inappropriate";
+		String report = "Quiz with Quiz ID "+quizID+" is Inappropriate";
 		Message m = new Message(usrID, admin, report,"t");
 		m.saveToDB();
 	}
