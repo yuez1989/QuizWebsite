@@ -16,7 +16,7 @@ public class AchievementRecord implements Comparable{
 	public AchievementRecord(String usrID, String achID) {
 		this.usrID = usrID;
 		this.achID = achID;
-		DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+		DateFormat df = new SimpleDateFormat("yy/MM/dd HH:mm:ss");
 		Date dateobj = new Date();
 		time = df.format(dateobj.getTime()).toString();
 	}

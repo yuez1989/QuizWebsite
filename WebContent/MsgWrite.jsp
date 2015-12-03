@@ -31,13 +31,19 @@
 </title>
 <script>
 	window.onload = function() {
-		if (document.getElementById("challenge-indicator").innerHTML == "NO") { // not challenge mode
-			document.getElementById("challenge-radio").disabled = true;
-			document.getElementById("text-radio").checked = true;
-		} else { // challenge mode
+		if (document.getElementById("challenge-indicator").innerHTML == "YES") { // challenge mode
 			document.getElementById("friend-radio").disabled = true;
 			document.getElementById("text-radio").disabled = true;
 			document.getElementById("challenge-radio").checked = true;
+		} 
+		else if (document.getElementById("friend-indicator").innerHTML == "YES") {
+			document.getElementById("challenge-radio").disabled = true;
+			document.getElementById("text-radio").disabled = true;
+			document.getElementById("friend-radio").checked = true;
+		}
+		else { // pure text mode
+			document.getElementById("challenge-radio").disabled = true;
+			document.getElementById("text-radio").checked = true;
 		}
 	};
 </script>
@@ -47,12 +53,19 @@
 		User user = new User(usrID);
 		UserInfo info = user.info;
 
+		/* Detect which type this request is sent from other forms*/
 		String quizID = request.getParameter("quizID");
 		// Let javascript control what options are grayed
 		if (quizID == null) { // see if a valid quizID is passed here
 			out.println("<div id='challenge-indicator' style='display:none;'>NO</div>");
 		} else {
 			out.println("<div id='challenge-indicator' style='display:none;'>YES</div>");
+		}
+		String frdID = request.getParameter("frdID");
+		if (frdID == null) { // see if a valid quizID is passed here
+			out.println("<div id='friend-indicator' style='display:none;'>NO</div>");
+		} else {
+			out.println("<div id='friend-indicator' style='display:none;'>YES</div>");
 		}
 	%>
 	<div class="msg-write-box">
@@ -61,7 +74,18 @@
 			<form name="submitMsgForm" action="MsgSend.jsp" method="POST">
 				<input type="hidden" name="fromID" value="<%=usrID%>">
 				<input type="hidden" name="quizID" value="<%=quizID%>">
-				<input class="msg-write-input" type="text" name="toID" placeholder="Enter Receiver ID" required>
+				<% 
+					if (frdID == null) {
+				%>
+					<input class="msg-write-input" type="text" name="toID" placeholder="Enter Receiver ID" required>
+				<%	
+					}
+					else {
+				%>
+					<input class="msg-write-input" type="text" name="toID" value=<%=frdID%> required>
+				<%
+					}
+				%>
 				<div class="msg-write-input">
 					<input id="friend-radio" type="radio" name="type" value="f">&nbsp;Friend
 					Request&nbsp;&nbsp; <input id="challenge-radio" type="radio"
