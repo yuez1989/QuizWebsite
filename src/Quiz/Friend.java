@@ -22,7 +22,7 @@ public class Friend implements Comparable{
 		if(usr1ID.equals(usr2ID)) return;
 		this.usr1ID = usr1ID;
 		this.usr2ID = usr2ID;
-		DateFormat df = new SimpleDateFormat("yy/MM/dd HH:mm:ss");
+		DateFormat df = new SimpleDateFormat("dd-MM-yy HH:mm:ss");
 		Date dateobj = new Date();
 		time = df.format(dateobj.getTime()).toString();
 	}
