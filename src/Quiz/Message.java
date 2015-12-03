@@ -18,7 +18,7 @@ public class Message implements Comparable{
 		toID = to;
 		this.type = type;
 		
-		DateFormat df = new SimpleDateFormat("yy/MM/dd HH:mm:ss");
+		DateFormat df = new SimpleDateFormat("yy-MM-dd HH:mm:ss");
 		Date dateobj = new Date();
 		time = df.format(dateobj);
 		System.out.println("TIME IS: " + time);
