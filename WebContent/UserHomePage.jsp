@@ -150,7 +150,7 @@
 						<input type="search" name = "quizID" value="xinhuiwu2015-11-18 16:19:13">
 						<br>
 						<input type="submit" value="Search Quiz">
-						<a href="Quizzes.jsp">See all Quizzes</a>
+						<a href="Quizzes.jsp" target="_blank">See all Quizzes</a>
 					</form>
 				</div>
 			</div>
