@@ -8,8 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
 
 <%		
-//String usrID = (String) session.getAttribute("user");
-String usrID ="xiaotihu";
+String usrID = (String) session.getAttribute("user");
 Administrator admin = new Administrator(usrID);
 session.setAttribute("admin", admin);
 %>

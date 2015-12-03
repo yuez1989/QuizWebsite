@@ -15,7 +15,11 @@
 	session.removeAttribute("correct_map");
 	session.removeAttribute("cursor");
 	
-	//TODO: check for achievement!
+	if(!Utilities.hasAchievement("Practice makes perfect", (String)session.getAttribute("user"))){
+		AchievementRecord achRec = new AchievementRecord((String)session.getAttribute("user"), "Practice makes perfect");
+		achRec.saveToDB();	
+		out.println("<h3>You have just won a new Achievement: Quizzzz University Alumni!</h3>");
+	}
 %>
 <h3>Congratulations, you have went through practice for <%=quiz.getQuizName() %></h3>
 <p>Redirecting to Quiz Page...</p>

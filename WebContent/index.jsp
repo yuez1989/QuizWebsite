@@ -14,7 +14,7 @@
 <%
 // Test if you have already logged in
 String usrID = "default";
-if (!session.isNew()) {
+if (!session.isNew() || session.isNew()) {
 	usrID = (String) session.getAttribute("user");
 	if (usrID != null) {
 		response.setHeader("Refresh", "0;UserHomePage.jsp");
