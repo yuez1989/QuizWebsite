@@ -132,7 +132,8 @@
 					<a href="javascript:document.submitForm.submit()"><%=usrID%>'s profile</a>
 				</form>
 			</div>
-			<div class="news-feed">Setting</div>
+			<% String settingStr = "Setting.jsp?usrID=" + usrID; %>
+			<div class="news-feed"><a href=<%=settingStr%> target="_blank">Setting</a></div>
 			<% if (user.permission == 1) { %>
 				<div class="news-feed"><a href="AdminHomePage.jsp" target="_blank">Administration Settings</a></div>
 			<%

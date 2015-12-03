@@ -26,20 +26,16 @@
 	if (usrID == null)
 		usrID = "default";
 	out.println(usrID);
+	User user = new User(usrID);
 %>
 </title>
 </head>
 <body>
-	<h3>Message Sent, redirecting back...</h3>
+	<h3>Setting saved...</h3>
 	<%
-		String fromID = request.getParameter("fromID");
-		String toID = request.getParameter("toID");
-		String type = request.getParameter("type");
-		String quizID = request.getParameter("quizID");
-		String msg = request.getParameter("msg");
-		Message message = new Message(fromID, toID, msg, type);
-		message.saveToDB();
-		response.setHeader("Refresh", "0;Messages.jsp");
+		user.privacy = request.getParameter("privacy").charAt(0);
+		user.saveToDB();
+		response.setHeader("Refresh", "0;UserHomePage.jsp");
 	%>
 </body>
 </html>
