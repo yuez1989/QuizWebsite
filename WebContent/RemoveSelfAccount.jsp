@@ -34,6 +34,7 @@
 		String self = request.getParameter("selfID");
 		if (self.equals(usrID)) {
 			Administrator.deleteSelf(self); // not very safe here...
+			request.getSession().invalidate();
 	%>
 			<h3>Your account is removed, please sign up a new one. DON'T LEAVE US!!!</h3>
 	<%
