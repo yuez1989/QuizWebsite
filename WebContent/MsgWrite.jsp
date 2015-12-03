@@ -67,6 +67,8 @@
 		} else {
 			out.println("<div id='friend-indicator' style='display:none;'>YES</div>");
 		}
+		
+		String textToID = request.getParameter("textToID");
 	%>
 	<div class="msg-write-box">
 		<div class="msg-write-header">Write a New Message</div>
@@ -76,13 +78,20 @@
 				<input type="hidden" name="quizID" value="<%=quizID%>">
 				<% 
 					if (frdID == null) {
+						if (textToID == null) {
 				%>
-					<input class="msg-write-input" type="text" name="toID" placeholder="Enter Receiver ID" required>
+							<input class="msg-write-input" type="text" name="toID" placeholder="Enter Receiver ID" required>
 				<%	
+						}
+						else { 
+				%>
+							<input class="msg-write-input" type="text" name="toID" value=<%=textToID%> required>
+				<%
+						}
 					}
 					else {
 				%>
-					<input class="msg-write-input" type="text" name="toID" value=<%=frdID%> required>
+						<input class="msg-write-input" type="text" name="toID" value=<%=frdID%> required>
 				<%
 					}
 				%>

@@ -52,7 +52,13 @@
 		<%	
 			}
 		}
-	%>
+		%>
+	</div>
+	<div class='send-message-to-person'>
+		<form name='sendMsgForm' action="MsgWrite.jsp" method="post">
+			<input type="hidden" name="textToID" value="<%=person%>">
+			<a href="javascript:document.sendMsgForm.submit()">Send <%=person%> a message</a>
+		</form>
 	</div>
 	<%
 	//can not access the homepage.
