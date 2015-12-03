@@ -56,7 +56,7 @@
 	</div>
 	<%
 	//can not access the homepage.
-	if (user.privacy == 'p' ||(user.privacy == 'f' && !Utilities.isFriend(usrID, person))) {
+	if ((!usrID.equals(person)) && (user.privacy == 'p' || (user.privacy == 'f' && !Utilities.isFriend(usrID, person)))) {
 		out.print("<h2>Sorry, you don't have access to " + person
 				+ "\'s Homepage</h2>");
 	} else {
