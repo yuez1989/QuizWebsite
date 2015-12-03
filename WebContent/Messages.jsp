@@ -21,12 +21,10 @@
 	crossorigin="anonymous"></script>
 <title>Quizzzz <%
 	String usrID = "default";
-	if (!session.isNew()) {
-		usrID = (String) session.getAttribute("user");
-		if (usrID == null) {
-			usrID = "default";
-			response.setHeader("Refresh", "0;index.jsp");
-		}		
+	usrID = (String) session.getAttribute("user");
+	if (usrID == null) {
+		usrID = "default";
+		response.setHeader("Refresh", "0;index.jsp");
 	}
 	out.println(usrID);
 %>
