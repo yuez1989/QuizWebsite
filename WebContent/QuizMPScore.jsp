@@ -154,6 +154,16 @@
 			} 
 			
 		%>
+		<%
+	double hiScore = Double.parseDouble(Utilities.getHighestScoreOfQuiz(quizID));
+	if(pregrade >= hiScore && !Utilities.hasAchievement("I am the Greatest", usrID)){
+		AchievementRecord achRec = new AchievementRecord(usrID, "I am the Greatest");
+		achRec.saveToDB();	
+		out.println("<p>Guess What! You just broke the record of this quiz! We give you the Achievement of \"I am the Greatest\" as reward.</p>");
+	}
+	%>
+		
+		
 		
 	<h3>Congratulations!</h3>
 	<h3>
