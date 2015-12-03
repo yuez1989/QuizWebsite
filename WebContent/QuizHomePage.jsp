@@ -122,6 +122,12 @@
 	if (!usrID.equals("default")) {
 		out.println("<p><a href=\'Quiz.jsp?quizID="+quizID+"\'>Start Quiz</a> </p>");
 		out.println("<p><a href='QuizPractice.jsp?quizID="+quizID+"\'>Start Quiz in Practice Mode</a> </p>");
+		%>
+		<form name="ReportQuiz" method="POST" action="ReportQuiz.jsp">
+		<input type="hidden" name="QuizID" value="<%=quizID%>"> <a
+			href="javascript:document.ReportQuiz.submit()">Report Inappropriate</a>
+		</form>
+	<%
 	}
 	else {
 	%>
@@ -129,7 +135,7 @@
 	<p>You cannot do or practice any quizzes if you are not logged in. Click <a href="CreateAccount.html">here</a> to sign up and <a href="index.jsp">here</a> to log in.</p>
 	<%
 	}
-	out.println("<p><a href=homepage.jsp>Go Back To Home Page</a> </p>");
+	out.println("<p><a href=UserHomePage.jsp>Go Back To Home Page</a> </p>");
 	}
 %>
 

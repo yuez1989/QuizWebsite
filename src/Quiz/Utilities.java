@@ -192,10 +192,7 @@ public class Utilities {
 		ArrayList<String> recentReviews = new ArrayList<String>();
 		String command = "SELECT * FROM Histories WHERE end > \""+time+"\" AND quizID = "+"\""+quizID+"\" ORDER BY end DESC;";
 		ResultSet rs = db.executeQuery(command);
-		int count = 0; 
 		while(rs.next()){
-			if(count == 3) break;
-			count++;
 			recentReviews.add(rs.getString("review"));
 		}
 		return recentReviews;
@@ -213,10 +210,7 @@ public class Utilities {
 		ArrayList<String> recentReviews = new ArrayList<String>();
 		String command = "SELECT * FROM Histories WHERE end > \""+time+"\" AND quizID = "+"\""+quizID+"\" ORDER BY end DESC;";
 		ResultSet rs = db.executeQuery(command);
-		int count = 0; 
 		while(rs.next()){
-			if(count == 3) break;
-			count++;
 			recentReviews.add(rs.getString("review"));
 		}
 		return recentReviews;
@@ -994,6 +988,38 @@ public class Utilities {
 		DataBase db = QuizSystem.getQuizSystem().db;
 		ResultSet rs = db.executeQuery("select * from Users where usrID = \""+usrID+"\";");
 		return rs.next();
+	}
+
+	/**
+	 * Get all the administrators' IDs
+	 * @return
+	 * @throws SQLException 
+	 */
+	public static ArrayList<String> getAllAdminIDs() throws SQLException{
+		ArrayList<String> adminIDs = new ArrayList<String>();
+		String command = "SELECT * FROM Users WHERE permission = \"1\";";
+		ResultSet rs = db.executeQuery(command);
+		while(rs.next()){
+			adminIDs.add(rs.getString("usrID"));
+		}
+		return adminIDs;
+	}
+	
+	/**
+	 * Get the image path URL of a piece of achievement
+	 * @param achID
+	 * @return Image URL in String
+	 * @throws SQLException 
+	 */
+	public static String getImagePathOfAch(String achID) throws SQLException{
+		String URL = "";
+		String command = "SELECT * FROM AchievementImage WHERE achID = \""+achID+"\";";
+		ResultSet rs = db.executeQuery(command);
+		if(rs.next()){
+			URL = rs.getString("imgpath");
+			return URL;
+		}
+		else return URL;
 	}
 
 	static public void main(String[] args){
