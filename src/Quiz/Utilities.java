@@ -738,10 +738,10 @@ public class Utilities {
 	 */
 	public static boolean hasAchievement(String achID, String usrID) throws SQLException{
 		DataBase db = QuizSystem.getQuizSystem().db;
-		ResultSet rs = db.executeQuery("SELECT * FROM AchievementRecords where usrID = \""+usrID+"\" AND achID = "+"\""+achID+"\";");
+		ResultSet rs = db.executeQuery("SELECT * FROM AchievementRecords WHERE usrID = \""+usrID+"\" AND achID = "+"\""+achID+"\";");
 		return rs.next();
 	}
-
+	
 	/**
 	 * return how many quizzes a user has created
 	 * @param quizID
@@ -751,7 +751,7 @@ public class Utilities {
 	public static int getQuizNumberCreated(String usrID) throws SQLException{
 		int count = 0;
 		DataBase db = QuizSystem.getQuizSystem().db;
-		ResultSet rsCount = db.executeQuery("SELECT COUNT(distinct quizID) FROM Quizzes where creator =  \'" + usrID+"\' ;");
+		ResultSet rsCount = db.executeQuery("SELECT COUNT(distinct quizID) FROM Quizzes where creator =  \'"+usrID+"\' ;");
 		if(rsCount.next()){
 			count = rsCount.getInt(1);
 		}
@@ -813,9 +813,9 @@ public class Utilities {
 
 
 	/**
-	 * Search and return an arraylist of quiz by quizID if there are any
+	 * Search by quizID ONLY (no exact match of quizID required)
 	 * @param str
-	 * @return
+	 * @return Arraylist of quizID
 	 */
 	public static ArrayList<String> searchQuizzes(String str){
 		ArrayList<String> list = new ArrayList<String>();
@@ -832,13 +832,13 @@ public class Utilities {
 	}
 
 	/**
-	 * Search and return an arraylist of quizID and quiz name, divided by ## by quiz name if there are any
+	 * Search by quizID or quiz name 
 	 * @param string
-	 * @return
+	 * @return Arraylist of quizID and quiz name divided by "##" 
 	 */
 	public static ArrayList<String> searchQuizzesByName(String string){
 		ArrayList<String> list = new ArrayList<String>();
-		ResultSet rs = QuizSystem.db.executeQuery("Select quizID, name from Quizzes where name like \'%" + string+"%\';");
+		ResultSet rs = QuizSystem.db.executeQuery("Select quizID, name from Quizzes where name like \'%" + string+"%\' OR quizID like \'%" + string+"%\';");
 		try {
 			while(rs.next()){
 				String str = "";
@@ -854,13 +854,41 @@ public class Utilities {
 	}
 
 	/**
-	 * Search and return an arraylist of quizID and quiz name, divided by ## by quiz name if there are any
+	 * Search  by part of quiz content 
 	 * @param string
-	 * @return
+	 * @return Arraylist of quizID
+	 */
+	public static ArrayList<Quiz> searchQuizzesByText(String string){
+		ArrayList<String> list = new ArrayList<String>();
+		ResultSet rs = QuizSystem.db.executeQuery("Select quizID from Quizzes where quizID like \'%" + string+"%\' or name like \'%" + string+"%\' or creator like \'%" + string+"%\' ;");
+		try {
+			while(rs.next()){
+				String qID = rs.getString("quizID");
+				list.add(qID);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		ArrayList<Quiz> result = new ArrayList<Quiz>();
+		
+		for(String qid:list){
+			try {
+				result.add(new Quiz(qid));
+			} catch (SQLException e) {
+				e.printStackTrace();
+			}
+		}
+		return result;
+	}
+	
+	/**
+	 * Search by quizID or quiz name, exact match ONLY
+	 * @param string
+	 * @return Arraylist of quizID
 	 */
 	public static ArrayList<String> searchQuizzesByExactName(String string){
 		ArrayList<String> list = new ArrayList<String>();
-		ResultSet rs = QuizSystem.db.executeQuery("Select quizID, name from Quizzes where name = \"" + string+"\";");
+		ResultSet rs = QuizSystem.db.executeQuery("Select quizID, name from Quizzes where name = \"" + string+"\" OR quizID = \"" + string+"\";");
 		try {
 			while(rs.next()){
 				String qID = rs.getString("quizID");
@@ -913,8 +941,6 @@ public class Utilities {
 		}
 		return num;
 	}
-
-	
 
 	static public void main(String[] args){
 		DataBase db = QuizSystem.getQuizSystem().db;
