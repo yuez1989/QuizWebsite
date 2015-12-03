@@ -42,7 +42,7 @@
 	%>
 	<div class="msg-box">
 		<div class="msg-left col-md-8">
-			<div class="msg-header"><%=usrID%>'s Messages
+			<div class="msg-header"><%=usrID%>'s Received Messages
 			</div>
 			<div class="msg-container">
 				<table>
