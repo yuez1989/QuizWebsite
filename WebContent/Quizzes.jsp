@@ -35,7 +35,11 @@
 		ArrayList<Quiz> quizzes = Utilities.getAllQuizzes();
 		for (Quiz quiz : quizzes) {
 	%>
-	<div style="margin-top:60px; margin-left:20%;"><%= quiz.getQuizID() %></div>
+	<div style="margin-top:30px; margin-left:20%;">
+	<p>Name: <a href = "QuizHomePage.jsp?quizID=<%=quiz.getQuizID() %>"><%=quiz.getQuizName() %></a></p>
+	<p>Creator: <a href = "Person.jsp?person=<%=quiz.getCreator() %>"><%=quiz.getCreator() %></a></p>
+	<p>Description: <%=quiz.getDescription() %></p>
+	</div>
 	<%
 			
 		}
