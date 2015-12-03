@@ -10,7 +10,7 @@
 </head>
 <body>
 
-<h2>Create a new Quiz:</h2>
+<h2>Create a new Quiz</h2>
 <%	
 	String[] result;
 	String QuizID = "";
@@ -113,6 +113,8 @@ if(!probCancel.equals("CancelQuestion")){
 		solutions.add(oneClass);
 		count++;
 	}	
+	//System.out.println("Solution is:"+solutions);
+
 	for(int i = 0; i<solutions.size();i++){
 		for(int j = 0; j<solutions.get(i).size();j++){
 			if(solutions.get(i).get(j).equals("")){
@@ -140,6 +142,18 @@ if(!probCancel.equals("CancelQuestion")){
 	
 	Question p = null;
 	if(QuesType.equals("MC")){
+		result = request.getParameterValues("solution"); 
+		if (result != null && result.length != 0) {
+			String oneSol[] = result[0].split(" ");
+			for(int i = 0; i<oneSol.length; i++){
+				ArrayList<String> oneClass = new ArrayList<String>();
+				if(!oneSol[i].equals("")){
+					oneClass.add(oneSol[i]);
+					solutions.add(oneClass);
+				}
+			}
+		}
+		System.out.println("Solution is:"+solutions);
 		count =1;
 		String choice = "";
 		while((choice = request.getParameter("Choice "+Character.toString ((char) (count+64))))!=null){
@@ -195,17 +209,17 @@ if(!probCancel.equals("CancelQuestion")){
 %>
 
 <form name="AddQuestion" method="POST" action="CreateQuestion.jsp">
-Please enter Quiz name:
-<INPUT TYPE="TEXT" NAME="Quiz Name" value="<%=QuizName%>"><BR>
-Please enter Quiz description:
-<INPUT TYPE="TEXT" NAME="Description" value="<%=Description%>"><BR>
-Please enter Quiz tags, separate by space:
-<INPUT TYPE="TEXT" NAME="Tags" value="<%=Tags%>"><BR>
-Please enter Quiz option:
-If you want question appear in random order, enter "R".
-If you want question appear on multiple pages, enter "M".
-If you want provide immediate correction, enter "I".
-You can have multiple options, order does not matter.
+Please enter Quiz name:<BR>
+<INPUT TYPE="TEXT" NAME="Quiz Name" value="<%=QuizName%>" style="width: 500px"><BR>
+Please enter Quiz description:<BR>
+<textarea  NAME="Description" cols="100" rows="5" ><%=Description%></textarea><BR>
+Please enter Quiz tags, separate by space:<BR>
+<INPUT TYPE="TEXT" NAME="Tags" value="<%=Tags%>" style="width: 500px"><BR>
+Please enter Quiz option:<BR>
+If you want question appear in random order, enter "R".<BR>
+If you want question appear on multiple pages, enter "M".<BR>
+If you want provide immediate correction, enter "I".<BR>
+You can have multiple options, order does not matter.<BR>
 <INPUT TYPE="TEXT" NAME="Spec" value="<%=Spec%>"><BR>
 <a href="javascript:document.AddQuestion.submit()">Add Problem</a>
 </form>
@@ -227,10 +241,14 @@ You can have multiple options, order does not matter.
 	
 %>
 Current questions in the Quiz
-
 <%
 	int count = 1;
 	if(questions != null){
+		if(questions.size()==0){
+			%>
+				<p>There is currently no question in this quiz!</p>
+			<%
+		}
 		for(Question p:questions){
 			//session.setAttribute("Question "+Integer.toString(count), p);
 			if(p.getType().equals("MC")){
@@ -298,7 +316,8 @@ Current questions in the Quiz
 	<input type="hidden" name="Spec" value="<%=Spec%>">
 	 <a href="javascript:document.AddQuiz.submit()">Create</a>
 </form>
-<form name="CancelQuiz" method="POST" action="UserHomePage.jsp">
+<form name="CancelQuiz" method="POST" action="AddQuizToDB.jsp">
+	<input type="hidden" name="Discard" value="Discard">
 	 <a href="javascript:document.CancelQuiz.submit()">Discard</a>
 </form>
 </body>
