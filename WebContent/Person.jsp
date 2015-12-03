@@ -59,7 +59,7 @@
 	</form>
 	<%
 	//can not access the homepage.
-	if (UserInfo.privacy == 'd') {
+	if (UserInfo.privacy == 'P' ||(UserInfo.privacy == 'F' && !Utilities.isFriend(usrID, person))) {
 		out.print("<h2>Sorry, you don't have access to " + person
 				+ "\'s Homepage</h2>");
 	} else {
