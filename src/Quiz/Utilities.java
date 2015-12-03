@@ -954,7 +954,7 @@ public class Utilities {
 		String p = Character.toString(prv);
 //		p = p.toLowerCase();
 //		if(p.equals("p") || p.equals("d") || p.equals("f"))
-			String cmd = "UPDATE Users SET privacy = "+p+" WHERE usrID = \""+usrID+"\";";
+			String cmd = "UPDATE Users SET privacy = \""+p+"\" WHERE usrID = \""+usrID+"\";";
 			QuizSystem.db.executeUpdate(cmd);
 	}
 
