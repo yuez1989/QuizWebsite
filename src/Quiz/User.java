@@ -57,6 +57,8 @@ public class User {
 	 */
 	public User(String usrID) {
 		this.usrID = usrID;
+		String command = "SELECT * FROM Users WHERE usrID = \"" + usrID + "\";";	
+		ResultSet rs = QuizSystem.db.executeQuery(command);
 		// get instance variables in user table
 		// get other ivars loaded in info
 		extractpermissionFromDB();

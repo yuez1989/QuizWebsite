@@ -131,7 +131,7 @@ $(document).ready(main);
 
 
 <div class='clear_quiz_history'>
-	<p id = 'clear_quiz_history_tag'>Clear Quiz History</p>
+	<p id = 'clear_quiz_history_tag'>Clear Quiz History (Enter quiz ID)</p>
 	<form name = "clear_quiz_history_form" id = "clear_quiz_history_form" method="post" action="QuizHistoryCleared">
 	<input type='text' name = 'clear_hist_quizID'>
 	<a href="javascript:document.clear_quiz_history_form.submit()">Clear</a>
