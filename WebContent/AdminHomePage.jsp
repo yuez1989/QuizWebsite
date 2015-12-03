@@ -122,7 +122,7 @@ $(document).ready(main);
 
 
 <div class = 'remove_quiz'>
-	<p id = 'remove_quiz_tag'>Remove Quiz</p>
+	<p id = 'remove_quiz_tag'>Remove Quiz By ID</p>
 	<form name = "remove_quiz_form" id = "remove_quiz_form" method="post" action="QuizRemoved">
 	<input type='text' name = 'attempted_quizID'>
 	<a href="javascript:document.remove_quiz_form.submit()">Remove</a>
