@@ -242,6 +242,13 @@
 				</div>
 				<div style="clear: both;"></div>
 			</div>
+			<% 
+				String deleteStr = "RemoveSelfAccount.jsp?selfID=" + usrID;
+			%>
+			<div class="delete-account">
+				<br>
+				<a href=<%=deleteStr%> class='dangerous-option'>Delete Account</a>
+			</div>
 		</div>
 		<div class="uhp-news col-md-6">
 			<div class="column-name">NEWS OF FRIENDS</div>
