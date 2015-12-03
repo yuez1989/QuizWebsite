@@ -28,8 +28,9 @@
 <title> Quiz <%=quiz.getQuizName() %>, by <%= quiz.getCreator()%></title>
 </head>
 <body>
-<p>
-<%
+<div>
+	<p>Name: <%= quiz.getQuizName() %></p>
+<%	
 	out.print("<p>Description: "+ quiz.getDescription()+"</p>");
 	out.print("<p>Rating: "+quiz.getRating()+"</p>");
 	ArrayList<String> recentReview = Utilities.getRecentQuizReviews(quizID);
@@ -92,6 +93,6 @@
 	}
 %>
 
-</p>
+</div>
 </body>
 </html>
