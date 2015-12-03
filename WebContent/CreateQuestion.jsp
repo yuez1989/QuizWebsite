@@ -92,5 +92,18 @@ if(questions == null){
 	<input type="hidden" name="Spec" value="<%=Spec%>">
 	 <a href="javascript:document.cancel.submit()">Cancel</a>
 </form>
+<%
+	if(questions.size()>0 && QuizName.length()>0 && QuizName.trim().length()>0){
+		%>	
+		<form name="AddQuiz" method="POST" action="AddQuizToDB.jsp">
+		<input type="hidden" name="Quiz Name" value="<%=QuizName%>">
+		<input type="hidden" name="Description" value="<%=Description%>">
+		<input type="hidden" name="Tags" value="<%=Tags%>">
+		<input type="hidden" name="Spec" value="<%=Spec%>">
+		<a href="javascript:document.AddQuiz.submit()">Create</a>
+		</form>
+		<%
+	}
+%>
 </body>
 </html>

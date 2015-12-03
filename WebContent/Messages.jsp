@@ -82,8 +82,8 @@
 								readText = "No, click to read it!";
 
 							out.println("<tr>");
-							out.println("<td>" + msg.fromID + "</td>");
-							out.println("<td>" + msg.toID + "</td>");
+							out.println("<td><a href='Person.jsp?person=" + msg.fromID + "' target='_blank'>" + msg.fromID + "</a></td>");
+							out.println("<td><a href='Person.jsp?person=" + msg.toID + "' target='_blank'>" + msg.toID + "</a></td>");
 							out.println("<td>" + typeText + "</td>");
 							out.println("<td>" + msg.time + "</td>");
 							out.println("<td><a href='MsgRead.jsp?fromID=" + msg.fromID + 
