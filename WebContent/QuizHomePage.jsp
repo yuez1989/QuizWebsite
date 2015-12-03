@@ -7,7 +7,14 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<%String quizID =  request.getParameter("quizID");%>
+<%
+	String quizID =  request.getParameter("quizID");
+	System.out.println("*********QUIZID" + quizID + "*********");
+	if (quizID.indexOf('_') >= 0) {
+		quizID = quizID.substring(0,quizID.indexOf("_"))+" "+quizID.substring(quizID.indexOf("_") + 1);
+		System.out.println("*********DE%OF" + quizID + "*********");
+	}
+%>
 
 <%Quiz quiz = new Quiz(quizID);%>
 
