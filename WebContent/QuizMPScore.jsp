@@ -98,21 +98,21 @@
 				if(!Utilities.hasAchievement("Quiz Taker", usrID)){
 				AchievementRecord achRec = new AchievementRecord(usrID, "Quiz Taker");
 				achRec.saveToDB();
-				out.println("<p>Congrats! You have just won a new Achievement: Quiz Taker</p>");
+				out.println("<p><b>Congrats! You have just won a new Achievement: Quiz Taker</b></p>");
 				}
 			}
 			else if(quizPlayed == 5){
 				if(!Utilities.hasAchievement("Kindergarten", usrID)){
 				AchievementRecord achRec = new AchievementRecord(usrID, "Kindergarten");
 				achRec.saveToDB();	
-				out.println("<p>Congrats! You have just won a new Achievement: Kindergarten</p>");
+				out.println("<p><b>Congrats! You have just won a new Achievement: Kindergarten</b></p>");
 				}
 			}
 			else if(quizPlayed == 10){
 				if(!Utilities.hasAchievement("Primary School", usrID)){
 				AchievementRecord achRec = new AchievementRecord(usrID, "Primary School");
 				achRec.saveToDB();	
-				out.println("<p>Congrats! You have just won a new Achievement: Primary School</p>");
+				out.println("<p><b>Congrats! You have just won a new Achievement: Primary School</b></p>");
 				}
 
 			}
@@ -121,7 +121,7 @@
 
 				AchievementRecord achRec = new AchievementRecord(usrID, "Middle School");
 				achRec.saveToDB();	
-				out.println("<p>Congrats! You have just won a new Achievement: Middle School</p>");
+				out.println("<p><b>Congrats! You have just won a new Achievement: Middle School</b></p>");
 				}
 			}
 			else if(quizPlayed == 50){
@@ -129,7 +129,7 @@
 
 				AchievementRecord achRec = new AchievementRecord(usrID, "High School");
 				achRec.saveToDB();	
-				out.println("<p>Congrats! You have just won a new Achievement: High School</p>");
+				out.println("<p><b>Congrats! You have just won a new Achievement: High School</b></p>");
 				}
 
 			}
@@ -138,9 +138,17 @@
 
 				AchievementRecord achRec = new AchievementRecord(usrID, "Quizzzz University Alumni");
 				achRec.saveToDB();	
-				out.println("<p>Congrats! You have just won a new Achievement: Quizzzz University Alumni</p>");
+				out.println("<p><b>Congrats! You have just won a new Achievement: Quizzzz University Alumni</b></p>");
 				}
 			} 
+			
+			
+			double hiScore = Double.parseDouble(Utilities.getHighestScoreOfQuiz(quizID));
+			if(pregrade >= hiScore){
+				AchievementRecord achRec = new AchievementRecord(usrID, "I am the Greatest");
+				achRec.saveToDB();	
+				out.println("<p><b>Guess What! You just broke the record of this quiz! We give you the Achievement of \"I am the Greatest\" as reward.</b></p>");
+			}
 			
 		%>
 		
@@ -186,6 +194,10 @@
 <%
 						
 	}else{
+		System.out.println("Previous"+pregrade);
+		System.out.println("Currently"+qgrade);
+
+		
 		if("true".equals(session.getAttribute(quizID+"correction"))){
 			if(qgrade >=1)
 				out.print("<h3>Congrats, it's correct!</h3>");
