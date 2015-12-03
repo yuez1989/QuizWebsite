@@ -117,3 +117,10 @@ CREATE TABLE Friends(
 	FOREIGN KEY (usr1ID) REFERENCES Users(usrID),
 	FOREIGN KEY (usr2ID) REFERENCES Users(usrID)
 );
+
+DROP TABLE IF EXISTS AchievementImage;
+CREATE TABLE AchievementImage(
+	achID VARCHAR(255),
+	imgpath VARCHAR(2047),
+	FOREIGN KEY (achID) REFERENCES Achievements(achID)
+);
