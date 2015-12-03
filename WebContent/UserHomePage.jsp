@@ -249,6 +249,9 @@
 				<br>
 				<a href=<%=deleteStr%> class='dangerous-option'>Delete Account</a>
 			</div>
+			<div class="write-to-admin">
+				<a href="AdminList.jsp" class='normal-option'>Check Admins List and Write to Them!</a>
+			</div>
 		</div>
 		<div class="uhp-news col-md-6">
 			<div class="column-name">NEWS OF FRIENDS</div>

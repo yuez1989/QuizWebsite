@@ -210,3 +210,14 @@ body {
 	color: red!important;
 	font-weight:bold!important;
 }
+
+.normal-option {
+	margin-top: 10px;
+	margin-bottom:10px;
+	font-weight:bold!important;
+}
+
+.admin-profile-link {
+	margin-top:60px;
+	margin-left:50px;
+}
