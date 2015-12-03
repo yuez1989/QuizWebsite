@@ -36,7 +36,7 @@ CREATE TABLE AchievementRecords(
 	FOREIGN KEY (achID) REFERENCES Achievements(achID)
 );
 
-DROP TABLE IF EXISTS Quizzes;
+DROP TABLE IF EXISTS  ;
 CREATE TABLE Quizzes(
 	quizID VARCHAR(255),
 	name VARCHAR(1023),
