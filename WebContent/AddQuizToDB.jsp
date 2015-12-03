@@ -61,7 +61,10 @@
 		ArrayList<String> tags = new ArrayList<String>();
 		if (result != null && result.length != 0) {
 			tags = new ArrayList<String>(Arrays.asList(result[0].split(" ")));
-		}
+		}		
+		System.out.println("on save page, processd tags:"+tags);	
+
+		
 		
 		ArrayList<Question> questions = (ArrayList<Question>) request.getSession().getAttribute("QuestionList");
 		if(request.getSession().getAttribute("QuestionList") == null){
@@ -77,6 +80,7 @@
 			}
 		}
 		q.saveToDB();
+		request.getSession().removeAttribute("QuestionList");	
 	}
 %>
 <%
