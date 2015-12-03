@@ -21,6 +21,7 @@
 	String person = (String) request.getParameter("person");
 	person = Utilities.searchAccounts(person).get(0);
 	//person = "xinhuiwu";
+	User user = new User(person);
 	UserInfo UserInfo = new UserInfo(person);
 %>
 <title>Quizzzz: Homepage of <%=person%>
@@ -59,7 +60,7 @@
 	</form>
 	<%
 	//can not access the homepage.
-	if (UserInfo.privacy == 'P' ||(UserInfo.privacy == 'F' && !Utilities.isFriend(usrID, person))) {
+	if (user.privacy == 'P' ||(user.privacy == 'F' && !Utilities.isFriend(usrID, person))) {
 		out.print("<h2>Sorry, you don't have access to " + person
 				+ "\'s Homepage</h2>");
 	} else {

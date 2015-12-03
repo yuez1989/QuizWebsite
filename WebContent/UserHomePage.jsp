@@ -45,7 +45,12 @@
 		*/
 
 		UserInfo info = user.info;
-		ArrayList<Message> unreadMsg = Utilities.unreadMessages(user);
+		ArrayList<Message> unreadMsgAll = Utilities.unreadMessages(user);
+		ArrayList<Message> unreadMsg = new ArrayList<Message>(); //(All messages that are received)
+		for (Message msg : unreadMsgAll) {
+			if ((msg.fromID).equals(usrID)) continue;
+			unreadMsg.add(msg);
+		}
 		ArrayList<History> histories = Utilities.getRecentActivitiesOfUser(usrID);
 		ArrayList<History> frdHistories = Utilities.getRecentFriendActivities(usrID);
 		ArrayList<Quiz> popQuizzes = Utilities.getPopularQuiz();
@@ -84,6 +89,7 @@
 					// Calculate different kinds of messages.
 					int newFriendRequests = 0, newChallenges = 0, newTextMessages = 0;
 					for (Message msg : unreadMsg) {
+						if((msg.fromID).equals(usrID)) continue;
 						char type = msg.type.charAt(0);
 						switch (type) {
 						case 'f':
@@ -127,7 +133,11 @@
 				</form>
 			</div>
 			<div class="news-feed">Setting</div>
-			<div class="news-feed">Administration Settings</div>
+			<% if (user.permission == 1) { %>
+				<div class="news-feed"><a href="AdminHomePage.jsp" target="_blank">Administration Settings</a></div>
+			<%
+				}
+			%>
 			<div class="quiz-options">
 				<div class="create-quiz-button">
 					<form method="POST" action="CreateQuiz.jsp"
@@ -178,7 +188,10 @@
 							if (endDate.compareTo(threeDaysAgo) >= 0) {
 								hasRecent = true;
 								String quizName = new Quiz(hist.quizID).getQuizName();
-								out.println("<span class='column-indent'>" + quizName + "</span>");
+								String quizStr = "Quiz.jsp?quizID=" + hist.quizID;
+							%>
+							<span class='column-indent'><a href=<%=quizStr%> target="_blank"><%= quizName %></a></span>
+							<%
 							}
 						}
 						if (hasRecent == false) {
@@ -194,8 +207,9 @@
 							out.println("<span class='column-indent'>You did not created any quizzes yet.</span>");
 						}
 						for (Quiz quiz : createSelf) {
+							String quizStr = "Quiz.jsp?quizID=" + quiz.getQuizID();
 					%>
-						<span class='column-indent'><%=quiz.getQuizName()%></span>
+						<span class='column-indent'><a href=<%=quizStr%> target="_blank"><%=quiz.getQuizName()%></a></span>
 					<%
 						}
 					%>
@@ -255,8 +269,9 @@
 					}
 					Collections.sort(recentCreatedQuizzesFrd);
 					for (Quiz quiz : recentCreatedQuizzesFrd) {		
+						String quizStr = "Quiz.jsp?quizID=" + quiz.getQuizID();
 				%>
-					<span class='news-feed'><%=quiz.getQuizName()%></span>
+					<span class='news-feed'><a href=<%=quizStr%> target="_blank"><%=quiz.getQuizName()%></a></span>
 				<% 
 					}
 				%>
@@ -310,7 +325,10 @@
 				<div class="column-name">Popular Quizzes</div>
 				<%
 					for (Quiz quiz : popQuizzes) {
-						out.println("<span style='padding-left: 10px;'>" + quiz.getQuizName() + "</span>");
+						String quizStr = "Quiz.jsp?quizID=" + quiz.getQuizID();
+				%>
+					<span style='padding-left: 10px;'><a href=<%=quizStr%> target="_blank"><%=quiz.getQuizName()%></a></span>
+				<%
 					}
 				%>
 			</div>
@@ -320,8 +338,9 @@
 					ArrayList<Quiz> recentQuizzesPublic = Utilities.getRecentQuiz();
 					Collections.sort(recentQuizzesPublic);
 					for (Quiz quiz : recentQuizzesPublic) {
+						String quizStr = "Quiz.jsp?quizID=" + quiz.getQuizID();
 				%>
-					<span style='padding-left: 10px;'><%=quiz.getQuizName()%></span>
+					<span style='padding-left: 10px;'><a href=<%=quizStr%> target="_blank"><%=quiz.getQuizName()%></a></span>
 				<%
 					}
 				%>

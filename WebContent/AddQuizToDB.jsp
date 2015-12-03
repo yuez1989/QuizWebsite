@@ -11,8 +11,10 @@
 <body>
 
 <%
+	String userID = (String)session.getAttribute("user");
 	String[] result;
 	String discard= "";
+	
 	result = request.getParameterValues("Discard");
 	if (result != null && result.length != 0) {
 		discard = result[0];
@@ -60,7 +62,6 @@
 		if (result != null && result.length != 0) {
 			tags = new ArrayList<String>(Arrays.asList(result[0].split(" ")));
 		}
-		String userID = (String)session.getAttribute("user");
 		
 		ArrayList<Question> questions = (ArrayList<Question>) request.getSession().getAttribute("QuestionList");
 		if(request.getSession().getAttribute("QuestionList") == null){
