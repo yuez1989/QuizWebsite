@@ -37,11 +37,27 @@
 			grade = grade + q.grade(ans);
 		}else if(Question.TYPE_MULTIPLECHOICE.equals(q.getType())){
 			ArrayList<String> ans = new ArrayList<String>();
-	
-			char ch =request.getParameter("q"+count+"ans1").charAt(0);
-			ans.add(Character.toString(ch));
-			out.print(q.grade(ans));
-			grade = grade + q.grade(ans);
+			if(q.getsolNum()>1){
+				int N = q.parseOption().size();
+				char A = 'A';
+				for(int i = 1; i<= N; i++){
+					System.out.println(request.getParameter("q"+count+"ans"+i));
+					if("true".equals(request.getParameter("q"+count+"ans"+i)))
+						ans.add(Character.toString((char)(A+i-1)));
+				}
+				
+				out.print(q.grade(ans));
+				grade = grade + q.grade(ans);
+
+			}else{
+				char ch =request.getParameter("q"+count+"ans1").charAt(0);
+				ans.add(Character.toString(ch));
+				out.print(q.grade(ans));
+				grade = grade + q.grade(ans);
+				
+			}
+			System.out.println(q.getSol());
+			System.out.println(ans);
 	
 		}else if(Question.TYPE_MATCHING.equals(q.getType())){
 			ArrayList<String> optionsleft = q.parseOptionleft();

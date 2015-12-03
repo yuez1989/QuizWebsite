@@ -101,14 +101,24 @@
 						out.print("<p class=\'question_description\'>"+ q.getText()+"</p>");
 						ArrayList<String> options = q.parseOption();
 						int optcnt = 0;
-						for(String opt: options){
-							optcnt++;
-							char chopt =(char)( 'A'+optcnt - 1);
-							if(optcnt == 1){
-								out.print("<input type=\'radio\' name = \'q"+count+"ans1\' value = \'"+chopt+"\' checked=\'checked\'>"+opt+"</input>");							
-							}else{
-								out.print("<input type=\'radio\' name = \'q"+count+"ans1\' value = \'"+chopt+"\'>"+opt+"</input>");							
+						if(q.getsolNum()>1){
+							for(String opt: options){
+								optcnt++;
+								char chopt =(char)( 'A'+optcnt - 1);
+								out.print("<input type=\'checkbox\' name = \'q"+count+"ans"+optcnt+"\' value = \'true\' >"+opt+"</input>");							
+
 							}
+						}else{
+							for(String opt: options){
+								optcnt++;
+								char chopt =(char)( 'A'+optcnt - 1);
+								if(optcnt == 1){
+									out.print("<input type=\'radio\' name = \'q"+count+"ans1\' value = \'"+chopt+"\' checked=\'checked\'>"+opt+"</input>");							
+								}else{
+									out.print("<input type=\'radio\' name = \'q"+count+"ans1\' value = \'"+chopt+"\'>"+opt+"</input>");							
+								}
+							}
+							
 						}
 					}else if(Question.TYPE_MATCHING.equals(q.getType())){
 						out.print("<p class=\'question_description\'>"+ q.getText()+"</p>");
