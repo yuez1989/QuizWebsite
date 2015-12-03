@@ -164,11 +164,10 @@
 							out.println("No achievements yet.");
 						}
 						for (AchievementRecord achr : achrs) {
-							%>
-					<div id="popup-ach-parent">
-						<span class='column-indent'><%=achr.achID%></span>
-						<% Achievement ach = new Achievement(achr.achID); %>
-						<div id='popup-ach-child'><%=ach.description%></div>
+							Achievement ach = new Achievement(achr.achID);
+					%>
+					<div>
+						<span class='column-indent' title='<%=ach.description%>'><%=achr.achID%></span>
 					</div>
 					<%						
 						}
@@ -296,8 +295,10 @@
 					}
 					Collections.sort(achrFrd);
 					for (AchievementRecord achr : achrFrd) {
+						String achUsrStr = "Person.jsp?person=" + achr.usrID;
+						Achievement ach = new Achievement(achr.achID);
 				%>
-					<span class='news-feed'><%=achr.usrID%> achieved <%=achr.achID%> at <%=achr.time%></span>
+					<span class='news-feed'><a href=<%=achUsrStr%>><%=achr.usrID%></a> achieved <span title='<%=ach.description%>'><%=achr.achID%></span> at <%=achr.time%></span>
 				<%
 					}
 				%>
