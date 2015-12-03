@@ -43,8 +43,11 @@ public class AnnouncementSent extends HttpServlet {
 		
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
-		out.print("<h3>Sucess.</h3>");
-		out.println("<p><a href = \'AdminHomePage.jsp\'>return to homepage...</p>");		
+		out.print("<h3>You have set an announcement:</h3>");
+		out.println("<div><p>");
+		out.println(content);
+		out.println("</p></div>");
+		out.println("<p><a href = \'AdminHomePage.jsp\'>return to administration page...</p>");		
 	}
 
 }
