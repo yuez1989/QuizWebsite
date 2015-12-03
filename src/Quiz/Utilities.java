@@ -945,10 +945,9 @@ public class Utilities {
 	static public void main(String[] args){
 		DataBase db = QuizSystem.getQuizSystem().db;
 
-		try {
-			System.out.print(getHighScoreOfUserInQuiz("xinhuiwu2015-11-18 16:19:13","xiaotihu"));
-		} catch (SQLException e) {
-			e.printStackTrace();
+		ArrayList<Quiz> quizlist = searchQuizzesByText("ha");
+		for(Quiz quiz:quizlist){
+			System.out.println(quiz.quizName);
 		}
 	}
 }
