@@ -109,6 +109,7 @@
 				if(!Utilities.hasAchievement("Quiz Taker", usrID)){
 				AchievementRecord achRec = new AchievementRecord(usrID, "Quiz Taker");
 				achRec.saveToDB();
+				
 				out.println("<p><b>Congrats! You have just won a new Achievement: Quiz Taker</b></p>");
 				}
 			}
