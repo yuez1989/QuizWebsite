@@ -3,6 +3,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@page import="Quiz.*"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="java.text.DecimalFormat"%>
+
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
@@ -13,9 +15,14 @@
 	String quizID = request.getParameter("quizID");
 	String quizName = request.getParameter("quizName");
 	ArrayList<Question> questions = (ArrayList<Question>) session.getAttribute(quizID+"questions");
+	String strgrade = (String)session.getAttribute(quizID+"grade");
+	
+	if(quizID == null || quizName == null || questions== null || strgrade == null || session.getAttribute("user") == null){
+		response.setHeader("Refresh", "0;UserHomePage.jsp");
+	}else{
+		
 	double pregrade = Double.parseDouble((String)session.getAttribute(quizID+"grade"));
-	
-	
+
 	Question q = questions.get(questions.size() - 1);
 	
 	double qgrade = 0;
@@ -75,7 +82,7 @@
 		}
 		
 		//warning this user should be user id not object
-		History hst = new History(quizID, (String)session.getAttribute("user"), "Regular", startTime, endTime, qgrade,
+		History hst = new History(quizID, (String)session.getAttribute("user"), "Regular", startTime, endTime, pregrade,
 				request.getParameter("review"), rating);
 		
 		hst.saveToDB();
@@ -84,12 +91,63 @@
 		session.removeAttribute(quizID+"grade");
 		session.removeAttribute(quizID+"startTime");
 		
+		String usrID = (String) session.getAttribute("user");
+		
+		int quizPlayed = Utilities.getQuizNumberPlayed((String) session.getAttribute("user"));
+			if(quizPlayed == 1){
+				if(!Utilities.hasAchievement("Quiz Taker", usrID)){
+				AchievementRecord achRec = new AchievementRecord(usrID, "Quiz Taker");
+				achRec.saveToDB();
+				out.println("<p>Congrats! You have just won a new Achievement: Quiz Taker</p>");
+				}
+			}
+			else if(quizPlayed == 5){
+				if(!Utilities.hasAchievement("Kindergarten", usrID)){
+				AchievementRecord achRec = new AchievementRecord(usrID, "Kindergarten");
+				achRec.saveToDB();	
+				out.println("<p>Congrats! You have just won a new Achievement: Kindergarten</p>");
+				}
+			}
+			else if(quizPlayed == 10){
+				if(!Utilities.hasAchievement("Primary School", usrID)){
+				AchievementRecord achRec = new AchievementRecord(usrID, "Primary School");
+				achRec.saveToDB();	
+				out.println("<p>Congrats! You have just won a new Achievement: Primary School</p>");
+				}
+
+			}
+			else if(quizPlayed == 30){
+				if(!Utilities.hasAchievement("Middle School", usrID)){
+
+				AchievementRecord achRec = new AchievementRecord(usrID, "Middle School");
+				achRec.saveToDB();	
+				out.println("<p>Congrats! You have just won a new Achievement: Middle School</p>");
+				}
+			}
+			else if(quizPlayed == 50){
+				if(!Utilities.hasAchievement("High School", usrID)){
+
+				AchievementRecord achRec = new AchievementRecord(usrID, "High School");
+				achRec.saveToDB();	
+				out.println("<p>Congrats! You have just won a new Achievement: High School</p>");
+				}
+
+			}
+			else if(quizPlayed == 100){
+				if(!Utilities.hasAchievement("Quizzzz University Alumni", usrID)){
+
+				AchievementRecord achRec = new AchievementRecord(usrID, "Quizzzz University Alumni");
+				achRec.saveToDB();	
+				out.println("<p>Congrats! You have just won a new Achievement: Quizzzz University Alumni</p>");
+				}
+			} 
+			
 		%>
 		
 	<h3>Congratulations!</h3>
 	<h3>
 		You get
-		<%=pregrade%>
+		<%=new DecimalFormat("#0.00").format(pregrade).toString()%>
 		in
 		<%=quizName%></h3>
 
@@ -97,12 +155,10 @@
 
 	<p>Quiz Statisics</p>
 	<ul>
-		<li>Highest Score: <%=Utilities.getHighRecordsOfQuiz(quizID)%></li>
+		<li>Highest Score: <%=Utilities.getHighestScoreOfQuiz(quizID)%></li>
 		<li>Average Score: <%=Utilities.getQuizAverageScore(quizID)%></li>
-		<li>Play Times:</li>
-		<li>You have played: <%=Utilities.getPlayTimesOfQuiz(quizID) %>		
-			times
-		</li>
+		<li>Play Times:You have played: <%=Utilities.getPlayTimesOfQuiz(quizID) %>		
+			times</li>
 	</ul>
 
 	<p>
@@ -118,8 +174,9 @@
 		%>
 	</ul>
 
-	<p>HomePage</p>
-	<p>Other quizzes</p>
+	<p><a href = 'QuizHomePage.jsp?quizID=<%=quizID %>'>QuizHomePage</a></p>
+	<p>TODO: User Home Page </p>
+	<p>TODO: Other quizzes</p>
 	
 	<form name='challengeForm' action="MsgWrite.jsp" method="post">
 		<input type="hidden" name="quizID" value="<%=quizID%>">
@@ -129,21 +186,26 @@
 <%
 						
 	}else{
-		if(qgrade >=1)
-			out.print("<h3>Congrats, it's correct!</h3>");
-		else if(qgrade == 0){
-			out.print("<h3>Sorry, you are wrong</h3>");
-			out.print("<p>The answer should be "+q.getSol()+" </p>");
-		}
-		else{
-			out.println("<h3>Partially Correct!</h3>");
-			out.print("<p>The answer should be "+q.getSol()+" </p>");		
-		}
-		session.setAttribute(quizID+"questions",questions);
-		session.setAttribute(quizID+"grade", Double.toString(pregrade));
-		response.setHeader("Refresh", "2;url=QuizMultiPage.jsp?quizID="+quizID+"&quizName="+quizName);
+		if("true".equals(session.getAttribute(quizID+"correction"))){
+			if(qgrade >=1)
+				out.print("<h3>Congrats, it's correct!</h3>");
+			else if(qgrade == 0){
+				out.print("<h3>Sorry, you are wrong</h3>");
+				out.print("<p>The answer should be "+q.getSol()+" </p>");
+			}
+			else{
+				out.println("<h3>Partially Correct!</h3>");
+				out.print("<p>The answer should be "+q.getSol()+" </p>");		
+			}
+			session.setAttribute(quizID+"questions",questions);
+			session.setAttribute(quizID+"grade", Double.toString(pregrade));
+			response.setHeader("Refresh", "2;url=QuizMultiPage.jsp?quizID="+quizID+"&quizName="+quizName);
 
+		}else{
+			response.setHeader("Refresh","0;url=QuizMultiPage.jsp?quizID="+quizID+"&quizName="+quizName);
+		}
 	}
+}
 %>
 </body>
 </html>

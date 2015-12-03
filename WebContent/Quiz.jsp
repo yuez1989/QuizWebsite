@@ -56,7 +56,11 @@
 			session.setAttribute(request.getParameter("quizID")+"questions",quiz.getQuestions());
 			session.setAttribute(request.getParameter("quizID")+"startTime", QuizSystem.generateCurrentTime());
 			session.setAttribute(request.getParameter("quizID")+ "grade", "0");
-			
+			if(quiz.isImmediateCorrection()){
+				session.setAttribute(request.getParameter("quizID")+"correction", "true");
+			}else{
+				session.setAttribute(request.getParameter("quizID")+"correction", "false");
+			}
 			response.setHeader("Refresh", "0;url=QuizMultiPage.jsp?quizID="+quiz.getQuizID()+"&quizName="+quiz.getQuizName());			
 		}
 	}else{

@@ -2,6 +2,7 @@ package Quiz;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.DecimalFormat;
 import java.util.*;
 
 public class Utilities {
@@ -686,14 +687,14 @@ public class Utilities {
 	 * @return score
 	 * @throws SQLException 
 	 */
-	public static double getHighestScoreOfQuiz(String quizID) throws SQLException{
+	public static String getHighestScoreOfQuiz(String quizID) throws SQLException{
 		double hscore = 0;
 		String command = "SELECT * FROM Histories WHERE quizID = "+"\""+quizID+"\" ORDER BY score DESC limit 1;";
 		ResultSet rs = db.executeQuery(command);
 		if(rs.next()){
 			hscore = rs.getDouble("score");
 		}	
-		return hscore;		
+		return new DecimalFormat("#0.00").format(hscore).toString() ;		
 	}
 
 	/**
@@ -722,6 +723,35 @@ public class Utilities {
 		int count = 0;
 		DataBase db = QuizSystem.getQuizSystem().db;
 		ResultSet rsCount = db.executeQuery("SELECT COUNT(distinct quizID) FROM Histories where usrID =  \'" + usrID+"\' ;");
+		if(rsCount.next()){
+			count = rsCount.getInt(1);
+		}
+		return count;
+	}
+
+	/**
+	 * Check whether a specific user has already got a specific achievement
+	 * @param achID
+	 * @param usrID
+	 * @return
+	 * @throws SQLException
+	 */
+	public static boolean hasAchievement(String achID, String usrID) throws SQLException{
+		DataBase db = QuizSystem.getQuizSystem().db;
+		ResultSet rs = db.executeQuery("SELECT * FROM AchievementRecords where usrID = \""+usrID+"\" AND achID = "+"\""+achID+"\";");
+		return rs.next();
+	}
+
+	/**
+	 * return how many quizzes a user has created
+	 * @param quizID
+	 * @return
+	 * @throws SQLException 
+	 */
+	public static int getQuizNumberCreated(String usrID) throws SQLException{
+		int count = 0;
+		DataBase db = QuizSystem.getQuizSystem().db;
+		ResultSet rsCount = db.executeQuery("SELECT COUNT(distinct quizID) FROM Quizzes where creator =  \'" + usrID+"\' ;");
 		if(rsCount.next()){
 			count = rsCount.getInt(1);
 		}

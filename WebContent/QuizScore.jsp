@@ -3,6 +3,8 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@page import="Quiz.*"%>
 <%@page import="java.util.ArrayList"%>
+<%@page import="java.text.DecimalFormat"%>
+
 
 <html>
 <head>
@@ -16,10 +18,12 @@
 	String quizID = request.getParameter("quizID");
 	String quizName = request.getParameter("quizName");
 	ArrayList<Question> questions = (ArrayList<Question>)session.getAttribute(quizID+"questions");
+	
+	if(startTime == null || quizID == null || quizName == null || questions == null)
+		response.setHeader("Refresh", "0;UserHomePage.jsp");
+	else {
 	session.removeAttribute(quizID+"questions");
-//	Quiz quiz = new Quiz(quizID);
 	double grade = 0;
-//	ArrayList<Question> questions = quiz.getQuestions();
 	
 	int count=0;
 	for(Question q: questions){
@@ -84,38 +88,59 @@
 
 		//get number of histories of current user ID and check what achievement is available
 		//***************TODO: check and complete******************
-
-		/* 	int quizPlayed = Utilities.getQuizNumberPlayed(usrID);
+		int quizPlayed = Utilities.getQuizNumberPlayed(usrID);
 			if(quizPlayed == 1){
-				AchievementRecord achRec = new AchievementRecord(usrID, "Quiz Taker");
-				achRec.saveToDB();
+				if(!Utilities.hasAchievement("Quiz Taker", usrID)){
+					AchievementRecord achRec = new AchievementRecord(usrID, "Quiz Taker");
+					achRec.saveToDB();
+					out.println("<p>Congrats! You have done your first quiz in Quizzzz, you now have a new Achievement: Quiz Taker</p>");
+				}
 			}
-			if(quizPlayed == 5){
-				AchievementRecord achRec = new AchievementRecord(usrID, "Kindergarten");
-				achRec.saveToDB();	
+			else if(quizPlayed == 5){
+				if(!Utilities.hasAchievement("Kindergarten", usrID)){
+					AchievementRecord achRec = new AchievementRecord(usrID, "Kindergarten");
+					achRec.saveToDB();	
+					out.println("<p>Congrats! You have just finished your fifth quiz, you have just won a new Achievement: Kindergarten</p>");
+				}
 			}
-			if(quizPlayed == 10){
+			else if(quizPlayed == 10){
+				if(!Utilities.hasAchievement("Primary School", usrID)){
+
 				AchievementRecord achRec = new AchievementRecord(usrID, "Primary School");
 				achRec.saveToDB();	
+				out.println("<p>Congrats! You have just finished your tenth quiz, you have just won a new Achievement: Primary School</p>");
+				}
 			}
-			if(quizPlayed == 30){
+			else if(quizPlayed == 30){
+				if(!Utilities.hasAchievement("Middle School", usrID)){
+
 				AchievementRecord achRec = new AchievementRecord(usrID, "Middle School");
 				achRec.saveToDB();	
+				out.println("<p>Nice! You have just won the Achievement of Middle School, you have finished 30 quizzes!</p>");
+				}
 			}
-			if(quizPlayed == 50){
+			else if(quizPlayed == 50){
+				if(!Utilities.hasAchievement("High School", usrID)){
+
 				AchievementRecord achRec = new AchievementRecord(usrID, "High School");
 				achRec.saveToDB();	
+				out.println("<p>Amazing! 50 quizzes have been taken by you, 50 more to go to graduate from Quizzzz University. Your new Achievement: High School</p>");
+				}
 			}
-			if(quizPlayed == 100){
+			else if(quizPlayed == 100){
+				if(!Utilities.hasAchievement("Quizzzz University Alumni", usrID)){
+
 				AchievementRecord achRec = new AchievementRecord(usrID, "Quizzzz University Alumni");
 				achRec.saveToDB();	
-			} */
+				out.println("<p>You made it! Your new Achievement: Quizzzz University Alumni! You have graduated from Quizzzz University by finishing 100 quizzes</p>");
+				}
+			}
 	%>
 
 	<h3>Congratulations!</h3>
 	<h3>
 		You get
-		<%=grade%>/<%=questions.size()%>
+		<%=new DecimalFormat("#0.00").format(grade).toString()%>/<%=questions.size()%>
 		in
 		<%=quizName%></h3>
 
@@ -123,12 +148,11 @@
 
 	<p>Quiz Statisics</p>
 	<ul>
-		<li>Highest Score: <%=Utilities.getHighRecordsOfQuiz(quizID)%></li>
+		<li>Highest Score: <%= Utilities.getHighestScoreOfQuiz(quizID) %></li>
 		<li>Average Score: <%=Utilities.getQuizAverageScore(quizID)%></li>
-		<li>Play Times:</li>
-		<li>You have played: <%=Utilities.getPlayTimesOfQuiz(quizID) %>		
-			times
-		</li>
+		<li>Play Times:You have played: <%=Utilities.getPlayTimesOfQuiz(quizID) %>		
+			times</li>
+
 	</ul>
 
 	<p>
@@ -139,17 +163,19 @@
 		<%
 			ArrayList<History> highrecords = Utilities.getHighRecordsOfQuiz(quizID);
 			for (History rec : highrecords) {
-				out.print("<li>" + rec.toString() + "</li>");
+				out.print("<li>" + rec.toStrinQHome() + "</li>");
 			}
 		%>
 	</ul>
 
-	<p>HomePage</p>
-	<p>Other quizzes</p>
+	<p><a href = 'QuizHomePage.jsp?quizID=<%=quizID %>'>QuizHomePage</a></p>
+	<p>TODO: User Home Page </p>
+	<p>TODO: Other quizzes</p>
 
 	<form name='challengeForm' action="MsgWrite.jsp" method="post">
 		<input type="hidden" name="quizID" value="<%=quizID%>">
 		<a href="javascript:document.challengeForm.submit()">Challenge your friend!</a>
 	</form>
+	<%} %>
 </body>
 </html>

@@ -221,6 +221,13 @@ public class Quiz implements Comparable {
 	public boolean isRandom(){
 		return random_questions;
 	}
+	public boolean isImmediateCorrection(){
+		if(multiple_pages){
+			if(immediate_correction)
+				return true;
+		}
+		return false;
+	}
 	//setters
 	public void updateQuizName(String name){
 		quizName = name;

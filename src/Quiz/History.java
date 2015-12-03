@@ -207,6 +207,17 @@ public class History implements Comparable {
 		return str;
 	}
 
+	public String toStrinQHome(){
+		StringBuilder str =new StringBuilder();
+		str.append(this.usrID);
+		str.append(" played this quiz and get ");
+		str.append(this.score);
+		str.append(" at ");
+		str.append(this.end);
+		return str.toString();
+
+	}
+	
 	@Override
 	public int compareTo(Object o) {
 		Date timeDate = QuizSystem.convertToDate(end);
