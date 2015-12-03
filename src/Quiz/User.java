@@ -35,7 +35,7 @@ public class User {
 		this.usrID = usrID;
 		this.password = encryptPW(password);
 
-		DateFormat df = new SimpleDateFormat("dd/MM/yy HH:mm:ss");
+		DateFormat df = new SimpleDateFormat("dd-MM-yy HH:mm:ss");
 		Date dateobj = new Date();
 		time = df.format(dateobj.getTime()).toString();
 		if (permission) {
