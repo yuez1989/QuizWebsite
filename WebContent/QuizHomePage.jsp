@@ -7,9 +7,23 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<%String quizID =  request.getParameter("quizID");%>
-
-<%Quiz quiz = new Quiz(quizID);%>
+<%
+	String quizID =  request.getParameter("quizID");
+	if (quizID.lastIndexOf('_') >= 0) {
+		quizID = quizID.substring(0,quizID.indexOf("_"))+" "+quizID.substring(quizID.indexOf("_") + 1);
+	}
+	
+	Quiz quiz = new Quiz(quizID);
+	
+	//Detect whether the search is valid
+	ArrayList<String> searchRes = Utilities.searchQuizzes(quizID);
+	if (searchRes.size() == 0) { // if there is a search result
+		quizID = "xinhuiwu2015-11-18 16:19:13";
+		out.println("<h3>The quiz you searched does not exist. We will redirect you to the list of quizzes we have...</h3>");
+		response.setHeader("Refresh", "2;Quizzes.jsp");		
+	}
+	else {
+%>
 
 <title> Quiz <%=quiz.getQuizName() %>, by <%= quiz.getCreator()%></title>
 </head>
@@ -75,7 +89,7 @@
 	out.println("<p><a href='QuizPractice.jsp?quizID="+quizID+"\'>Start Quiz in Practice Mode</a> </p>");
 	//TODO realization of editing the quiz
 	out.println("<p><a href=homepage.jsp>Go Back To Home Page</a> </p>");
-	
+	}
 %>
 
 </p>

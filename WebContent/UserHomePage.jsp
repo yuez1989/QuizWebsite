@@ -146,10 +146,11 @@
 					</form>
 				</div>
 				<div class="create-quiz-button">
-					<form method="POST" action="Quiz.jsp" target="_blank">
+					<form method="POST" action="QuizHomePage.jsp" target="_blank">
 						<input type="search" name = "quizID" value="xinhuiwu2015-11-18 16:19:13">
 						<br>
 						<input type="submit" value="Search Quiz">
+						<a href="Quizzes.jsp" target="_blank">See all Quizzes</a>
 					</form>
 				</div>
 			</div>
@@ -188,7 +189,8 @@
 							if (endDate.compareTo(threeDaysAgo) >= 0) {
 								hasRecent = true;
 								String quizName = new Quiz(hist.quizID).getQuizName();
-								String quizStr = "Quiz.jsp?quizID=" + hist.quizID;
+								String quizStr = "QuizHomePage.jsp?quizID=" + hist.quizID;
+								quizStr= quizStr.substring(0,quizStr.indexOf(" "))+"_"+quizStr.substring(quizStr.indexOf(" ")+1);
 							%>
 							<span class='column-indent'><a href=<%=quizStr%> target="_blank"><%= quizName %></a></span>
 							<%
@@ -207,7 +209,8 @@
 							out.println("<span class='column-indent'>You did not created any quizzes yet.</span>");
 						}
 						for (Quiz quiz : createSelf) {
-							String quizStr = "Quiz.jsp?quizID=" + quiz.getQuizID();
+							String quizStr = "QuizHomePage.jsp?quizID=" + quiz.getQuizID();
+							quizStr= quizStr.substring(0,quizStr.indexOf(" "))+"_"+quizStr.substring(quizStr.indexOf(" ")+1);
 					%>
 						<span class='column-indent'><a href=<%=quizStr%> target="_blank"><%=quiz.getQuizName()%></a></span>
 					<%
@@ -269,7 +272,8 @@
 					}
 					Collections.sort(recentCreatedQuizzesFrd);
 					for (Quiz quiz : recentCreatedQuizzesFrd) {		
-						String quizStr = "Quiz.jsp?quizID=" + quiz.getQuizID();
+						String quizStr = "QuizHomePage.jsp?quizID=" + quiz.getQuizID();
+						quizStr= quizStr.substring(0,quizStr.indexOf(" "))+"_"+quizStr.substring(quizStr.indexOf(" ")+1);
 				%>
 					<span class='news-feed'><a href=<%=quizStr%> target="_blank"><%=quiz.getQuizName()%></a></span>
 				<% 
@@ -325,7 +329,8 @@
 				<div class="column-name">Popular Quizzes</div>
 				<%
 					for (Quiz quiz : popQuizzes) {
-						String quizStr = "Quiz.jsp?quizID=" + quiz.getQuizID();
+						String quizStr = "QuizHomePage.jsp?quizID=" + quiz.getQuizID();
+						quizStr= quizStr.substring(0,quizStr.indexOf(" "))+"_"+quizStr.substring(quizStr.indexOf(" ")+1);
 				%>
 					<span style='padding-left: 10px;'><a href=<%=quizStr%> target="_blank"><%=quiz.getQuizName()%></a></span>
 				<%
@@ -338,7 +343,8 @@
 					ArrayList<Quiz> recentQuizzesPublic = Utilities.getRecentQuiz();
 					Collections.sort(recentQuizzesPublic);
 					for (Quiz quiz : recentQuizzesPublic) {
-						String quizStr = "Quiz.jsp?quizID=" + quiz.getQuizID();
+						String quizStr = "QuizHomePage.jsp?quizID=" + quiz.getQuizID();
+						quizStr= quizStr.substring(0,quizStr.indexOf(" "))+"_"+quizStr.substring(quizStr.indexOf(" ")+1);
 				%>
 					<span style='padding-left: 10px;'><a href=<%=quizStr%> target="_blank"><%=quiz.getQuizName()%></a></span>
 				<%
