@@ -192,10 +192,7 @@ public class Utilities {
 		ArrayList<String> recentReviews = new ArrayList<String>();
 		String command = "SELECT * FROM Histories WHERE end > \""+time+"\" AND quizID = "+"\""+quizID+"\" ORDER BY end DESC;";
 		ResultSet rs = db.executeQuery(command);
-		int count = 0; 
 		while(rs.next()){
-			if(count == 3) break;
-			count++;
 			recentReviews.add(rs.getString("review"));
 		}
 		return recentReviews;
@@ -213,10 +210,7 @@ public class Utilities {
 		ArrayList<String> recentReviews = new ArrayList<String>();
 		String command = "SELECT * FROM Histories WHERE end > \""+time+"\" AND quizID = "+"\""+quizID+"\" ORDER BY end DESC;";
 		ResultSet rs = db.executeQuery(command);
-		int count = 0; 
 		while(rs.next()){
-			if(count == 3) break;
-			count++;
 			recentReviews.add(rs.getString("review"));
 		}
 		return recentReviews;
