@@ -113,7 +113,8 @@ body {
 }
 
 .uhp-content a {
-	color: black;
+	color: rgb(59,114,184);
+	font-weight: 25;
 	text-decoration: none;
 }
 

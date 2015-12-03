@@ -54,9 +54,9 @@
 	%>
 	<div>
 		<form name="submitMsgForm" action="PrivacySend.jsp" method="POST">
-			<input id="private-radio" type="radio" name="privacy" value='f'>&nbsp;Private: only you could see your profile&nbsp;&nbsp; 
-			<input id="default-radio" type="radio" name="privacy" value='c'>&nbsp;Default: everybody could see your profile&nbsp;&nbsp; 
-			<input id="friend-radio" type="radio" name="privacy" value='t'>&nbsp;Friend: only you and your friend could see your profile&nbsp;&nbsp;
+			<input id="private-radio" type="radio" name="privacy" value='p'>&nbsp;Private: only you could see your profile&nbsp;&nbsp; 
+			<input id="default-radio" type="radio" name="privacy" value='d'>&nbsp;Default: everybody could see your profile&nbsp;&nbsp; 
+			<input id="friend-radio" type="radio" name="privacy" value='f'>&nbsp;Friend: only you and your friend could see your profile&nbsp;&nbsp;
 			<input type="submit" value="Submit">
 		</form>
 	</div>
