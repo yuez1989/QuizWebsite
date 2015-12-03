@@ -33,8 +33,8 @@
 <body>
 	<h3>Setting saved...</h3>
 	<%
-		user.privacy = request.getParameter("privacy").charAt(0);
-		user.saveToDB();
+		char privacy = request.getParameter("privacy").charAt(0);
+		Utilities.updateUserPrivacy(usrID, privacy);
 		response.setHeader("Refresh", "0;UserHomePage.jsp");
 	%>
 </body>
