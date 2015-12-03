@@ -59,6 +59,17 @@ public class Administrator extends User{
 		
 	}
 	
+	public static void deleteSelf(String usrID){
+		QuizSystem.db.executeUpdate("Delete from AchievementRecords WHERE usrID = \'"+usrID+"\';");
+		QuizSystem.db.executeUpdate("Delete from Histories WHERE usrID = \'"+usrID+"\';");
+		QuizSystem.db.executeUpdate("DELETE FROM Messages WHERE fromID = \'"+usrID+"\' or toID = \'"+usrID+"\';");
+		QuizSystem.db.executeUpdate("DELETE FROM Friends WHERE usr1ID = \'"+usrID+"\' or usr2ID = \'"+usrID+"\';");
+		QuizSystem.db.executeUpdate("delete from Announcements where creatorID = \'"+usrID+"\';");
+		QuizSystem.db.executeUpdate("Update Quizzes set creator = \'default\' where creator = \'"+usrID+"\';");
+		QuizSystem.db.executeUpdate("DELETE FROM Users WHERE usrID = \'"+usrID+"\';");
+		
+	}
+	
 	
 	public static void main(String[] args){
 		QuizSystem.getQuizSystem();

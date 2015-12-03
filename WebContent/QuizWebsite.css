@@ -203,3 +203,10 @@ body {
 	display:inline-block;
 	margin-right:20px;
 }
+
+.dangerous-option {
+	margin-top: 10px;
+	margin-bottom:10px;
+	color: red!important;
+	font-weight:bold!important;
+}
