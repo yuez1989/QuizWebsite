@@ -42,9 +42,14 @@
 			<%= quiz.getQuizName() %></p>
 		<%	
 	out.print("<p>Description: "+ quiz.getDescription()+"</p>");
+	out.print("<p>Tags: </p>");
+	for(String tagi:quiz.getTags()){
+		out.print("<span><b>&nbsp;&nbsp;"+tagi+"&nbsp;&nbsp;</b></span>");
+	}
 	out.print("<p>Rating: "+quiz.getRating()+"</p>");
 	ArrayList<String> recentReview = Utilities.getRecentQuizReviews(quizID);
 	for(String re : recentReview){
+		if(!re.isEmpty())
 		out.print("<p>Recent review:\" " + re + "\"</p>" );
 	}
 
