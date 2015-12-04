@@ -308,6 +308,7 @@ Current questions in the Quiz
 					<input type="hidden" name="Description" value="<%=Description%>">
 					<input type="hidden" name="Tags" value="<%=Tags%>">
 					<input type="hidden" name="Spec" value="<%=Spec%>">
+					<input type="hidden" name="questionType" value=<%=p.getType()%>>
 					<input type="hidden" name="indexInList" value="<%=count%>">
 					<a href= <%=jsCommand%>>Question <%=count %></a>
 				</form>
