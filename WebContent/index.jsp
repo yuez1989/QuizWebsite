@@ -8,6 +8,7 @@
 <meta charset="UTF-8">
 <title>Quizzzz</title>
 <link rel="stylesheet" type="text/css" href="indexstyle.css">
+<link rel="stylesheet" href="cssslider_files/csss_engine1/style.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
 <script src='index.js'></script>
@@ -21,6 +22,57 @@
 %>
 </head>
 <body>
+		<!-- slider -->
+		<!--[if IE]><link rel="stylesheet" href="cssslider_files/csss_engine1/ie.css"><![endif]-->
+		<!--[if lte IE 9]><script type="text/javascript" src="cssslider_files/csss_engine1/ie.js"></script><![endif]-->
+<div class='csslider1 autoplay '>
+		<input name="cs_anchor1" id='cs_slide1_0' type="radio" class='cs_anchor slide' >
+		<input name="cs_anchor1" id='cs_slide1_1' type="radio" class='cs_anchor slide' >
+		<input name="cs_anchor1" id='cs_slide1_2' type="radio" class='cs_anchor slide' >
+		<input name="cs_anchor1" id='cs_slide1_3' type="radio" class='cs_anchor slide' >
+		<input name="cs_anchor1" id='cs_play1' type="radio" class='cs_anchor' checked>
+		<input name="cs_anchor1" id='cs_pause1_0' type="radio" class='cs_anchor pause'>
+		<input name="cs_anchor1" id='cs_pause1_1' type="radio" class='cs_anchor pause'>
+		<input name="cs_anchor1" id='cs_pause1_2' type="radio" class='cs_anchor pause'>
+		<input name="cs_anchor1" id='cs_pause1_3' type="radio" class='cs_anchor pause'>
+		<ul>
+			<li class="cs_skeleton"><img src="cssslider_files/csss_images1/gldgate.jpg" style="width: 100%;"></li>
+			<li class='num0 img slide'> <img src='cssslider_files/csss_images1/gldgate.jpg' alt='World' title='World' /></li>
+			<li class='num1 img slide'> <img src='cssslider_files/csss_images1/dome.jpg' alt='Depth' title='Depth' /></li>
+			<li class='num2 img slide'> <img src='cssslider_files/csss_images1/dog.jpg' alt='Fun' title='Fun' /></li>
+			<li class='num3 img slide'> <img src='cssslider_files/csss_images1/laptop.jpg' alt='Technology' title='Technology' /></li>
+		</ul><div class="cs_engine"><a href="http://cssslider.com">responsive slider</a> by cssSlider.com v2.1m</div>
+		<div class='cs_description'>
+			<label class='num0'><span class="cs_title"><span class="cs_wrapper">World</span></span><br/><span class="cs_descr"><span class="cs_wrapper">Broading your horizen...</span></span></label>
+			<label class='num1'><span class="cs_title"><span class="cs_wrapper">Depth</span></span><br/><span class="cs_descr"><span class="cs_wrapper">Deepen your knowledge...</span></span></label>
+			<label class='num2'><span class="cs_title"><span class="cs_wrapper">Fun</span></span><br/><span class="cs_descr"><span class="cs_wrapper">Make it fun!</span></span></label>
+			<label class='num3'><span class="cs_title"><span class="cs_wrapper">Technology</span></span><br/><span class="cs_descr"><span class="cs_wrapper">Connect with your fellows</span></span></label>
+		</div>
+		<div class='cs_arrowprev'>
+			<label class='num0' for='cs_slide1_0'><span><i></i><b></b></span></label>
+			<label class='num1' for='cs_slide1_1'><span><i></i><b></b></span></label>
+			<label class='num2' for='cs_slide1_2'><span><i></i><b></b></span></label>
+			<label class='num3' for='cs_slide1_3'><span><i></i><b></b></span></label>
+		</div>
+		<div class='cs_arrownext'>
+			<label class='num0' for='cs_slide1_0'><span><i></i><b></b></span></label>
+			<label class='num1' for='cs_slide1_1'><span><i></i><b></b></span></label>
+			<label class='num2' for='cs_slide1_2'><span><i></i><b></b></span></label>
+			<label class='num3' for='cs_slide1_3'><span><i></i><b></b></span></label>
+		</div>
+		<div class='cs_bullets'>
+			<label class='num0' for='cs_slide1_0'> <span class='cs_point'></span>
+				<span class='cs_thumb'><img src='cssslider_files/csss_tooltips1/gldgate.jpg' alt='World' title='World' /></span></label>
+			<label class='num1' for='cs_slide1_1'> <span class='cs_point'></span>
+				<span class='cs_thumb'><img src='cssslider_files/csss_tooltips1/dome.jpg' alt='Depth' title='Depth' /></span></label>
+			<label class='num2' for='cs_slide1_2'> <span class='cs_point'></span>
+				<span class='cs_thumb'><img src='cssslider_files/csss_tooltips1/dog.jpg' alt='Fun' title='Fun' /></span></label>
+			<label class='num3' for='cs_slide1_3'> <span class='cs_point'></span>
+				<span class='cs_thumb'><img src='cssslider_files/csss_tooltips1/laptop.jpg' alt='Technology' title='Technology' /></span></label>
+		</div>
+		</div>
+		<!-- End cssSlider -->
+		
 	<div class='menubar'>
 		<ul>
 			<li id='about' class='leftmenu'>About Us</li>
