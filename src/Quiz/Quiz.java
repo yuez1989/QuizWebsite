@@ -329,16 +329,12 @@ public class Quiz implements Comparable {
 	
 	public void saveToDB(String oldId) throws SQLException{
 		Quiz old = new Quiz(oldId);
-		quizID = oldId;
-		createTime = old.getCreatTime();
-		deleteQuiz(oldId);
-		updateTime = QuizSystem.generateCurrentTime();
-		String cmd = "REPLACE INTO Quizzes VALUE(\""+quizID+"\",\""+quizName+"\",\""+
-				creator+"\",\""+createTime+"\",\""+updateTime+"\",\""+description+"\",\""+
-				getSpec()+"\");";
-			db.executeUpdate(cmd);
-		updateTags(tags);
-		updateQuestions(questions);
+		old.updateQuizName(quizName);
+		old.updateDescription(description);
+		old.updateUpdateTime(QuizSystem.generateCurrentTime());
+		old.updatePlayType(this.getSpec());
+		old.updateTags(tags);
+		old.updateQuestions(this.questions);
 	}
 	//Randomize question order
 	public void shuffleQuestion(){
