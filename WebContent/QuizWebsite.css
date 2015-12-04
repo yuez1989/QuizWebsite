@@ -31,16 +31,6 @@ input[type=search]{
 	border-radius: 3px;
 }
 
-input[type=text]:focus {
-	border-color: #333;
-}
-input[type=password]:focus {
-	border-color: #333;
-}
-input[type=search]:focus {
-	border-color: #333;
-}
-
 input[type=submit] {
 	padding: 1px 6px;
 	background: #ffffff;
@@ -53,7 +43,7 @@ input[type=submit] {
 
 input[type=submit]:hover{
 	padding: 1px 6px;
-	background: #eae6f8;
+	background: #f9ffca;
 	border: solid 1px #ccc;
 	cursor: pointer;
 	-webkit-border-radius: 5px;
@@ -141,8 +131,6 @@ input[type=submit]:hover{
 }
 
 .header-line {
-	background-image:url('images/crop.png');
-	background-size:cover;
 	opacity: .9; 
 	position: fixed;
 	top: 0;
@@ -194,7 +182,7 @@ input[type=submit]:hover{
 	top: 55px;
 	right: 50px;
 	border: 1px solid #fff;
-	width: 185px;
+	width: 200px;
 	height: 100px;
 	background-color: white;
 	border:solid 1px #ccc;
@@ -235,7 +223,7 @@ input[type=submit]:hover{
 }
 
 .uhp-content a {
-	color: rgb(59, 114, 184);
+	color: ;
 	font-weight: 25;
 	text-decoration: none;
 }
@@ -265,7 +253,7 @@ input[type=submit]:hover{
 }
 
 .column-indent {
-	text-indent: 10px;
+	text-indent: 5px;
 	margin-top: 5px;
 }
 
