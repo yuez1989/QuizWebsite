@@ -28,7 +28,7 @@
 		if (usrID == null) {
 			usrID = "default";
 			response.setHeader("Refresh", "0;index.jsp");
-		}		
+		}
 	}
 	out.println(usrID);
 %>
@@ -48,7 +48,8 @@
 		ArrayList<Message> unreadMsgAll = Utilities.unreadMessages(user);
 		ArrayList<Message> unreadMsg = new ArrayList<Message>(); //(All messages that are received)
 		for (Message msg : unreadMsgAll) {
-			if ((msg.fromID).equals(usrID)) continue;
+			if ((msg.fromID).equals(usrID))
+				continue;
 			unreadMsg.add(msg);
 		}
 		ArrayList<History> histories = Utilities.getRecentActivitiesOfUser(usrID);
@@ -57,7 +58,9 @@
 	%>
 	<div class="header-line">
 		<div class="logo-header">
-			<div class="logo-header-large"><a href="UserHomePage.jsp">Quizzzz</a></div>
+			<div class="logo-header-large">
+				<a href="UserHomePage.jsp">Quizzzz</a>
+			</div>
 			<div class="logo-header-small">Only fun learning wakes us up</div>
 		</div>
 		<div class="personal-header">
@@ -89,7 +92,8 @@
 					// Calculate different kinds of messages.
 					int newFriendRequests = 0, newChallenges = 0, newTextMessages = 0;
 					for (Message msg : unreadMsg) {
-						if((msg.fromID).equals(usrID)) continue;
+						if ((msg.fromID).equals(usrID))
+							continue;
 						char type = msg.type.charAt(0);
 						switch (type) {
 						case 'f':
@@ -127,31 +131,41 @@
 		<div class="uhp-user col-md-3">
 			<div class="column-name">PROFILE</div>
 			<div class="news-feed">
-				<form name="submitForm" method="POST" action="Person.jsp" target="_blank">
-					<input type="hidden" name="person" value="<%=usrID%>">
-					<a href="javascript:document.submitForm.submit()"><%=usrID%>'s profile</a>
+				<form name="submitForm" method="POST" action="Person.jsp"
+					target="_blank">
+					<input type="hidden" name="person" value="<%=usrID%>"> <a
+						href="javascript:document.submitForm.submit()"><%=usrID%>'s
+						profile</a>
 				</form>
 			</div>
-			<% String settingStr = "Setting.jsp?usrID=" + usrID; %>
-			<div class="news-feed"><a href=<%=settingStr%> target="_blank">Setting</a></div>
-			<% if (user.permission == 1) { %>
-				<div class="news-feed"><a href="AdminHomePage.jsp" target="_blank">Administration Settings</a></div>
+			<%
+				String settingStr = "Setting.jsp?usrID=" + usrID;
+			%>
+			<div class="news-feed">
+				<a href=<%=settingStr%> target="_blank">Setting</a>
+			</div>
+			<%
+				if (user.permission == 1) {
+			%>
+			<div class="news-feed">
+				<a href="AdminHomePage.jsp" target="_blank">Administration
+					Settings</a>
+			</div>
 			<%
 				}
 			%>
 			<div class="quiz-options">
 				<div class="create-quiz-button">
-					<form method="POST" action="CreateQuiz.jsp"
-						target="_blank">
+					<form method="POST" action="CreateQuiz.jsp" target="_blank">
 						<input type="submit" value="Create New Quiz"></input>
 					</form>
 				</div>
 				<div class="create-quiz-button">
 					<form method="POST" action="QuizHomePage.jsp" target="_blank">
-						<input type="search" name = "quizID" value="xinhuiwu2015-11-18 16:19:13">
-						<br>
-						<input type="submit" value="Search Quiz">
-						<a href="Quizzes.jsp" target="_blank">See all Quizzes</a>
+						<input type="search" name="quizID"
+							value="xinhuiwu2015-11-18 16:19:13"> <br> <input
+							type="submit" value="Search Quiz"> <a href="Quizzes.jsp"
+							target="_blank">See all Quizzes</a>
 					</form>
 				</div>
 			</div>
@@ -169,7 +183,7 @@
 					<div>
 						<span class='column-indent' title='<%=ach.description%>'><%=achr.achID%></span>
 					</div>
-					<%						
+					<%
 						}
 					%>
 				</div>
@@ -181,7 +195,8 @@
 						int counter = 0;
 						for (History hist : histories) {
 							counter++;
-							if (counter == 10) break;
+							if (counter == 10)
+								break;
 							// calculate a date of 3 days ago
 							Date endDate = QuizSystem.convertToDate(hist.end);
 							Date threeDaysAgo = QuizSystem.convertToDate(QuizSystem.minusDay(hist.end, 3));
@@ -190,11 +205,13 @@
 								hasRecent = true;
 								String quizName = new Quiz(hist.quizID).getQuizName();
 								String quizStr = "QuizHomePage.jsp?quizID=" + hist.quizID;
-								quizStr= quizStr.substring(0,quizStr.indexOf(" "))+"_"+quizStr.substring(quizStr.indexOf(" ")+1);
-							%>
-							<span class='column-indent'><a href=<%=quizStr%> target="_blank"><%= quizName %></a></span>
-							<%
-							}
+								quizStr = quizStr.substring(0, quizStr.indexOf(" ")) + "_"
+										+ quizStr.substring(quizStr.indexOf(" ") + 1);
+					%>
+					<span class='column-indent'><a href=<%=quizStr%>
+						target="_blank"><%=quizName%></a></span>
+					<%
+						}
 						}
 						if (hasRecent == false) {
 							out.println("<span class='column-indent'>No recent history.</span>");
@@ -210,9 +227,11 @@
 						}
 						for (Quiz quiz : createSelf) {
 							String quizStr = "QuizHomePage.jsp?quizID=" + quiz.getQuizID();
-							quizStr= quizStr.substring(0,quizStr.indexOf(" "))+"_"+quizStr.substring(quizStr.indexOf(" ")+1);
+							quizStr = quizStr.substring(0, quizStr.indexOf(" ")) + "_"
+									+ quizStr.substring(quizStr.indexOf(" ") + 1);
 					%>
-						<span class='column-indent'><a href=<%=quizStr%> target="_blank"><%=quiz.getQuizName()%></a></span>
+					<span class='column-indent'><a href=<%=quizStr%>
+						target="_blank"><%=quiz.getQuizName()%></a></span>
 					<%
 						}
 					%>
@@ -228,29 +247,30 @@
 						for (String frdID : frdIDs) {
 							String frdLink = "Person.jsp?person=" + frdID;
 					%>
-						<span class='column-indent'><a href=<%=frdLink%> target="_blank"><%=frdID%></a></span>
-					<%	
-							maxFrdsAppear++;
+					<span class='column-indent'><a href=<%=frdLink%>
+						target="_blank"><%=frdID%></a></span>
+					<%
+						maxFrdsAppear++;
 							if (maxFrdsAppear > 20) {
 								break;
 							}
 						}
 						String personLink = "Person.jsp?person=" + usrID;
 					%>
-					<span class='column-indent'><a href=<%=personLink%> target="_blank">...Go to profile to see all</a>
-					</span>
+					<span class='column-indent'><a href=<%=personLink%>
+						target="_blank">...Go to profile to see all</a> </span>
 				</div>
 				<div style="clear: both;"></div>
 			</div>
-			<% 
+			<%
 				String deleteStr = "RemoveSelfAccount.jsp?selfID=" + usrID;
 			%>
 			<div class="delete-account">
-				<br>
-				<a href=<%=deleteStr%> class='dangerous-option'>Delete Account</a>
+				<br> <a href=<%=deleteStr%> class='dangerous-option'>Delete
+					Account</a>
 			</div>
 			<div class="write-to-admin">
-				<a href="AdminList.jsp" class='normal-option'>Check Admins List and Write to Them!</a>
+				<a href="AdminList.jsp" class='normal-option'>Contact us</a>
 			</div>
 		</div>
 		<div class="uhp-news col-md-6">
@@ -264,18 +284,22 @@
 					int counterHist = 0;
 					for (History hist : frdHistories) {
 						counterHist++;
-						if (counterHist > 15) break;
+						if (counterHist > 15)
+							break;
 						Quiz quiz = new Quiz(hist.quizID);
 						String histPersonStr = "Person.jsp?person=" + hist.usrID;
 						String quizStr = "QuizHomePage.jsp?quizID=" + quiz.getQuizID();
-						quizStr= quizStr.substring(0,quizStr.indexOf(" "))+"_"+quizStr.substring(quizStr.indexOf(" ")+1);
-						%>
-						<span class='news-feed'>
-							<a href=<%=histPersonStr%> target="_blank"><%=hist.usrID%></a> took quiz 
-							<a href=<%=quizStr%> target="_blank"><%=quiz.getQuizName()%></a> at <%=hist.end%>, 
-							scoring <%=hist.score%>. Review: <%= hist.review %>; Rating: <%= hist.rating %>.
-						</span>
-					<% } %>
+						quizStr = quizStr.substring(0, quizStr.indexOf(" ")) + "_"
+								+ quizStr.substring(quizStr.indexOf(" ") + 1);
+				%>
+				<span class='news-feed'> <a href=<%=histPersonStr%>
+					target="_blank"><%=hist.usrID%></a> took quiz <a href=<%=quizStr%>
+					target="_blank"><%=quiz.getQuizName()%></a> at <%=hist.end%>,
+					scoring <%=hist.score%>. Review: <%=hist.review%>; Rating: <%=hist.rating%>.
+				</span>
+				<%
+					}
+				%>
 			</div>
 			<div>
 				<div class="column-name">Quizzes Created</div>
@@ -286,12 +310,13 @@
 						recentCreatedQuizzesFrd.addAll(recents);
 					}
 					Collections.sort(recentCreatedQuizzesFrd);
-					for (Quiz quiz : recentCreatedQuizzesFrd) {		
+					for (Quiz quiz : recentCreatedQuizzesFrd) {
 						String quizStr = "QuizHomePage.jsp?quizID=" + quiz.getQuizID();
-						quizStr= quizStr.substring(0,quizStr.indexOf(" "))+"_"+quizStr.substring(quizStr.indexOf(" ")+1);
+						quizStr = quizStr.substring(0, quizStr.indexOf(" ")) + "_"
+								+ quizStr.substring(quizStr.indexOf(" ") + 1);
 				%>
-					<span class='news-feed'><a href=<%=quizStr%> target="_blank"><%=quiz.getQuizName()%></a></span>
-				<% 
+				<span class='news-feed'><a href=<%=quizStr%> target="_blank"><%=quiz.getQuizName()%></a></span>
+				<%
 					}
 				%>
 			</div>
@@ -308,7 +333,9 @@
 						String achUsrStr = "Person.jsp?person=" + achr.usrID;
 						Achievement ach = new Achievement(achr.achID);
 				%>
-					<span class='news-feed'><a href=<%=achUsrStr%>><%=achr.usrID%></a> achieved <span title='<%=ach.description%>'><%=achr.achID%></span> at <%=achr.time%></span>
+				<span class='news-feed'><a href=<%=achUsrStr%>><%=achr.usrID%></a>
+					achieved <span title='<%=ach.description%>'><%=achr.achID%></span>
+					at <%=achr.time%></span>
 				<%
 					}
 				%>
@@ -322,7 +349,7 @@
 				<%
 					ArrayList<String> announcements = new ArrayList<String>();
 					announcements = Utilities.getRecentAnnouncements(10);
-					
+
 					if (announcements != null) {
 						if (announcements.size() != 0) {
 							for (String s : announcements) {
@@ -339,17 +366,19 @@
 				%>
 				<p>No Announcement</p>
 				<%
-}
-%>
+					}
+				%>
 			</div>
 			<div>
 				<div class="column-name">Popular Quizzes</div>
 				<%
 					for (Quiz quiz : popQuizzes) {
 						String quizStr = "QuizHomePage.jsp?quizID=" + quiz.getQuizID();
-						quizStr= quizStr.substring(0,quizStr.indexOf(" "))+"_"+quizStr.substring(quizStr.indexOf(" ")+1);
+						quizStr = quizStr.substring(0, quizStr.indexOf(" ")) + "_"
+								+ quizStr.substring(quizStr.indexOf(" ") + 1);
 				%>
-					<span style='padding-left: 10px;'><a href=<%=quizStr%> target="_blank"><%=quiz.getQuizName()%></a></span>
+				<span style='padding-left: 10px;'><a href=<%=quizStr%>
+					target="_blank"><%=quiz.getQuizName()%></a></span>
 				<%
 					}
 				%>
@@ -361,9 +390,11 @@
 					Collections.sort(recentQuizzesPublic);
 					for (Quiz quiz : recentQuizzesPublic) {
 						String quizStr = "QuizHomePage.jsp?quizID=" + quiz.getQuizID();
-						quizStr= quizStr.substring(0,quizStr.indexOf(" "))+"_"+quizStr.substring(quizStr.indexOf(" ")+1);
+						quizStr = quizStr.substring(0, quizStr.indexOf(" ")) + "_"
+								+ quizStr.substring(quizStr.indexOf(" ") + 1);
 				%>
-					<span style='padding-left: 10px;'><a href=<%=quizStr%> target="_blank"><%=quiz.getQuizName()%></a></span>
+				<span style='padding-left: 10px;'><a href=<%=quizStr%>
+					target="_blank"><%=quiz.getQuizName()%></a></span><br>
 				<%
 					}
 				%>
