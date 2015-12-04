@@ -255,7 +255,7 @@ public class Question{
 		while(result.length()>0){
 			int index = result.indexOf(EC_START);
 			if (index<0) return;
-			result = result.substring(EC_START.length());
+			result = result.substring(index+EC_START.length());
 			ArrayList<String> oneAns = new ArrayList<String>();
 			while(result.indexOf(EC_END)!=0){
 				index = result.indexOf(ANS_START);
