@@ -71,7 +71,14 @@
 		
 		ArrayList<String> tags = new ArrayList<String>();
 		if (result != null && result.length != 0) {
-			tags = new ArrayList<String>(Arrays.asList(Tags.split(" ")));
+			String[] tagToAdd = Tags.split(" ");
+			for(int i = 0; i<tagToAdd.length ;i++){
+				if(tagToAdd[i]!=null){
+					if(tagToAdd[i].trim().length()!=0){
+						tags.add(tagToAdd[i]);
+					}
+				}
+			}
 		}		
 		//System.out.println("on save page, processd tags:"+tags);	
 	
