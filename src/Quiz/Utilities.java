@@ -1042,6 +1042,28 @@ public class Utilities {
 	}
 
 	/**
+	 * Get all announcementID and announcement  
+	 * @param string
+	 * @return Arraylist of announcementID and announcement divided by "##" 
+	 */
+	public static ArrayList<String> getAllAnnouncements(){
+		ArrayList<String> list = new ArrayList<String>();
+		ResultSet rs = QuizSystem.db.executeQuery("Select announceID, content from Announcements;");
+		try {
+			while(rs.next()){
+				String str = "";
+				str += rs.getString("announceID");
+				str += "##";
+				str += rs.getString("content");
+				list.add(str);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	/**
 	 * Remove a piece of announcement from database
 	 * @param annID
 	 */
