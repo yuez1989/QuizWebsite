@@ -904,6 +904,25 @@ public class Utilities {
 	}
 	
 	/**
+	 * Search by tag ID
+	 * @param string
+	 * @return Arraylist of quizID
+	 */
+	public static ArrayList<String> searchQuizzesByTagID(String tagID){
+		ArrayList<String> list = new ArrayList<String>();
+		ResultSet rs = QuizSystem.db.executeQuery("Select quizID from TagAssign where tagsID like \'%" +tagID+"%\';");
+		try {
+			while(rs.next()){
+				String qID = rs.getString("quizID");
+				list.add(qID);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return list;
+	}
+	
+	/**
 	 * Search by quizID or quiz name, exact match ONLY
 	 * @param string
 	 * @return Arraylist of quizID

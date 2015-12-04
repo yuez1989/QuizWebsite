@@ -60,7 +60,7 @@ public class CreateAccountServlet extends HttpServlet {
 			return;
 		}
 		if(!password.equals(passwordcopy)) { // two password does not match
-			RequestDispatcher dispatcher = request.getRequestDispatcher("PasswordMismatch.jsp");
+			RequestDispatcher dispatcher = request.getRequestDispatcher("PasswordMismatch.html");
 			dispatcher.forward(request, response);
 			return;
 		}

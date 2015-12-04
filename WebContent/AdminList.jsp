@@ -42,5 +42,7 @@
 		}
 	%>
 	</div>
+	<div class = "admin-profile-link"><span><a href = "UserHomePage.jsp">Return</a></span>
+	</div>
 </body>
 </html>

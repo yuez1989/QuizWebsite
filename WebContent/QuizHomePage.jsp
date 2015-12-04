@@ -7,6 +7,29 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+
+<link rel="stylesheet" href="QuizWebsite.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"
+	integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ=="
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"
+	integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX"
+	crossorigin="anonymous">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"
+	integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ=="
+	crossorigin="anonymous"></script>
+<script src="//code.jquery.com/jquery-1.10.2.js"></script>
+<script> 
+$(function(){
+  $("#header").load("Header.html"); 
+});
+</script> 
+
 <%
 	// Identify current session
 	String usrID = "default";
@@ -34,17 +57,28 @@
 %>
 
 <title>Quiz <%=quiz.getQuizName() %>, by <%= quiz.getCreator()%></title>
+
 </head>
 <body>
-	<div>
-		<p>
-			Name:
-			<%= quiz.getQuizName() %></p>
+
+	<div id="header"></div>
+	
+	<div class = "uhp-content">
+		<div class="col-md-3"></div>
+		<div class="col-mid-6">
+			<div class="column-name">Name</div>
+
+			<span class='news-feed'><%= quiz.getQuizName() %><br></span>
 		<%	
-	out.print("<p>Description: "+ quiz.getDescription()+"</p>");
+	out.print("<span>Description: "+ quiz.getDescription()+"</span>");
+	out.print("<p>Tags: </p>");
+	for(String tagi:quiz.getTags()){
+		out.print("<span><b>&nbsp;&nbsp;"+tagi+"&nbsp;&nbsp;</b></span>");
+	}
 	out.print("<p>Rating: "+quiz.getRating()+"</p>");
 	ArrayList<String> recentReview = Utilities.getRecentQuizReviews(quizID);
 	for(String re : recentReview){
+		if(!re.isEmpty())
 		out.print("<p>Recent review:\" " + re + "\"</p>" );
 	}
 
@@ -138,7 +172,7 @@
 	out.println("<p><a href=UserHomePage.jsp>Go Back To Home Page</a> </p>");
 	}
 %>
-
+		</div>
 	</div>
 </body>
 </html>

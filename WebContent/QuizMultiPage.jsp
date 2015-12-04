@@ -120,7 +120,7 @@
 	
 	<input type = 'hidden' name = 'quizID' value = '<%= quizID %>'>
 	<input type = 'hidden' name = 'quizName' value = '<%=quizName %>'>
-	<input type = 'submit' class = 'question_submit' value = 'submit multiple pages'>
+	<input type = 'submit' class = 'question_submit' value = 'continue'>
 	
 </form>
 
