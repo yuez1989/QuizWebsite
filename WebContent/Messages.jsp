@@ -85,7 +85,7 @@
 							out.println("<td>" + typeText + "</td>");
 							out.println("<td>" + msg.time + "</td>");
 							out.println("<td><a href='MsgRead.jsp?fromID=" + msg.fromID + 
-									"&toID=" + msg.toID + "&time=" + msg.time + " 'target='_blank'>" + readText + "</a></td>");
+									"&toID=" + msg.toID + "&time=" + msg.time + " '>" + readText + "</a></td>");
 							//<a href = "QuizHomePage.jsp?quizID=xiaotihu2015-11-23 19:12:15">Quiz HomePage</a
 							out.println("<td>"); // COME BACK HERE! FOR DELETING MESSAGE 
 							String formName = "DeleteMsgForm" + i;
