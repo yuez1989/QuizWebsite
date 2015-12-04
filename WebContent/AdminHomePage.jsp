@@ -146,6 +146,43 @@ $(document).ready(main);
 	</form>
 </div>
 
+<div class = 'delete_announcement'>
+<p id = 'delete_announcement_tag'>Delete Announcement</p>
+<div id = "delete_announcement_content">
+
+<%
+	ArrayList<String> announcelist = Utilities.getAllAnnouncements();
+
+	ArrayList<String> announceIDList = new ArrayList<String>();
+	ArrayList<String> announceContentList = new ArrayList<String>();
+	
+	for(String str:announcelist){
+		String[] strs = str.split("##");
+		announceIDList.add(strs[0]);
+		announceContentList.add(strs[1]);
+	}
+	int N = announcelist.size();
+	for(int i = 0; i< N; i++){
+		%>
+		
+		<form id = 'delete_announcement_form' name = 'delete_announcement_form<%=i %>' method = 'post' action = 'AnnouncementRemoved'> 
+		<input type = 'hidden' name = 'anid' value = '<%=announceIDList.get(i) %>'>
+		<span><a href='javascript:document.delete_announcement_form<%=i %>.submit()'>Delete</a>&nbsp;&nbsp;&nbsp;&nbsp;<%=announceContentList.get(i) %></span><br>
+		</form>
+		<br>
+		
+	<%
+		//out.print("<span>"+announceContentList.get(i)+"</span><br>");
+		//out.print("<span><form id = 'delete_announcement_form' name = 'delete_announcement_form' method = 'post' action = 'AnnouncementRemoved'> <input type = 'hidden' name = 'anid' value = '"+announceIDList.get(i)+"'> <a href='javascript:document.delete_announcement_form.submit()'>Delete</a><form></span><br>");
+		
+	}
+
+%>
+</div>
+
+
+</div>
+
 <div class = 'site_statistics'>
 <p>Site Statistics</p>
 <p>Total number of users: <%=Utilities.getTotalNumberOfUsers() %></p>
