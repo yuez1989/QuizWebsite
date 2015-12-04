@@ -315,10 +315,24 @@ public class Quiz implements Comparable {
 	}
 	public void saveToDB() throws SQLException{
 		if(createTime.equals("")) createTime = QuizSystem.generateCurrentTime();
-		if(updateTime.equals("")) updateTime = QuizSystem.generateCurrentTime();
+		updateTime = QuizSystem.generateCurrentTime();
 		if(quizID.equals("")){
 			quizID = creator+createTime;
 		}
+		String cmd = "REPLACE INTO Quizzes VALUE(\""+quizID+"\",\""+quizName+"\",\""+
+				creator+"\",\""+createTime+"\",\""+updateTime+"\",\""+description+"\",\""+
+				getSpec()+"\");";
+			db.executeUpdate(cmd);
+		updateTags(tags);
+		updateQuestions(questions);
+	}
+	
+	public void saveToDB(String oldId) throws SQLException{
+		Quiz old = new Quiz(oldId);
+		quizID = oldId;
+		createTime = old.getCreatTime();
+		deleteQuiz(oldId);
+		updateTime = QuizSystem.generateCurrentTime();
 		String cmd = "REPLACE INTO Quizzes VALUE(\""+quizID+"\",\""+quizName+"\",\""+
 				creator+"\",\""+createTime+"\",\""+updateTime+"\",\""+description+"\",\""+
 				getSpec()+"\");";
