@@ -146,14 +146,21 @@
 							optcnt++;
 						}
 					}else if(Question.TYPE_BLANKFILL.equals(q.getType())){
-						String text = q.getText();
+						String text ="-"+ q.getText()+"-";
 						String[] contents = text.split("<blank>");
+						//contents[contents.length-1] = contents[contents.length-1].substring(0, contents[contents.length-1].length()-1);
 						out.print("<p>");
 						for(int i = 1; i< contents.length ; i++){
-							out.print(contents[i-1]);
+							if(i == 1){
+								out.print(contents[i-1].substring(1));						
+							}else{
+								out.print(contents[i-1]);						
+
+							}
 							out.print("<input type = \'text\' name =\'q"+count+"ans"+i+"\'>");
 						}
-						out.print(contents[contents.length-1]);
+						
+						out.print(contents[contents.length-1].substring(0,contents[contents.length-1].length() - 1));
 						out.print("</p>");
 					}
 					out.print("</div>");
