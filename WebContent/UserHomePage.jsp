@@ -295,7 +295,7 @@
 						int counterHist = 0;
 						for (History hist : frdHistories) {
 							counterHist++;
-							if (counterHist > 15)
+							if (counterHist > 10)
 								break;
 							Quiz quiz = new Quiz(hist.quizID);
 							String histPersonStr = "Person.jsp?person=" + hist.usrID;
@@ -316,7 +316,7 @@
 					<%
 						ArrayList<Quiz> recentCreatedQuizzesFrd = new ArrayList<Quiz>();
 						for (String frdID : frdIDs) {
-							ArrayList<Quiz> recents = Utilities.getRecentCreatedQuiz(frdID);
+							ArrayList<Quiz> recents = Utilities.getRecentCreatedQuiz(frdID,1);
 							recentCreatedQuizzesFrd.addAll(recents);
 						}
 						Collections.sort(recentCreatedQuizzesFrd);
