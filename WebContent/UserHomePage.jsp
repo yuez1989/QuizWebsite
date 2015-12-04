@@ -134,9 +134,203 @@
 			<div style="clear: both;"></div>
 		</div>
 		<div class="body-section">
-			<div class='col-md-4 body-part-wrapper'><div class='body-part'>Hello</div></div>
-			<div class='col-md-4 body-part-wrapper'><div class='body-part'>Hello</div></div>
-			<div class='col-md-4 body-part-wrapper'><div class='body-part'>Hello</div></div>
+			<div class='col-md-3 body-part-wrapper'>
+				<div class='body-part'>
+					<div class="column-name">PROFILE</div>
+					<div class="news-feed">
+						<form name="submitForm" method="POST" action="Person.jsp"
+							target="_blank">
+							<input type="hidden" name="person" value="<%=usrID%>"> <a
+								href="javascript:document.submitForm.submit()"><%=usrID%>'s
+								profile</a>
+						</form>
+					</div>
+					<%
+					String settingStr = "Setting.jsp?usrID=" + usrID;
+					%>
+					<div class="news-feed">
+						<a href=<%=settingStr%> target="_blank">Setting</a>
+					</div>
+					<%
+						if (user.permission == 1) {
+					%>
+					<div class="news-feed">
+						<a href="AdminHomePage.jsp" target="_blank">Administration Settings</a>
+					</div>
+					<%
+						}
+					%>
+					<br>
+					<div>
+						<span class="section-name">Achievements </span>
+						<%
+							ArrayList<AchievementRecord> achrs = info.achievementRecords;
+							if (achrs.size() == 0) {
+								out.println("No achievements yet.");
+							}
+							for (AchievementRecord achr : achrs) {
+								Achievement ach = new Achievement(achr.achID);
+						%>
+						<div>
+							<span class='column-indent' title='<%=ach.description%>'><%=achr.achID%></span>
+						</div>
+						<%
+							}
+						%>
+					</div>
+					<br>
+					<div>
+						<span class="section-name">Recent Quizzes Done</span>
+						<%
+							Calendar cal = new GregorianCalendar();
+							boolean hasRecent = false;
+							int counter = 0;
+							for (History hist : histories) {
+								counter++;
+								if (counter == 10)
+									break;
+								// calculate a date of 3 days ago
+								Date endDate = QuizSystem.convertToDate(hist.end);
+								Date threeDaysAgo = QuizSystem.convertToDate(QuizSystem.minusDay(hist.end, 3));
+
+								if (endDate.compareTo(threeDaysAgo) >= 0) {
+									hasRecent = true;
+									String quizName = new Quiz(hist.quizID).getQuizName();
+									String quizStr = "QuizHomePage.jsp?quizID=" + hist.quizID;
+									quizStr = quizStr.substring(0, quizStr.indexOf(" ")) + "_"
+											+ quizStr.substring(quizStr.indexOf(" ") + 1);
+						%>
+						<span class='column-indent'><a href=<%=quizStr%>
+							target="_blank"><%=quizName%></a></span><br>
+						<%
+							}
+							}
+							if (hasRecent == false) {
+								out.println("<span class='column-indent'>No recent history.</span>");
+							}
+						%>
+					</div>
+					<br>
+					<div>
+						<span class="section-name">Recent Creation</span><br>
+						<%
+							ArrayList<Quiz> createSelf = Utilities.getRecentCreatedQuiz(usrID);
+							if (createSelf.size() == 0) {
+								out.println("<span class='column-indent'>You did not created any quizzes yet.</span>");
+							}
+							for (Quiz quiz : createSelf) {
+								String quizStr = "QuizHomePage.jsp?quizID=" + quiz.getQuizID();
+								quizStr = quizStr.substring(0, quizStr.indexOf(" ")) + "_"
+										+ quizStr.substring(quizStr.indexOf(" ") + 1);
+						%>
+						<span class='column-indent'><a href=<%=quizStr%>
+							target="_blank"><%=quiz.getQuizName()%></a></span><br>
+						<%
+							}
+						%>
+					</div>
+					<br>
+					<div>
+						<span class="section-name">Friends List</span><br>
+						<%
+							ArrayList<String> frdIDs = Utilities.getFriendList(usrID);
+							if (frdIDs.size() == 0) {
+								out.println("<span class='column-indent'>No friends yet.</span>");
+							}
+							int maxFrdsAppear = 0; // max number of friends shown
+							for (String frdID : frdIDs) {
+								String frdLink = "Person.jsp?person=" + frdID;
+						%>
+						<span class='column-indent'><a href=<%=frdLink%>
+							target="_blank"><%=frdID%></a></span><br>
+						<%
+							maxFrdsAppear++;
+								if (maxFrdsAppear > 20) {
+									break;
+								}
+							}
+							String personLink = "Person.jsp?person=" + usrID;
+						%>
+						<span class='column-indent'><a href=<%=personLink%>
+							target="_blank">...Go to profile to see all</a> </span>
+					</div>
+					<%
+						String deleteStr = "RemoveSelfAccount.jsp?selfID=" + usrID;
+					%>
+					<div class="delete-account">
+						<br> <a href=<%=deleteStr%> class='dangerous-option'>Delete
+							Account</a>
+					</div>
+					<div class="write-to-admin">
+						<a href="AdminList.jsp" class='normal-option'>Contact us</a>
+					</div>
+				</div>
+				<div class='body-part'>
+					<div class="column-name">Quiz Creation and Search</div>
+					<div class="news-feed">
+							<a href="CreateQuiz.jsp" target="_blank">Create New Quiz</a>
+					</div>
+					<div class="news-feed">
+							<a href="Quizzes.jsp" target="_blank">See all Quizzes</a>
+					</div>
+					<div class="news-feed create-quiz-button">
+						<form name='searchQuizForm' method="POST" action="QuizHomePage.jsp" target="_blank">
+							<input type="search" name="quizID" value="xinhuiwu2015-11-18 16:19:13"><br>
+							<input type="submit" value="Search Quiz" style='margin-top:10px;'> 
+						</form>
+					</div>
+				</div>
+			</div>
+			<div class='col-md-6 body-part-wrapper'>
+				<div class='body-part'>
+					<div class="column-name">NEWS OF FRIENDS</div>
+					<div class="column-name">Quizzes Taken Recent</div>
+					<%
+						if (frdHistories.size() == 0) {
+							out.println("No recent friend activities; Add more friend!");
+						}
+						int counterHist = 0;
+						for (History hist : frdHistories) {
+							counterHist++;
+							if (counterHist > 15)
+								break;
+							Quiz quiz = new Quiz(hist.quizID);
+							String histPersonStr = "Person.jsp?person=" + hist.usrID;
+							String quizStr = "QuizHomePage.jsp?quizID=" + quiz.getQuizID();
+							quizStr = quizStr.substring(0, quizStr.indexOf(" ")) + "_"
+									+ quizStr.substring(quizStr.indexOf(" ") + 1);
+					%>
+					<span class='news-feed'> <a href=<%=histPersonStr%>
+						target="_blank"><%=hist.usrID%></a> took quiz <a href=<%=quizStr%>
+						target="_blank"><%=quiz.getQuizName()%></a> at <%=hist.end%>,
+						scoring <%=hist.score%>. Review: <%=hist.review%>; Rating: <%=hist.rating%>.
+					</span>
+					<%
+						}
+					%>
+					<br>
+					<div class="column-name">Quizzes Created</div>
+					<%
+						ArrayList<Quiz> recentCreatedQuizzesFrd = new ArrayList<Quiz>();
+						for (String frdID : frdIDs) {
+							ArrayList<Quiz> recents = Utilities.getRecentCreatedQuiz(frdID);
+							recentCreatedQuizzesFrd.addAll(recents);
+						}
+						Collections.sort(recentCreatedQuizzesFrd);
+						for (Quiz quiz : recentCreatedQuizzesFrd) {
+							String quizStr = "QuizHomePage.jsp?quizID=" + quiz.getQuizID();
+							quizStr = quizStr.substring(0, quizStr.indexOf(" ")) + "_"
+									+ quizStr.substring(quizStr.indexOf(" ") + 1);
+					%>
+					<span class='news-feed'><a href=<%=quizStr%> target="_blank"><%=quiz.getQuizName()%></a></span>
+					<%
+						}
+					%>
+			</div>
+		</div>
+			<div class='col-md-3 body-part-wrapper'>
+				<div class='body-part'>Hello</div>
+			</div>
 		</div>
 	</div>
 </body>

@@ -6,7 +6,6 @@
 
 /* Header */
 body {
-	background-color: #ffffff;
 }
 
 input[type=text]{
@@ -34,6 +33,26 @@ input[type=search]{
 input[type=submit] {
 	padding: 1px 6px;
 	background: transparent;
+	color: #000000!important;
+	border: solid 1px #000000;
+	cursor: pointer;
+	-webkit-border-radius: 5px;
+	border-radius: 3px;
+}
+
+input[type=submit]:hover{
+	padding: 1px 6px;
+	background: #ffffff;
+	color: #ffffff!important;
+	border: solid 1px #000000;
+	cursor: pointer;
+	-webkit-border-radius: 5px;
+	border-radius: 3px;
+}
+
+.header-line input[type=submit] {
+	padding: 1px 6px;
+	background: transparent;
 	color: #ffffff!important;
 	border: solid 1px #ffffff;
 	cursor: pointer;
@@ -41,7 +60,7 @@ input[type=submit] {
 	border-radius: 3px;
 }
 
-input[type=submit]:hover{
+.header-line input[type=submit]:hover{
 	padding: 1px 6px;
 	background: #ffffff;
 	color: #000000!important;
@@ -146,8 +165,8 @@ input[type=submit]:hover{
 }
 
 .body-section {
-	position:fixed;
-	top:60px;
+	position:absolute;
+	top:40px;
 	margin-left:20px;
 	margin-right:20px;
 	width:96%;
@@ -157,17 +176,30 @@ input[type=submit]:hover{
 .body-part-wrapper {
 	padding:20px;
 }
+
 .body-part {
-	opacity: .6;
+	opacity: .8;
 	position: relative;
-	width: 90%;
+	width: 98%;
 	padding: 20px 40px 20px 40px;
 	margin: 0 auto;
+	margin-top:30px!important;
+	margin-bottom:10px!important;
 	background-color: #fff;
 	-webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
 	-moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
+	color:rgb(51,51,51);
 }
+
+.body-part a{
+	color:rgb(51,51,51);
+}
+
+.body-part a:hover{
+	color:rgb(200,200,200)!important;
+}
+
 
 .header-line * {
 	color: white;
@@ -267,24 +299,26 @@ input[type=submit]:hover{
 
 .column-name {
 	font-size: 15px;
-	color: rgb(147, 153, 164);
+	font-weight:bold;
 	padding-bottom: 5px;
 	padding-top: 5px;
 }
 
 .section-name {
-	color: rgb(147, 153, 164);
-	padding-top: 10px;
+	font-weight:bold;
+	margin-top: 10px;
+	margin-left:20px;
 }
 
 .column-indent {
-	text-indent: 5px;
+	margin-left:20px;
 	margin-top: 5px;
 }
 
 .news-feed {
 	display: block;
 	margin-top: 5px;
+	margin-left: 20px;
 }
 
 .create-quiz-button {

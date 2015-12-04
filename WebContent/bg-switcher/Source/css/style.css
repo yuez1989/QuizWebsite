@@ -9,8 +9,6 @@ html {
     overflow-x: auto;
 }
 body {
-    overflow-x: hidden;
-    overflow-y: auto;
 }
 a {
     color:#f7f7f7;
