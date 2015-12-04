@@ -12,6 +12,7 @@
 
 <h2>Create a new Quiz</h2>
 <%	
+
 	String[] result;
 	String QuizID = "";
 	String QuizName = "";
@@ -19,7 +20,7 @@
 	String Tags = "";
 	String Spec = "";
 	String probCancel= "";
-	
+	String QuestionIDList = "";
 	ArrayList<Question> questions =  new ArrayList<Question>();	
 	result = request.getParameterValues("QuizID");
 	if (result != null && result.length != 0) {
@@ -32,7 +33,8 @@
 	}
 	if(myquiz!= null){
 		questions = myquiz.getQuestions();
-		request.getSession().setAttribute("QuestionList" , questions);
+		//request.getSession().setAttribute("QuestionList" , questions);
+		QuestionIDList= Utilities.QuestionListToString(questions);
 		QuizName = myquiz.getQuizName();
 		System.out.println("edit old quiz name "+QuizName);
 		Description = myquiz.getDescription();
@@ -44,15 +46,32 @@
 		myquiz = null;
 		QuizID = "";
 	}else{
+		/*
 		if(request.getSession().getAttribute("QuestionList") == null){
 			request.getSession().setAttribute("QuestionList" , questions);	
 		}else{
 			questions = (ArrayList<Question>) request.getSession().getAttribute("QuestionList");
+		}*/
+		result = request.getParameterValues("QuestionIDList");
+		if (result != null && result.length != 0) {
+			QuestionIDList = result[0];
 		}
+		if(QuestionIDList == null){ System.out.print("QuestionIDList in create Quiz.jsp is null");}
+		System.out.println("QuestionIDList in createQuiz.jsp line 60 is"+QuestionIDList);
+		//TOTOTOTOTOTOTOTOTO
+		questions = Utilities.stringToQuestionList(QuestionIDList);
+		/*for(int i =0; i<questions.size();i++){
+			if(questions.get(i)==null){
+				questions.remove(i);
+				i--;
+			}
+		}*/
+		//TOTOTOTOTOTOTOTOTO
+		
 		result = request.getParameterValues("Quiz Name");
 		if (result != null && result.length != 0) {
 			QuizName = result[0];
-			System.out.println("new passed in quiz name "+QuizName);
+			//System.out.println("new passed in quiz name "+QuizName);
 		}
 	
 		result = request.getParameterValues("Description");
@@ -174,6 +193,7 @@ if(!probCancel.equals("CancelQuestion")){
 			count++;
 		}
 		p = new Question(questionText, pictureUrl, solutions,time, userID,order, "MC");
+		p.saveProb();
 	}
 	if(QuesType.equals("MATCH")){
 		count =1;
@@ -195,6 +215,7 @@ if(!probCancel.equals("CancelQuestion")){
 			count++;
 		}
 		p = new Question(questionText, pictureUrl, solutions,time, userID,order, "MATCH");
+		p.saveProb();
 	}else if(QuesType!=null){
 		int solnum = solutions.size();
 		result = request.getParameterValues("NumberOfSulution");
@@ -209,6 +230,7 @@ if(!probCancel.equals("CancelQuestion")){
 		} 
 		if(!QuesType.equals("")){
 			p = new Question(questionText, pictureUrl, solutions,solnum, time, userID,order, QuesType);
+			p.saveProb();
 		}
 	}
 	String index = "";
@@ -219,12 +241,13 @@ if(!probCancel.equals("CancelQuestion")){
 	}
 	if(p!=null){
 		if(index==""){
+			p.saveProb();
 			questions.add(p);
 		}else{
 			System.out.println(p.getAllSol());
 			questions.set(Integer.parseInt(index)-1,p);
 		}
-		request.getSession().setAttribute("QuestionList" , questions);
+		//request.getSession().setAttribute("QuestionList" , questions);
 	}
 }
 %>
@@ -242,10 +265,10 @@ If you want question appear on multiple pages, enter "M".<BR>
 If you want provide immediate correction, enter "I".<BR>
 You can have multiple options, order does not matter.<BR>
 <INPUT TYPE="TEXT" NAME="Spec" value="<%=Spec%>"><BR>
-<a href="javascript:document.AddQuestion.submit()">Add Problem or Finish</a>
-</form>
+
 
 <%	
+	System.out.println("QuestionIDList in createQuiz.jsp line 270 is"+QuestionIDList);
 	String questionToBeRemoved = "";
 	result = request.getParameterValues("indexToDelete");
 	if (result != null && result.length != 0) {
@@ -255,23 +278,41 @@ You can have multiple options, order does not matter.<BR>
 		if(questionToBeRemoved!=""){
 			int qindex = Integer.parseInt(questionToBeRemoved);
 			if(qindex>=1 && qindex<=questions.size()){
+				questions.get(qindex-1).deleteProbFromDB();
 				questions.remove(qindex-1);
 			}
 		}
 	}
-	
+	//TTTTTTTTTTTTTTT
+	QuestionIDList= Utilities.QuestionListToString(questions);//!!!!!!!!!!!!
+	//TTTTTTTTTTTTTTT
+	System.out.println("QuestionIDList in createQuiz.jsp line 287 is"+QuestionIDList);
+	for(int i =0; i<questions.size();i++){
+		if(questions.get(i)==null){
+			questions.remove(i);
+			i--;
+		}
+	}
 %>
+<input type="hidden" name="QuestionIDList" value="<%=QuestionIDList%>">
+<a href="javascript:document.AddQuestion.submit()">Add Problem or Finish</a>
+</form>
 Current questions in the Quiz
 <%
 	int count = 1;
+	System.out.println("questions length() at line 298 in CreateQuiz.jsp is "+questions.size());
 	if(questions != null){
 		if(questions.size()==0){
 			%>
 				<p>There is currently no question in this quiz!</p>
 			<%
 		}
-		for(Question p:questions){
+		//for(Question p:questions){
+		for(int i=0; i<questions.size();i++){
+			Question p = questions.get(i);
 			//session.setAttribute("Question "+Integer.toString(count), p);
+			if(p==null){System.out.println("p is null at line 308 in CreateQuiz.jsp");}
+			if(p.getType()==null){System.out.println("p is null at line 298 in CreateQuiz.jsp");}
 			if(p.getType().equals("MC")){
 				String formName = "AddMultipleChoices" + count;
 				String jsCommand = "javascript:document.AddMultipleChoices" + count + ".submit()";
@@ -281,6 +322,7 @@ Current questions in the Quiz
 					<input type="hidden" name="Description" value="<%=Description%>">
 					<input type="hidden" name="Tags" value="<%=Tags%>">
 					<input type="hidden" name="Spec" value="<%=Spec%>">
+					<input type="hidden" name="QuestionIDList" value="<%=QuestionIDList%>">
 					<input type="hidden" name="indexInList" value="<%=count%>">
 					<a href= <%=jsCommand%>>Question <%=count %></a>
 				</form>
@@ -295,6 +337,7 @@ Current questions in the Quiz
 					<input type="hidden" name="Description" value="<%=Description%>">
 					<input type="hidden" name="Tags" value="<%=Tags%>">
 					<input type="hidden" name="Spec" value="<%=Spec%>">
+					<input type="hidden" name="QuestionIDList" value="<%=QuestionIDList%>">
 					<input type="hidden" name="indexInList" value="<%=count%>">
 					<a href= <%=jsCommand%>>Question <%=count %></a>
 				</form>
@@ -309,6 +352,7 @@ Current questions in the Quiz
 					<input type="hidden" name="Tags" value="<%=Tags%>">
 					<input type="hidden" name="Spec" value="<%=Spec%>">
 					<input type="hidden" name="questionType" value=<%=p.getType()%>>
+					<input type="hidden" name="QuestionIDList" value="<%=QuestionIDList%>">
 					<input type="hidden" name="indexInList" value="<%=count%>">
 					<a href= <%=jsCommand%>>Question <%=count %></a>
 				</form>
@@ -322,6 +366,7 @@ Current questions in the Quiz
 					<input type="hidden" name="Description" value="<%=Description%>">
 					<input type="hidden" name="Tags" value="<%=Tags%>">
 					<input type="hidden" name="Spec" value="<%=Spec%>">
+					<input type="hidden" name="QuestionIDList" value="<%=QuestionIDList%>">
 					<input type="hidden" name="indexToDelete" value="<%=count%>">
 					<a href= <%=jsCommand%>>Delete Question <%=count %></a>
 			</form>
@@ -332,6 +377,7 @@ Current questions in the Quiz
 %>
 <form name="CancelQuiz" method="POST" action="AddQuizToDB.jsp">
 	<input type="hidden" name="Discard" value="Discard">
+	<input type="hidden" name="QuestionIDList" value="<%=QuestionIDList%>">
 	 <a href="javascript:document.CancelQuiz.submit()">Discard</a>
 </form>
 </body>
