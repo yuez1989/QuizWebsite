@@ -587,8 +587,11 @@ public class Utilities {
 		String[] qNames = str.split("<PID>");
 		for(String name : qNames){
 			Question q = new Question(name);
-			qList.add(q);
+			if(q!=null && name.length()>0){
+				qList.add(q);
+			}
 		}
+		System.out.println("qList in utilities has length "+qList.size());
 		return qList;
 	}
 	
@@ -598,13 +601,16 @@ public class Utilities {
 	 * @return
 	 */
 	static public String QuestionListToString(ArrayList<Question> qList){
+		if(qList.size()==0){
+			return "";
+		}
 		String longString = "";
-		for(int i = 0; i<qList.size()-1; i++){
+		for(int i = 0; i<qList.size(); i++){
 			String qID = qList.get(i).problemID;
 			longString += qID;
 			longString += "<PID>";
 		}
-		longString += qList.get(qList.size()-1).problemID;
+		//longString += qList.get(qList.size()-1).problemID;
 		return longString;
 	}
 
