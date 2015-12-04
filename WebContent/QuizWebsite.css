@@ -56,15 +56,16 @@ input[type=submit]:hover{
 	display: table;
 	padding: 4px;
 	margin: 8px 8px 8px 8px;
-	-webkit-transition: color 1s ease-out;
-	-moz-transition: color 1s ease-out;
-	-ms-transition: color 1s ease-out;
-	-o-transition: color 1s ease-out;
-	transition: color 1s ease-out;
+	-webkit-transition: all 1s ease-out;
+	-moz-transition: all 1s ease-out;
+	-ms-transition: all 1s ease-out;
+	-o-transition: all 1s ease-out;
+	transition: all 1s ease-out;
 }
 
 .welcome-box:hover {
-	background-color: #faf7fc;
+	border : solid 1px rgb(51,51,51);
+	cursor:pointer;
 }
 
 .welcome-msg {
