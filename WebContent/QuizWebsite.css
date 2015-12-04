@@ -6,6 +6,7 @@
 
 /* Header */
 body {
+	background-color:#ccc!important;
 }
 
 input[type=text]{
