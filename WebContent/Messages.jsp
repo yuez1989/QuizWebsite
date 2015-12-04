@@ -51,7 +51,7 @@
 			<div class='body-part'>
 				<div class="column-name">MESSAGE OPTIONS</div>
 				<div class="news-feed">
-					<a href="MsgWrite.jsp" target="_blank">Write A New Message</a>
+					<a href="MsgWrite.jsp" target="_blank" class='important-option'>Write A New Message</a>
 				</div>
 				<div class='news-feed'>
 					<a href="MsgDeleteAll.jsp" class='dangerous-option'>Delete All
