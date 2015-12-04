@@ -71,12 +71,13 @@
 			request.getSession().setAttribute("QuestionList" , questions);	
 		}
 		Quiz q = new Quiz(QuizName, Description, userID, tags, questions, Spec);	
-	
+		//request.getSession().removeAttribute("QuestionList");
 		String oldQuizID = null;
 		oldQuizID = (String)request.getSession().getAttribute("OldQuizID");
 		if(oldQuizID!=null){
 			if(oldQuizID.length()>0){
 				q.saveToDB(oldQuizID);
+				request.getSession().removeAttribute("OldQuizID");
 			}else{
 				q.saveToDB();
 			}
