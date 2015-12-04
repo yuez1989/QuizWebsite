@@ -330,8 +330,8 @@
 						}
 					%>
 					<div>
-					<br> 
-					<div class="column-name">Achievements Earned</div>
+						<br>
+						<div class="column-name">Achievements Earned</div>
 						<%
 							ArrayList<AchievementRecord> achrFrd = new ArrayList<AchievementRecord>();
 							for (String frdID : frdIDs) {
@@ -355,6 +355,66 @@
 			<div class='col-md-3 body-part-wrapper'>
 				<div class='body-part'>
 					<div class="column-name">OTHERS</div>
+					<div>
+						<div class="column-name">Announcements</div>
+						<%
+							ArrayList<String> announcements = new ArrayList<String>();
+							announcements = Utilities.getRecentAnnouncements(10);
+							if (announcements != null) {
+								if (announcements.size() != 0) {
+									for (String s : announcements) {
+						%>
+						<span style='padding-left: 20px;'><%=s%></span><br>
+						<%
+							}
+								} else {
+						%>
+						<span style='padding-left: 20px;'>No Announcement</span><br>
+						<%
+							}
+							} else {
+						%>
+						<span style='padding-left: 20px;'>No Announcement</span><br>
+						<%
+							}
+						%>
+					</div>
+				</div>
+				<div class='body-part'>
+					<div class="column-name">PUBLIC QUIZ UPDATES</div>
+					<div>
+						<div>
+							<div class="column-name">Popular Quizzes</div>
+							<%
+								for (Quiz quiz : popQuizzes) {
+									String quizStr = "QuizHomePage.jsp?quizID=" + quiz.getQuizID();
+									quizStr = quizStr.substring(0, quizStr.indexOf(" ")) + "_"
+											+ quizStr.substring(quizStr.indexOf(" ") + 1);
+							%>
+							<span style='padding-left: 5px;'><a href=<%=quizStr%>
+								target="_blank"><%=quiz.getQuizName()%></a></span><br>
+							<%
+								}
+							%>
+						</div><br>
+						<div>
+							<div class="column-name">Recently Created Quizzes</div>
+							<%
+								ArrayList<Quiz> recentQuizzesPublic = Utilities.getRecentQuiz();
+								Collections.sort(recentQuizzesPublic);
+								for (Quiz quiz : recentQuizzesPublic) {
+									String quizStr = "QuizHomePage.jsp?quizID=" + quiz.getQuizID();
+									quizStr = quizStr.substring(0, quizStr.indexOf(" ")) + "_"
+											+ quizStr.substring(quizStr.indexOf(" ") + 1);
+							%>
+							<span style='padding-left: 5px;'><a href=<%=quizStr%>
+								target="_blank"><%=quiz.getQuizName()%></a></span><br>
+							<%
+								}
+							%>
+						</div>
+
+					</div>
 				</div>
 			</div>
 		</div>
