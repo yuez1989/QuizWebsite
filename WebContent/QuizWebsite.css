@@ -1,12 +1,33 @@
 @CHARSET "UTF-8";
 
+
 * {
-	font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+	font-family: 'Lucida Grande', 'Lucida Sans Unicode', 'Lucida Sans', Geneva, Verdana, sans-serif;
 }
 
 /* Header */
 body {
 	background-color: rgb(233, 234, 237) !important;
+}
+
+.index-wrapper {
+	background-color: white;
+}
+
+.welcome-box {
+	text-align: center;
+	border: solid 1px #CCCCCC;
+	background-color: #f9f9f9;
+	border-radius: 10px;
+	display: table;
+	padding: 4px;
+	margin: 4px 4px 0px 4px;
+}
+
+.welcome-msg {
+	color:rgb(51,51,51);
+	font-size:30px;
+	text-align:left;
 }
 
 .header-line {
@@ -58,12 +79,12 @@ body {
 }
 
 #popup-child {
-	display: none;
+	display:none;
 	position: absolute;
 	top: 65px;
 	right: 50px;
 	border: 1px solid #fff;
-	width: 180px;
+	width: 185px;
 	height: 100px;
 	background-color: white;
 	border-radius: 3px;
