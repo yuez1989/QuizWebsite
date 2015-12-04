@@ -315,7 +315,7 @@ public class Quiz implements Comparable {
 	}
 	public void saveToDB() throws SQLException{
 		if(createTime.equals("")) createTime = QuizSystem.generateCurrentTime();
-		if(updateTime.equals("")) updateTime = QuizSystem.generateCurrentTime();
+		updateTime = QuizSystem.generateCurrentTime();
 		if(quizID.equals("")){
 			quizID = creator+createTime;
 		}
@@ -325,6 +325,16 @@ public class Quiz implements Comparable {
 			db.executeUpdate(cmd);
 		updateTags(tags);
 		updateQuestions(questions);
+	}
+	
+	public void saveToDB(String oldId) throws SQLException{
+		Quiz old = new Quiz(oldId);
+		old.updateQuizName(quizName);
+		old.updateDescription(description);
+		old.updateUpdateTime(QuizSystem.generateCurrentTime());
+		old.updatePlayType(this.getSpec());
+		old.updateTags(tags);
+		old.updateQuestions(this.questions);
 	}
 	//Randomize question order
 	public void shuffleQuestion(){

@@ -76,10 +76,13 @@
 		oldQuizID = (String)request.getSession().getAttribute("OldQuizID");
 		if(oldQuizID!=null){
 			if(oldQuizID.length()>0){
-				Quiz.deleteQuiz(oldQuizID);
+				q.saveToDB(oldQuizID);
+			}else{
+				q.saveToDB();
 			}
+		}else{
+			q.saveToDB();
 		}
-		q.saveToDB();
 		request.getSession().removeAttribute("QuestionList");	
 	}
 %>
