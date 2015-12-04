@@ -93,7 +93,67 @@ if(questions == null){
 	 <a href="javascript:document.cancel.submit()">Cancel</a>
 </form>
 <%
-	if(questions.size()>0 && QuizName.length()>0 && QuizName.trim().length()>0){
+	ArrayList<Integer> probWithNoSol = new ArrayList<Integer>();
+	for(int i= 0; i< questions.size(); i++){
+		int numSolExist = questions.get(i).getAllSol().size();
+		if(numSolExist==0 || numSolExist<questions.get(i).getsolNum()){
+			probWithNoSol.add(i+1);
+		}
+	}
+	if(probWithNoSol.size()!=0){
+		%>
+		<p> Not enough solution provided in the following questions:
+		<%
+		int count=1;
+		for(int index:probWithNoSol){
+			if(questions.get(index-1).getType().equals("MC")){
+				String formName = "AddMultipleChoices" + count;
+				String jsCommand = "javascript:document.AddMultipleChoices" + count + ".submit()";
+				%>
+				<form name=<%=formName%> method="POST" action="MultipleChoice.jsp">
+					<input type="hidden" name="Quiz Name" value="<%=QuizName%>">
+					<input type="hidden" name="Description" value="<%=Description%>">
+					<input type="hidden" name="Tags" value="<%=Tags%>">
+					<input type="hidden" name="Spec" value="<%=Spec%>">
+					<input type="hidden" name="indexInList" value="<%=index%>">
+					<a href= <%=jsCommand%>>Question <%=index %></a>
+				</form>
+				<%
+			}
+			else if(questions.get(index-1).getType().equals("MATCH")){
+				String formName = "AddMatching" + count;
+				String jsCommand = "javascript:document.AddMatching" + count + ".submit()";
+				%>
+				<form name=<%=formName%> method="POST" action="Matching.jsp">
+					<input type="hidden" name="Quiz Name" value="<%=QuizName%>">
+					<input type="hidden" name="Description" value="<%=Description%>">
+					<input type="hidden" name="Tags" value="<%=Tags%>">
+					<input type="hidden" name="Spec" value="<%=Spec%>">
+					<input type="hidden" name="indexInList" value="<%=index%>">
+					<a href= <%=jsCommand%>>Question <%=index %></a>
+				</form>
+				<%
+			}else{
+				String formName = "AddFreeResponse" + count;
+				String jsCommand = "javascript:document.AddFreeResponse" + count + ".submit()";
+				%>
+				<form name=<%=formName%> method="POST" action="FreeResponse.jsp">
+					<input type="hidden" name="Quiz Name" value="<%=QuizName%>">
+					<input type="hidden" name="Description" value="<%=Description%>">
+					<input type="hidden" name="Tags" value="<%=Tags%>">
+					<input type="hidden" name="Spec" value="<%=Spec%>">
+					<input type="hidden" name="indexInList" value="<%=index%>">
+					<a href= <%=jsCommand%>>Question <%=index %></a>
+				</form>
+				<%
+			}
+			count++;
+		}
+		%>
+		</p>
+		<%
+	}
+	if(questions.size()>0 && QuizName.length()>0 && QuizName.trim().length()>0 && probWithNoSol.size()==0){
 		%>	
 		<form name="AddQuiz" method="POST" action="AddQuizToDB.jsp">
 		<input type="hidden" name="Quiz Name" value="<%=QuizName%>">
