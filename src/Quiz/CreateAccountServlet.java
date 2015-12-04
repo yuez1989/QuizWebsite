@@ -49,7 +49,7 @@ public class CreateAccountServlet extends HttpServlet {
 		// Database has the user
 		ResultSet rs = db.executeQuery("select * from Users where usrID = \""+accountname+"\";");
 		try {
-			if(rs.next() || accountname.indexOf("##")!=-1){ // if user already exists
+			if(rs.next() || accountname.indexOf("##")!=-1 || accountname.indexOf("_")!=-1 || accountname.indexOf("%")!=-1){ // if user already exists
 				RequestDispatcher dispatcher = request.getRequestDispatcher("NameInUse.html");
 				dispatcher.forward(request, response);
 				return;
