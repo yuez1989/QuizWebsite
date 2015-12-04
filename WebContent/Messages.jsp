@@ -98,7 +98,7 @@
 						<input type="hidden" name="fromIDDelete" value=<%=msg.fromID%>>
 						<input type="hidden" name="toIDDelete" value=<%=msg.toID%>>
 						<input type="hidden" name="timeDelete" value=<%=msgTime%>>
-						<a href=<%=formHrefName%>>Delete this message</a>
+						<a href=<%=formHrefName%>>Delete</a>
 					</form>
 				
 					<%							
