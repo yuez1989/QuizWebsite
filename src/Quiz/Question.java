@@ -215,6 +215,18 @@ public class Question{
 		System.out.println(command);
 		db.executeUpdate(command);		
 	}
+	
+	/**
+	 * Delete a Question from database. First break the relation of this question and the quiz it belongs to,
+	 * then delete the current question form database.
+	 */
+	public void deleteProbFromDB(){
+		String deleteBelongTo = "DELETE FROM ProblemBelongto WHERE proID = \""+problemID+"\";";
+		db.executeUpdate(deleteBelongTo);
+		String deleteProb = "DELETE FROM Problems WHERE proID = "+"\""+problemID+"\";";
+		db.executeUpdate(deleteProb);		
+	}
+	
 	public  void displayProblem(){};
 	public  void displayProblemEdit(){};
 	
