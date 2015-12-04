@@ -60,7 +60,7 @@
 			</div>
 		</div>
 		<div class='body-part-wrapper col-md-8'>
-			<div class='body-part'>
+			<div class='body-part' style="min-height:200px!important;">
 				<div class="column-name">INBOX</div>
 				<div class="msg-container">
 					<table>
