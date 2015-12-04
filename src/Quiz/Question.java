@@ -220,6 +220,7 @@ public class Question{
 	
 	public String parseInputintoDB(){
 		String sol= "";
+		sol += NUMSOL_START+numberOfSolutions+NUMSOL_END;
 		for(ArrayList<String> answers: solutions){
 			sol += EC_START;
 			for(String ans: answers){
