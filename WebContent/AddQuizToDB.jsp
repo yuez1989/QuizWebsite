@@ -77,9 +77,12 @@
 		if(oldQuizID!=null){
 			if(oldQuizID.length()>0){
 				q.saveToDB(oldQuizID);
+			}else{
+				q.saveToDB();
 			}
+		}else{
+			q.saveToDB();
 		}
-		q.saveToDB();
 		request.getSession().removeAttribute("QuestionList");	
 	}
 %>
