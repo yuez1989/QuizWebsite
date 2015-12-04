@@ -44,8 +44,7 @@ $(function(){
 		quizID = quizID.substring(0,quizID.indexOf("_"))+" "+quizID.substring(quizID.indexOf("_") + 1);
 	}
 	
-	Quiz quiz = new Quiz(quizID);
-	
+	Quiz quiz;
 	//Detect whether the search is valid
 	ArrayList<String> searchRes = Utilities.searchQuizzes(quizID);
 	if (searchRes.size() == 0) { // if there is a search result
@@ -54,6 +53,7 @@ $(function(){
 		response.setHeader("Refresh", "2;Quizzes.jsp");		
 	}
 	else {
+		quiz = new Quiz(searchRes.get(0));
 %>
 
 <title>Quiz <%=quiz.getQuizName() %>, by <%= quiz.getCreator()%></title>
