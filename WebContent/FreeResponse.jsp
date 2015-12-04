@@ -2,11 +2,20 @@
     pageEncoding="ISO-8859-1"%>
 <%@page import="Quiz.*"%>
 <%@page import="java.util.*"%>
+<%
+String[] result;
+String questionType = "";
+result = request.getParameterValues("questionType");
+if (result != null && result.length != 0) {
+	questionType = result[0];
+}
+System.out.print("questionType is "+questionType);
+%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
-<title>Create a Free Response Question</title>
+<title>Create a <%=questionType%> Question</title>
 </head>
 <body>
 <%
@@ -17,7 +26,8 @@ if(questions != null){
 }else{
 	System.out.println("NO question list passed");
 }
-String[] result = request.getParameterValues("Quiz Name");
+
+result = request.getParameterValues("Quiz Name");
 String QuizName="";
 if (result != null && result.length != 0) {
 	QuizName = result[0];
@@ -40,13 +50,6 @@ result = request.getParameterValues("Spec");
 if (result != null && result.length != 0) {
 	Spec = result[0];
 }
-
-String questionType = "";
-result = request.getParameterValues("questionType");
-if (result != null && result.length != 0) {
-	questionType = result[0];
-}
-
 
 String context="";
 String url="";
@@ -82,7 +85,15 @@ if(index!=""){
 
 %>
 <form name="submitQuestion" method="POST" action="CreateQuiz.jsp">
-	Please enter the question here<BR>
+	<p>Please enter the question here:
+	<%if(questionType.equals("BLANK")){
+		System.out.print(questionType);
+		String s= "(place <blank> where you want a blank in your question)";
+		%>
+		<%=s%>
+		<%
+	} 	
+	%></p>
 	<textarea  NAME="question" cols="100" rows="5" ><%=context%></textarea><BR>
 	Please enter the picture url here<BR>
 	<INPUT TYPE="TEXT" NAME="picture" value="<%=url %>" style="width: 500px;"><BR>
