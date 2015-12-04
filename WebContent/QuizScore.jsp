@@ -111,7 +111,7 @@
 					achRec.saveToDB();
 					out.print("<img src=\'"+Utilities.getImagePathOfAch("Quiz Taker")+"\' style=\'width:250px;height:150px;\'>");
 					out.println("<p><b>Congrats! You have done your first quiz in Quizzzz, you now have a new Achievement: Quiz Taker</b></p>");
-				<embed src="end.wav" hidden="true" autostart="true" loop="1">
+				//<embed src="end.wav" hidden="true" autostart="true" loop="1">
 				}
 			}
 			else if(quizPlayed == 5){
@@ -120,7 +120,7 @@
 					achRec.saveToDB();
 					out.print("<img src=\'"+Utilities.getImagePathOfAch("Kindergarten")+"\' style=\'width:250px;height:150px;\'>");
 					out.println("<p><b>Congrats! You have just finished your fifth quiz, you have just won a new Achievement: Kindergarten</b></p>");
-				<embed src="end.wav" hidden="true" autostart="true" loop="1">
+				//<embed src="end.wav" hidden="true" autostart="true" loop="1">
 				}
 			}
 			else if(quizPlayed == 10){
@@ -129,7 +129,7 @@
 				AchievementRecord achRec = new AchievementRecord(usrID, "Primary School");
 				achRec.saveToDB();	
 				out.println("<p>Congrats! You have just finished your tenth quiz, you have just won a new Achievement: Primary School</p>");
-				<embed src="end.wav" hidden="true" autostart="true" loop="1">
+				//<embed src="end.wav" hidden="true" autostart="true" loop="1">
 				}
 			}
 			else if(quizPlayed == 30){
@@ -139,7 +139,7 @@
 				achRec.saveToDB();	
 				out.print("<img src=\'"+Utilities.getImagePathOfAch("Middle School")+"\' style=\'width:250px;height:150px;\'>");
 				out.println("<p><b>Nice! You have just won the Achievement of Middle School, you have finished 30 quizzes!</b></p>");
-				<embed src="end.wav" hidden="true" autostart="true" loop="1">
+				//<embed src="end.wav" hidden="true" autostart="true" loop="1">
 				}
 			}
 			else if(quizPlayed == 50){
@@ -149,7 +149,7 @@
 				achRec.saveToDB();	
 				out.print("<img src=\'"+Utilities.getImagePathOfAch("High School")+"\' style=\'width:250px;height:150px;\'>");
 				out.println("<p><b>Amazing! 50 quizzes have been taken by you, 50 more to go to graduate from Quizzzz University. Your new Achievement: High School</b></p>");
-				<embed src="end.wav" hidden="true" autostart="true" loop="1">
+				//<embed src="end.wav" hidden="true" autostart="true" loop="1">
 				}
 			}
 			else if(quizPlayed == 100){
@@ -159,7 +159,7 @@
 				achRec.saveToDB();	
 				out.print("<img src=\'"+Utilities.getImagePathOfAch("Quizzzz University Alumni")+"\' style=\'width:250px;height:150px;\'>");
 				out.println("<p><b>You made it! Your new Achievement: Quizzzz University Alumni! You have graduated from Quizzzz University by finishing 100 quizzes</b></p>");
-				<embed src="end.wav" hidden="true" autostart="true" loop="1">
+				//<embed src="end.wav" hidden="true" autostart="true" loop="1">
 				}
 			}
 			%>
@@ -170,7 +170,7 @@
 		achRec.saveToDB();	
 		out.print("<img src=\'"+Utilities.getImagePathOfAch("I am the Greatest")+"\' style=\'width:250px;height:350px;\'>");
 		out.println("<p><b>Guess What! You just broke the record of this quiz! We give you the Achievement of \"I am the Greatest\" as reward.</b></p>");
-		<embed src="end.wav" hidden="true" autostart="true" loop="1">
+		//<embed src="end.wav" hidden="true" autostart="true" loop="1">
 	}
 	%>
 
