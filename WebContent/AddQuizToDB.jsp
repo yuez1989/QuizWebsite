@@ -19,11 +19,22 @@
 	if (result != null && result.length != 0) {
 		discard = result[0];
 	}
+	String QuestionIDList="";
+	result = request.getParameterValues("QuestionIDList");
+	if (result != null && result.length != 0) {
+		QuestionIDList = result[0];
+	}
+	//TOTOTOTOTOTOTOTOTO
+	ArrayList<Question> questions = Utilities.stringToQuestionList(QuestionIDList);
+	//TOTOTOTOTOTOTOTOTO
 	if(discard.equals("Discard")){
 		%>
 			<p>Quiz information discard, redirect to your homepage</p>
 		<%
-		request.getSession().removeAttribute("QuestionList");
+		for(Question p:questions){
+			p.deleteProbFromDB();
+		}
+		//request.getSession().removeAttribute("QuestionList");
 		//response.setHeader("Refresh", "2:UserHomePage.jsp");
 	}else{
 		%>
@@ -35,43 +46,45 @@
 		if (result != null && result.length != 0) {
 			QuizName = result[0];
 		}
-		System.out.println("on save page, Quiz Name:"+QuizName);
+		//System.out.println("on save page, Quiz Name:"+QuizName);
 			
 		String Description = "";
 		result = request.getParameterValues("Description");
 		if (result != null && result.length != 0) {
 			Description = result[0];
 		}
-		System.out.println("on save page, Description:"+Description);	
+		//System.out.println("on save page, Description:"+Description);	
 	
 		String Tags = "";
 		result = request.getParameterValues("Tags");
 		if (result != null && result.length != 0) {
 			Tags = result[0];
 		}
-		System.out.println("on save page, Tags:"+Tags);	
+		//System.out.println("on save page, Tags:"+Tags);	
 	
 		String Spec = "";
 		result = request.getParameterValues("Spec");
 		if (result != null && result.length != 0) {
 			Spec = result[0];
 		}
-		System.out.println("on save page, Spec:"+Spec);
+		//System.out.println("on save page, Spec:"+Spec);
 		
 		ArrayList<String> tags = new ArrayList<String>();
 		if (result != null && result.length != 0) {
 			tags = new ArrayList<String>(Arrays.asList(Tags.split(" ")));
 		}		
-		System.out.println("on save page, processd tags:"+tags);	
+		//System.out.println("on save page, processd tags:"+tags);	
 	
 		
-		
+		/*
 		ArrayList<Question> questions = (ArrayList<Question>) request.getSession().getAttribute("QuestionList");
 		if(request.getSession().getAttribute("QuestionList") == null){
 			request.getSession().setAttribute("QuestionList" , questions);	
-		}
+		}*/
+		
 		Quiz q = new Quiz(QuizName, Description, userID, tags, questions, Spec);	
 		//request.getSession().removeAttribute("QuestionList");
+		
 		String oldQuizID = null;
 		oldQuizID = (String)request.getSession().getAttribute("OldQuizID");
 		if(oldQuizID!=null){
@@ -84,7 +97,7 @@
 		}else{
 			q.saveToDB();
 		}
-		request.getSession().removeAttribute("QuestionList");	
+		//request.getSession().removeAttribute("QuestionList");	
 	}
 %>
 <%
