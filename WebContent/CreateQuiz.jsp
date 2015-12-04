@@ -97,7 +97,11 @@ if(!probCancel.equals("CancelQuestion")){
 	long time =0;
 	result = request.getParameterValues("time"); 
 	if (result != null && result.length != 0) {
-		time = Long.parseLong(result[0])*1000;
+		try{
+			time = Long.parseLong(result[0])*1000;
+		}catch(NumberFormatException nfe){
+			
+		}
 	} 
 	
 	int count =1;
