@@ -154,7 +154,7 @@ if(!probCancel.equals("CancelQuestion")){
 	if(QuesType.equals("MC")){
 		result = request.getParameterValues("solution"); 
 		if (result != null && result.length != 0) {
-			String oneSol[] = result[0].split(",");
+			String oneSol[] = result[0].split(" ");
 			for(int i = 0; i<oneSol.length; i++){
 				ArrayList<String> oneClass = new ArrayList<String>();
 				if(!oneSol[i].trim().equals("")){
