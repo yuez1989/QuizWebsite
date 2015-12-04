@@ -71,7 +71,7 @@
 			</div>
 			<div class="personal-header">
 				<div class="inline-part">
-					<form method="POST" action="Person.jsp" target="_blank">
+					<form method="POST" action="AccountSearchByName.jsp" target="_blank">
 						<input type="search" name="person" placeholder="search by user ID"
 							style="color: black;" size="25"> <input type="submit"
 							value="Submit" style="color: black;">
