@@ -58,19 +58,155 @@
 </head>
 <body>
 	<div class="body-section">
-		<div class='col-md-3'></div>
-		<div class='col-md-6 body-part-wrapper'>
+		<div class='col-md-2'></div>
+		<div class='col-md-8 body-part-wrapper'>
 			<div class='body-part'>
-			Hello
+			
+			
+			<div class="column-name">QUIZ SUMMARY PAGE</div>
+			<div class="column-name">Name</div>
+			<span><%= quiz.getQuizName() %></span>
+				
+			<div class="column-name">Description</div>
+			<span><%= quiz.getDescription() %></span>
+
+			<div class="column-name">Tags</div>
+			<%
+				for(String tagi:quiz.getTags()){
+				out.print("<span><b>"+tagi+"&nbsp;&nbsp;&nbsp;&nbsp;</b></span>");
+				}
+				if(quiz.getTags().isEmpty())
+				out.print("<span>No Tags Currently</span>");
+			%>
+
+			<div class="column-name">Rating</div>
+			<span><%=quiz.getRating() %></span>
+
+			<div class="column-name">Recent Review</div>
+			<%
+				ArrayList<String> recentReview = Utilities.getRecentQuizReviews(quizID);
+				for(String re : recentReview){
+					if(!re.isEmpty())
+					out.print("<span class='news-feed'>" + re + "</span>" );
+				}
+
+				ArrayList<History> recentActHist = Utilities.getRecentActivitiesOfQuiz(quizID);
+				int countOverAll =0;
+				int count1 = 0;
+			%>
+
+			<div class="column-name">Recent Activities</div>
+			
+			<%
+				for(History hist : recentActHist){
+					if(count1 == 5) break;
+					count1++;
+					countOverAll++;
+					String formname = "AccessPerson"+hist.getUsrID()+countOverAll;
+					String formsubmit = "javascript:document."+formname+".submit()";
+			%>
+			<form name=<%=formname%> method="POST" action="Person.jsp">
+			<input type="hidden" name="person" value="<%=hist.getUsrID()%>">
+			<p>
+			<a href=<%=formsubmit%>> <%=hist.getUsrID()%></a> played this quiz at <%=hist.getEndTime()%> and got score of <%=hist.getScore()%></p>
+			</form>
+			<%
+			}
+			ArrayList<History> highScores = Utilities.getHighRecordsOfQuiz(quizID);
+			int count2 = 0;
+			%>
+
+			<div class="column-name">High Scores</div>
+
+			<%
+			for(History hist : highScores){
+				if(count2 == 10) break;
+				count2++;
+				countOverAll++;
+				String formname = "AccessPerson"+hist.getUsrID()+countOverAll;
+				String formsubmit = "javascript:document."+formname+".submit()";
+				%>
+				<form name=<%=formname%> method="POST" action="Person.jsp">
+				<input type="hidden" name="person" value="<%=hist.getUsrID()%>">
+				<p>
+				<a href=<%=formsubmit%>> <%=hist.getUsrID()%></a> score: <%=hist.getScore()%></p>
+				</form>
+			<%
+			}
+			ArrayList<History> highScoresLastday = Utilities.getTopPerformanceOfLastDay(quizID, QuizSystem.generateCurrentTime());
+			int count3 = 0;
+			%>
+
+			<div class="column-name">High Scores of last day</div>
+
+			<%
+
+			for(History hist : highScoresLastday){
+				if(count3 == 10) break;
+				count3++;
+				countOverAll++;
+				String formname = "AccessPerson"+hist.getUsrID()+countOverAll;
+				String formsubmit = "javascript:document."+formname+".submit()";
+			%>
+			<form name=<%=formname%> method="POST" action="Person.jsp">
+			<input type="hidden" name="person" value="<%=hist.getUsrID()%>">
+			 <p>User: <a href=<%=formsubmit%>> <%=hist.getUsrID()%></a> score: <%=hist.getScore()%></p>
+			</form>
+			<%
+			}
+			double avgScore = Utilities.getQuizAverageScore(quizID);
+			%>
+
+			<div class="column-name">Average Scores</div>
+			<span><%=avgScore %></span>
+
+			<%
+
+			String userID = (String)session.getAttribute("user");
+
+			if(quiz.getCreator().equals(userID)){
+			%>
+				<form name="EditQuiz" method="POST" action="CreateQuiz.jsp">
+				<input type="hidden" name="QuizID" value="<%=quizID%>"> <a
+				href="javascript:document.EditQuiz.submit()">Edit</a>
+			</form>
+			<%
+			}
+			if (!usrID.equals("default")) {
+				out.println("<p><a href=\'Quiz.jsp?quizID="+quizID+"\'>Start Quiz</a> </p>");
+				out.println("<p><a href='QuizPractice.jsp?quizID="+quizID+"\'>Start Quiz in Practice Mode</a> </p>");
+				%>
+				<form name="ReportQuiz" method="POST" action="ReportQuiz.jsp">
+				<input type="hidden" name="QuizID" value="<%=quizID%>"> <a
+				href="javascript:document.ReportQuiz.submit()">Report Inappropriate</a>
+				</form>
+				<%
+			}else {
+				%>
+				<br>
+				<p>You cannot do or practice any quizzes if you are not logged in. Click <a href="CreateAccount.html">here</a> to sign up and <a href="index.jsp">here</a> to log in.</p>
+				<%
+			}
+			out.println("<p><a href=UserHomePage.jsp>Go Back To Home Page</a> </p>");
+			%>
+
+
+
+
+
+
+
+
+
+
 			</div>
 		</div>
-		<div class='col-md-3'></div>
+		<div class='col-md-2'></div>
 	</div>
 
 	<%
 		}
 	%>
-	</div>
-	</div>
+
 </body>
 </html>
