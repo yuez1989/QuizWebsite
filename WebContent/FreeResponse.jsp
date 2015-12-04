@@ -63,6 +63,9 @@ if(index!=""){
 		time = Long.toString(p.getTime()/1000);
 		sol = p.getAllSol();
 		solnum = Integer.toString(p.getsolNum());
+		if(solnum.equals("0")){
+			solnum="";
+		}
 		if(p.getOrder()!=0){
 			order="Y";
 		}
