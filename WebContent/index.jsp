@@ -7,7 +7,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Quizzzz</title>
-<link rel="stylesheet" type="text/css" href="indexstyle.css">
+
 <link rel="stylesheet" href="cssslider_files/csss_engine1/style.css">
 <script
 	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -36,7 +36,7 @@
 	} else {
 %>
 </head>
-<body>
+<body style='background-color:#ffffff!important;'>
 	<div class='index-wrapper'>
 		<!-- slider -->
 		<!--[if IE]><link rel="stylesheet" href="cssslider_files/csss_engine1/ie.css"><![endif]-->
@@ -78,7 +78,7 @@
 			<div class='cs_description'>
 				<label class='num0'><span class="cs_title"><span
 						class="cs_wrapper">World</span></span><br /> <span class="cs_descr"><span
-						class="cs_wrapper">Broading your horizen...</span></span></label> <label
+						class="cs_wrapper">Broading your horizon...</span></span></label> <label
 					class='num1'><span class="cs_title"><span
 						class="cs_wrapper">Depth</span></span><br /> <span class="cs_descr"><span
 						class="cs_wrapper">Deepen your knowledge...</span></span></label> <label
@@ -118,69 +118,78 @@
 			</div>
 		</div>
 		<!-- End cssSlider -->
-		<div class='welcome-box'>
-			<div class='welcome-msg'>Welcome to Quizzzz!</div>
+		<div class='welcome-wrapper'>
+			<div class='welcome-box'>
+				<div class='welcome-msg' data-toggle="collapse"
+					data-target=".browse-section" title='Click to see our prouds!'>Welcome to Quizzzz!</div>
+			</div>
 		</div>
+
 		<div class='menubar'>
 			<ul>
-				<li id='about' class='leftmenu'>About Us</li>
-				<li id='explore' class='leftmenu'>Explore Quiz</li>
-				<li id='login' class='rightmenu'>Log In
-					<form id='login_form' action="UserLoginServlet" method="post">
-						<label for="account">Name</label> <input type='text'
-							name='account' id='account' /> <label for='password'>Password</label>
+				<li id='login'>
+					<form name='login_form' action="UserLoginServlet" method="post">
+						<label for="account">Name: </label> <input type='text'
+							name='account' id='account' /> <label for='password'>Password: </label>
 						<input type='password' name='password' id='password' /> <input
 							type='submit' value='Login' />
 					</form>
 				</li>
-				<li id='signup' class='rightmenu'>Sign Up</li>
+				<li>
+					<form action="CreateAccount.html" method="post">
+						<input type='submit' value='Sign Up' />
+					</form>
+				</li>
 			</ul>
 		</div>
-		<div class='most_popular'>
-			<%
-				ArrayList<Quiz> poplist = Utilities.getPopularQuiz();
-					if (poplist != null) {
-						out.print("<h3>Most Popular Quizzes</h3>");
-						out.print("<ul>");
-						for (Quiz quiz : poplist) {
-							out.print("<li><a href = \'QuizHomePage.jsp?quizID=" + quiz.getQuizID() + "\'>"
-									+ quiz.getQuizName() + "</a></li>");
+		
+		<div class='browse-section collapse' id='browse-id'>
+			<div class='most_popular col-md-4'>
+				<%
+					ArrayList<Quiz> poplist = Utilities.getPopularQuiz();
+						if (poplist != null) {
+							out.print("<h3>Most Popular Quizzes</h3>");
+							out.print("<ul>");
+							for (Quiz quiz : poplist) {
+								out.print("<li><a href = \'QuizHomePage.jsp?quizID=" + quiz.getQuizID() + "\'>"
+										+ quiz.getQuizName() + "</a></li>");
+							}
+							out.print("</ul>");
 						}
-						out.print("</ul>");
-					}
+				%>
+			</div>
+			<div class='top_player col-md-4'>
+				<%
+					ArrayList<User> toplist = Utilities.getTopPlayer();
+						if (toplist != null) {
+							out.print("<h3>Toppest Player</h3>");
+							out.print("<ul>");
+							for (User player : toplist) {
+								out.print("<li><a href = \'Person.jsp?person=" + player.usrID + "\'>" + player.usrID
+										+ "</a></li>");
+							}
+							out.print("</ul>");
+						}
+				%>
+			</div>
+			<div class='recent_quiz col-md-4'>
+				<%
+					ArrayList<Quiz> recentlist = Utilities.getRecentQuiz();
+						if (recentlist != null) {
+							out.print("<h3>Recent Added Quizzes</h3>");
+							out.print("<ul>");
+							for (Quiz quiz : recentlist) {
+								out.print("<li><a href = \'QuizHomePage.jsp?quizID=" + quiz.getQuizID() + "\'>"
+										+ quiz.getQuizName() + "</li>");
+							}
+							out.print("</ul>");
+						}
+				%>
+			</div>
+			<%
+				}
 			%>
 		</div>
-		<div class='top_player'>
-			<%
-				ArrayList<User> toplist = Utilities.getTopPlayer();
-					if (toplist != null) {
-						out.print("<h3>Toppest Player</h3>");
-						out.print("<ul>");
-						for (User player : toplist) {
-							out.print("<li><a href = \'Person.jsp?person=" + player.usrID + "\'>" + player.usrID
-									+ "</a></li>");
-						}
-						out.print("</ul>");
-					}
-			%>
-		</div>
-		<div class='recent_quiz'>
-			<%
-				ArrayList<Quiz> recentlist = Utilities.getRecentQuiz();
-					if (recentlist != null) {
-						out.print("<h3>Recent Added Quizzes</h3>");
-						out.print("<ul>");
-						for (Quiz quiz : recentlist) {
-							out.print("<li><a href = \'QuizHomePage.jsp?quizID=" + quiz.getQuizID() + "\'>"
-									+ quiz.getQuizName() + "</li>");
-						}
-						out.print("</ul>");
-					}
-			%>
-		</div>
-		<%
-			}
-		%>
 	</div>
 </body>
 </html>
