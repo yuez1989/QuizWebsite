@@ -48,6 +48,7 @@ if(questions == null){
 	<input type="hidden" name="Description" value="<%=Description%>">
 	<input type="hidden" name="Tags" value="<%=Tags%>">
 	<input type="hidden" name="Spec" value="<%=Spec%>">
+	<input type="hidden" name="questionType" value="FREERESPONSE">
 	<a href="javascript:document.AddFreeResponse.submit()">Add Free Response Problem</a>
 </form>
 
@@ -56,6 +57,7 @@ if(questions == null){
 	<input type="hidden" name="Description" value="<%=Description%>">
 	<input type="hidden" name="Tags" value="<%=Tags%>">
 	<input type="hidden" name="Spec" value="<%=Spec%>">
+	<input type="hidden" name="questionType" value="BLANK">
 	<a href="javascript:document.AddBlank.submit()">Add Fill in Blank Problem</a>
 </form>
 
@@ -64,6 +66,7 @@ if(questions == null){
 	<input type="hidden" name="Description" value="<%=Description%>">
 	<input type="hidden" name="Tags" value="<%=Tags%>">
 	<input type="hidden" name="Spec" value="<%=Spec%>">
+	<input type="hidden" name="questionType" value="PICTURERESPONCE">
 	<a href="javascript:document.AddPicResponse.submit()">Add Picture Response Problem</a>
 </form>
 
