@@ -274,8 +274,8 @@
 							<a href="Quizzes.jsp" target="_blank">See all Quizzes</a>
 					</div>
 					<div class="news-feed create-quiz-button">
-						<form name='searchQuizForm' method="POST" action="QuizHomePage.jsp" target="_blank">
-							<input type="search" name="quizID" value="xinhuiwu2015-11-18 16:19:13"><br>
+						<form name='searchQuizForm' method="POST" action="QuizSearchByName.jsp" target="_blank">
+							<input type="search" name="quizID" value=""><br>
 							<input type="submit" value="Search Quiz" style='margin-top:10px;'> 
 						</form>
 					</div>
