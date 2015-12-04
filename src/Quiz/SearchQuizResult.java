@@ -49,7 +49,7 @@ public class SearchQuizResult extends HttpServlet {
 		}else{
 			out.print("<ul>");
 			for(String str:list){
-				out.println("<li>"+str+"</li>");
+				out.println("<li><a href = \'QuizHomePage.jsp?quizID="+str+"\' target='_blank'>"+str+"</a></li>");
 			}
 			out.print("</ul>");
 		}

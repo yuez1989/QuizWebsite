@@ -51,7 +51,7 @@ public class SearchQuizByNameResult extends HttpServlet {
 				String[] spice = str.split("##");
 				String quizurl = spice[0];
 				String genstr = spice[0]+"&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"+spice[1];
-				out.println("<li><a href = \'QuizHomePage.jsp?quizID="+quizurl+"\'>"+genstr+"</a></li>");
+				out.println("<li><a href = \'QuizHomePage.jsp?quizID="+quizurl+"\' target='_blank'>"+genstr+"</a></li>");
 			}
 			out.print("</ul>");
 		}

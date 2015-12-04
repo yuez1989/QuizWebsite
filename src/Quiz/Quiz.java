@@ -28,9 +28,9 @@ public class Quiz implements Comparable {
 
 
 	// internal info
-	protected ArrayList<String> tags; //user could supply
-	protected ArrayList<Question> questions; //user could supply
-	protected ArrayList<String> rankList; // {"Abc123 93" "FGERW123  89"}
+	protected ArrayList<String> tags = new ArrayList<String>(); //user could supply
+	protected ArrayList<Question> questions = new ArrayList<Question>(); //user could supply
+	protected ArrayList<String> rankList = new ArrayList<String>(); // {"Abc123 93" "FGERW123  89"}
 
 	// quiz options
 	protected boolean random_questions = false;
@@ -90,13 +90,17 @@ public class Quiz implements Comparable {
 	public Quiz(String quizID) throws SQLException {
 		this.quizID = quizID;
 		try {
-			getQuizfromDB();
+			if(getQuizfromDB()){
+				;
+			}else{
+				this.quizID = null;
+			}
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		}
 	}
 	
-	private void getQuizfromDB() throws ClassNotFoundException, SQLException {
+	private boolean getQuizfromDB() throws ClassNotFoundException, SQLException {
 		String command = "SELECT * FROM Quizzes WHERE quizID = " + "\""
 				+ quizID + "\";";
 		ResultSet rs = db.executeQuery(command);
@@ -121,7 +125,9 @@ public class Quiz implements Comparable {
 			getRanksFromDB();
 			getTagsFromDB();
 			getRatingFromDB();
-		}
+			return true;
+		}else 
+			return false;
 	}
 	private void getQuestionsFromDB() throws SQLException {
 		questions = new ArrayList<Question>();
@@ -132,7 +138,7 @@ public class Quiz implements Comparable {
 		while (rs.next()) {
 			String pid = rs.getString("proID");
 			pids.add(pid);
-			System.out.println(pid);
+//			System.out.println(pid);
 //			questions.add(new Question(pid));
 		}
 		for(String pid:pids){

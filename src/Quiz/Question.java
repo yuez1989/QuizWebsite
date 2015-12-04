@@ -75,9 +75,9 @@ public class Question{
 		this.context = context;
 		this.picutreUrl = url;
 		this.solutions = solutions;
-		for(int i = 0; i<solutions.size(); i++){
-			System.out.println(solutions.get(i).get(0));
-		}
+//		for(int i = 0; i<solutions.size(); i++){
+//			System.out.println(solutions.get(i).get(0));
+//		}
 		this.numberOfSolutions = this.solutions.size();
 		this.timed = timed;
 		String time = Long.toString(System.currentTimeMillis());
@@ -94,9 +94,9 @@ public class Question{
 		this.context = context;
 		this.picutreUrl = url;
 		this.solutions = solutions;
-		for(int i = 0; i<solutions.size(); i++){
-			System.out.println(solutions.get(i).get(0));
-		}
+//		for(int i = 0; i<solutions.size(); i++){
+//			System.out.println(solutions.get(i).get(0));
+//		}
 		this.numberOfSolutions = numSol;
 		this.timed = timed;
 		String time = Long.toString(System.currentTimeMillis());

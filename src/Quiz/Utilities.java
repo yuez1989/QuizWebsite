@@ -1041,6 +1041,15 @@ public class Utilities {
 		else return URL;
 	}
 
+	/**
+	 * Remove a piece of announcement from database
+	 * @param annID
+	 */
+	public static boolean removeAnnouncementFromDB(String annID){
+		String command = "DELETE FROM Announcements WHERE announceID = \""+annID+"\";";
+		return db.executeUpdate(command);
+	}
+
 	static public void main(String[] args){
 		DataBase db = QuizSystem.getQuizSystem().db;
 
