@@ -65,22 +65,25 @@
 			
 			<div class="column-name">QUIZ SUMMARY PAGE</div>
 			<div class="column-name">Name</div>
-			<span><%= quiz.getQuizName() %></span>
+			<span class='news-feed'><%= quiz.getQuizName() %></span>
 				
 			<div class="column-name">Description</div>
-			<span><%= quiz.getDescription() %></span>
+			<span class='news-feed'><%= quiz.getDescription() %></span>
 
 			<div class="column-name">Tags</div>
 			<%
 				for(String tagi:quiz.getTags()){
-				out.print("<span><b>"+tagi+"&nbsp;&nbsp;&nbsp;&nbsp;</b></span>");
+				out.print("<span class='news-feed'><b>"+tagi+"&nbsp;&nbsp;&nbsp;&nbsp;</b></span>");
 				}
 				if(quiz.getTags().isEmpty())
-				out.print("<span>No Tags Currently</span>");
+				out.print("<span class='news-feed'>No Tags Currently</span>");
 			%>
 
 			<div class="column-name">Rating</div>
-			<span><%=quiz.getRating() %></span>
+			<% double rdrating = quiz.getRating();
+			rdrating = ((double)Math.round(rdrating*100))/100;
+			%>
+			<span class='news-feed'><%=rdrating %></span>
 
 			<div class="column-name">Recent Review</div>
 			<%
@@ -107,8 +110,8 @@
 			%>
 			<form name=<%=formname%> method="POST" action="Person.jsp">
 			<input type="hidden" name="person" value="<%=hist.getUsrID()%>">
-			<p>
-			<a href=<%=formsubmit%>> <%=hist.getUsrID()%></a> played this quiz at <%=hist.getEndTime()%> and got score of <%=hist.getScore()%></p>
+			<span class="news-feed">
+			<a href=<%=formsubmit%>> <%=hist.getUsrID()%></a> played this quiz at <%=hist.getEndTime()%> and got score of <%=hist.getScore()%></span>
 			</form>
 			<%
 			}
@@ -116,7 +119,7 @@
 			int count2 = 0;
 			%>
 
-			<div class="column-name">High Scores</div>
+			<div class="column-name">High Scores -/<%=quiz.getQuestions().size() %></div>
 
 			<%
 			for(History hist : highScores){
@@ -128,8 +131,8 @@
 				%>
 				<form name=<%=formname%> method="POST" action="Person.jsp">
 				<input type="hidden" name="person" value="<%=hist.getUsrID()%>">
-				<p>
-				<a href=<%=formsubmit%>> <%=hist.getUsrID()%></a> score: <%=hist.getScore()%></p>
+				<span class='news-feed'>User: 
+				<a href=<%=formsubmit%>><%=hist.getUsrID()%></a> score: <%=hist.getScore()%></span>
 				</form>
 			<%
 			}
@@ -137,7 +140,7 @@
 			int count3 = 0;
 			%>
 
-			<div class="column-name">High Scores of last day</div>
+			<div class="column-name">High Scores of Last Day</div>
 
 			<%
 
@@ -150,15 +153,16 @@
 			%>
 			<form name=<%=formname%> method="POST" action="Person.jsp">
 			<input type="hidden" name="person" value="<%=hist.getUsrID()%>">
-			 <p>User: <a href=<%=formsubmit%>> <%=hist.getUsrID()%></a> score: <%=hist.getScore()%></p>
+			 <span class = 'news-feed'>User: <a href=<%=formsubmit%>> <%=hist.getUsrID()%></a> score: <%=hist.getScore()%></span>
 			</form>
 			<%
 			}
 			double avgScore = Utilities.getQuizAverageScore(quizID);
+			avgScore = ((double)Math.round(avgScore*100))/100;
 			%>
 
 			<div class="column-name">Average Scores</div>
-			<span><%=avgScore %></span>
+			<span class = 'news-feed'><%=avgScore %></span>
 
 			<%
 
@@ -174,7 +178,7 @@
 			}
 			if (!usrID.equals("default")) {
 				out.println("<p><a href=\'Quiz.jsp?quizID="+quizID+"\'>Start Quiz</a> </p>");
-				out.println("<p><a href='QuizPractice.jsp?quizID="+quizID+"\'>Start Quiz in Practice Mode</a> </p>");
+				out.println("<p><a href='QuizPractice.jsp?quizID="+quizID+"\'>Start in Practice Mode</a> </p>");
 				%>
 				<form name="ReportQuiz" method="POST" action="ReportQuiz.jsp">
 				<input type="hidden" name="QuizID" value="<%=quizID%>"> <a
@@ -187,16 +191,8 @@
 				<p>You cannot do or practice any quizzes if you are not logged in. Click <a href="CreateAccount.html">here</a> to sign up and <a href="index.jsp">here</a> to log in.</p>
 				<%
 			}
-			out.println("<p><a href=UserHomePage.jsp>Go Back To Home Page</a> </p>");
+			out.println("<br><p><a href=UserHomePage.jsp>Back To Home Page</a></p>");
 			%>
-
-
-
-
-
-
-
-
 
 
 			</div>
