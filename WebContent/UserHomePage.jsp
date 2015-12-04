@@ -278,7 +278,7 @@
 					<div class="news-feed create-quiz-button">
 						<form name='searchQuizForm' method="POST"
 							action="QuizSearchByName.jsp" target="_blank">
-							<input type="search" name="quizID" value=""><br> <input
+							<input type="search" name="quizID" placeholder="Enter quiz name or tag" value=""><br> <input
 								type="submit" value="Search Quiz" style='margin-top: 10px;'>
 						</form>
 					</div>
