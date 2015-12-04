@@ -76,7 +76,7 @@
 		oldQuizID = (String)request.getSession().getAttribute("OldQuizID");
 		if(oldQuizID!=null){
 			if(oldQuizID.length()>0){
-				Quiz.deleteQuiz(oldQuizID);
+				q.saveToDB(oldQuizID);
 			}
 		}
 		q.saveToDB();
