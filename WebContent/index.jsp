@@ -162,7 +162,7 @@
 				<%
 					ArrayList<User> toplist = Utilities.getTopPlayer();
 						if (toplist != null) {
-							out.print("<h3>Toppest Player</h3>");
+							out.print("<h3>Top Players</h3>");
 							out.print("<ul>");
 							for (User player : toplist) {
 								out.print("<li><a href = \'Person.jsp?person=" + player.usrID + "\'>" + player.usrID
@@ -176,7 +176,7 @@
 				<%
 					ArrayList<Quiz> recentlist = Utilities.getRecentQuiz();
 						if (recentlist != null) {
-							out.print("<h3>Recent Added Quizzes</h3>");
+							out.print("<h3>Recently Added Quizzes</h3>");
 							out.print("<ul>");
 							for (Quiz quiz : recentlist) {
 								out.print("<li><a href = \'QuizHomePage.jsp?quizID=" + quiz.getQuizID() + "\'>"
