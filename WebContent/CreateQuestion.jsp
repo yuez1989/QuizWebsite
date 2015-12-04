@@ -11,13 +11,24 @@
 <body>
 Please choose the question type:
 <%
+String[] result;
+String QuestionIDList="";
+result = request.getParameterValues("QuestionIDList");
+if (result != null && result.length != 0) {
+	QuestionIDList = result[0];
+}
+System.out.println("QuestionIDList in createQueston.jsp is"+QuestionIDList);
+//TOTOTOTOTOTOTOTOTO
+ArrayList<Question> questions = Utilities.stringToQuestionList(QuestionIDList);
+//TOTOTOTOTOTOTOTOTO
+/*
 ArrayList<Question> questions = (ArrayList<Question>) request.getSession().getAttribute("QuestionList");
 if(questions == null){
 	System.out.println("no question list passed in createQuestion");
 	//request.setAttribute("QuestionList", questions);
-}
+}*/
 //System.out.println("in create question, problem list is: "+questions);
-	String[] result = request.getParameterValues("Quiz Name");
+	result = request.getParameterValues("Quiz Name");
 	String QuizName="";
 	if (result != null && result.length != 0) {
 		QuizName = result[0];
@@ -49,6 +60,7 @@ if(questions == null){
 	<input type="hidden" name="Tags" value="<%=Tags%>">
 	<input type="hidden" name="Spec" value="<%=Spec%>">
 	<input type="hidden" name="questionType" value="FREERESPONSE">
+	<input type="hidden" name="QuestionIDList" value="<%=QuestionIDList%>">
 	<a href="javascript:document.AddFreeResponse.submit()">Add Free Response Problem</a>
 </form>
 
@@ -58,6 +70,7 @@ if(questions == null){
 	<input type="hidden" name="Tags" value="<%=Tags%>">
 	<input type="hidden" name="Spec" value="<%=Spec%>">
 	<input type="hidden" name="questionType" value="BLANK">
+	<input type="hidden" name="QuestionIDList" value="<%=QuestionIDList%>">
 	<a href="javascript:document.AddBlank.submit()">Add Fill in Blank Problem</a>
 </form>
 
@@ -67,6 +80,7 @@ if(questions == null){
 	<input type="hidden" name="Tags" value="<%=Tags%>">
 	<input type="hidden" name="Spec" value="<%=Spec%>">
 	<input type="hidden" name="questionType" value="PICTURERESPONCE">
+	<input type="hidden" name="QuestionIDList" value="<%=QuestionIDList%>">
 	<a href="javascript:document.AddPicResponse.submit()">Add Picture Response Problem</a>
 </form>
 
@@ -75,6 +89,7 @@ if(questions == null){
 	<input type="hidden" name="Description" value="<%=Description%>">
 	<input type="hidden" name="Tags" value="<%=Tags%>">
 	<input type="hidden" name="Spec" value="<%=Spec%>">
+	<input type="hidden" name="QuestionIDList" value="<%=QuestionIDList%>">
 	<a href="javascript:document.AddMultipleChoices.submit()">Add Multiple ChoicesProblem</a>
 </form>
 
@@ -85,6 +100,7 @@ if(questions == null){
 	<input type="hidden" name="Description" value="<%=Description%>">
 	<input type="hidden" name="Tags" value="<%=Tags%>">
 	<input type="hidden" name="Spec" value="<%=Spec%>">
+	<input type="hidden" name="QuestionIDList" value="<%=QuestionIDList%>">
 	<a href="javascript:document.AddMatching.submit()">Add Matching Problem</a>
 </form>
 
@@ -93,6 +109,7 @@ if(questions == null){
 	<input type="hidden" name="Description" value="<%=Description%>">
 	<input type="hidden" name="Tags" value="<%=Tags%>">
 	<input type="hidden" name="Spec" value="<%=Spec%>">
+	<input type="hidden" name="QuestionIDList" value="<%=QuestionIDList%>">
 	 <a href="javascript:document.cancel.submit()">Cancel</a>
 </form>
 <%
@@ -118,6 +135,7 @@ if(questions == null){
 					<input type="hidden" name="Description" value="<%=Description%>">
 					<input type="hidden" name="Tags" value="<%=Tags%>">
 					<input type="hidden" name="Spec" value="<%=Spec%>">
+					<input type="hidden" name="QuestionIDList" value="<%=QuestionIDList%>">
 					<input type="hidden" name="indexInList" value="<%=index%>">
 					<a href= <%=jsCommand%>>Question <%=index %></a>
 				</form>
@@ -132,6 +150,7 @@ if(questions == null){
 					<input type="hidden" name="Description" value="<%=Description%>">
 					<input type="hidden" name="Tags" value="<%=Tags%>">
 					<input type="hidden" name="Spec" value="<%=Spec%>">
+					<input type="hidden" name="QuestionIDList" value="<%=QuestionIDList%>">
 					<input type="hidden" name="indexInList" value="<%=index%>">
 					<a href= <%=jsCommand%>>Question <%=index %></a>
 				</form>
@@ -145,6 +164,7 @@ if(questions == null){
 					<input type="hidden" name="Description" value="<%=Description%>">
 					<input type="hidden" name="Tags" value="<%=Tags%>">
 					<input type="hidden" name="Spec" value="<%=Spec%>">
+					<input type="hidden" name="QuestionIDList" value="<%=QuestionIDList%>">
 					<input type="hidden" name="indexInList" value="<%=index%>">
 					<a href= <%=jsCommand%>>Question <%=index %></a>
 				</form>
@@ -163,6 +183,7 @@ if(questions == null){
 		<input type="hidden" name="Description" value="<%=Description%>">
 		<input type="hidden" name="Tags" value="<%=Tags%>">
 		<input type="hidden" name="Spec" value="<%=Spec%>">
+		<input type="hidden" name="QuestionIDList" value="<%=QuestionIDList%>">
 		<a href="javascript:document.AddQuiz.submit()">Create</a>
 		</form>
 		<%
