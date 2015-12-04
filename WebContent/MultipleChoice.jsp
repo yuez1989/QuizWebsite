@@ -10,12 +10,22 @@
 </head>
 <body>
 <%
-ArrayList<Question> questions = (ArrayList<Question>) request.getSession().getAttribute("QuestionList");
+String[] result;
+
+/*ArrayList<Question> questions = (ArrayList<Question>) request.getSession().getAttribute("QuestionList");
 if(questions != null){
 	System.out.println("question list passed");
 	request.getSession().setAttribute("QuestionList" , questions);
+}*/
+String QuestionIDList="";
+result = request.getParameterValues("QuestionIDList");
+if (result != null && result.length != 0) {
+	QuestionIDList = result[0];
 }
-String[] result = request.getParameterValues("Quiz Name");
+//TOTOTOTOTOTOTOTOTO
+ArrayList<Question> questions = Utilities.stringToQuestionList(QuestionIDList);
+//TOTOTOTOTOTOTOTOTO
+result = request.getParameterValues("Quiz Name");
 String QuizName="";
 if (result != null && result.length != 0) {
 	QuizName = result[0];
@@ -85,7 +95,7 @@ if(index!=""){
 			soltext+=sol.get(i).get(j)+"#";
 		}
 		soltext = soltext.substring(0,soltext.length()-1);
-		soltext +=",";
+		soltext +=" ";
 		soltobox.add(soltext);
 	}
 	if(soltext.length()>0){
@@ -151,6 +161,7 @@ if(index!=""){
 	<input type="hidden" name="Tags" value="<%=Tags%>">
 	<input type="hidden" name="Spec" value="<%=Spec%>">
 	<input type="hidden" name="questionType" value="MC">
+	<input type="hidden" name="QuestionIDList" value="<%=QuestionIDList%>">
 	<input type="hidden" name="indexInList" value="<%=index%>">
 	 <a href="javascript:document.submitQuestion.submit()">Finish</a>
 </form>
@@ -159,6 +170,7 @@ if(index!=""){
 	<input type="hidden" name="Description" value="<%=Description%>">
 	<input type="hidden" name="Tags" value="<%=Tags%>">
 	<input type="hidden" name="Spec" value="<%=Spec%>">
+	<input type="hidden" name="QuestionIDList" value="<%=QuestionIDList%>">
 	<a href="javascript:document.cancel.submit()">Cancel</a>
 </form>
 </body>
