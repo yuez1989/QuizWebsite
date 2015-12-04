@@ -19,13 +19,22 @@ System.out.print("questionType is "+questionType);
 </head>
 <body>
 <%
-ArrayList<Question> questions = (ArrayList<Question>) request.getSession().getAttribute("QuestionList");
+/*ArrayList<Question> questions = (ArrayList<Question>) request.getSession().getAttribute("QuestionList");
 if(questions != null){
 	//System.out.println("question list passed");
 	request.getSession().setAttribute("QuestionList" , questions);
 }else{
 	System.out.println("NO question list passed");
+}*/
+
+String QuestionIDList="";
+result = request.getParameterValues("QuestionIDList");
+if (result != null && result.length != 0) {
+	QuestionIDList = result[0];
 }
+//TOTOTOTOTOTOTOTOTO
+ArrayList<Question> questions = Utilities.stringToQuestionList(QuestionIDList);
+//TOTOTOTOTOTOTOTOTO
 
 result = request.getParameterValues("Quiz Name");
 String QuizName="";
@@ -174,6 +183,7 @@ if(index!=""){
 	<input type="hidden" name="Spec" value="<%=Spec%>">
 	<input type="hidden" name="questionType" value="<%=questionType%>">
 	<input type="hidden" name="indexInList" value="<%=index%>">
+	<input type="hidden" name="QuestionIDList" value="<%=QuestionIDList%>">
 	 <a href="javascript:document.submitQuestion.submit()">Finish</a>
 </form>
 <form name="cancel" method="POST" action="CreateQuiz.jsp">
@@ -181,6 +191,7 @@ if(index!=""){
 	<input type="hidden" name="Description" value="<%=Description%>">
 	<input type="hidden" name="Tags" value="<%=Tags%>">
 	<input type="hidden" name="Spec" value="<%=Spec%>">
+	<input type="hidden" name="QuestionIDList" value="<%=QuestionIDList%>">
 	<input type="hidden" name="QuestionCancelled" value="CancelQuestion">
 	 <a href="javascript:document.cancel.submit()">Cancel</a>
 </form>
