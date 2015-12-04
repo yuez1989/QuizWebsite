@@ -71,7 +71,8 @@
 			</div>
 			<div class="personal-header">
 				<div class="inline-part">
-					<form method="POST" action="AccountSearchByName.jsp" target="_blank">
+					<form method="POST" action="AccountSearchByName.jsp"
+						target="_blank">
 						<input type="search" name="person" placeholder="search by user ID"
 							style="color: black;" size="25"> <input type="submit"
 							value="Submit" style="color: black;">
@@ -146,7 +147,7 @@
 						</form>
 					</div>
 					<%
-					String settingStr = "Setting.jsp?usrID=" + usrID;
+						String settingStr = "Setting.jsp?usrID=" + usrID;
 					%>
 					<div class="news-feed">
 						<a href=<%=settingStr%> target="_blank">Setting</a>
@@ -155,7 +156,8 @@
 						if (user.permission == 1) {
 					%>
 					<div class="news-feed">
-						<a href="AdminHomePage.jsp" target="_blank">Administration Settings</a>
+						<a href="AdminHomePage.jsp" target="_blank">Administration
+							Settings</a>
 					</div>
 					<%
 						}
@@ -268,15 +270,16 @@
 				<div class='body-part'>
 					<div class="column-name">Quiz Creation and Search</div>
 					<div class="news-feed">
-							<a href="CreateQuiz.jsp" target="_blank">Create New Quiz</a>
+						<a href="CreateQuiz.jsp" target="_blank">Create New Quiz</a>
 					</div>
 					<div class="news-feed">
-							<a href="Quizzes.jsp" target="_blank">See all Quizzes</a>
+						<a href="Quizzes.jsp" target="_blank">See all Quizzes</a>
 					</div>
 					<div class="news-feed create-quiz-button">
-						<form name='searchQuizForm' method="POST" action="QuizSearchByName.jsp" target="_blank">
-							<input type="search" name="quizID" value=""><br>
-							<input type="submit" value="Search Quiz" style='margin-top:10px;'> 
+						<form name='searchQuizForm' method="POST"
+							action="QuizSearchByName.jsp" target="_blank">
+							<input type="search" name="quizID" value=""><br> <input
+								type="submit" value="Search Quiz" style='margin-top: 10px;'>
 						</form>
 					</div>
 				</div>
@@ -326,10 +329,33 @@
 					<%
 						}
 					%>
+					<div>
+					<br> 
+					<div class="column-name">Achievements Earned</div>
+						<%
+							ArrayList<AchievementRecord> achrFrd = new ArrayList<AchievementRecord>();
+							for (String frdID : frdIDs) {
+								ArrayList<AchievementRecord> recents = Utilities.getRecentAchievements(frdID);
+								achrFrd.addAll(recents);
+							}
+							Collections.sort(achrFrd);
+							for (AchievementRecord achr : achrFrd) {
+								String achUsrStr = "Person.jsp?person=" + achr.usrID;
+								Achievement ach = new Achievement(achr.achID);
+						%>
+						<span class='news-feed'><a href=<%=achUsrStr%>><%=achr.usrID%></a>
+							achieved <span title='<%=ach.description%>'><%=achr.achID%></span>
+							at <%=achr.time%></span>
+						<%
+							}
+						%>
+					</div>
+				</div>
 			</div>
-		</div>
 			<div class='col-md-3 body-part-wrapper'>
-				<div class='body-part'>Hello</div>
+				<div class='body-part'>
+					<div class="column-name">OTHERS</div>
+				</div>
 			</div>
 		</div>
 	</div>
