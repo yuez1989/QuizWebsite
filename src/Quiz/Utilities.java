@@ -577,6 +577,38 @@ public class Utilities {
 	}
 
 	/**
+	 * Given a string of question IDs divided by "<PID>", get the list of question of it
+	 * @param str
+	 * @return
+	 * @throws SQLException 
+	 */
+	static public ArrayList<Question> stringToQuestionList(String str) throws SQLException{
+		ArrayList<Question> qList = new ArrayList<Question>();
+		String[] qNames = str.split("<PID>");
+		for(String name : qNames){
+			Question q = new Question(name);
+			qList.add(q);
+		}
+		return qList;
+	}
+	
+	/**
+	 * Given a list of Question objects, get a long String of all their question IDs
+	 * @param qList
+	 * @return
+	 */
+	static public String QuestionListToString(ArrayList<Question> qList){
+		String longString = "";
+		for(int i = 0; i<qList.size()-1; i++){
+			String qID = qList.get(i).problemID;
+			longString += qID;
+			longString += "<PID>";
+		}
+		longString += qList.get(qList.size()-1).problemID;
+		return longString;
+	}
+
+	/**
 	 * Get recent created Quizzes, with specific days of recent defined
 	 * @return Arraylist of recent created quizzes in order from newest to oldest
 	 * @throws SQLException 
