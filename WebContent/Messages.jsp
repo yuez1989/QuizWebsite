@@ -75,9 +75,9 @@
 								break;
 							}
 
-							String readText = "Yes, click to read again.";
+							String readText = "Read";
 							if (msg.isRead == 1 && msg.toID.equals(usrID))
-								readText = "No, click to read it!";
+								readText = "Unread";
 
 							out.println("<tr>");
 							out.println("<td><a href='Person.jsp?person=" + msg.fromID + "' target='_blank'>" + msg.fromID + "</a></td>");
