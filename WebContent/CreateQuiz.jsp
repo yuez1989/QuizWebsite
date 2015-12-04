@@ -41,7 +41,9 @@
 		for(String s:myquiz.getTags()){
 			Tags += s+" ";
 		}
-		Tags = Tags.substring(0,Tags.length()-1);
+		if(myquiz.getTags().size()!=0){
+			Tags = Tags.substring(0,Tags.length()-1);
+		}
 		Spec = myquiz.getSpec();
 		myquiz = null;
 		QuizID = "";
