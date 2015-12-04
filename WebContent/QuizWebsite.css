@@ -392,6 +392,11 @@ input[type=submit]:hover{
 	font-weight: bold !important;
 }
 
+.important-option {
+	color: blue !important;
+	font-weight: bold !important;
+}
+
 .normal-option {
 	margin-top: 10px;
 	margin-bottom: 10px;
