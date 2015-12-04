@@ -41,6 +41,12 @@ if (result != null && result.length != 0) {
 	Spec = result[0];
 }
 
+String questionType = "";
+result = request.getParameterValues("questionType");
+if (result != null && result.length != 0) {
+	questionType = result[0];
+}
+
 
 String context="";
 String url="";
@@ -63,6 +69,7 @@ if(index!=""){
 		time = Long.toString(p.getTime()/1000);
 		sol = p.getAllSol();
 		solnum = Integer.toString(p.getsolNum());
+		questionType = p.getType(); 
 		if(solnum.equals("0")){
 			solnum="";
 		}
@@ -154,7 +161,7 @@ if(index!=""){
 	<input type="hidden" name="Description" value="<%=Description%>">
 	<input type="hidden" name="Tags" value="<%=Tags%>">
 	<input type="hidden" name="Spec" value="<%=Spec%>">
-	<input type="hidden" name="questionType" value="FREERESPONSE">
+	<input type="hidden" name="questionType" value="<%=questionType%>">
 	<input type="hidden" name="indexInList" value="<%=index%>">
 	 <a href="javascript:document.submitQuestion.submit()">Finish</a>
 </form>
