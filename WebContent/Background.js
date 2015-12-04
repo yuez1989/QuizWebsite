@@ -30,7 +30,7 @@ var srcBgArray = [
 ];
  
 $(document).ready(function() {
-  $('.webpage-wrapper').bcatBGSwitcher({
+  $('body').bcatBGSwitcher({
     urls: srcBgArray,
     alt: 'Alt text',
     timeout: 9000

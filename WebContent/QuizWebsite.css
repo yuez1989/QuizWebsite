@@ -33,12 +33,11 @@ input[type=search]{
 
 input[type=submit] {
 	padding: 1px 6px;
-	background: #ffffff;
-	border: solid 1px #ccc;
+	background: transparent;
+	color: #ffffff;
 	cursor: pointer;
 	-webkit-border-radius: 5px;
 	border-radius: 3px;
-	
 }
 
 input[type=submit]:hover{
@@ -142,6 +141,30 @@ input[type=submit]:hover{
 	padding-bottom: 10px;
 	z-index: 9;
 	height: 60px;
+}
+
+.body-section {
+	position:fixed;
+	top:60px;
+	margin-left:20px;
+	margin-right:20px;
+	width:96%;
+	opacity:.9;
+}
+
+.body-part-wrapper {
+	padding:20px;
+}
+.body-part {
+	opacity: .6;
+	position: relative;
+	width: 90%;
+	padding: 20px 40px 20px 40px;
+	margin: 0 auto;
+	background-color: #fff;
+	-webkit-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
+	-moz-box-shadow: 0 0 4px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
+	box-shadow: 0 0 5px rgba(0, 0, 0, 0.2), inset 0 0 50px rgba(0, 0, 0, 0.1);
 }
 
 .header-line * {
