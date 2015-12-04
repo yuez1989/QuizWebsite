@@ -264,7 +264,7 @@
 							Account</a>
 					</div>
 					<div class="write-to-admin">
-						<a href="AdminList.jsp" class='normal-option'>Contact us</a>
+						<a href="AdminList.jsp" class='normal-option' target='_blank'>Contact us</a>
 					</div>
 				</div>
 				<div class='body-part'>
