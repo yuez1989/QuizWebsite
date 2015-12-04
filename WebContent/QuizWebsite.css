@@ -34,7 +34,8 @@ input[type=search]{
 input[type=submit] {
 	padding: 1px 6px;
 	background: transparent;
-	color: #ffffff;
+	color: #ffffff!important;
+	border: solid 1px #ffffff;
 	cursor: pointer;
 	-webkit-border-radius: 5px;
 	border-radius: 3px;
@@ -42,8 +43,9 @@ input[type=submit] {
 
 input[type=submit]:hover{
 	padding: 1px 6px;
-	background: #f9ffca;
-	border: solid 1px #ccc;
+	background: #ffffff;
+	color: #000000!important;
+	border: solid 1px #ffffff;
 	cursor: pointer;
 	-webkit-border-radius: 5px;
 	border-radius: 3px;
