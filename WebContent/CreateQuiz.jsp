@@ -324,9 +324,10 @@ You can have multiple options, order does not matter.<BR>
 	}
 %>
 <input type="hidden" name="QuestionIDList" value="<%=QuestionIDList%>">
-<a href="javascript:document.AddQuestion.submit()">Add Problem or Finish</a>
+<a href="javascript:document.AddQuestion.submit()">Edit Problem or Finishs</a>
 </form>
-Current questions in the Quiz
+Currently, there are <%= questions.size()%> questions in the Quiz
+<!--
 <%
 	int count = 1;
 	System.out.println("questions length() at line 298 in CreateQuiz.jsp is "+questions.size());
@@ -403,7 +404,7 @@ Current questions in the Quiz
 			count++;
 		}
 	}
-%>
+%>-->
 <form name="CancelQuiz" method="POST" action="AddQuizToDB.jsp">
 	<input type="hidden" name="Discard" value="Discard">
 	<input type="hidden" name="QuestionIDList" value="<%=QuestionIDList%>">

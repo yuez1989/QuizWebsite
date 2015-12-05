@@ -118,8 +118,86 @@ if(questions == null){
 	<input type="hidden" name="Tags" value="<%=Tags%>">
 	<input type="hidden" name="Spec" value="<%=Spec%>">
 	<input type="hidden" name="QuestionIDList" value="<%=QuestionIDList%>">
-	 <a href="javascript:document.cancel.submit()">Cancel</a>
+	 <a href="javascript:document.cancel.submit()">Edit General Quiz Information</a>
 </form>
+Current questions in the Quiz
+<%
+	int count = 1;
+	System.out.println("questions length() at line 298 in CreateQuiz.jsp is "+questions.size());
+	if(questions != null){
+		if(questions.size()==0){
+			%>
+				<p>There is currently no question in this quiz!</p>
+			<%
+		}
+		//for(Question p:questions){
+		for(int i=0; i<questions.size();i++){
+			Question p = questions.get(i);
+			//session.setAttribute("Question "+Integer.toString(count), p);
+			if(p==null){System.out.println("p is null at line 308 in CreateQuiz.jsp");}
+			if(p.getType()==null){System.out.println("p is null at line 298 in CreateQuiz.jsp");}
+			if(p.getType().equals("MC")){
+				String formName = "AddMultipleChoices" + count;
+				String jsCommand = "javascript:document.AddMultipleChoices" + count + ".submit()";
+				%>
+				<form name=<%=formName%> method="POST" action="MultipleChoice.jsp">
+					<input type="hidden" name="Quiz Name" value="<%=QuizName%>">
+					<input type="hidden" name="Description" value="<%=Description%>">
+					<input type="hidden" name="Tags" value="<%=Tags%>">
+					<input type="hidden" name="Spec" value="<%=Spec%>">
+					<input type="hidden" name="QuestionIDList" value="<%=QuestionIDList%>">
+					<input type="hidden" name="indexInList" value="<%=count%>">
+					<a href= <%=jsCommand%>>Question <%=count %></a>
+				</form>
+				<%
+			}
+			else if(p.getType().equals("MATCH")){
+				String formName = "AddMatching" + count;
+				String jsCommand = "javascript:document.AddMatching" + count + ".submit()";
+				%>
+				<form name=<%=formName%> method="POST" action="Matching.jsp">
+					<input type="hidden" name="Quiz Name" value="<%=QuizName%>">
+					<input type="hidden" name="Description" value="<%=Description%>">
+					<input type="hidden" name="Tags" value="<%=Tags%>">
+					<input type="hidden" name="Spec" value="<%=Spec%>">
+					<input type="hidden" name="QuestionIDList" value="<%=QuestionIDList%>">
+					<input type="hidden" name="indexInList" value="<%=count%>">
+					<a href= <%=jsCommand%>>Question <%=count %></a>
+				</form>
+				<%
+			}else{
+				String formName = "AddFreeResponse" + count;
+				String jsCommand = "javascript:document.AddFreeResponse" + count + ".submit()";
+				%>
+				<form name=<%=formName%> method="POST" action="FreeResponse.jsp">
+					<input type="hidden" name="Quiz Name" value="<%=QuizName%>">
+					<input type="hidden" name="Description" value="<%=Description%>">
+					<input type="hidden" name="Tags" value="<%=Tags%>">
+					<input type="hidden" name="Spec" value="<%=Spec%>">
+					<input type="hidden" name="questionType" value=<%=p.getType()%>>
+					<input type="hidden" name="QuestionIDList" value="<%=QuestionIDList%>">
+					<input type="hidden" name="indexInList" value="<%=count%>">
+					<a href= <%=jsCommand%>>Question <%=count %></a>
+				</form>
+				<%
+			}
+			String formName = "DeleteQuestion" + count;
+			String jsCommand = "javascript:document.DeleteQuestion" + count + ".submit()";
+			%>
+			<form name=<%=formName%> method="POST" action="CreateQuiz.jsp">
+					<input type="hidden" name="Quiz Name" value="<%=QuizName%>">
+					<input type="hidden" name="Description" value="<%=Description%>">
+					<input type="hidden" name="Tags" value="<%=Tags%>">
+					<input type="hidden" name="Spec" value="<%=Spec%>">
+					<input type="hidden" name="QuestionIDList" value="<%=QuestionIDList%>">
+					<input type="hidden" name="indexToDelete" value="<%=count%>">
+					<a href= <%=jsCommand%>>Delete Question <%=count %></a>
+			</form>
+			<%
+			count++;
+		}
+	}
+%>
 <%
 	ArrayList<Integer> probWithNoSol = new ArrayList<Integer>();
 	for(int i= 0; i< questions.size(); i++){
@@ -132,11 +210,11 @@ if(questions == null){
 		%>
 		<p> Not enough solution provided in the following questions:
 		<%
-		int count=1;
+		count=1;
 		for(int index:probWithNoSol){
 			if(questions.get(index-1).getType().equals("MC")){
-				String formName = "AddMultipleChoices" + count;
-				String jsCommand = "javascript:document.AddMultipleChoices" + count + ".submit()";
+				String formName = "AddMultipleChoices" + count+"A";
+				String jsCommand = "javascript:document.AddMultipleChoices" + count +"A"+ ".submit()";
 				%>
 				<form name=<%=formName%> method="POST" action="MultipleChoice.jsp">
 					<input type="hidden" name="Quiz Name" value="<%=QuizName%>">
@@ -150,8 +228,8 @@ if(questions == null){
 				<%
 			}
 			else if(questions.get(index-1).getType().equals("MATCH")){
-				String formName = "AddMatching" + count;
-				String jsCommand = "javascript:document.AddMatching" + count + ".submit()";
+				String formName = "AddMatching" + count +"A";
+				String jsCommand = "javascript:document.AddMatching" + count +"A"+ ".submit()";
 				%>
 				<form name=<%=formName%> method="POST" action="Matching.jsp">
 					<input type="hidden" name="Quiz Name" value="<%=QuizName%>">
@@ -164,8 +242,8 @@ if(questions == null){
 				</form>
 				<%
 			}else{
-				String formName = "AddFreeResponse" + count;
-				String jsCommand = "javascript:document.AddFreeResponse" + count + ".submit()";
+				String formName = "AddFreeResponse" + count+"A";
+				String jsCommand = "javascript:document.AddFreeResponse" + count +"A"+ ".submit()";
 				%>
 				<form name=<%=formName%> method="POST" action="FreeResponse.jsp">
 					<input type="hidden" name="Quiz Name" value="<%=QuizName%>">
@@ -197,5 +275,10 @@ if(questions == null){
 		<%
 	}
 %>
+<form name="CancelQuiz" method="POST" action="AddQuizToDB.jsp">
+	<input type="hidden" name="Discard" value="Discard">
+	<input type="hidden" name="QuestionIDList" value="<%=QuestionIDList%>">
+	 <a href="javascript:document.CancelQuiz.submit()">Discard</a>
+</form>
 </body>
 </html>
