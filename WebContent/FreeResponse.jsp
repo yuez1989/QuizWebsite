@@ -60,6 +60,14 @@ if (result != null && result.length != 0) {
 	Spec = result[0];
 }
 
+String select[] = request.getParameterValues("QuizOption"); 
+if (select != null && select.length != 0) {
+	Spec = "";
+	for (int i = 0; i < select.length; i++) {
+		Spec+=select[i]; 
+	}
+}
+
 String context="";
 String url="";
 String time = "0";
