@@ -375,6 +375,21 @@ input[type=reset]:hover{
 	text-align: center !important;
 }
 
+.msg-read-body table {
+	width: 100%;
+	table-layout: fixed;
+}
+
+.msg-read-body th {
+	text-align: left!important;
+	vertical-align: top;
+	width:20%;
+}
+
+.msg-read-body td {
+	word-wrap:break-word;
+}
+
 .msg-write {
 	margin-top: 20px;
 }

@@ -69,13 +69,21 @@
 	%>
 	<div class="body-section">
 		<div class='body-part-wrapper col-md-2'></div>
-		<div class='body-part-wrapper col-md-6'>
+		<div class='body-part-wrapper col-md-8'>
 			<div class='body-part'>
 				<div class='section-name'>MESSAGE</div>
 				<div class="msg-read-box">
-					<div class="msg-read-header"><%=msg.fromID%>
-						to
-						<%=msg.toID%></div>
+					<%
+						String fromStr = "Person.jsp?person=" + msg.fromID;
+					%>
+					<div class="msg-read-header">
+						<a href=<%=fromStr%> target="_blank"><%=msg.fromID%></a> to
+						<%
+							String toStr = "Person.jsp?person=" + msg.toID;
+						%>
+						<a href=<%=toStr%> target="_blank"><%=msg.toID%></a>
+					</div>
+					<br>
 					<div class="msg-read-body">
 						<table>
 							<tr>
@@ -119,8 +127,7 @@
 								break;
 							}
 						%>
-						<br>
-						<a href="Messages.jsp">Go back</a>
+						<br> <a href="Messages.jsp">Go back</a>
 					</div>
 				</div>
 			</div>
