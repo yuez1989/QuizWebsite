@@ -33,6 +33,7 @@ $(document).ready(function() {
   $('body').bcatBGSwitcher({
     urls: srcBgArray,
     alt: 'Alt text',
-    timeout: 10000
+    timeout: 15000,
+    speed: 5000
   });
 });
