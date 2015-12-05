@@ -102,7 +102,7 @@
 		<div class='col-md-9 body-part-wrapper'>
 			<div class='body-part'>
 				<div class = 'column-name'>Quizzzz: HOMEPAGE OF <%=person%></div>
-
+				<hr>
 				<%
 				//can not access the homepage.
 				if ((!usrID.equals(person)) && (user.privacy == 'p' || (user.privacy == 'f' && !Utilities.isFriend(usrID, person)))) {
@@ -135,7 +135,7 @@
 						%>
 					</div>
 				</div>
-
+				<br>
 				<div class='achievements'>
 					<div class = 'column-name'><%=person%> Has Achieved</div>
 			
@@ -162,7 +162,7 @@
 				</div>
 				
 				
-				
+				<br>
 				<div class='history'>
 					<div class = 'column-name'><%=person%> Has Played:</div>
 
