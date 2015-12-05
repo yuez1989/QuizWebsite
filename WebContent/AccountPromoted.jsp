@@ -45,12 +45,12 @@
 			String inputaccount = request.getParameter("attempted_account");
 			ArrayList<String> similarids = Utilities.searchAccounts(inputaccount);
 			
-			if(similarids.isEmpty()){
+			if(!Utilities.searchAccountsExact(inputaccount)){
 				out.println("<span class='news-feed'>No Accounts Found.</span>");
 				out.println("<br><br><span class='news-feed'>Redirect to administrator page in 2 seconds...</span>");
 				response.setHeader("Refresh", "2;url=AdminHomePage.jsp");
 				out.println("<span class='news-feed'><a href = \'AdminHomePage.jsp\'>click here to return immediately</span>");	
-			}else if(similarids.size() == 1){
+			}else{
 				out.print("<span class = 'news-feed'>One Accounts Found</span>");
 				Administrator admin = (Administrator)request.getSession().getAttribute("admin");
 				admin.promoteAdmin(similarids.get(0));
@@ -60,15 +60,8 @@
 				out.println("<span class = 'news-feed'><a href = \'AdminHomePage.jsp\'>click here to return immediately</span>");	
 				response.setHeader("Refresh", "3;url=AdminHomePage.jsp");
 
-			}else{
-				
-				out.print("<span class='news-feed'>Several accounts are found. Do you mean...<span>");
-				for(String str:similarids){
-					out.print("<span class='news-feed'>"+str+"</span>");
-				}
-				out.println("<br><br><a href = \'AdminHomePage.jsp\'>return to administration page</span>");	
 			}
-			
+
 			
 			%>
 			</div>
