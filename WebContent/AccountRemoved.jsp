@@ -43,41 +43,27 @@
 			<div class="column-name">REMOVE ACCOUNT RESULTS</div>
 <% 
 	String inputaccount = request.getParameter("attempted_account");
-	ArrayList<String> similarids = Utilities.searchAccounts(inputaccount);
-	
-	if(similarids.isEmpty()){
+	//ArrayList<String> similarids = Utilities.searchAccounts(inputaccount);
+	if(!Utilities.searchAccountsExact(inputaccount)){
 %>
 			<span class='feed-news'>No Accounts Found.</span><br>
 			<span>Redirect to administrator page in 2 seconds...</span>
 			<span><a href = 'AdminHomePage.jsp'>click here to return immediately</a></span>
 <%
 		response.setHeader("Refresh", "2;url=AdminHomePage.jsp");	
-	}else if(similarids.size() == 1){
+	}else{
 		Administrator admin = (Administrator)request.getSession().getAttribute("admin");
-		admin.deleteUser(similarids.get(0));
+		admin.deleteUser(inputaccount);
 %>
 			<span class='feed-news'>One Account Found</span><br>
-			<span class='feed-news'>You have deleted <%=similarids.get(0) %></span><br><br>
+			<span class='feed-news'>You have deleted <%=inputaccount %></span><br><br>
 			<span class='feed-news'>Redirect to administrator page in 3 seconds...</span>
 			
 			<span><a href = 'AdminHomePage.jsp'>click here to return immediately</a></span>
 <%	
 		response.setHeader("Refresh", "3;url=AdminHomePage.jsp");
 		
-	}else{
-		
-%>
-			<span class='column-name'>Do You Mean...</span><br>
-			
-			
-<%
-
-		for(String str:similarids){
-			out.print("<span class = 'feed-news'>"+str+"</span><br>");
-		}
 	}
-	out.println("<br><br><br><span class = 'feed-news'><a href = \'AdminHomePage.jsp\'>return to administration page...</a></span>");	
-	
 %>
 
 
