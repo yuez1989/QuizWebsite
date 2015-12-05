@@ -55,6 +55,9 @@
 
 
 %>
+		<br>
+		<br>
+		<span class='news-feed'><a href='AdminHomePage.jsp'>RETURN</a></span>
 			
 			
 			
