@@ -6,10 +6,28 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<link rel="stylesheet" href="QuizWebsite.css">
+<script src='UserHomePage.js'></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"
+	integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ=="
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"
+	integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX"
+	crossorigin="anonymous">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"
+	integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ=="
+	crossorigin="anonymous"></script>
 <title>Create a new Quiz!!</title>
 </head>
 <body>
-
+	<div class="body-section">
+		<div class='body-part-wrapper col-md-10'>
+			<div class='body-part'>
 <h2>Create a new Quiz</h2>
 <%	
 
@@ -410,5 +428,8 @@ Currently, there are <%= questions.size()%> questions in the Quiz
 	<input type="hidden" name="QuestionIDList" value="<%=QuestionIDList%>">
 	 <a href="javascript:document.CancelQuiz.submit()">Discard</a>
 </form>
+</div>
+</div>
+</div>
 </body>
 </html>
