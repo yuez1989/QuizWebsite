@@ -73,8 +73,12 @@
 			<div class='body-part'>
 				<span class='normal-option'>SORRY, YOU CANNOT TAKE ONE QUIZ
 					SIMULTANEOUSLY.</span><br> <span>Click "Clear Paused Quiz" to
-					clear quiz taking sessions.</span><br> <a href='QuizCancel.jsp'
-					class='dangerous-option'>Clear Paused Quiz</a>
+					clear quiz taking sessions.</span><br>
+				<%
+					String cancelStr = "QuizCancel.jsp?quizID=" + quizID;
+				%>
+				<a href=<%=cancelStr%> class='dangerous-option'>Clear Paused
+					Quiz</a>
 				<div>
 					<%
 						} else {
@@ -104,105 +108,112 @@
 					<div class='body-part'>
 						<span class='normal-option'>SORRY, YOU CANNOT TAKE ONE QUIZ
 							SIMULTANEOUSLY.</span><br> <span>Click "Clear Paused Quiz"
-							to clear quiz taking sessions.</span><br> <a href='QuizCancel.jsp'
-							class='dangerous-option'>Clear Paused Quiz</a>
+							to clear quiz taking sessions.</span><br>
+						<%
+							String cancelStr = "QuizCancel.jsp?quizID=" + quizID;
+						%>
+						<a href=<%=cancelStr%> class='dangerous-option'>Clear Paused
+							Quiz</a>
 						<div>
 							<%
 								} else {
 											//start a new quiz in one page
 											session.setAttribute(request.getParameter("quizID") + "questions", quiz.getQuestions());
-
-											out.println("<form class=\'total_form\' action=\'QuizScore.jsp\' method=\'post\'>");
-
-											ArrayList<Question> questions = quiz.getQuestions();
-											int count = 0;
-											for (Question q : questions) {
-												count++;
-												out.print("<div class = question" + count + ">");
-												out.print("<h3>Question " + count + "<h3>");
-												if (Question.TYPE_FREERESPONCE.equals(q.getType())
-														|| Question.TYPE_PICTURERESPONCE.equals(q.getType())) {
-													out.print("<p class=\'question_description\'>" + q.getText() + "</p>");
-													if (!q.getPic().isEmpty())
-														out.print("<img src=\'" + q.getPic() + "\' class=\'question_image\'>");
-													for (int i = 1; i <= q.getsolNum(); i++) {
-														out.print("<input type=\'text\' name=\'q" + count + "ans" + i
-																+ "\' placeholder=\'enter here\'>");
-													}
-												} else if (Question.TYPE_MULTIPLECHOICE.equals(q.getType())) {
-													out.print("<p class=\'question_description\'>" + q.getText() + "</p>");
-													ArrayList<String> options = q.parseOption();
-													int optcnt = 0;
-													if (q.getsolNum() > 1) {
-														for (String opt : options) {
-															optcnt++;
-															char chopt = (char) ('A' + optcnt - 1);
-															out.print("<input type=\'checkbox\' name = \'q" + count + "ans" + optcnt
-																	+ "\' value = \'true\' >" + opt + "</input>");
-
-														}
-													} else {
-														for (String opt : options) {
-															optcnt++;
-															char chopt = (char) ('A' + optcnt - 1);
-															if (optcnt == 1) {
-																out.print("<input type=\'radio\' name = \'q" + count + "ans1\' value = \'"
-																		+ chopt + "\' checked=\'checked\'>" + opt + "</input>");
-															} else {
-																out.print("<input type=\'radio\' name = \'q" + count + "ans1\' value = \'"
-																		+ chopt + "\'>" + opt + "</input>");
-															}
-														}
-
-													}
-												} else if (Question.TYPE_MATCHING.equals(q.getType())) {
-													out.print("<p class=\'question_description\'>" + q.getText() + "</p>");
-													ArrayList<String> optionsleft = q.parseOptionleft();
-													ArrayList<String> optionsright = q.parseOptionright();
-													int optcnt = 1;
-													for (String opt : optionsleft) {
-														/* 							<select>
-																					  <option value="volvo">Volvo</option>
-																					  <option value="saab">Saab</option>
-																					  <option value="opel">Opel</option>
-																					  <option value="audi">Audi</option>
-																					</select> */
-														out.println("<p>" + opt);
-														out.print("<select name = \'q" + count + "ans" + optcnt + "\'>");
-														char selectvalue = 'A';
-														for (String optright : optionsright) {
-															out.println("<option value=\'" + Character.toString(selectvalue) + "\'>"
-																	+ optright + "</option>");
-															selectvalue = (char) (selectvalue + 1);
-														}
-														out.print("</select></p>");
-														//out.print("<input type=\'text\' name = \'q"+count+"ans"+optcnt+"\'></input>");
-														//out.print("<p>"+opt+"</p>");
-														//out.print("<p>"+optionsright.get(optcnt-1)+"</p>");
-														optcnt++;
-													}
-												} else if (Question.TYPE_BLANKFILL.equals(q.getType())) {
-													String text = "-" + q.getText() + "-";
-													String[] contents = text.split("<blank>");
-													//contents[contents.length-1] = contents[contents.length-1].substring(0, contents[contents.length-1].length()-1);
-													out.print("<p>");
-													for (int i = 1; i < contents.length; i++) {
-														if (i == 1) {
-															out.print(contents[i - 1].substring(1));
-														} else {
-															out.print(contents[i - 1]);
-
-														}
-														out.print("<input type = \'text\' name =\'q" + count + "ans" + i + "\'>");
-													}
-
-													out.print(contents[contents.length - 1].substring(0,
-															contents[contents.length - 1].length() - 1));
-													out.print("</p>");
-												}
-												out.print("</div>");
-											}
 							%>
+							<div class='body-part'>
+								<%
+									out.println("<form class=\'total_form\' action=\'QuizScore.jsp\' method=\'post\'>");
+
+												ArrayList<Question> questions = quiz.getQuestions();
+												int count = 0;
+												for (Question q : questions) {
+													count++;
+													out.print("<div class = question" + count + ">");
+													out.print("<h3>Question " + count + "<h3>");
+													if (Question.TYPE_FREERESPONCE.equals(q.getType())
+															|| Question.TYPE_PICTURERESPONCE.equals(q.getType())) {
+														out.print("<p class=\'question_description\'>" + q.getText() + "</p>");
+														if (!q.getPic().isEmpty())
+															out.print("<img src=\'" + q.getPic() + "\' class=\'question_image\'>");
+														for (int i = 1; i <= q.getsolNum(); i++) {
+															out.print("<input type=\'text\' name=\'q" + count + "ans" + i
+																	+ "\' placeholder=\'enter here\'>");
+														}
+													} else if (Question.TYPE_MULTIPLECHOICE.equals(q.getType())) {
+														out.print("<p class=\'question_description\'>" + q.getText() + "</p>");
+														ArrayList<String> options = q.parseOption();
+														int optcnt = 0;
+														if (q.getsolNum() > 1) {
+															for (String opt : options) {
+																optcnt++;
+																char chopt = (char) ('A' + optcnt - 1);
+																out.print("<input type=\'checkbox\' name = \'q" + count + "ans" + optcnt
+																		+ "\' value = \'true\' >" + opt + "</input>");
+
+															}
+														} else {
+															for (String opt : options) {
+																optcnt++;
+																char chopt = (char) ('A' + optcnt - 1);
+																if (optcnt == 1) {
+																	out.print("<input type=\'radio\' name = \'q" + count + "ans1\' value = \'"
+																			+ chopt + "\' checked=\'checked\'>" + opt + "</input>");
+																} else {
+																	out.print("<input type=\'radio\' name = \'q" + count + "ans1\' value = \'"
+																			+ chopt + "\'>" + opt + "</input>");
+																}
+															}
+
+														}
+													} else if (Question.TYPE_MATCHING.equals(q.getType())) {
+														out.print("<p class=\'question_description\'>" + q.getText() + "</p>");
+														ArrayList<String> optionsleft = q.parseOptionleft();
+														ArrayList<String> optionsright = q.parseOptionright();
+														int optcnt = 1;
+														for (String opt : optionsleft) {
+															/* 							<select>
+																						  <option value="volvo">Volvo</option>
+																						  <option value="saab">Saab</option>
+																						  <option value="opel">Opel</option>
+																						  <option value="audi">Audi</option>
+																						</select> */
+															out.println("<p>" + opt);
+															out.print("<select name = \'q" + count + "ans" + optcnt + "\'>");
+															char selectvalue = 'A';
+															for (String optright : optionsright) {
+																out.println("<option value=\'" + Character.toString(selectvalue) + "\'>"
+																		+ optright + "</option>");
+																selectvalue = (char) (selectvalue + 1);
+															}
+															out.print("</select></p>");
+															//out.print("<input type=\'text\' name = \'q"+count+"ans"+optcnt+"\'></input>");
+															//out.print("<p>"+opt+"</p>");
+															//out.print("<p>"+optionsright.get(optcnt-1)+"</p>");
+															optcnt++;
+														}
+													} else if (Question.TYPE_BLANKFILL.equals(q.getType())) {
+														String text = "-" + q.getText() + "-";
+														String[] contents = text.split("<blank>");
+														//contents[contents.length-1] = contents[contents.length-1].substring(0, contents[contents.length-1].length()-1);
+														out.print("<p>");
+														for (int i = 1; i < contents.length; i++) {
+															if (i == 1) {
+																out.print(contents[i - 1].substring(1));
+															} else {
+																out.print(contents[i - 1]);
+
+															}
+															out.print("<input type = \'text\' name =\'q" + count + "ans" + i + "\'>");
+														}
+
+														out.print(contents[contents.length - 1].substring(0,
+																contents[contents.length - 1].length() - 1));
+														out.print("</p>");
+													}
+													out.print("</div>");
+												}
+								%>
+							</div>
 							<div id="rating_review">
 								<div id="rating">
 									<label>Rating</label> <label for="1star">1</label> <input
@@ -237,10 +248,9 @@
 								<input type="submit" class='total_cancel' value='cancel'>
 							</form>
 							<%
-								}
 									}
-								}
-							%>
-						
-</body>
+										}
+									}
+								%>
+						</body>
 </html>
