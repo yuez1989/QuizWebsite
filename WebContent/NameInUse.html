@@ -1,25 +1,72 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<jsp:include page="Header.jsp" />
+
 <html>
 <head>
 <meta charset="UTF-8">
+
+<link rel="stylesheet" href="QuizWebsite.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"
+	integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ=="
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"
+	integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX"
+	crossorigin="anonymous">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"
+	integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ=="
+	crossorigin="anonymous"></script>
+<script src='UserHomePage.js'></script>
+<script src='Background.js'></script>
+<script type="text/javascript"
+	src="bg-switcher/Source/js/jquery.bcat.bgswitcher.js"></script>
+<link type="text/css" rel="stylesheet"
+	href="bg-switcher/Source/css/style.css" media="all" />
+	
 <title>Name In Use</title>
 </head>
 <body>
-<h1>The User name you entered is already in use</h1>
 
-<form action="CreateAccountServlet" method = "post">
-
-	<p>User Name: <input type="text" name="account" /></p>
-	<p>Password: <input type="password" name="password" /></p>
-	<p>Re-Enter Password: <input type="text" name="passwordcopy" /> </p>
-	<input type="submit" value = "create"/>
-	
-</form>
-<div>
-<p>
-<a href="index.jsp">Return to Log In</a>
-</p>
+<div class="body-section">
+	<div class='col-md-2 body-part-wrapper'></div>
+	<div class='col-md-8 body-part-wrapper'>
+		<div class='body-part'>
+		<div class="column-name">NAME IN USE</div>
+		<br>
+		<br>
+			<span class='news-feed'>The User Name You Entered Is Already In Use</span>
+			<form action="CreateAccountServlet" method = "post">
+			<span class='news-feed'>Fill in the following information to create a new account.</span>
+			<span class='news-feed'>Please do not include characters like #, % and _</span>
+			<br>
+			<span class='news-feed'>User Name</span>
+			<span class= 'news-feed'><input type="text" name="account" /></span>
+			
+			<span class='news-feed'>Password</span>
+			<span class= 'news-feed'><input type="password" name="password" /></span>
+			
+			<span class='news-feed'>Re-Enter Password</span>
+			<span class= 'news-feed'><input type="password" name="passwordcopy" /></span>						
+			
+			<br>
+			<span class= 'news-feed'><input type="submit" value = "Sign Up"/></span>
+			</form>
+			
+			
+			<br>
+			<br>
+			<div>
+			<span class= 'news-feed'><a href="index.jsp">Return To Log In</a></span>
+			</div>
+			
+		</div>
+	</div>
 </div>
+
 
 </body>
 </html>

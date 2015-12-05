@@ -1,23 +1,64 @@
-<!DOCTYPE html>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<jsp:include page="Header.jsp" />
+
 <html>
 <head>
 <meta charset="UTF-8">
+
+<link rel="stylesheet" href="QuizWebsite.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"
+	integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ=="
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"
+	integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX"
+	crossorigin="anonymous">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"
+	integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ=="
+	crossorigin="anonymous"></script>
+<script src='UserHomePage.js'></script>
+<script src='Background.js'></script>
+<script type="text/javascript"
+	src="bg-switcher/Source/js/jquery.bcat.bgswitcher.js"></script>
+<link type="text/css" rel="stylesheet"
+	href="bg-switcher/Source/css/style.css" media="all" />
+	
 <title>Login Error</title>
 </head>
 <body>
 
-<h1>Login Error</h1>
-<p>Your account and password does not match. Please try again or sign up for a new account.</p>
 
-<form action="UserLoginServlet" method = "post">
-	<p>User Name: <input type="text" name="account" /></p>
-	<p>Password: <input type="password" name="password" /></p>
-	<input type="submit" value = "Login"/>
-</form>
+<div class="body-section">
+	<div class='col-md-2 body-part-wrapper'></div>
+	<div class='col-md-8 body-part-wrapper'>
+		<div class='body-part'>
+		<div class="column-name">LOG IN ERROR</div>
+		<br>
+		<br>
+			<span class='news-feed'>Your account and password does not match. Please try again or sign up for a new account.</span>
+			
+			<form action="UserLoginServlet" method = "post">
+				<span class='news-feed'>User Name</span>
+				<span class= 'news-feed'><input type="text" name="account" /></span>
+				
+				<span class='news-feed'>Password</span>
+				<span class= 'news-feed'><input type="password" name="password" /></span>
+			
+				<br>
+				<span class= 'news-feed'><input type="submit" value = "Log In"/></span>
+				<br>
+				<bt>
+				<span class = 'news-feed'><a href='index.jsp'>Return To HomePage</a></span>
+			</form>
+			
+		</div>
+	</div>
+</div>
 
-<form action="CreateAccount.html" method = "get">
-	<input type="submit" value = "Sign Up"/>
-</form>
 
 </body>
 </html>
