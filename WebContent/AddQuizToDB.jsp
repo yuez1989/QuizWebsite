@@ -153,8 +153,10 @@
 		out.println("<p><b>You have just created fifty quizzes!!! You have just won the Achievement of Confucius. You are the king of quiz creators!</b></p>");
 		}
 	}
+	response.setHeader("Refresh", "4;url=UserHomePage.jsp"); 
 %>
 
+Redirecting back to home page...
 <form name="FinishQuiz" method="POST" action="UserHomePage.jsp">
 	 <a href="javascript:document.FinishQuiz.submit()">Back to Homepage</a>
 </form>
