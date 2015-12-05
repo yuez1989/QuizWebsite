@@ -6,7 +6,10 @@
 
 /* Header */
 body {
-	background-color:#ccc!important;
+	background-image:url('images/aurora.jpeg');
+	background-attachment:fixed;
+	background-size:cover;
+	background-repeat:repeat;
 }
 
 input[type=text]{

@@ -36,7 +36,7 @@
 	} else {
 %>
 </head>
-<body style='background-color:#ffffff!important;'>
+<body style='background-color:#ffffff!important;background-image:none!important;'>
 	<div class='index-wrapper'>
 		<!-- slider -->
 		<!--[if IE]><link rel="stylesheet" href="cssslider_files/csss_engine1/ie.css"><![endif]-->
