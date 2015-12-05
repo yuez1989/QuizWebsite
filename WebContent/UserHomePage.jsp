@@ -182,7 +182,7 @@
 					</div>
 					<br>
 					<div>
-						<span class="section-name">Recent Quizzes Done</span>
+						<span class="section-name">Recent Quizzes Done</span><br>
 						<%
 							Calendar cal = new GregorianCalendar();
 							boolean hasRecent = false;
@@ -195,7 +195,6 @@
 								Date endDate = QuizSystem.convertToDate(hist.end);
 								Date threeDaysAgo = QuizSystem.convertToDate(QuizSystem.minusDay(hist.end, 3));
 						%>
-						<br>
 						<%							
 									if (endDate.compareTo(threeDaysAgo) >= 0) {
 									hasRecent = true;

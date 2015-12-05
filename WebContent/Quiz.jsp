@@ -121,9 +121,8 @@
 											session.setAttribute(request.getParameter("quizID") + "questions", quiz.getQuestions());
 							%>
 							<div class='body-part'>
-								<%
-									out.println("<form class=\'total_form\' action=\'QuizScore.jsp\' method=\'post\'>");
-
+								<form class='total_form' action='QuizScore.jsp' method='post'>
+									<%
 												ArrayList<Question> questions = quiz.getQuestions();
 												int count = 0;
 												for (Question q : questions) {
@@ -213,9 +212,11 @@
 													out.print("</div>");
 												}
 								%>
+								
 							</div>
 							<div class='body-part'>
 								<div id="rating_review">
+
 									<div id="rating">
 										<label>Rating</label> <label for="1star">1</label> <input
 											type="radio" name="rating" value="1" id="1star"> <label
@@ -237,13 +238,13 @@
 											placeholder="Love the quiz? Add a review now!"></textarea>
 									</div>
 								</div>
+								<br>
 								<input type="hidden" name="quizID" value="<%=quiz.getQuizID()%>">
 								<input type="hidden" name="quizName"
 									value="<%=quiz.getQuizName()%>"> <input type="hidden"
 									name="startTime" value="<%=QuizSystem.generateCurrentTime()%>">
 								<input type="submit" class='total_submit' value='submit now' />
-
-								</form>
+								</form><br>
 								<form class='cancel_form' action="QuizCancel.jsp" method="get">
 									<input type="hidden" name="quizID"
 										value="<%=quiz.getQuizID()%>"> <input type="submit"
