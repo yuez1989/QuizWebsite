@@ -74,11 +74,8 @@
 				<span class='normal-option'>SORRY, YOU CANNOT TAKE ONE QUIZ
 					SIMULTANEOUSLY.</span><br> <span>Click "Clear Paused Quiz" to
 					clear quiz taking sessions.</span><br>
-				<%
-					String cancelStr = "QuizCancel.jsp?quizID=" + quizID;
-				%>
-				<a href=<%=cancelStr%> class='dangerous-option'>Clear Paused
-					Quiz</a>
+				<a href="Quizzes.jsp" class='dangerous-option'>Clear Paused
+					Quiz And Go Back to Quiz List</a>
 				<div>
 					<%
 						} else {
@@ -109,10 +106,7 @@
 						<span class='normal-option'>SORRY, YOU CANNOT TAKE ONE QUIZ
 							SIMULTANEOUSLY.</span><br> <span>Click "Clear Paused Quiz"
 							to clear quiz taking sessions.</span><br>
-						<%
-							String cancelStr = "QuizCancel.jsp?quizID=" + quizID;
-						%>
-						<a href=<%=cancelStr%> class='dangerous-option'>Clear Paused
+						<a href="Quizzes.jsp" class='dangerous-option'>Clear Paused
 							Quiz</a>
 						<div>
 							<%
