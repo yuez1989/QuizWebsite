@@ -9,9 +9,32 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="QuizWebsite.css">
+<script src='UserHomePage.js'></script>
+<script
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"
+	integrity="sha512-dTfge/zgoMYpP7QbHy4gWMEGsbsdZeCXz7irItjcC3sPUFtf0kuFbDz/ixG7ArTxmDjLXDmezHubeNikyKGVyQ=="
+	crossorigin="anonymous">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css"
+	integrity="sha384-aUGj/X2zp5rLCbBxumKTCw2Z50WgIr1vs/PFN4praOTvYXWlVyh2UtNUU0KAUhAX"
+	crossorigin="anonymous">
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"
+	integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ=="
+	crossorigin="anonymous"></script>
+<script src='Background.js'></script>
+<script type="text/javascript"
+	src="bg-switcher/Source/js/jquery.bcat.bgswitcher.js"></script>
 <title>Get Your Grade!</title>
 </head>
 <body>
+	<div class="body-section">
+		<div class='body-part-wrapper col-md-3'></div>
+		<div class='body-part-wrapper col-md-6'>
+			<div class='body-part'>
 <%
 	String endTime = QuizSystem.generateCurrentTime();
 	String startTime = request.getParameter("startTime");
@@ -214,15 +237,15 @@
 			}
 		%>
 	</ul>
-
 	<p><a href = 'QuizHomePage.jsp?quizID=<%=quizID %>'>QuizHomePage</a></p>
-	<p>TODO: User Home Page </p>
-	<p>TODO: Other quizzes</p>
-
 	<form name='challengeForm' action="MsgWrite.jsp" method="post">
 		<input type="hidden" name="quizID" value="<%=quizID%>">
 		<a href="javascript:document.challengeForm.submit()">Challenge your friend!</a>
 	</form>
+	<br><p><a href=UserHomePage.jsp>Back To Home Page</a></p>
 	<%} %>
+</div>
+</div>
+</div>
 </body>
 </html>
