@@ -53,7 +53,7 @@ if(Question.TYPE_FREERESPONCE.equals(q.getType()) || Question.TYPE_PICTURERESPON
 
 
 if(questiongrade >= 1){
-	if(correct_map.get(q.getProbID())<1){
+	if(correct_map.get(q.getProbID())<2){
 		correct_map.put(q.getProbID(), correct_map.get(q.getProbID())+1);
 	}else{
 		correct_map.remove(q.getProbID());
