@@ -870,6 +870,24 @@ public class Utilities {
 		}
 		return list;
 	}
+	/**
+	 * Get the account IDs given the partial string of desired user ID
+	 * @param usrID
+	 * @return
+	 */
+	public static boolean searchAccountsExact(String usrID){
+		boolean exist = false; 
+		ResultSet rs = QuizSystem.db.executeQuery("Select usrID from Users where usrID = \'" + usrID+"\';");
+
+		try {
+			while(rs.next()){
+				return true;
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return exist;
+	}
 
 
 	/**
