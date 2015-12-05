@@ -23,7 +23,6 @@
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"
 	integrity="sha512-K1qjQ+NcF2TYO/eI3M6v8EiNYZfA95pQumfvcVrTHtwQVDG+aHRqLi/ETn2uB+1JqwYqVG3LIvdm9lj6imS/pQ=="
 	crossorigin="anonymous"></script>
-<script src='BackgroundStatic.js'></script>
 <script type="text/javascript"
 	src="bg-switcher/Source/js/jquery.bcat.bgswitcher.js"></script>
 <%
@@ -40,7 +39,7 @@
 %>
 <title>Welcome to <%=request.getParameter("quizName")%></title>
 </head>
-<body>
+<body style="background-image:url('images/aurora.jpeg')!important;background-attachment:fixed;background-size:cover;">
 	<div class="body-section">
 		<div class='body-part-wrapper col-md-2'></div>
 		<div class='body-part-wrapper col-md-8'>

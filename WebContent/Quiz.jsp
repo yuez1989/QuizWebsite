@@ -238,7 +238,7 @@
 									value="<%=quiz.getQuizName()%>"> <input type="hidden"
 									name="startTime" value="<%=QuizSystem.generateCurrentTime()%>">
 								<input type="submit" class='total_submit' value='submit now' />
-								</form><br>
+								</form><br><br>
 								<form class='cancel_form' action="QuizCancel.jsp" method="get">
 									<input type="hidden" name="quizID"
 										value="<%=quiz.getQuizID()%>"> <input type="submit"
