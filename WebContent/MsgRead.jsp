@@ -37,7 +37,7 @@
 		String time = request.getParameter("time");
 		String friendID = fromID;
 		if (fromID.equals(usrID))
-				friendID = toID;
+			friendID = toID;
 		Message msg = new Message(fromID, toID, time);
 		String messageShown = msg.msg;
 		String url = "";
@@ -64,55 +64,66 @@
 			typeText = "Text";
 			break;
 		}
-		
+
 		msg.setAsRead(); // set this message as read
 	%>
-	<div class="msg-read-box">
-		<div class="msg-read-header"><%=msg.fromID%> to <%=msg.toID%></div>
-		<div class="msg-read-body">
-			<table>
-				<tr>
-					<th>Time</th>
-					<td><%=msg.time%></td>
-				</tr>
-				<tr>
-					<th>Type</th>
-					<td><%=typeText%></td>
-				</tr>
-				<tr>
-					<th>Message</th>
-					<td><%=messageShown%>
-					<%
-						if (!url.equals("")) { // if there is an url here
-							out.println("<a href='" + url + "'>Click to take the Quiz.</a>");
-						}
-					%>
-					</td>
-				</tr>
-			</table>
-		</div>
-		<br>
-		<div class="msg-read-option">
-			<%
-				switch (typeCh) {
-				case 'f':
-					if (toID.equals(usrID)) {
-						String strAgree = "<div><div class='msg-read-option-abreast'><form name='addFriendForm' method='POST' action='AddFriend.jsp'><input type='hidden' name='friendID' value='" + friendID + "'><a href='javascript:document.addFriendForm.submit()'>Agree</a></form></div>";
-						String strDecline = "<div class='msg-read-option-abreast'><a href = 'Messages.jsp'>Decline</a></div></div>";
-						out.println(strAgree);
-						out.println(strDecline);
-					}
-					break;
-				case 'c':
-					out.println();
-					break;
-				case 't':
-					break;
-				default:
-					break;
-			}
-			%>
-			<br><a href="Messages.jsp">Go back</a>
+	<div class="body-section">
+		<div class='body-part-wrapper col-md-2'></div>
+		<div class='body-part-wrapper col-md-6'>
+			<div class='body-part'>
+				<div class='section-name'>MESSAGE</div>
+				<div class="msg-read-box">
+					<div class="msg-read-header"><%=msg.fromID%>
+						to
+						<%=msg.toID%></div>
+					<div class="msg-read-body">
+						<table>
+							<tr>
+								<th>Time</th>
+								<td><%=msg.time%></td>
+							</tr>
+							<tr>
+								<th>Type</th>
+								<td><%=typeText%></td>
+							</tr>
+							<tr>
+								<th>Message</th>
+								<td><%=messageShown%> <%
+ 	if (!url.equals("")) { // if there is an url here
+ 		out.println("<a href='" + url + "'>Click to take the Quiz.</a>");
+ 	}
+ %></td>
+							</tr>
+						</table>
+					</div>
+					<br>
+					<div class="msg-read-option">
+						<%
+							switch (typeCh) {
+							case 'f':
+								if (toID.equals(usrID)) {
+									String strAgree = "<div><div class='msg-read-option-abreast'><form name='addFriendForm' method='POST' action='AddFriend.jsp'><input type='hidden' name='friendID' value='"
+											+ friendID
+											+ "'><a href='javascript:document.addFriendForm.submit()'>Agree</a></form></div>";
+									String strDecline = "<div class='msg-read-option-abreast'><a href = 'Messages.jsp'>Decline</a></div></div>";
+									out.println(strAgree);
+									out.println(strDecline);
+								}
+								break;
+							case 'c':
+								out.println();
+								break;
+							case 't':
+								break;
+							default:
+								break;
+							}
+						%>
+						<br>
+						<a href="Messages.jsp">Go back</a>
+					</div>
+				</div>
+			</div>
 		</div>
 	</div>
 </body>

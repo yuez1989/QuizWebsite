@@ -4,7 +4,6 @@
 <%@page import="Quiz.*"%>
 <%@page import="java.util.ArrayList"%>
 <jsp:include page="Header.jsp" />
-
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
