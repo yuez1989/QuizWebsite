@@ -172,8 +172,11 @@
 							out.print("</p>");
 						}
 				%>
+				
+				
 				<input type='hidden' name='proID' value=<%=q.getProbID()%>>
-				<p>
+				
+				<p style="margin-top:15px;">
 					<input type='submit' value='Try'>
 				</p>
 				</form>
