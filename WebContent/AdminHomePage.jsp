@@ -59,7 +59,7 @@ session.setAttribute("admin", admin);
 			
 			<div class = "search_account">
 				<div class="column-name">Search Accounts</div>
-				<form name = 'search_account_form' id = 'search_account_form' method ="post" action = "SearchAccountResult">
+				<form name = 'search_account_form' id = 'search_account_form' method ="post" action = "SearchAccountResult.jsp" target='_blank'>
 				<input type='text' name = 'searched_account'>
 				<a href="javascript:document.search_account_form.submit()">Search</a>
 				</form>
@@ -68,7 +68,7 @@ session.setAttribute("admin", admin);
 			
 			<div class = 'create_announcement'>
 				<div class="column-name">Create Announcement</div>
-				<form name="create_announcement_form" id="create_announcement_form" method="POST" action="AnnouncementSent">
+				<form name="create_announcement_form" id="create_announcement_form" method="POST" action="AnnouncementSent.jsp">
 				<textarea rows='4' cols='75' name = 'announcement_content' id = 'announcement_content' placeholder = 'Enter Message Here'></textarea>
 				<a href="javascript:document.create_announcement_form.submit()">Send</a>
 				</form>
@@ -77,7 +77,7 @@ session.setAttribute("admin", admin);
 			
 			<div class = 'remove_account'>
 				<div class="column-name">Remove Account</div>
-				<form name = "remove_account_form" id = "remove_account_form" method="post" action="AccountRemoved">
+				<form name = "remove_account_form" id = "remove_account_form" method="post" action="AccountRemoved.jsp">
 				<input type='text' name = 'attempted_account'>
 				<a href="javascript:document.remove_account_form.submit()">Remove</a>
 				</form>
@@ -87,7 +87,7 @@ session.setAttribute("admin", admin);
 
 			<div class = 'search_quiz_name'>
 				<div class="column-name">Search Quiz By Name</div>
-				<form name = "search_quiz_name_form" id = "search_quiz_name_form" method="post" action="SearchQuizByNameResult">
+				<form name = "search_quiz_name_form" id = "search_quiz_name_form" method="post" action="SearchQuizByNameResult.jsp">
 				<input type='text' name = 'searched_quizName'>
 				<a href="javascript:document.search_quiz_name_form.submit()">Search</a>
 				</form>
@@ -96,7 +96,7 @@ session.setAttribute("admin", admin);
 
 			<div class = 'search_quiz'>
 				<div class="column-name">Search Quiz By ID</div>
-				<form name = "search_quiz_form" id = "search_quiz_form" method="post" action="SearchQuizResult">
+				<form name = "search_quiz_form" id = "search_quiz_form" method="post" action="SearchQuizResult.jsp">
 				<input type='text' name = 'searched_quizID'>
 				<a href="javascript:document.search_quiz_form.submit()">Search</a>
 				</form>
@@ -105,7 +105,7 @@ session.setAttribute("admin", admin);
 			
 			<div class = 'remove_quiz'>
 				<div class="column-name">Remove Quiz By ID</div>
-				<form name = "remove_quiz_form" id = "remove_quiz_form" method="post" action="QuizRemoved">
+				<form name = "remove_quiz_form" id = "remove_quiz_form" method="post" action="QuizRemoved.jsp">
 				<input type='text' name = 'attempted_quizID'>
 				<a href="javascript:document.remove_quiz_form.submit()">Remove</a>
 				</form>
@@ -114,7 +114,7 @@ session.setAttribute("admin", admin);
 			
 			<div class='clear_quiz_history'>
 				<div class="column-name">Clear Quiz History (Enter quiz ID)</div>
-				<form name = "clear_quiz_history_form" id = "clear_quiz_history_form" method="post" action="QuizHistoryCleared">
+				<form name = "clear_quiz_history_form" id = "clear_quiz_history_form" method="post" action="QuizHistoryCleared.jsp">
 				<input type='text' name = 'clear_hist_quizID'>
 				<a href="javascript:document.clear_quiz_history_form.submit()">Clear</a>
 				</form>
@@ -123,13 +123,13 @@ session.setAttribute("admin", admin);
 			
 			<div class = 'promote_account'>
 				<div class="column-name">Promote User to Administrator</div>
-				<form name = 'promote_account_form' id = 'promote_account_form' method='post' action='AccountPromoted'>
+				<form name = 'promote_account_form' id = 'promote_account_form' method='post' action='AccountPromoted.jsp'>
 				<input type = 'text' name = 'attempted_account'>
 				<a href="javascript:document.promote_account_form.submit()">Promote</a>
 				</form>
 				<br>
 			</div>
-			
+			<hr>
 			<div class = 'delete_announcement'>
 				<div class="column-name">Delete Announcement</div>
 				<div id = "delete_announcement_content">
