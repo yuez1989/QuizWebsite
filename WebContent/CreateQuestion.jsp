@@ -52,6 +52,14 @@ if(questions == null){
 		Spec = result[0];
 	}
 	
+	String select[] = request.getParameterValues("QuizOption"); 
+	if (select != null && select.length != 0) {
+		Spec = "";
+		for (int i = 0; i < select.length; i++) {
+			Spec+=select[i]; 
+		}
+	}
+	
 %>
 
 <form name="AddFreeResponse" method="POST" action="FreeResponse.jsp">

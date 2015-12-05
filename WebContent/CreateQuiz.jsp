@@ -91,6 +91,15 @@
 		if (result != null && result.length != 0) {
 			Spec = result[0];
 		}
+		
+		String select[] = request.getParameterValues("QuizOption"); 
+		if (select != null && select.length != 0) {
+			Spec = "";
+			for (int i = 0; i < select.length; i++) {
+				Spec+=select[i]; 
+			}
+		}
+		
 		result = request.getParameterValues("QuestionCancelled");
 		if (result != null && result.length != 0) {
 			probCancel = result[0];
@@ -261,12 +270,30 @@ Please enter Quiz description:<BR>
 <textarea  NAME="Description" cols="100" rows="5" ><%=Description%></textarea><BR>
 Please enter Quiz tags, separate by space:<BR>
 <INPUT TYPE="TEXT" NAME="Tags" value="<%=Tags%>" style="width: 500px"><BR>
+<!--
 Please enter Quiz option:<BR>
 If you want question appear in random order, enter "R".<BR>
 If you want question appear on multiple pages, enter "M".<BR>
 If you want provide immediate correction, enter "I".<BR>
 You can have multiple options, order does not matter.<BR>
 <INPUT TYPE="TEXT" NAME="Spec" value="<%=Spec%>"><BR>
+-->
+
+<input type="checkbox" name="QuizOption" value = "R"
+	<% 
+    if (Spec.indexOf("R")>=0) {
+        out.print("checked=\"checked\"");
+    } %>>question appear in random order<BR>
+<input type="checkbox" name="QuizOption" value = "M"
+	<% 
+    if (Spec.indexOf("M")>=0) {
+        out.print("checked=\"checked\"");
+    } %>>question appear on multiple pages<BR>
+<input type="checkbox" name="QuizOption" value = "I"
+	<% 
+    if (Spec.indexOf("I")>=0) {
+        out.print("checked=\"checked\"");
+    } %>>provide immediate correction<BR>
 
 
 <%	
