@@ -264,7 +264,7 @@
 				<div class='body-part'>
 					<div class="column-name">Quiz Creation and Search</div>
 					<div class="news-feed">
-						<a href="CreateQuiz.jsp" target="_blank">Create New Quiz</a>
+						<a href="CreateQuiz.jsp" target="_blank" class='important-option'>Create New Quiz</a>
 					</div>
 					<div class="news-feed">
 						<a href="Quizzes.jsp" target="_blank">See all Quizzes</a>
