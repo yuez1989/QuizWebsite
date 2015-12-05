@@ -68,7 +68,7 @@ session.setAttribute("admin", admin);
 			
 			<div class = 'create_announcement'>
 				<div class="column-name">Create Announcement</div>
-				<form name="create_announcement_form" id="create_announcement_form" method="POST" action="AnnouncementSent">
+				<form name="create_announcement_form" id="create_announcement_form" method="POST" action="AnnouncementSent.jsp">
 				<textarea rows='4' cols='75' name = 'announcement_content' id = 'announcement_content' placeholder = 'Enter Message Here'></textarea>
 				<a href="javascript:document.create_announcement_form.submit()">Send</a>
 				</form>
