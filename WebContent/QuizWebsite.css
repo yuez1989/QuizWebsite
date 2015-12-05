@@ -46,7 +46,7 @@ input[type=submit] {
 
 input[type=submit]:hover{
 	padding: 1px 6px;
-	background-color: #e6e5e7;
+	background-color: #2f2e2f;
 	color: #ffffff!important;
 	border: solid 1px #e6e5e7;
 	cursor: pointer;

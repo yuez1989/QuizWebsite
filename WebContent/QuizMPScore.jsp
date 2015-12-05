@@ -247,12 +247,9 @@
 				<p>
 					<a href='QuizHomePage.jsp?quizID=<%=quizID%>'>QuizHomePage</a>
 				</p>
-				<p>TODO: User Home Page</p>
-				<p>TODO: Other quizzes</p>
-
 				<form name='challengeForm' action="MsgWrite.jsp" method="post">
 					<input type="hidden" name="quizID" value="<%=quizID%>"> <a
-						href="javascript:document.challengeForm.submit()">Challenge
+						href="javascript:document.challengeForm.submit()" class='important-option'>Challenge
 						your friend!</a>
 				</form>
 
