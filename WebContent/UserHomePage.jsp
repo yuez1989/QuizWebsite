@@ -202,7 +202,7 @@
 									quizStr = quizStr.substring(0, quizStr.indexOf(" ")) + "_"
 											+ quizStr.substring(quizStr.indexOf(" ") + 1);
 						%>
-						<span class='column-indent'><a href=<%=quizStr%>
+						<br><span class='column-indent'><a href=<%=quizStr%>
 							target="_blank"><%=quizName%></a></span><br>
 						<%
 							}
