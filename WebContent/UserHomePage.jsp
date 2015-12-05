@@ -401,7 +401,7 @@
 						<div>
 							<div class="column-name">Recently Created Quizzes</div>
 							<%
-								ArrayList<Quiz> recentQuizzesPublic = Utilities.getRecentQuiz();
+								ArrayList<Quiz> recentQuizzesPublic = Utilities.getRecentQuiz(3);
 								Collections.sort(recentQuizzesPublic);
 								for (Quiz quiz : recentQuizzesPublic) {
 									String quizStr = "QuizHomePage.jsp?quizID=" + quiz.getQuizID();

@@ -39,7 +39,7 @@
 %>
 <title>Welcome to <%=request.getParameter("quizName")%></title>
 </head>
-<body style="background-image:url('images/aurora.jpeg')!important;background-attachment:fixed;background-size:cover;">
+<body style="background-image:url('images/mountain.jpg')!important;background-attachment:fixed;background-size:cover;">
 	<div class="body-section">
 		<div class='body-part-wrapper col-md-2'></div>
 		<div class='body-part-wrapper col-md-8'>

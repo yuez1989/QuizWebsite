@@ -6,7 +6,7 @@
 
 /* Header */
 body {
-	background-image:url('images/aurora.jpeg');
+	background-image:url('images/mountain.jpg');
 	background-attachment:fixed;
 	background-size:cover;
 	background-repeat:repeat;
@@ -45,6 +45,26 @@ input[type=submit] {
 }
 
 input[type=submit]:hover{
+	padding: 1px 6px;
+	background-color: #e6e5e7;
+	color: #ffffff!important;
+	border: solid 1px #e6e5e7;
+	cursor: pointer;
+	-webkit-border-radius: 5px;
+	border-radius: 3px;
+}
+
+input[type=reset] {
+	padding: 1px 6px;
+	background: transparent;
+	color: #000000!important;
+	border: solid 1px #000000;
+	cursor: pointer;
+	-webkit-border-radius: 5px;
+	border-radius: 3px;
+}
+
+input[type=reset]:hover{
 	padding: 1px 6px;
 	background-color: #e6e5e7;
 	color: #ffffff!important;
@@ -364,12 +384,11 @@ input[type=submit]:hover{
 }
 
 .msg-write-box {
-	margin-top: 60px;
-	margin-left: 20%;
+	margin-top: 3px;
+	margin-left: 19%;
 }
 
 .msg-write-header {
-	margin-top: 10px;
 	margin-bottom: 10px;
 }
 
