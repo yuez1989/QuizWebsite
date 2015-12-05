@@ -194,15 +194,17 @@
 								// calculate a date of 3 days ago
 								Date endDate = QuizSystem.convertToDate(hist.end);
 								Date threeDaysAgo = QuizSystem.convertToDate(QuizSystem.minusDay(hist.end, 3));
-
-								if (endDate.compareTo(threeDaysAgo) >= 0) {
+						%>
+						<br>
+						<%							
+									if (endDate.compareTo(threeDaysAgo) >= 0) {
 									hasRecent = true;
 									String quizName = new Quiz(hist.quizID).getQuizName();
 									String quizStr = "QuizHomePage.jsp?quizID=" + hist.quizID;
 									quizStr = quizStr.substring(0, quizStr.indexOf(" ")) + "_"
 											+ quizStr.substring(quizStr.indexOf(" ") + 1);
 						%>
-						<br><span class='column-indent'><a href=<%=quizStr%>
+						<span class='column-indent'><a href=<%=quizStr%>
 							target="_blank"><%=quizName%></a></span><br>
 						<%
 							}
