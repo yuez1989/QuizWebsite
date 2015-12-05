@@ -30,7 +30,12 @@
 </title>
 </head>
 <body>
+	<div class="body-section">
+		<div class='body-part-wrapper col-md-2'></div>
+		<div class='body-part-wrapper col-md-8'>
+			<div class='body-part'>
 	<div class="admin-profile-link">
+	<p>Feel free to send us a message!!</p><br>
 	<%
 		ArrayList<String> admins = Utilities.getAllAdminIDs();
 		for (String adminID:admins) {
@@ -44,5 +49,8 @@
 	</div>
 	<div class = "admin-profile-link"><span><a href = "UserHomePage.jsp">Return</a></span>
 	</div>
+</div>
+</div>
+</div>
 </body>
 </html>
